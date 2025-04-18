@@ -1,0 +1,28 @@
+using UnityEngine;
+
+//==============================================================================
+// AllManager
+//==============================================================================
+// 게임을 통제하는 컨트롤러에 접근 할 수 있도록 싱글톤을 이용해서 
+// 만든 매니저 해당 매니저는 다양한 게임을 관리하는 여러 컨트롤러에 접근할 수 있는
+// 유일한 통로
+//==============================================================================
+public class AllManager : Singleton<AllManager>
+{
+
+    [Header("GameController")]
+    [SerializeField] private GameModeController _gameModeController;
+    public GameModeController GameMode { get { return _gameModeController; } }
+
+
+    private void Start()
+    {
+        Screen.SetResolution(1920, 1080, true);
+        Application.targetFrameRate = 60;
+
+        if (GameMode == null) Debug.Log("GameModeContoller가 없습니다.");
+
+        
+
+    }
+}
