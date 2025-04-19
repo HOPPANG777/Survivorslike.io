@@ -58,6 +58,9 @@ public struct UnitAttribute
 
     [Tooltip("공격 쿨타임(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _attackCoolDown;
     public float UnitAttackCoolDown { get { return _attackCoolDown / 100f; } set { _attackCoolDown = (int)value; } }
+
+    [Tooltip("넉백 파워(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _knockbackForce;
+    public float UnitKnockbackForce { get { return _knockbackForce / 100f; } set { _knockbackForce = (int)value; } }
 }
 
 [Serializable]
@@ -85,4 +88,7 @@ public struct EnemyableAttribute
 
     [Tooltip("적이 가지고 있는 경험치")][SerializeField] private int _enemyExp;
     public int EnemyExp { get { return _enemyExp; } set { _enemyExp = value; } }
+
+    [Tooltip("적이 가지고 있는 경험치")][SerializeField] private int _enemyPushStrength;
+    public int EnemyPushStrength { get { return _enemyPushStrength; } set { _enemyPushStrength = value; } }
 }

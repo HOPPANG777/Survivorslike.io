@@ -7,7 +7,7 @@ using UnityEngine;
 //	
 //==============================================================================
 
-public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IHitted, IUnitAttribute<UnitAttribute>
+public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IHitted, IAttacker, IUnitAttribute<UnitAttribute>
 {
     [Header("Unit Base")]
     [Tooltip("Unit Data")][SerializeField] protected UnitBaseSO _unitBaseData;
@@ -45,6 +45,9 @@ public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICol
 
     [Tooltip("객체의 포지션을 받는(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] protected int _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius / 100.0f; } }
+
+    [Header("IAttacker")]
+    public float AttackPower { get { return Attributes.UnitDamage; } }
 
     virtual protected void Start()
     {

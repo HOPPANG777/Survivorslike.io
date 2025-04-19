@@ -61,3 +61,37 @@
 //        tilemap.transform.position += moveOffset;
 //    }
 //}
+
+/*
+    /// <summary>
+    /// 공격 버튼 눌렀을 때 호출
+    /// </summary>
+    public void PerformAttack()
+    {
+        // 1) 충돌 매니저가 관리하는 리스트를 직접 꺼내온다
+        var all = AllManager.instace.CollisionManager.GetAllCollidables(); 
+        int count = all.Count;
+
+        // 2) 반경 내 대상만 검사
+        float sqrRadius = Attribute.UnitAttackRange * Attribute.UnitAttackRange;
+        Vector2 myPos = (Vector2)transform.position;
+
+        for (int i = 0; i < count; i++)
+        {
+            var target = all[i];
+            // 위치 차이, 제곱 거리 계산
+            Vector2 dir = target.Position - myPos;
+            if (dir.sqrMagnitude > sqrRadius) continue;
+
+            // 3) 데미지 처리
+            if (target is IHitted hitTarget) hitTarget.Hitted(_damage);
+
+            // 4) 넉백 처리
+            if (target is IPushable pushTarget)
+            {
+                Vector2 knockVec = dir.normalized * Attribute.UnitKnockbackForce;
+                pushTarget.Push(knockVec);
+            }
+        }
+    }
+*/

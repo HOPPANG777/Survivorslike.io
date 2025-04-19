@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IPushable
+public interface IPushable // ≥ÀπÈ¿∫?
 {
-    
+    void Push(Vector3 direction);
 }

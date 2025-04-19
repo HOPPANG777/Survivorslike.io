@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class PushController : MonoBehaviour
+public class PushController : ICollision
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OnCollision(ICollidable a, ICollidable b)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // 둘 다 IPushable이면 서로 밀치기
+        if (a is IPushable pa && b is IPushable pb)
+        {
+            var dir = (b.Position - a.Position).normalized;
+            pa.Push(-dir);
+            pb.Push(dir);
+        }
     }
 }

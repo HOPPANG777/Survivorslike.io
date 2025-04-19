@@ -14,6 +14,8 @@ public class AllManager : Singleton<AllManager>
     [SerializeField] private GameModeController _gameModeController;
     public GameModeController GameMode { get { return _gameModeController; } }
 
+    [SerializeField] private CollisionController _collisionController;
+    public CollisionController CollisionController { get { return _collisionController; } }
 
     private void Start()
     {
@@ -21,8 +23,6 @@ public class AllManager : Singleton<AllManager>
         Application.targetFrameRate = 60;
 
         if (GameMode == null) Debug.Log("GameModeContoller가 없습니다.");
-
-        
-
+        if (CollisionController == null) Debug.Log("CollisionController가 없습니다.");
     }
 }

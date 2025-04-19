@@ -7,7 +7,7 @@ using UnityEngine;
 //	
 //==============================================================================
 
-public class EnemyUnit : UnitBase, IEnemyAttribute
+public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
 {
     [Header("Enemy Unit")]
     private EnemyUnitSO _enemyData;
@@ -31,5 +31,10 @@ public class EnemyUnit : UnitBase, IEnemyAttribute
         base.SetStatus();
         _enemyData = _unitBaseData as EnemyUnitSO;
         _enemyAttribute = _enemyData.EnemyAttribute;
+    }
+
+    public void Push(Vector3 direction)
+    {
+        this.transform.position += (direction * Attributes.EnemyPushStrength);
     }
 }
