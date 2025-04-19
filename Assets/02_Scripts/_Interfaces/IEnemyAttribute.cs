@@ -6,4 +6,4 @@ using UnityEngine;
 // 적들의 능력치 인터페이스
 //
 //==============================================================================
-public interface IEnemyAttribute : IUnitAttribute<IEnemyAttribute> { }
+public interface IEnemyAttribute : IUnitAttribute<EnemyableAttribute> { }

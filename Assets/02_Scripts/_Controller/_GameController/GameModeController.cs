@@ -42,7 +42,7 @@ public class GameModeController : MonoBehaviour, IGameMode
             case GameModeType.GAMEMODE_INGAME:
                 {
                     TileMapController.TilemapMove();
-                    CameraController.FollowCameraMove();
+                    CameraController.FollowCameraMove(); 
                 }
                 break;
             case GameModeType.GAMEMODE_GAMEPAUSE:
