@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Sirenix.OdinInspector;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -12,24 +13,25 @@ using UnityEngine.Tilemaps;
 // 해당 타일맵은 탑뷰 특히 뱀파이어 서바이벌에 해당하는 장르에서 무한맵을 구현하기 위한
 // 컨트롤러이다.
 //==============================================================================
-public class TileMapController : MonoBehaviour
+public class TileMapController : MonoBehaviour, IMoveable
 {
-    [Header("TileMap")]
-    [Tooltip("타일맵 사이즈(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _tileMapSize; // 40이 기본
+    [TabGroup("TileMap")][Tooltip("타일맵 사이즈(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _tileMapSize; // 40이 기본
     public float TileMapSize { get { return _tileMapSize / 100; } }
 
-    [Tooltip("타일맵 오버랩 오프셋(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _tilemapOverlapOffset; // 0.1이 기본
+    [TabGroup("TileMap")][Tooltip("타일맵 오버랩 오프셋(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _tilemapOverlapOffset; // 0.1이 기본
     public float TileMapOverlapOffset { get { return _tilemapOverlapOffset / 100; } }
 
-    [SerializeField] private List<GameObject> _tileMapList;
+    [TabGroup("TileMap")][SerializeField] private List<GameObject> _tileMapList;
     public List<GameObject> TileMapList { get { return _tileMapList; } }
 
-    [Header("Target")]
-    [SerializeField] private GameObject _tileMapTarget;
+    [TabGroup("Target")][SerializeField] private GameObject _tileMapTarget;
     public GameObject TileMapTarget { get { return _tileMapTarget; } }
 
-    [SerializeField] private IPositionProvider _tileMapTargetPosition;
+    [TabGroup("Target")][SerializeField] private IPositionProvider _tileMapTargetPosition;
     public IPositionProvider TileMapTargetPosition { get { return _tileMapTargetPosition; } }
+
+    [TabGroup("Direction")][SerializeField] private Vector3 _moveDirection;
+    public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
     private bool CheckTileMap()
     {
@@ -58,10 +60,11 @@ public class TileMapController : MonoBehaviour
         }
     }
 
-    public void TilemapMove()
+    public void Move()
     {
         if (CheckTileMap() == false) return;
         if (CheckTileMapList() == false) return;
+        if (AllManager.instance.GameMode.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         // 현재 플레이어의 위치 가져오기
         Vector3 playerPosition = TileMapTargetPosition.Position;

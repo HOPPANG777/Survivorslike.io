@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 //==============================================================================
@@ -13,7 +14,7 @@ public class PlayerUnit : UnitBase, IPlayerAttribute
     private PlayerUnitSO _playerData;
     public PlayerUnitSO PlayerData { get { return _playerData; } set { _playerData = value; } }
 
-    [Tooltip("Player Attribute")][SerializeField] private PlayerableAttribute _playerAttribute;
+    [TabGroup("Player Unit")][Tooltip("Player Attribute")][SerializeField] private PlayerableAttribute _playerAttribute;
     public new PlayerableAttribute Attributes { get { return _playerAttribute; } set { _playerAttribute = value; } }
 
     override protected void Start()

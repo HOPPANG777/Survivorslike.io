@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,8 +15,7 @@ using UnityEngine;
 
 public class PlayerUnitSO : UnitBaseSO
 {
-    [Header("PlayerData")]
-    [SerializeField] protected PlayerableAttribute _playerAttribute;
+    [TabGroup("Player Data")][SerializeField] protected PlayerableAttribute _playerAttribute;
     public PlayerableAttribute PlayerAttribute { get { return _playerAttribute; } set { _playerAttribute = value; } }
 
     override public void SetData(UnitBaseSO _unitData)

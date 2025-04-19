@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 //==============================================================================
@@ -13,7 +14,7 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
     private EnemyUnitSO _enemyData;
     public EnemyUnitSO EnemyData { get { return _enemyData; } set { _enemyData = value; } }
 
-    [Tooltip("Enemy Attribute")][SerializeField] private EnemyableAttribute _enemyAttribute;
+    [TabGroup("Enemy Unit")][Tooltip("Enemy Attribute")][SerializeField] private EnemyableAttribute _enemyAttribute;
     public new EnemyableAttribute Attributes { get { return _enemyAttribute; } set { _enemyAttribute = value; } }
 
     override protected void Start()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 //==============================================================================
 // CameraController
@@ -6,24 +7,25 @@
 // Camera의 이동을 담당하는 Controller
 //
 //==============================================================================
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IMoveable
 {
-    [Header("Camera")]
-    [Tooltip("카메라")][SerializeField] private Camera _camera;
+    [TabGroup("Camera")][Tooltip("카메라")][SerializeField] private Camera _camera;
     public Camera MainCamera { get { return _camera; } }
 
-    [Tooltip("카메라가 따라다니는 속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _cameraFollowSpeed; // 기본이 4
+    [TabGroup("Camera")][Tooltip("카메라가 따라다니는 속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _cameraFollowSpeed; // 기본이 4
     public float CameraFollowSpeed { get {  return _cameraFollowSpeed / 100; } }
 
-    [Tooltip("카메라가 따라다니는 속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _cameraFixedZ; // 기본이 10
+    [TabGroup("Camera")][Tooltip("카메라가 따라다니는 속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _cameraFixedZ; // 기본이 10
     public float CameraFixedZ { get { return _cameraFixedZ / 100; } }
 
-    [Header("Target")]
-    [SerializeField] private GameObject _cameraTarget;
+    [TabGroup("Target")][SerializeField] private GameObject _cameraTarget;
     public GameObject CameraTarget { get { return _cameraTarget; } }
 
-    [SerializeField] private IPositionProvider _cameraTargetPosition;
+    [TabGroup("Target")][SerializeField] private IPositionProvider _cameraTargetPosition;
     public IPositionProvider CameraTargetPosition { get { return _cameraTargetPosition; } }
+
+    [TabGroup("Direction")][SerializeField] private Vector3 _moveDirection;
+    public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
     private bool CheckCamera()
     {
@@ -39,7 +41,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void FollowCameraMove()
+    public void Move()
     {
         if (CheckCamera() == false) return;
 

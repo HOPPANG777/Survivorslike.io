@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 //==============================================================================
@@ -9,12 +10,10 @@ using UnityEngine;
 //==============================================================================
 public class AllManager : Singleton<AllManager>
 {
-
-    [Header("GameController")]
-    [SerializeField] private GameModeController _gameModeController;
+    [TabGroup("Controller")][SerializeField] private GameModeController _gameModeController;
     public GameModeController GameMode { get { return _gameModeController; } }
 
-    [SerializeField] private CollisionController _collisionController;
+    [TabGroup("Controller")][SerializeField] private CollisionController _collisionController;
     public CollisionController CollisionController { get { return _collisionController; } }
 
     private void Start()
@@ -24,5 +23,7 @@ public class AllManager : Singleton<AllManager>
 
         if (GameMode == null) Debug.Log("GameModeContoller가 없습니다.");
         if (CollisionController == null) Debug.Log("CollisionController가 없습니다.");
+
+        GameMode.GameStart();
     }
 }

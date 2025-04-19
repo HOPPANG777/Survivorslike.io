@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,26 +15,25 @@ using UnityEngine;
 
 public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
 {
-    [Header("UnitBaseSO")]
-    [SerializeField] protected UnitAttribute _unitAttribute;
+    [TabGroup("UnitBaseSO")][SerializeField] protected UnitAttribute _unitAttribute;
     public UnitAttribute UnitAttribute { get { return _unitAttribute; } set { _unitAttribute = value; } }
 
-    [Tooltip("유닛 이름")][SerializeField] protected string _unitName;
+    [TabGroup("UnitBaseSO")][Tooltip("유닛 이름")][SerializeField] protected string _unitName;
     public string UnitName { get { return _unitName; } set { _unitName = value; } }
 
-    [Tooltip("팀 타입")][SerializeField] protected TeamType _teamType;
+    [TabGroup("UnitBaseSO")][Tooltip("팀 타입")][SerializeField] protected TeamType _teamType;
     public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
 
     // 사용할 사운드 이름
-    [Tooltip("사운드 이름")][SerializeField] protected string _soundName;
+    [TabGroup("Sound")][Tooltip("사운드 이름")][SerializeField] protected string _soundName;
     public string SoundName { get { return _soundName; } }
 
     // 사용할 사운드 타입
-    [Tooltip("사운드 타입")][SerializeField] protected SoundType _soundType;
+    [TabGroup("Sound")][Tooltip("사운드 타입")][SerializeField] protected SoundType _soundType;
     public SoundType SoundType { get { return _soundType; } }
 
     // 사용할 오디오 클립
-    [Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
+    [TabGroup("Sound")][Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
     virtual public void SetData(UnitBaseSO unitData)

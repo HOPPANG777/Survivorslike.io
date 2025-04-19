@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class CollisionController : MonoBehaviour
 {
-    [Header("Collision Controller")]
-    [Tooltip("격자 셀 크기(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int cellSize;
+    [TabGroup("Collision Controller")][Tooltip("격자 셀 크기(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int cellSize;
     public float CellSize { get { return cellSize / 100.0f; } }
 
-    [SerializeField] private SpatialHashCollisionController _controller;
-    [SerializeField] private List<ICollidable> _collidables = new List<ICollidable>(); // 이제 이 리스트만 순회합니다.
-    [SerializeField] private List<ICollision> _responders = new List<ICollision>();
+    [TabGroup("Collision Controller")][SerializeField] private SpatialHashCollisionController _controller;
+    [TabGroup("Collision Controller")][SerializeField] private List<ICollidable> _collidables = new List<ICollidable>(); // 이제 이 리스트만 순회합니다.
+    [TabGroup("Collision Controller")][SerializeField] private List<ICollision> _responders = new List<ICollision>();
 
     void Awake()
     {

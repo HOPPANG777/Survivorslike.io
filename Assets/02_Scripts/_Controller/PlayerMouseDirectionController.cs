@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 //==============================================================================
@@ -6,17 +7,18 @@ using UnityEngine;
 // Player의 회전을 담당하는 Controller
 //
 //==============================================================================
-public class PlayerMouseDirectionController : MonoBehaviour
+public class PlayerMouseDirectionController : MonoBehaviour, IMoveable
 {
-    [Header("Target")]
-    [Tooltip("타겟")][SerializeField] private GameObject _player;
+    [TabGroup("Target")][Tooltip("타겟")][SerializeField] private GameObject _player;
     public GameObject Player { get { return _player; } }
 
-    [Tooltip("타겟 포지션")][SerializeField] private IPositionProvider _playerPosition;
+    [TabGroup("Target")][Tooltip("타겟 포지션")][SerializeField] private IPositionProvider _playerPosition;
     public IPositionProvider PlayerPosition { get { return _playerPosition; } }
 
-    [Header("PlayerMouseDirection")]
-    [Tooltip("회전 속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _rotationSpeed; // 0이면 즉시회전, >0이면 부드럽게 회전
+    [TabGroup("PlayerMouseDirection")][Tooltip("마우스 방향")][SerializeField] private Vector3 _moveDirection;
+    public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
+
+    [TabGroup("PlayerMouseDirection")][Tooltip("회전 속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _rotationSpeed; // 0이면 즉시회전, >0이면 부드럽게 회전
     public float RotationSpeed { get { return _rotationSpeed / 100f; } }
 
     private bool CheckPlayerMouseDirection()
@@ -48,13 +50,14 @@ public class PlayerMouseDirectionController : MonoBehaviour
 
     private void Update()
     {
-        FaceMousePointer();
+        Move();
     }
 
-    private void FaceMousePointer()
+    public void Move()
     {
         if (CheckPlayerMouseDirection() == false) return;
         if (CheckTargetPosition() == false) return;
+        if (AllManager.instance.GameMode.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         // 1) 마우스 스크린 좌표
         Vector3 mouseScreenPos = Input.mousePosition;
@@ -66,10 +69,10 @@ public class PlayerMouseDirectionController : MonoBehaviour
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
 
         // 4) 플레이어→마우스 방향 벡터
-        Vector2 dir = (mouseWorldPos - _playerPosition.Position).normalized;
+        _moveDirection = (mouseWorldPos - _playerPosition.Position).normalized;
 
         // 5) Atan2로 각도 계산 (도 단위)
-        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float targetAngle = Mathf.Atan2(_moveDirection.y, _moveDirection.x) * Mathf.Rad2Deg;
         // 기본 스프라이트 방향(오른쪽)이 0°일 때 맞춰짐. 
         // 만약 위쪽이 0°라면 targetAngle -= 90f 해 주세요.
 

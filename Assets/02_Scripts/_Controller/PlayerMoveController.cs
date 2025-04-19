@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 //==============================================================================
@@ -8,15 +9,13 @@ using UnityEngine;
 //==============================================================================
 public class PlayerMoveController : MonoBehaviour, IMoveable
 {
-    [Header("Target")]
-    [SerializeField] private GameObject _player;
+    [TabGroup("Target")][SerializeField] private GameObject _player;
     public GameObject Player { get { return _player; } }
 
-    [SerializeField] private Vector3 _moveDirection;
+    [TabGroup("Target")][SerializeField] private Vector3 _moveDirection;
     public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
-    [Header("Interface")]
-    [SerializeField] private IUnitAttribute<UnitAttribute> _playerAttribute;
+    [TabGroup("Interface")][SerializeField] private IUnitAttribute<UnitAttribute> _playerAttribute;
     public IUnitAttribute<UnitAttribute> PlayerAttribute { get { return _playerAttribute; } }
 
     private bool CheckPlayerMove()
@@ -55,6 +54,7 @@ public class PlayerMoveController : MonoBehaviour, IMoveable
     {
         if (CheckPlayerMove() == false) return;
         if (CheckPlayerAttribute() == false) return;
+        if (AllManager.instance.GameMode.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         // ют╥б
         _moveDirection.x = Input.GetAxisRaw("Horizontal");

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 //==============================================================================
@@ -8,15 +9,13 @@ using UnityEngine;
 //==============================================================================
 public class GameModeController : MonoBehaviour, IGameMode
 {
-    [Header("게임모드 관련")]
-    [Tooltip("게임모드 타입")][SerializeField] private GameModeType _gameMode;
+    [TabGroup("GameMode")][Tooltip("게임모드 타입")][SerializeField] private GameModeType _gameMode;
     public GameModeType GameMode { get { return _gameMode; } set { _gameMode = value; } }
     
-    [Header("컨트롤러")]
-    [Tooltip("타일맵 컨트롤러")][SerializeField] private TileMapController _tileMapController;
+    [TabGroup("Controller")][Tooltip("타일맵 컨트롤러")][SerializeField] private TileMapController _tileMapController;
     public TileMapController TileMapController { get { return _tileMapController; } }
 
-    [Tooltip("카메라 컨트롤러")][SerializeField] private CameraController _cameraController;
+    [TabGroup("Controller")][Tooltip("카메라 컨트롤러")][SerializeField] private CameraController _cameraController;
     public CameraController CameraController { get { return _cameraController; } }
 
     private void Update()
@@ -37,12 +36,15 @@ public class GameModeController : MonoBehaviour, IGameMode
                 {
                     if (TileMapController == null) Debug.Log("TileMapController가 참조되지 않았습니다!");
                     if (CameraController == null) Debug.Log("CameraController가 참조되지 않았습니다!");
+
+
+
                 }
                 break;
             case GameModeType.GAMEMODE_INGAME:
                 {
-                    TileMapController.TilemapMove();
-                    CameraController.FollowCameraMove(); 
+                    TileMapController.Move();
+                    CameraController.Move(); 
                 }
                 break;
             case GameModeType.GAMEMODE_GAMEPAUSE:
@@ -66,9 +68,38 @@ public class GameModeController : MonoBehaviour, IGameMode
                 }
                 break;
             default:
-                Debug.Log("에러! 에러! 에러!");
+                Debug.Log("게임 모드 타입이 제대로 정의되지 않았습니다!");
                 break;
         }
     }
 
+    public void GameStart()
+    {
+        GameMode = GameModeType.GAMEMODE_GAMESTART;
+    }
+
+    public void GamePause()
+    {
+        GameMode = GameModeType.GAMEMODE_GAMEPAUSE;
+    }
+
+    public void GameIngame()
+    {
+        GameMode = GameModeType.GAMEMODE_INGAME;
+    }
+
+    public void GameLevelUp()
+    {
+        GameMode = GameModeType.GAMEMODE_LEVELUP;
+    }
+
+    public void GameOver()
+    {
+        GameMode = GameModeType.GAMEMODE_GAMEOVER;
+    }
+
+    public void GameClear()
+    {
+        GameMode = GameModeType.GAMEMODE_GAMECLEAR;
+    }
 }
