@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79fdb87aabf3c9e45a7484501256ee7a, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  _unitAttribute:
+    _health: 10000
+    _currentHealth: 10000
+    _maxHealth: 10000
+    _moveSpeed: 500
+    _damage: 100
+    _defense: 500
+    _criticalDamage: 150
+    _criticalChance: 500
+    _projectileNumber: 1
+    _projectileSpeed: 1000
+    _attackSpeed: 500
+    _attackRange: 200
+    _attackDuration: 100
+    _attackCoolDown: 150
+  _unitName: Player
+  _teamType: 1
+  _soundName: Player
+  _soundType: 2
+  _soundClip: {fileID: 0}
+  _playerAttribute:
+    _playerGetExpRange: 200
+    _luck: 100
+    _playerCurrentExp: 0
+    _playerLevel: 1

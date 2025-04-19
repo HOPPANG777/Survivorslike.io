@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //==============================================================================
@@ -12,8 +15,8 @@ using UnityEngine;
 public class PlayerUnitSO : UnitBaseSO
 {
     [Header("PlayerData")]
-    [SerializeField] private IPlayerAttribute _playerAttribute;
-    public IPlayerAttribute PlayerAttribute { get { return _playerAttribute; } set { _playerAttribute = value; } }
+    [SerializeField] protected PlayerableAttribute _playerAttribute;
+    public PlayerableAttribute PlayerAttribute { get { return _playerAttribute; } set { _playerAttribute = value; } }
 
     override public void SetData(UnitBaseSO _unitData)
     {

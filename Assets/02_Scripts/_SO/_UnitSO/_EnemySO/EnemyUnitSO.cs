@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //==============================================================================
@@ -12,8 +15,8 @@ using UnityEngine;
 public class EnemyUnitSO : UnitBaseSO
 {
     [Header("EnemyData")]
-    [SerializeField] private IEnemyAttribute _enemyAttribute;
-    public IEnemyAttribute EnemyAttribute { get { return _enemyAttribute; } set { _enemyAttribute = value; } }
+    [SerializeField] protected EnemyableAttribute _enemyAttribute;
+    public EnemyableAttribute EnemyAttribute { get { return _enemyAttribute; } set { _enemyAttribute = value; } }
 
     override public void SetData(UnitBaseSO _unitData)
     {

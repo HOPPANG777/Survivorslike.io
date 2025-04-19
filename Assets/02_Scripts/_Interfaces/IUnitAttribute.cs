@@ -20,6 +20,12 @@ public struct UnitAttribute
     [Tooltip("체력(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _health;
     public float UnitHealth { get { return _health / 100f; } set { _health = (int)value; } }
 
+    [Tooltip("현재 체력(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _currentHealth;
+    public float UnitCurrentHealth { get { return _currentHealth / 100f; } set { _currentHealth = (int)value; } }
+
+    [Tooltip("최대 체력(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _maxHealth;
+    public float UnitMaxHealth { get { return _maxHealth / 100f; } set { _maxHealth = (int)value; } }
+
     [Tooltip("이동속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _moveSpeed;
     public float UnitMoveSpeed { get { return _moveSpeed / 100f; } set { _moveSpeed = (int)value; } }
 
@@ -57,7 +63,7 @@ public struct UnitAttribute
 [Serializable]
 public struct PlayerableAttribute
 {
-    public UnitAttribute Base;
+    //public UnitAttribute Base;
 
     [Tooltip("플레이어 경험치 획득 반경(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _playerGetExpRange;
     public float PlayerGetExpRange { get { return _playerGetExpRange / 100f; } set { _playerGetExpRange = (int)value; } }
@@ -75,7 +81,7 @@ public struct PlayerableAttribute
 [Serializable]
 public struct EnemyableAttribute
 {
-    public UnitAttribute Base;
+    //public UnitAttribute Base;
 
     [Tooltip("적이 가지고 있는 경험치")][SerializeField] private int _enemyExp;
     public int EnemyExp { get { return _enemyExp; } set { _enemyExp = value; } }

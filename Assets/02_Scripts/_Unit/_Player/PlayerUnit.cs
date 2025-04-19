@@ -10,18 +10,26 @@ using UnityEngine;
 public class PlayerUnit : UnitBase, IPlayerAttribute
 {
     [Header("Player Unit")]
-    [Tooltip("Player Data")][SerializeField] private PlayerUnitSO _playerData;
+    private PlayerUnitSO _playerData;
     public PlayerUnitSO PlayerData { get { return _playerData; } set { _playerData = value; } }
 
-    public PlayerableAttribute Attributes { get { return PlayerData.PlayerAttribute.Attributes; } set { PlayerData.PlayerAttribute.Attributes = value; } }
+    [Tooltip("Player Attribute")][SerializeField] private PlayerableAttribute _playerAttribute;
+    public new PlayerableAttribute Attributes { get { return _playerAttribute; } set { _playerAttribute = value; } }
 
-    private void Start()
+    override protected void Start()
     {
-        
+        base.Start();
     }
 
-    private void Update()
+    override protected void Update()
     {
-        
+        base.Update();
+    }
+
+    override public void SetStatus()
+    {
+        base.SetStatus();
+        _playerData = _unitBaseData as PlayerUnitSO;
+        _playerAttribute = _playerData.PlayerAttribute;
     }
 }

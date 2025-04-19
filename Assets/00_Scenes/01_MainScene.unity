@@ -746,10 +746,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d5033dc8ede7a4bb2f1e9c89ce2fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attributes:
+  _unitBaseData: {fileID: 11400000, guid: 7a2f241fc871b634b8c11944b3303ab2, type: 2}
+  _unitName: 
+  _teamType: 0
+  _soundName: 
+  _soundType: 0
+  _soundClip: {fileID: 0}
+  _soundSource: {fileID: 0}
+  _playerData: {fileID: 0}
+  _playerAttribute:
     Base:
       _health: 0
-      _moveSpeed: 500
+      _moveSpeed: 0
       _damage: 0
       _defense: 0
       _criticalDamage: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 // Player의 이동을 담당하는 Controller
 //
 //==============================================================================
-public class PlayerMoveController : MonoBehaviour, IPositionProvider, IMoveable
+public class PlayerMoveController : MonoBehaviour, IMoveable
 {
     [Header("Target")]
     [SerializeField] private GameObject _player;
@@ -16,11 +16,8 @@ public class PlayerMoveController : MonoBehaviour, IPositionProvider, IMoveable
     public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
     [Header("Interface")]
-    [SerializeField] private Vector3 _position => this.transform.position;
-    public Vector3 Position { get { return _position; } }
-
-    [SerializeField] private IPlayerAttribute _playerAttribute;
-    public IPlayerAttribute PlayerAttribute { get { return _playerAttribute; } }
+    [SerializeField] private IUnitAttribute<UnitAttribute> _playerAttribute;
+    public IUnitAttribute<UnitAttribute> PlayerAttribute { get { return _playerAttribute; } }
 
     private bool CheckPlayerMove()
     {
@@ -37,14 +34,14 @@ public class PlayerMoveController : MonoBehaviour, IPositionProvider, IMoveable
 
     private bool CheckPlayerAttribute()
     {
-        if (_player.TryGetComponent<IPlayerAttribute>(out var attribute))
+        if (_player.TryGetComponent<IUnitAttribute<UnitAttribute>>(out var attribute))
         {
             _playerAttribute = attribute;
             return true;
         }
         else
         {
-            Debug.LogError("IPositionProvider 컴포넌트를 찾을 수 없습니다!");
+            Debug.LogError("IPlayerAttribute 컴포넌트를 찾을 수 없습니다!");
             return false;
         }
     }
@@ -64,7 +61,7 @@ public class PlayerMoveController : MonoBehaviour, IPositionProvider, IMoveable
         _moveDirection.y = Input.GetAxisRaw("Vertical");
 
         // 방향 벡터
-        Vector3 nextVector = _moveDirection.normalized * _playerAttribute.Attributes.Base.UnitMoveSpeed * Time.deltaTime;
+        Vector3 nextVector = _moveDirection.normalized * _playerAttribute.Attributes.UnitMoveSpeed * Time.deltaTime;
 
         // 이동
         this.transform.position = this.transform.position + nextVector;

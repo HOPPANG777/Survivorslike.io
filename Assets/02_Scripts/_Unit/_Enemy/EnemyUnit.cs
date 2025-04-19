@@ -10,18 +10,26 @@ using UnityEngine;
 public class EnemyUnit : UnitBase, IEnemyAttribute
 {
     [Header("Enemy Unit")]
-    [Tooltip("Enemy Data")][SerializeField] private EnemyUnitSO _enemyData;
+    private EnemyUnitSO _enemyData;
     public EnemyUnitSO EnemyData { get { return _enemyData; } set { _enemyData = value; } }
 
-    public EnemyableAttribute Attributes { get { return EnemyData.EnemyAttribute.Attributes; } set { EnemyData.EnemyAttribute.Attributes = value; } }
-    
-    private void Start()
+    [Tooltip("Enemy Attribute")][SerializeField] private EnemyableAttribute _enemyAttribute;
+    public new EnemyableAttribute Attributes { get { return _enemyAttribute; } set { _enemyAttribute = value; } }
+
+    override protected void Start()
     {
-        
+        base.Start();
     }
 
-    private void Update()
+    override protected void Update()
     {
-        
+        base.Update();
+    }
+
+    override public void SetStatus()
+    {
+        base.SetStatus();
+        _enemyData = _unitBaseData as EnemyUnitSO;
+        _enemyAttribute = _enemyData.EnemyAttribute;
     }
 }
