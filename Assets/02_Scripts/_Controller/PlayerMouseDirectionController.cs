@@ -57,7 +57,7 @@ public class PlayerMouseDirectionController : MonoBehaviour, IMoveable
     {
         if (CheckPlayerMouseDirection() == false) return;
         if (CheckTargetPosition() == false) return;
-        if (AllManager.instance.GameMode.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         // 1) 마우스 스크린 좌표
         Vector3 mouseScreenPos = Input.mousePosition;

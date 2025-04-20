@@ -54,7 +54,7 @@ public class PlayerMoveController : MonoBehaviour, IMoveable
     {
         if (CheckPlayerMove() == false) return;
         if (CheckPlayerAttribute() == false) return;
-        if (AllManager.instance.GameMode.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         // ют╥б
         _moveDirection.x = Input.GetAxisRaw("Horizontal");

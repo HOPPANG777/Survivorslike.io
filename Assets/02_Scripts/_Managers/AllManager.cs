@@ -11,19 +11,19 @@ using UnityEngine;
 public class AllManager : Singleton<AllManager>
 {
     [TabGroup("Controller")][SerializeField] private GameModeController _gameModeController;
-    public GameModeController GameMode { get { return _gameModeController; } }
+    public GameModeController GamemodeManager { get { return _gameModeController; } }
 
     [TabGroup("Controller")][SerializeField] private CollisionController _collisionController;
-    public CollisionController CollisionController { get { return _collisionController; } }
+    public CollisionController CollisionManager { get { return _collisionController; } }
 
     private void Start()
     {
         Screen.SetResolution(1920, 1080, true);
         Application.targetFrameRate = 60;
 
-        if (GameMode == null) Debug.Log("GameModeContoller가 없습니다.");
-        if (CollisionController == null) Debug.Log("CollisionController가 없습니다.");
+        if (GamemodeManager == null) Debug.Log("GameModeContoller가 없습니다.");
+        if (CollisionManager == null) Debug.Log("CollisionController가 없습니다.");
 
-        GameMode.GameStart();
+        GamemodeManager.GameStart();
     }
 }

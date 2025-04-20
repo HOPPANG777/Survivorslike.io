@@ -21,6 +21,7 @@ public class UIManager : Singleton<UIManager>
 
     public void PausePage()
     {
+        AllManager.instance.GamemodeManager.GamePause();
         _backManager.NavigateTo(_pageList[2], SlideDirection.SLIDE_DOWN, SlideDirection.SLIDE_UP);
     }
 }

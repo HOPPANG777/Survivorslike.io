@@ -51,7 +51,7 @@ public class UIBackController : MonoBehaviour, IUIBack
         // TitlePage 여부 판단
         bool isCurrentRoot = (_pages.Count > 0 && _currentPage == _pages[0]);
         bool isTargetRoot = (_pages.Count > 0 && page == _pages[0]);
-        bool isIngame = AllManager.instance.GameMode.GameMode == GameModeType.GAMEMODE_INGAME;
+        bool isIngame = AllManager.instance.GamemodeManager.GameMode == GameModeType.GAMEMODE_GAMESTART;
 
         // 기록에 남기기
         _history.Push(new NavEntry
@@ -63,7 +63,7 @@ public class UIBackController : MonoBehaviour, IUIBack
         });
 
         // 현재 페이지 슬라이드 아웃 또는 비활성화
-        if (isCurrentRoot && isIngame)
+        if (isCurrentRoot && !isIngame)
         {
             // 게임 모드 인게임일 때만 TitlePage 비활성화
             _currentPage.SetActive(false);
@@ -76,7 +76,7 @@ public class UIBackController : MonoBehaviour, IUIBack
         // 목표 페이지 활성화 및 슬라이드 인 (TitlePage일 땐 정상 슬라이드)
         page.SetActive(true);
         var nextSlider = page.GetComponent<UISliderController>();
-        if (!(isTargetRoot && isIngame))
+        if (!(isTargetRoot && !isIngame))
         {
             nextSlider.Slide(inDirection);
         }
@@ -92,7 +92,7 @@ public class UIBackController : MonoBehaviour, IUIBack
 
         var entry = _history.Pop();
         bool previousIsRoot = (_pages.Count > 0 && entry.Page == _pages[0]);
-        bool isIngame = AllManager.instance.GameMode.GameMode == GameModeType.GAMEMODE_INGAME;
+        bool isIngame = AllManager.instance.GamemodeManager.GameMode == GameModeType.GAMEMODE_GAMESTART;
 
         // 현재 페이지 슬라이드 아웃
         _currentSlider.Slide(Opposite(entry.InDirection));
@@ -101,7 +101,7 @@ public class UIBackController : MonoBehaviour, IUIBack
         entry.Page.SetActive(true);
 
         // 이전 페이지가 TitlePage이면서 인게임 모드일 때만 비슬라이드, 그 외 정상 슬라이드
-        if (!(previousIsRoot && isIngame))
+        if (!(previousIsRoot && !isIngame))
         {
             entry.Slider.Slide(Opposite(entry.OutDirection));
         }
@@ -122,6 +122,6 @@ public class UIBackController : MonoBehaviour, IUIBack
             case SlideDirection.SLIDE_RIGHT: return SlideDirection.SLIDE_LEFT;
             default: return dir;
         }
-    }
+    }   
 }
 

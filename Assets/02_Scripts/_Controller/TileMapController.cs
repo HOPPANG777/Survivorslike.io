@@ -64,7 +64,7 @@ public class TileMapController : MonoBehaviour, IMoveable
     {
         if (CheckTileMap() == false) return;
         if (CheckTileMapList() == false) return;
-        if (AllManager.instance.GameMode.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         // 현재 플레이어의 위치 가져오기
         Vector3 playerPosition = TileMapTargetPosition.Position;
