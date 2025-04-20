@@ -20,7 +20,6 @@ public class AllManager : Singleton<AllManager>
     [TabGroup("Controller")][SerializeField] private UIController _uiController;
     public UIController UIManager { get { return _uiController; } }
 
-
     private void Start()
     {
         Screen.SetResolution(1920, 1080, true);

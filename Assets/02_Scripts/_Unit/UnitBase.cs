@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 //==============================================================================
@@ -12,7 +13,7 @@ public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICol
 {
     [Header("Unit Base")]
     [TabGroup("Unit Base")][Tooltip("Unit Data")][SerializeField] protected UnitBaseSO _unitBaseData;
-    public UnitBaseSO UnitBaseData { get { return _unitBaseData; } }
+    public UnitBaseSO UnitBaseData { get { return _unitBaseData; } set { _unitBaseData = value; } }
 
     [TabGroup("Unit Base")][Tooltip("¿Ø¥÷ ¿Ã∏ß")][SerializeField] protected string _unitName;
     public string UnitName { get { return _unitName; } set { _unitName = value; } }
