@@ -18,6 +18,9 @@ public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
     [TabGroup("UnitBaseSO")][SerializeField] protected UnitAttribute _unitAttribute;
     public UnitAttribute UnitAttribute { get { return _unitAttribute; } set { _unitAttribute = value; } }
 
+    [TabGroup("UnitBaseSO")][Tooltip("유닛 스프라이트")][SerializeField] protected Sprite _unitSprite;
+    public Sprite UnitSprite { get { return _unitSprite; } set { _unitSprite = value; } }
+
     [TabGroup("UnitBaseSO")][Tooltip("유닛 이름")][SerializeField] protected string _unitName;
     public string UnitName { get { return _unitName; } set { _unitName = value; } }
 
@@ -39,6 +42,8 @@ public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
     public virtual void SetData(UnitBaseSO unitData)
     {
         this.UnitAttribute = unitData.UnitAttribute;
+
+        this.UnitSprite = unitData.UnitSprite;
 
         this.UnitName = unitData.UnitName;
 

@@ -7,7 +7,7 @@ using UnityEngine;
 // Player의 이동을 담당하는 Controller
 //
 //==============================================================================
-public class PlayerMoveController : MonoBehaviour, IMoveable
+public class PlayerMoveController : MonoBehaviour, IMoveable, ISpeakable
 {
     [TabGroup("Target")][SerializeField] private GameObject _player;
     public GameObject Player { get { return _player; } }
@@ -26,6 +26,23 @@ public class PlayerMoveController : MonoBehaviour, IMoveable
 
     [TabGroup("Dash")][Tooltip("대쉬 쿨타임(s)(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _dashCooldown; // 2f;
     public float DashCooldown { get { return _dashCooldown / 100f; } set { _dashCooldown = (int)value; } }
+
+    // 사용할 사운드 이름
+    [TabGroup("Dash Sound")][Tooltip("사운드 이름")][SerializeField] protected string _soundName;
+    public string SoundName { get { return _soundName; } }
+
+    // 사용할 사운드 타입
+    [TabGroup("Dash Sound")][Tooltip("사운드 타입")][SerializeField] protected SoundType _soundType;
+    public SoundType SoundType { get { return _soundType; } }
+
+    // 사용할 오디오 클립
+    [TabGroup("Dash Sound")][Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
+    public AudioClip SoundClip { get { return _soundClip; } }
+
+    // 오디오를 출력할 주체
+    [TabGroup("Dash Sound")][Tooltip("오디오를 출력할 주체")][SerializeField] protected AudioSource _soundSource;
+    public AudioSource SoundSource { get { return _soundSource; } }
+
 
     // 내부 상태
     private bool _isDashing;
@@ -103,6 +120,8 @@ public class PlayerMoveController : MonoBehaviour, IMoveable
         // 입력 체크
         if (!(Input.GetKeyDown(KeyCode.Space))) return;
 
+        SoundPlay();
+
         // 마우스 월드 좌표
         //var cam = Camera.main;
         //if (cam == null) return;
@@ -135,5 +154,15 @@ public class PlayerMoveController : MonoBehaviour, IMoveable
         {
             transform.position += moveStep;
         }
+    }
+
+    public void SoundPlay()
+    {
+        _soundSource.Play();
+    }
+
+    public void SoundStop()
+    {
+        _soundSource.Stop();
     }
 }
