@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 //==============================================================================
 // AllManager
@@ -16,6 +17,10 @@ public class AllManager : Singleton<AllManager>
     [TabGroup("Controller")][SerializeField] private CollisionController _collisionController;
     public CollisionController CollisionManager { get { return _collisionController; } }
 
+    [TabGroup("Controller")][SerializeField] private UIController _uiController;
+    public UIController UIManager { get { return _uiController; } }
+
+
     private void Start()
     {
         Screen.SetResolution(1920, 1080, true);
@@ -23,7 +28,9 @@ public class AllManager : Singleton<AllManager>
 
         if (GamemodeManager == null) Debug.Log("GameModeContoller가 없습니다.");
         if (CollisionManager == null) Debug.Log("CollisionController가 없습니다.");
+        if (UIManager == null) Debug.Log("UIController가 없습니다.");
 
         GamemodeManager.GameStart();
+        _uiController.Init();
     }
 }

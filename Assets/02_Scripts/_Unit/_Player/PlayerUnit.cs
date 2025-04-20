@@ -37,6 +37,6 @@ public class PlayerUnit : UnitBase, IPlayerAttribute
     public override void Hitted(float damageValue)
     {
         base.Hitted(damageValue);
-        UIManager.instance.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(base.Attributes.UnitCurrentHealth / base.Attributes.UnitMaxHealth);
+        AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(base.Attributes.UnitCurrentHealth / base.Attributes.UnitMaxHealth);
     }
 }
