@@ -17,20 +17,26 @@ public class PlayerUnit : UnitBase, IPlayerAttribute
     [TabGroup("Player Unit")][Tooltip("Player Attribute")][SerializeField] private PlayerableAttribute _playerAttribute;
     public new PlayerableAttribute Attributes { get { return _playerAttribute; } set { _playerAttribute = value; } }
 
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
     }
 
-    override protected void Update()
+    protected override void Update()
     {
         base.Update();
     }
 
-    override public void SetStatus()
+    public override void SetStatus()
     {
         base.SetStatus();
         _playerData = _unitBaseData as PlayerUnitSO;
         _playerAttribute = _playerData.PlayerAttribute;
+    }
+
+    public override void Hitted(float damageValue)
+    {
+        base.Hitted(damageValue);
+        UIManager.instance.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(base.Attributes.UnitCurrentHealth / base.Attributes.UnitMaxHealth);
     }
 }

@@ -18,6 +18,9 @@ public class GameModeController : MonoBehaviour, IGameMode
     [TabGroup("Controller")][Tooltip("카메라 컨트롤러")][SerializeField] private CameraController _cameraController;
     public CameraController CameraController { get { return _cameraController; } }
 
+    [TabGroup("Game")][Tooltip("타이머")][SerializeField] private float _gameTime;
+    public float GameTime { get { return _gameTime; } }
+
     private void Update()
     {
         switch (GameMode)
@@ -36,15 +39,17 @@ public class GameModeController : MonoBehaviour, IGameMode
                 {
                     if (TileMapController == null) Debug.Log("TileMapController가 참조되지 않았습니다!");
                     if (CameraController == null) Debug.Log("CameraController가 참조되지 않았습니다!");
-
-
-
+                    _gameTime = 0;
+                    UIManager.instance.ResetUI();
                 }
                 break;
             case GameModeType.GAMEMODE_INGAME:
                 {
+                    _gameTime += Time.deltaTime;
+
                     TileMapController.Move();
-                    CameraController.Move(); 
+                    CameraController.Move();
+                    UIManager.instance.IngameClockController.UpdateTimer(_gameTime);
                 }
                 break;
             case GameModeType.GAMEMODE_GAMEPAUSE:
@@ -54,7 +59,7 @@ public class GameModeController : MonoBehaviour, IGameMode
                 break;
             case GameModeType.GAMEMODE_LEVELUP:
                 {
-
+                    UIManager.instance.PlayerCurrentExpBarController.UpdateExpBarBlinking();
                 }
                 break;
             case GameModeType.GAMEMODE_GAMEOVER:

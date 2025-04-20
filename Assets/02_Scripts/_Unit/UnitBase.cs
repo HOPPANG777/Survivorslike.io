@@ -50,14 +50,14 @@ public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICol
     //[Header("IAttacker")]
     public float AttackPower { get { return Attributes.UnitDamage; } }
 
-    virtual protected void Start()
+    protected virtual void Start()
     {
         SetStatus();
     }
 
-    virtual protected void Update()
+    protected virtual void Update()
     {
-        
+
     }
 
     public void SoundPlay()
@@ -67,10 +67,10 @@ public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICol
 
     public void SoundStop()
     {
-       
+
     }
 
-    virtual public void SetStatus()
+    public virtual void SetStatus()
     {
         _unitBaseData.SetData(UnitBaseData);
         _unitAttribute = _unitBaseData.UnitAttribute;
@@ -81,7 +81,7 @@ public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICol
         _soundClip = _unitBaseData.SoundClip;
     }
 
-    virtual public void Hitted(float damageValue)
+    public virtual void Hitted(float damageValue)
     {
         var damageReduction = damageValue * (100f / (100f + this.Attributes.UnitDefense));
 

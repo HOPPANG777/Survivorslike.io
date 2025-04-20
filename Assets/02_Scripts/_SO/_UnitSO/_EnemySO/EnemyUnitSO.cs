@@ -18,7 +18,7 @@ public class EnemyUnitSO : UnitBaseSO
     [TabGroup("Enemy Data")][SerializeField] protected EnemyableAttribute _enemyAttribute;
     public EnemyableAttribute EnemyAttribute { get { return _enemyAttribute; } set { _enemyAttribute = value; } }
 
-    override public void SetData(UnitBaseSO _unitData)
+    public override void SetData(UnitBaseSO _unitData)
     {
         base.SetData(_unitData);
 

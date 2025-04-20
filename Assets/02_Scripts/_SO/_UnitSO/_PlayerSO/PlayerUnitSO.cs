@@ -18,7 +18,7 @@ public class PlayerUnitSO : UnitBaseSO
     [TabGroup("Player Data")][SerializeField] protected PlayerableAttribute _playerAttribute;
     public PlayerableAttribute PlayerAttribute { get { return _playerAttribute; } set { _playerAttribute = value; } }
 
-    override public void SetData(UnitBaseSO _unitData)
+    public override void SetData(UnitBaseSO _unitData)
     {
         base.SetData(_unitData);
 

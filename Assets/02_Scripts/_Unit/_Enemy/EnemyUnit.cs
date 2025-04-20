@@ -17,21 +17,26 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
     [TabGroup("Enemy Unit")][Tooltip("Enemy Attribute")][SerializeField] private EnemyableAttribute _enemyAttribute;
     public new EnemyableAttribute Attributes { get { return _enemyAttribute; } set { _enemyAttribute = value; } }
 
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
     }
 
-    override protected void Update()
+    protected override void Update()
     {
         base.Update();
     }
 
-    override public void SetStatus()
+    public override void SetStatus()
     {
         base.SetStatus();
         _enemyData = _unitBaseData as EnemyUnitSO;
         _enemyAttribute = _enemyData.EnemyAttribute;
+    }
+
+    public override void Hitted(float damageValue)
+    {
+        base.Hitted(damageValue);
     }
 
     public void Push(Vector3 direction)

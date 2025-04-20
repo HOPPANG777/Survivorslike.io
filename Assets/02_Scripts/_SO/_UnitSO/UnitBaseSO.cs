@@ -36,7 +36,7 @@ public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
     [TabGroup("Sound")][Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
-    virtual public void SetData(UnitBaseSO unitData)
+    public virtual void SetData(UnitBaseSO unitData)
     {
         this.UnitAttribute = unitData.UnitAttribute;
 
@@ -49,5 +49,5 @@ public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
         this._soundType = unitData._soundType;
 
         this._soundClip = unitData._soundClip;
-    }    
+    }
 }
