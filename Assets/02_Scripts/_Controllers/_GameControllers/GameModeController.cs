@@ -39,8 +39,6 @@ public class GameModeController : MonoBehaviour, IGameMode
                 {
                     if (TileMapController == null) Debug.Log("TileMapController가 참조되지 않았습니다!");
                     if (CameraController == null) Debug.Log("CameraController가 참조되지 않았습니다!");
-                    _gameTime = 0;
-                    AllManager.instance.UIManager.ResetUI();
                 }
                 break;
             case GameModeType.GAMEMODE_INGAME:
@@ -80,6 +78,8 @@ public class GameModeController : MonoBehaviour, IGameMode
 
     public void GameStart()
     {
+        _gameTime = 0;
+        AllManager.instance.UIManager.ResetUI();
         GameMode = GameModeType.GAMEMODE_GAMESTART;
     }
 
@@ -106,11 +106,6 @@ public class GameModeController : MonoBehaviour, IGameMode
     public void GameClear()
     {
         GameMode = GameModeType.GAMEMODE_GAMECLEAR;
-    }
-
-    public void GameQuit()
-    {
-        GameMode = GameModeType.GAMEMODE_GAMESTART;
     }
 
     public void GameExit()

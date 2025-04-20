@@ -22,6 +22,9 @@ public class UIBackController : MonoBehaviour, IUIBack
 
     public void Init()
     {
+        // 모든 페이지 비활성화
+        for (int i = 0; i < _pages.Count; i++) _pages[i].SetActive(false);
+
         // 초기 위치 리스트 생성
         _initialPositions = new List<Vector2>(_pages.Count);
         {
@@ -52,7 +55,8 @@ public class UIBackController : MonoBehaviour, IUIBack
         {
             var page = _pages[i];
             var rect = page.GetComponent<RectTransform>();
-            if (rect != null) rect.anchoredPosition = _initialPositions[i];
+            if (rect != null)
+                rect.anchoredPosition = _initialPositions[i];
 
             page.SetActive(i == 0);
         }
@@ -61,6 +65,7 @@ public class UIBackController : MonoBehaviour, IUIBack
         _currentPage = _pages.Count > 0 ? _pages[0] : null;
         _currentSlider = _currentPage != null ? _currentPage.GetComponent<UISliderController>() : null;
     }
+
     public void NavigateTo(GameObject page, SlideDirection outDirection, SlideDirection inDirection)
     {
         // 같은 페이지 클릭 시 뒤로 가기
@@ -105,10 +110,7 @@ public class UIBackController : MonoBehaviour, IUIBack
         // 현재 페이지 슬라이드 아웃
         _currentSlider.Slide(Opposite(entry.InDirection));
 
-        // 이전 페이지 위치 초기화 및 활성화
-        var prevRect = entry.Page.GetComponent<RectTransform>();
-        if (prevRect != null) prevRect.anchoredPosition = _initialPositions[_pages.IndexOf(entry.Page)];
-
+        // 이전 페이지 활성화
         entry.Page.SetActive(true);
         if (!(previousIsRoot && !isIngame)) entry.Slider.Slide(Opposite(entry.OutDirection));
 
@@ -130,3 +132,4 @@ public class UIBackController : MonoBehaviour, IUIBack
         }
     }
 }
+
