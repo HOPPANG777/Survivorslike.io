@@ -55,6 +55,12 @@ public class UIController : MonoBehaviour
         _backManager.NavigateTo(_pageList[4], SlideDirection.SLIDE_RIGHT, SlideDirection.SLIDE_LEFT);
     }
 
+    public void LevelUpPage()
+    {
+        AllManager.instance.GamemodeManager.GameLevelUp();
+        _backManager.NavigateTo(_pageList[5], SlideDirection.SLIDE_LEFT, SlideDirection.SLIDE_RIGHT);
+    }
+
     public void ResetUI()
     {
         PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(1);

@@ -58,6 +58,7 @@ public class GameModeController : MonoBehaviour, IGameMode
             case GameModeType.GAMEMODE_LEVELUP:
                 {
                     AllManager.instance.UIManager.PlayerCurrentExpBarController.UpdateExpBarBlinking();
+                   
                 }
                 break;
             case GameModeType.GAMEMODE_GAMEOVER:
