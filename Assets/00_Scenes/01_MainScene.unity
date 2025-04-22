@@ -4815,6 +4815,7 @@ GameObject:
   - component: {fileID: 962865888}
   - component: {fileID: 962865890}
   - component: {fileID: 962865889}
+  - component: {fileID: 962865892}
   - component: {fileID: 962865891}
   m_Layer: 0
   m_Name: TestPlayer
@@ -4907,13 +4908,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 962865886}
   _moveDirection: {x: 0, y: 0, z: 0}
-  _dashDistance: 500
-  _dashSpeed: 2000
-  _dashCooldown: 200
-  _soundName: 
-  _soundType: 0
-  _soundClip: {fileID: 0}
-  _soundSource: {fileID: 0}
 --- !u!114 &962865890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4970,6 +4964,26 @@ MonoBehaviour:
     _luck: 0
     _playerCurrentExp: 0
     _playerLevel: 0
+--- !u!114 &962865892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962865886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695e900aeaab235489aca893653d523a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 962865886}
+  _dashDistance: 50
+  _dashSpeed: 2000
+  _dashCooldown: 200
+  _soundName: PlayerDash
+  _soundType: 2
+  _soundClip: {fileID: 0}
+  _soundSource: {fileID: 0}
 --- !u!1 &1003824356
 GameObject:
   m_ObjectHideFlags: 0

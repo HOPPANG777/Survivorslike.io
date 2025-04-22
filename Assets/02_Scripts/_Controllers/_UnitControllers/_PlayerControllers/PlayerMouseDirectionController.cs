@@ -21,6 +21,11 @@ public class PlayerMouseDirectionController : MonoBehaviour, IMoveable
     [TabGroup("PlayerMouseDirection")][Tooltip("회전 속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _rotationSpeed; // 0이면 즉시회전, >0이면 부드럽게 회전
     public float RotationSpeed { get { return _rotationSpeed / 100f; } }
 
+    private void Update()
+    {
+        Move();
+    }
+
     private bool CheckPlayerMouseDirection()
     {
         if (_player == null)
@@ -46,11 +51,6 @@ public class PlayerMouseDirectionController : MonoBehaviour, IMoveable
             Debug.LogError("IPositionProvider 컴포넌트를 찾을 수 없습니다!");
             return false;
         }
-    }
-
-    private void Update()
-    {
-        Move();
     }
 
     public void Move()
