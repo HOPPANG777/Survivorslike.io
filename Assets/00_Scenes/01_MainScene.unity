@@ -4977,7 +4977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 962865886}
-  _dashDistance: 50
+  _dashDistance: 200
   _dashSpeed: 2000
   _dashCooldown: 200
   _soundName: PlayerDash

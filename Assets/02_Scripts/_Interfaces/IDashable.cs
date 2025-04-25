@@ -1,4 +1,3 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 public interface IDashable
@@ -14,10 +13,4 @@ public interface IDashable
 
     // 객체의 대쉬
     public void Dash();
-
-    // 대쉬를 지속
-    public void ContinueDash();
-
-    // 대쉬 시작
-    public void TryStartDash();
 }

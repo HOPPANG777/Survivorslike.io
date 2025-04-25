@@ -42,8 +42,7 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable
     private Vector3 _dashTarget;
     private float _dashTimer;
 
-
-    private void Update()
+    private void LateUpdate()
     {
         Dash();
     }
@@ -81,58 +80,59 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable
         if (CheckPlayerDirection() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-        // 쿨타임 감소
-        if (_dashTimer > 0f) _dashTimer -= Time.deltaTime;
+            // 쿨타임 감소
+            if (_dashTimer > 0f) _dashTimer -= Time.deltaTime;
 
-        // 대쉬 중이면 대쉬 지속, 아니면 일반 이동 + 대쉬 시도
-        if (_isDashing)
-        {
-            ContinueDash();
+            // 대쉬 중이면 대쉬 지속, 아니면 일반 이동 + 대쉬 시도
+            if (_isDashing)
+            {
+                ContinueDash();
+            }
+            else
+            {
+                TryStartDash();
+            }
         }
-        else
+
+        public void TryStartDash()
         {
-            TryStartDash();
+            // 쿨타임 / 모드 확인
+            if (_dashTimer > 0f) return;
+            if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
+            // 입력 체크
+            if (!(Input.GetKeyDown(KeyCode.Space))) return;
+
+            //SoundPlay();
+
+            // 대쉬 방향 & 목표 설정
+            _dashDir = _playerDirection.MoveDirection.normalized; // (_moveDirection - transform.position).normalized;
+            _dashTarget = this.transform.position + _dashDir * DashDistance;
+
+            _isDashing = true;
+            _dashTimer = DashCooldown;
         }
-    }
 
-    public void TryStartDash()
-    {
-        // 쿨타임 / 모드 확인
-        if (_dashTimer > 0f) return;
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-
-        // 입력 체크
-        if (!(Input.GetKeyDown(KeyCode.Space))) return;
-
-        SoundPlay();
-
-        // 대쉬 방향 & 목표 설정
-        _dashDir = _playerDirection.MoveDirection.normalized; //(_moveDirection - transform.position).normalized;
-        _dashTarget = this.transform.position + _dashDir * DashDistance;
-
-        _isDashing = true;
-        _dashTimer = DashCooldown;
-    }
-
-    public void ContinueDash()
-    {
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-
-        // 한 프레임 이동량
-        Vector3 moveStep = _dashDir * DashSpeed * Time.deltaTime;
-        Vector3 toTarget = _dashTarget - transform.position;
-
-        // 목표 넘어서면 종료
-        if (Vector3.Dot(toTarget, _dashDir) <= 0f || moveStep.sqrMagnitude >= toTarget.sqrMagnitude)
+        public void ContinueDash()
         {
-            this.transform.position = _dashTarget;
-            _isDashing = false;
+            if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
+            // 한 프레임 이동량
+            Vector3 moveStep = _dashDir * DashSpeed * Time.deltaTime;
+            Vector3 toTarget = _dashTarget - transform.position;
+
+            // 목표 넘어서면 종료
+            if (Vector3.Dot(toTarget, _dashDir) <= 0f || moveStep.sqrMagnitude >= toTarget.sqrMagnitude)
+            {
+                // SoundStop();
+                this.transform.position = _dashTarget;
+                _isDashing = false;
+            }
+            else
+            {
+                this.transform.position += moveStep;
+            }
         }
-        else
-        {
-            this.transform.position += moveStep;
-        }
-    }
 
     public void SoundPlay()
     {
