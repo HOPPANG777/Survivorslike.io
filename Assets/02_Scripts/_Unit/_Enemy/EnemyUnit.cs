@@ -64,6 +64,6 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
     {
         base.Dead();
         AllManager.instance.UIManager.EnemyKillCountController.UpdateKillCounter();
-        UnitFactory.Instance.Release(this.gameObject.GetComponent<EnemyUnit>());
+        UnitFactory.instance.Release(this.gameObject.GetComponent<EnemyUnit>());
     }
 }

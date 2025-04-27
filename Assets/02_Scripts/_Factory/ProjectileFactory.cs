@@ -12,7 +12,7 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
 
     private void Start()
     {
-        _pool = PoolManager.Instance;
+        _pool = PoolManager.instance;
         _map = new Dictionary<ProjectileBaseSO, GameObject>(_entries.Count);
 
         for (int i = 0; i < _entries.Count; i++)

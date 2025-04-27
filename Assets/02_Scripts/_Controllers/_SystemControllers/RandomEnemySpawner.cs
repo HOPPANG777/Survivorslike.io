@@ -17,7 +17,7 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
 
     private void Start()
     {
-        _factory = UnitFactory.Instance;
+        _factory = UnitFactory.instance;
     }
 
     private void Update()

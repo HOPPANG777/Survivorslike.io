@@ -51,7 +51,7 @@ public class EnemyShooterController : MonoBehaviour, IShoot
         }
 
         // ÆÑÅä¸®¿¡¼­ ²¨³» ¾²±â
-        var go = ProjectileFactory.Instance.Create(_bulletData, _bulletSpawnPoint.transform.position, _bulletSpawnPoint.transform.rotation);
+        var go = ProjectileFactory.instance.Create(_bulletData, _bulletSpawnPoint.transform.position, _bulletSpawnPoint.transform.rotation);
 
         if (go == null)
         {

@@ -14,7 +14,7 @@ using Sirenix.OdinInspector;
 public class SerializedSingleton<T> : SerializedMonoBehaviour where T : SerializedMonoBehaviour
 {
     private static T _instance;
-    public static T Instance
+    public static T instance
     {
         get
         {

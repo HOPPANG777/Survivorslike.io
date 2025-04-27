@@ -2431,7 +2431,7 @@
             This implementation will find all AttributeProcessor definitions not marked with the <see cref="T:Sirenix.OdinInspector.Editor.OdinDontRegisterAttribute"/>.
             </summary>
         </member>
-        <member name="F:Sirenix.OdinInspector.Editor.DefaultOdinAttributeProcessorLocator.Instance">
+        <member name="F:Sirenix.OdinInspector.Editor.DefaultOdinAttributeProcessorLocator.">
             <summary>
             Singleton instance of the DefaultOdinAttributeProcessorLocator class.
             </summary>
@@ -2461,7 +2461,7 @@
             Default implementation and the version that will be used by <see cref="T:Sirenix.OdinInspector.Editor.PropertyTree"/> if no other <see cref="T:Sirenix.OdinInspector.Editor.OdinPropertyResolver"/> instance have been specified.
             </summary>
         </member>
-        <member name="F:Sirenix.OdinInspector.Editor.DefaultOdinPropertyResolverLocator.Instance">
+        <member name="F:Sirenix.OdinInspector.Editor.DefaultOdinPropertyResolverLocator.">
             <summary>
             Singleton instance of <see cref="T:Sirenix.OdinInspector.Editor.DefaultOdinPropertyResolverLocator"/>.
             </summary>
@@ -8316,7 +8316,7 @@
             
                  protected override object GetTarget()
                  {
-                     return MySingleton.Instance;
+                     return MySingleton.;
                  }
              }
              </code>
@@ -8579,8 +8579,8 @@
                      {
                          { "Home",                           this,                           EditorIcons.House       }, // draws the someDataField in this case.
                          { "Odin Settings",                  null,                           SdfIconType.GearFill    },
-                         { "Odin Settings/Color Palettes",   ColorPaletteManager.Instance,   EditorIcons.EyeDropper  },
-                         { "Odin Settings/AOT Generation",   AOTGenerationConfig.Instance,   EditorIcons.SmartPhone  },
+                         { "Odin Settings/Color Palettes",   ColorPaletteManager.,   EditorIcons.EyeDropper  },
+                         { "Odin Settings/AOT Generation",   AOTGenerationConfig.,   EditorIcons.SmartPhone  },
                          { "Camera current",                 Camera.current                                          },
                          { "Some Class",                     this.someData                                           }
                      };
