@@ -28,3 +28,4 @@ MonoBehaviour:
   _soundName: ProjectileSound
   _soundType: 2
   _soundClip: {fileID: 0}
+  _collisionRadius: 0.2

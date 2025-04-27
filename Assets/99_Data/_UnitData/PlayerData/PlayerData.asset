@@ -33,7 +33,7 @@ MonoBehaviour:
   _soundName: Player
   _soundType: 2
   _soundClip: {fileID: 0}
-  _collisionRadius: 1
+  _collisionRadius: 0.2
   _playerAttribute:
     _playerGetExpRange: 2
     _luck: 1
