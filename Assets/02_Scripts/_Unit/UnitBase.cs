@@ -79,13 +79,13 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         _unitBaseData.SetData(UnitBaseData);
         _unitAttribute = _unitBaseData.UnitAttribute;
         _unitName = _unitBaseData.UnitName;
+        _collisionRadius = _unitBaseData.CollisionRadius;
         _teamType = _unitBaseData.TeamType;
         _soundName = _unitBaseData.SoundName;
         _soundType = _unitBaseData.SoundType;
         _soundClip = _unitBaseData.SoundClip;
         _soundSource = this.gameObject.GetComponent<AudioSource>();
         AllManager.instance.CollisionManager.RegisterCollidable(this);
-        _collisionRadius = _unitBaseData.CollisionRadius;
         isDead = false;
     }
 
@@ -100,13 +100,14 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     {
         if (this._unitAttribute.UnitCurrentHealth <= 0)
         {
+            this._unitAttribute.UnitCurrentHealth = 0;
             Dead();
         }
     }
 
     public virtual void Dead()
     {
-        if (!isDead) return;
+        if (isDead == true) return;
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
         isDead = true;
     }

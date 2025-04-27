@@ -87,6 +87,7 @@ public class GameModeController : MonoBehaviour, IGameMode
         AllManager.instance.UIManager.ResetUI();
         Player.GetComponent<PlayerUnit>().SetStatus();
         Player.transform.position = Vector3.zero;
+        Player.gameObject.SetActive(false);
         GameMode = GameModeType.GAMEMODE_GAMESTART;
     }
 
@@ -97,6 +98,7 @@ public class GameModeController : MonoBehaviour, IGameMode
 
     public void GameIngame()
     {
+        Player.gameObject.SetActive(true);
         GameMode = GameModeType.GAMEMODE_INGAME;
     }
 

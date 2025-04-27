@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -9,6 +10,9 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
 
     private Dictionary<ProjectileBaseSO, GameObject> _map;
     private IPoolManager _pool;
+
+    // 활성화된(생성된) 발사체 목록
+    private readonly List<ProjectileBase> _activeProjectiles = new List<ProjectileBase>();
 
     private void Start()
     {
@@ -39,13 +43,38 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
         projectile.ProjectileBaseData = data;
         projectile.SetStatus();
 
+        // 활성 유닛으로 등록
+        _activeProjectiles.Add(projectile);
+
         return go;
     }
 
-    public void Release(GameObject projectile)
+    public void Release(ProjectileBase projectile)
     {
         if (projectile == null) return;
-        projectile.SetActive(false);
-        _pool.Return(projectile);
+
+        // 활성 목록에서 제거
+        if (_activeProjectiles.Contains(projectile))
+        {
+            _activeProjectiles.Remove(projectile);
+        }
+
+        projectile.gameObject.SetActive(false);
+        _pool.Return(projectile.gameObject);
     }
+
+    public void ReleaseAll()
+    {
+        for (int i = _activeProjectiles.Count - 1; i >= 0; i--)
+        {
+            var unit = _activeProjectiles[i];
+            if (unit != null)
+            {
+                unit.gameObject.SetActive(false);
+                _pool.Return(unit.gameObject);
+            }
+        }
+        _activeProjectiles.Clear();
+    }
+
 }

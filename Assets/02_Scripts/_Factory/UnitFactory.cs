@@ -10,6 +10,9 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
     private Dictionary<UnitBaseSO, GameObject> _map;
     private IPoolManager _pool;
 
+    // 활성화된(생성된) 유닛 목록
+    private readonly List<UnitBase> _activeUnits = new List<UnitBase>();
+
     private void Start()
     {
         _pool = PoolManager.instance;
@@ -30,13 +33,38 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
         var unit = go.GetComponent<UnitBase>();
         unit.UnitBaseData = data;
         unit.SetStatus();
+
+        // 활성 유닛으로 등록
+        _activeUnits.Add(unit);
+
         return unit;
     }
 
     public void Release(UnitBase unit)
     {
         if (unit == null) return;
+        
+        // 활성 목록에서 제거
+        if (_activeUnits.Contains(unit))
+        {
+            _activeUnits.Remove(unit);
+        }
+
         unit.gameObject.SetActive(false);
         _pool.Return(unit.gameObject);
+    }
+
+    public void ReleaseAll()
+    {
+        for (int i = _activeUnits.Count - 1; i >= 0; i--)
+        {
+            var unit = _activeUnits[i];
+            if (unit != null)
+            {
+                unit.gameObject.SetActive(false);
+                _pool.Return(unit.gameObject);
+            }
+        }
+        _activeUnits.Clear();
     }
 }

@@ -69,7 +69,7 @@
     public void PerformAttack()
     {
         // 1) 충돌 매니저가 관리하는 리스트를 직접 꺼내온다
-        var all = AllManager.instace.CollisionManager.GetAllCollidables(); 
+        var all = AllManager.instace.Manager.GetAllCollidables(); 
         int count = all.Count;
 
         // 2) 반경 내 대상만 검사

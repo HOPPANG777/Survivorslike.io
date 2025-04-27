@@ -116,7 +116,7 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
     /// </summary>
     public virtual void Dead()
     {
-        if (!isDead) return;
+        if (isDead == true) return;
 
         // 충돌 시스템에서 해제
         AllManager.instance.CollisionManager.UnregisterCollidable(this);

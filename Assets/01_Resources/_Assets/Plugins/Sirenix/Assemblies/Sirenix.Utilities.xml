@@ -2912,7 +2912,7 @@
         </member>
         <member name="M:Sirenix.Utilities.MathUtilities.InfiniteLineIntersect(UnityEngine.Vector2,UnityEngine.Vector2,UnityEngine.Vector2,UnityEngine.Vector2)">
             <summary>
-            Returns the collision point between two infinite lines.
+            Returns the  point between two infinite lines.
             </summary>
         </member>
         <member name="M:Sirenix.Utilities.MathUtilities.LineDistToPlane(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)">

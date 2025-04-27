@@ -19,9 +19,6 @@ public struct ProjectileAttribute
     [TabGroup("Attribute")][Tooltip("투사체 존속 시간(초)")][SerializeField] private float _lifetime;
     public float Lifetime { get { return _lifetime; } set { _lifetime = value; } }
 
-    [TabGroup("Attribute")][Tooltip("충돌 반경")][SerializeField] private float _collisionRadius;
-    public float CollisionRadius { get { return _collisionRadius; } set { _collisionRadius = value; } }
-
     [TabGroup("Attribute")][Tooltip("넉백 세기")][SerializeField] private float _knockbackForce;
     public float KnockbackForce { get { return _knockbackForce; } set { _knockbackForce = value; } }
 
