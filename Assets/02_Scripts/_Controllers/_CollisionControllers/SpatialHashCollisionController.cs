@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SpatialHashCollisionController
 {
-    private readonly float _cellSize;
-    private readonly Dictionary<Vector2Int, List<ICollidable>> _grid = new Dictionary<Vector2Int, List<ICollidable>>();
+    private float _cellSize;
+    private Dictionary<Vector2Int, List<ICollidable>> _grid = new Dictionary<Vector2Int, List<ICollidable>>();
 
     public SpatialHashCollisionController(float cellSize)
     {

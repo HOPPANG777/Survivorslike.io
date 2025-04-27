@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
 {
-    [TabGroup("Target")][SerializeField] private GameObject _enemy;
-    public GameObject Enemy { get { return _enemy; } }
+    [TabGroup("Target")][SerializeField] private GameObject _player;
+    public GameObject Player { get { return _player; } }
 
-    [TabGroup("Target")][Tooltip("타겟 포지션")][SerializeField] private IPositionProvider _enemyPosition;
-    public IPositionProvider EnemyPosition { get { return _enemyPosition; } }
+    [TabGroup("Target")][Tooltip("타겟 포지션")][SerializeField] private IPositionProvider _playerPosition;
+    public IPositionProvider PlayerPosition { get { return _playerPosition; } }
 
     [TabGroup("Target")][Tooltip("타겟의 방향")][SerializeField] private float _angle;
     public float Angle { get { return _angle; } }
@@ -21,6 +21,11 @@ public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
     [TabGroup("Interface")][SerializeField] private IUnitAttribute<UnitAttribute> _enemyAttribute;
     public IUnitAttribute<UnitAttribute> EnemyAttribute { get { return _enemyAttribute; } }
 
+    private void Start()
+    {
+        if (CheckEnemyMoveTarget() == false) return;
+    }
+
     private void Update()
     {
         Move();
@@ -29,9 +34,10 @@ public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
 
     private bool CheckEnemyMoveTarget()
     {
-        if (_enemy == null)
+        if (_player == null)
         {
-            Debug.LogError("Enemy 할당되지 않았습니다!");
+            _player = AllManager.instance.GamemodeManager.Player;
+            //Debug.LogError("Player 할당되지 않았습니다!");
             return false;
         }
         else
@@ -56,9 +62,9 @@ public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
 
     private bool CheckTargetPosition()
     {
-        if (_enemy.TryGetComponent<IPositionProvider>(out var provider))
+        if (_player.TryGetComponent<IPositionProvider>(out var provider))
         {
-            _enemyPosition = provider;
+            _playerPosition = provider;
             return true;
         }
         else
@@ -70,13 +76,12 @@ public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
 
     public void Move()
     {
-        if (CheckEnemyMoveTarget() == false) return;
         if (CheckEnemyAttribute() == false) return;
         if (CheckTargetPosition() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         // 방향
-        _moveDirection = (_enemyPosition.Position - this.transform.position).normalized;
+        _moveDirection = (_playerPosition.Position - this.transform.position).normalized;
 
         // 이동
         this.transform.position = this.transform.position + (_moveDirection * (Random.Range(_enemyAttribute.Attributes.UnitMoveSpeed, _enemyAttribute.Attributes.UnitMoveSpeed) * Time.deltaTime));

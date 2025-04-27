@@ -39,4 +39,9 @@ public class PlayerUnit : UnitBase, IPlayerAttribute
         base.Hitted(damageValue);
         AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(base.Attributes.UnitCurrentHealth / base.Attributes.UnitMaxHealth);
     }
+
+    public override void Dead()
+    {
+        base.Dead();
+    }
 }

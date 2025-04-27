@@ -5,19 +5,31 @@ using UnityEngine;
 
 public class CollisionController : MonoBehaviour
 {
-    [TabGroup("Collision Controller")][Tooltip("격자 셀 크기(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int cellSize;
-    public float CellSize { get { return cellSize / 100.0f; } }
+    [TabGroup("Collision Controller")][Tooltip("격자 셀 크기(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private float _cellSize;
+    public float CellSize { get { return _cellSize; } }
 
     [TabGroup("Collision Controller")][SerializeField] private SpatialHashCollisionController _controller;
     [TabGroup("Collision Controller")][SerializeField] private List<ICollidable> _collidables = new List<ICollidable>(); // 이제 이 리스트만 순회합니다.
     [TabGroup("Collision Controller")][SerializeField] private List<ICollision> _responders = new List<ICollision>();
 
-    void Awake()
+    public void Init()
     {
-        _controller = new SpatialHashCollisionController(cellSize);
+        _controller = new SpatialHashCollisionController(CellSize);
 
-        _responders.Add(new HittedController(10f));
+        _responders.Add(new HittedController(0.0f));
         _responders.Add(new PushController());
+    }
+
+    // ② 단일 충돌 강제 실행 메서드
+    public void HandleSingleCollision(ICollidable a, ICollidable b)
+    {
+        int respCount = _responders.Count;
+        for (int i = 0; i < respCount; i++)
+        {
+            var responder = _responders[i];
+            responder.OnCollision(a, b);
+            responder.OnCollision(b, a);
+        }
     }
 
     /// <summary>Collidable 등록</summary>

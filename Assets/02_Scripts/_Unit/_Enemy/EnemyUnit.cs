@@ -41,6 +41,24 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
 
     public void Push(Vector3 direction)
     {
-        this.transform.position += (direction * Attributes.EnemyPushStrength);
+        // 캐싱된 거리 제곱값을 사용
+        float sqrDis = direction.sqrMagnitude;
+
+        // 충돌 반경 설정
+        float minDistance = 1.0f;
+        float minDistanceSquared = minDistance * minDistance;
+
+        if (sqrDis < minDistanceSquared)
+        {
+            // 밀쳐내기 계산
+            Vector3 pushDirection = direction.normalized * (minDistance - Mathf.Sqrt(sqrDis)) * Attributes.EnemyPushStrength;
+            this.transform.position += pushDirection * 0.5f;
+        }
+    }
+
+    public override void Dead()
+    {
+        base.Dead();
+        AllManager.instance.UIManager.EnemyKillCountController.UpdateKillCounter();
     }
 }

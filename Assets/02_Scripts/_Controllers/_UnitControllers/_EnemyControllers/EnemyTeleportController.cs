@@ -19,11 +19,17 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
     private Camera _mainCamera;
     private float _timer = 0f;
 
+    private void Start()
+    {
+        if (CheckEnemyMoveTarget() == false) return;
+    }
+
     private bool CheckEnemyMoveTarget()
     {
         if (_enemy == null)
         {
-            Debug.LogError("Enemy 할당되지 않았습니다!");
+            _enemy = this.gameObject;
+            //Debug.LogError("Enemy 할당되지 않았습니다!");
             return false;
         }
         else
@@ -69,7 +75,6 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
 
     private void TeleportEnemy(Vector3 enemy)
     {
-        if (CheckEnemyMoveTarget() == false) return;
         if (CheckTargetPosition() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 

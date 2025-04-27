@@ -21,6 +21,10 @@ public class GameModeController : MonoBehaviour, IGameMode
     [TabGroup("Game")][Tooltip("타이머")][SerializeField] private float _gameTime;
     public float GameTime { get { return _gameTime; } }
 
+    [TabGroup("Player")][Tooltip("플레이어")][SerializeField] private GameObject _player;
+    public GameObject Player { get { return _player; } }
+
+
     private void Update()
     {
         switch (GameMode)

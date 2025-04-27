@@ -11,7 +11,7 @@ using UnityEngine;
 //	
 //==============================================================================
 
-[CreateAssetMenu(fileName = "UnitData", menuName = "UnitData/UnitData", order = 0)]
+[CreateAssetMenu(fileName = "UnitData", menuName = "UnitData", order = 0)]
 
 public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
 {
@@ -39,6 +39,9 @@ public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
     [TabGroup("Sound")][Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
+    [TabGroup("Collision")][Tooltip("충돌 반경")][SerializeField] protected float _collisionRadius;
+    public float CollisionRadius { get { return _collisionRadius; } }
+
     public virtual void SetData(UnitBaseSO unitData)
     {
         this.UnitAttribute = unitData.UnitAttribute;
@@ -54,5 +57,7 @@ public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
         this._soundType = unitData._soundType;
 
         this._soundClip = unitData._soundClip;
+
+        this._collisionRadius = unitData._collisionRadius;
     }
 }

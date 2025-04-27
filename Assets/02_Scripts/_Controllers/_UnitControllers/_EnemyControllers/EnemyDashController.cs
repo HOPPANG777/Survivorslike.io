@@ -42,6 +42,11 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
     private Vector3 _dashTarget;
     private float _dashTimer;
 
+    private void Start()
+    {
+        if (CheckEnemyDash() == false) return;
+    }
+
     private void Update()
     {
         Dash();
@@ -51,7 +56,8 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
     {
         if (_enemy == null)
         {
-            Debug.LogError("Enemy가 할당되지 않았습니다!");
+            _enemy = this.gameObject;
+            //Debug.LogError("Enemy가 할당되지 않았습니다!");
             return false;
         }
         else
@@ -76,7 +82,6 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
 
     public void Dash()
     {
-        if (CheckEnemyDash() == false) return;
         if (CheckEnemyDirection() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 

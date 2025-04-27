@@ -9,7 +9,7 @@ using UnityEngine;
 //	
 //==============================================================================
 
-public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IHitted, IAttacker, IUnitAttribute<UnitAttribute>
+public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IHitted, IAttacker, IUnitAttribute<UnitAttribute>, IDead
 {
     [Header("Unit Base")]
     [TabGroup("Unit Base")][Tooltip("Unit Data")][SerializeField] protected UnitBaseSO _unitBaseData;
@@ -45,8 +45,8 @@ public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICol
     [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][SerializeField] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
 
-    [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] protected int _collisionRadius;
-    public float CollisionRadius { get { return _collisionRadius / 100.0f; } }
+    [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] protected float _collisionRadius;
+    public float CollisionRadius { get { return _collisionRadius; } }
 
     //[Header("IAttacker")]
     public float AttackPower { get { return Attributes.UnitDamage; } }
@@ -80,6 +80,9 @@ public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICol
         _soundName = _unitBaseData.SoundName;
         _soundType = _unitBaseData.SoundType;
         _soundClip = _unitBaseData.SoundClip;
+        _soundSource = this.gameObject.GetComponent<AudioSource>();
+        AllManager.instance.CollisionManager.RegisterCollidable(this);
+        _collisionRadius = _unitBaseData.CollisionRadius;
     }
 
     public virtual void Hitted(float damageValue)
@@ -87,5 +90,10 @@ public class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICol
         var damageReduction = damageValue * (100f / (100f + this.Attributes.UnitDefense));
 
         this._unitAttribute.UnitCurrentHealth -= (damageReduction);
+    }
+
+    public virtual void Dead()
+    {
+        AllManager.instance.CollisionManager.UnregisterCollidable(this);
     }
 }

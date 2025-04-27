@@ -30,6 +30,7 @@ public class AllManager : Singleton<AllManager>
         if (UIManager == null) Debug.Log("UIController가 없습니다.");
 
         _uiController.Init();
+        _collisionController.Init();
         GamemodeManager.GameStart();
     }
 }

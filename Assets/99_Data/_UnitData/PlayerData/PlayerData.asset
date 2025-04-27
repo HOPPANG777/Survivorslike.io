@@ -13,27 +13,29 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   _unitAttribute:
-    _health: 10000
-    _currentHealth: 10000
-    _maxHealth: 10000
-    _moveSpeed: 500
-    _damage: 100
-    _defense: 500
-    _criticalDamage: 150
-    _criticalChance: 500
+    _health: 100
+    _currentHealth: 100
+    _maxHealth: 100
+    _moveSpeed: 5
+    _damage: 1
+    _defense: 5
+    _criticalDamage: 1.5
+    _criticalChance: 5
     _projectileNumber: 1
-    _projectileSpeed: 1000
-    _attackSpeed: 500
-    _attackRange: 200
-    _attackDuration: 100
-    _attackCoolDown: 150
+    _attackSpeed: 5
+    _attackRange: 2
+    _attackDuration: 1
+    _attackCoolDown: 1.5
+    _knockbackForce: 0.5
+  _unitSprite: {fileID: 21300000, guid: a00fe705d046a0146abadb7668ff56bc, type: 3}
   _unitName: Player
   _teamType: 1
   _soundName: Player
   _soundType: 2
   _soundClip: {fileID: 0}
+  _collisionRadius: 1
   _playerAttribute:
-    _playerGetExpRange: 200
-    _luck: 100
+    _playerGetExpRange: 2
+    _luck: 1
     _playerCurrentExp: 0
     _playerLevel: 1
