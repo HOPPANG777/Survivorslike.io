@@ -22,9 +22,9 @@ public class RedTriangleProjectile : ProjectileBase
         base.Move();
     }
 
-    protected override void AgeCheck()
+    public override void CheckDead()
     {
-        base.AgeCheck();
+        base.CheckDead();
     }
 
     public override void Dead()

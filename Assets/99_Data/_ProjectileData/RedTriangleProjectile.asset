@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectileAttribute:
     _damage: 10
-    _projectileSpeed: 3
-    _lifetime: 2
+    _projectileSpeed: 5
+    _lifetime: 3
     _collisionRadius: 1
     _knockbackForce: 1
     _pierceCount: 0

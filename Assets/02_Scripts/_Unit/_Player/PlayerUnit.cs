@@ -40,8 +40,14 @@ public class PlayerUnit : UnitBase, IPlayerAttribute
         AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(base.Attributes.UnitCurrentHealth / base.Attributes.UnitMaxHealth);
     }
 
+    public override void CheckDead()
+    {
+        base.CheckDead();
+    }
+
     public override void Dead()
     {
         base.Dead();
+        AllManager.instance.UIManager.GameOverPage();
     }
 }

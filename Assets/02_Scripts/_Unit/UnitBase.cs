@@ -51,6 +51,8 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     //[Header("IAttacker")]
     public float AttackPower { get { return Attributes.UnitDamage; } }
 
+    private bool isDead = false;
+
     protected virtual void Start()
     {
         SetStatus();
@@ -58,7 +60,8 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
 
     protected virtual void Update()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        CheckDead();
     }
 
     public void SoundPlay()
@@ -83,6 +86,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         _soundSource = this.gameObject.GetComponent<AudioSource>();
         AllManager.instance.CollisionManager.RegisterCollidable(this);
         _collisionRadius = _unitBaseData.CollisionRadius;
+        isDead = false;
     }
 
     public virtual void Hitted(float damageValue)
@@ -92,8 +96,18 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         this._unitAttribute.UnitCurrentHealth -= (damageReduction);
     }
 
+    public virtual void CheckDead()
+    {
+        if (this._unitAttribute.UnitCurrentHealth <= 0)
+        {
+            Dead();
+        }
+    }
+
     public virtual void Dead()
     {
+        if (!isDead) return;
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
+        isDead = true;
     }
 }

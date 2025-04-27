@@ -85,6 +85,8 @@ public class GameModeController : MonoBehaviour, IGameMode
     {
         _gameTime = 0;
         AllManager.instance.UIManager.ResetUI();
+        Player.GetComponent<PlayerUnit>().SetStatus();
+        Player.transform.position = Vector3.zero;
         GameMode = GameModeType.GAMEMODE_GAMESTART;
     }
 

@@ -56,9 +56,14 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
         }
     }
 
+    public override void CheckDead()
+    {
+        base.CheckDead();
+    }
     public override void Dead()
     {
         base.Dead();
         AllManager.instance.UIManager.EnemyKillCountController.UpdateKillCounter();
+        UnitFactory.Instance.Release(this.gameObject.GetComponent<EnemyUnit>());
     }
 }

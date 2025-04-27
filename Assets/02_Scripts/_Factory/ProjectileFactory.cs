@@ -33,16 +33,18 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
         var go = _pool.Get(prefab);
         go.transform.position = position;
         go.transform.rotation = rotation;
+
+        var projectile = go.GetComponent<ProjectileBase>();
+
+        projectile.ProjectileBaseData = data;
+        projectile.SetStatus();
+
         return go;
     }
 
     public void Release(GameObject projectile)
     {
-        if (projectile == null)
-        {
-            return;
-        }
-
+        if (projectile == null) return;
         projectile.SetActive(false);
         _pool.Return(projectile);
     }

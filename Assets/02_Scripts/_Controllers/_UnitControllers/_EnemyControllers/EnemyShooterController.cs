@@ -9,7 +9,7 @@ public class EnemyShooterController : MonoBehaviour, IShoot
     [TabGroup("Interface")][SerializeField] private IUnitAttribute<UnitAttribute> _enemyAttribute;
 
     // 내부 타이머
-    private float _shootTimer = 0f;
+    [SerializeField] private float _shootTimer = 0f;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class EnemyShooterController : MonoBehaviour, IShoot
         _shootTimer += Time.deltaTime;
         if (_shootTimer >= _shootInterval)
         {
-            _shootTimer -= _shootInterval;
+            _shootTimer = 0;
             Shoot();
         }
     }
@@ -53,6 +53,10 @@ public class EnemyShooterController : MonoBehaviour, IShoot
         // 팩토리에서 꺼내 쓰기
         var go = ProjectileFactory.Instance.Create(_bulletData, _bulletSpawnPoint.transform.position, _bulletSpawnPoint.transform.rotation);
 
-        if (go == null) return;
+        if (go == null)
+        {
+            Debug.LogError("EnemyShooter: ProjectileFactory에서 생성 실패");
+            return;
+        } 
     }
 }
