@@ -39,20 +39,19 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
         base.Hitted(damageValue);
     }
 
-    public void Push(Vector3 direction)
+    public void Push(Vector3 delta)
     {
-        // 캐싱된 거리 제곱값을 사용
-        float sqrDis = direction.sqrMagnitude;
+        // 실제 거리
+        float dist = delta.magnitude;
+        float minDistance = 1.0f;                  // 원하는 최소 간격
+        float overlap = minDistance - dist;        // 겹친 정도
 
-        // 충돌 반경 설정
-        float minDistance = 1.0f;
-        float minDistanceSquared = minDistance * minDistance;
-
-        if (sqrDis < minDistanceSquared)
+        if (overlap > 0f && dist > 0f)
         {
-            // 밀쳐내기 계산
-            Vector3 pushDirection = direction.normalized * (minDistance - Mathf.Sqrt(sqrDis)) * Attributes.EnemyPushStrength;
-            this.transform.position += pushDirection * 0.5f;
+            Vector3 dir = delta / dist;            // 단위 방향 벡터
+                                                   // 겹친 거리만큼 세기 곱해 반반씩 밀어냄
+            Vector3 push = dir * (overlap * Attributes.EnemyPushStrength * 0.5f);
+            transform.position += push;
         }
     }
 
@@ -63,7 +62,7 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
     public override void Dead()
     {
         base.Dead();
-        AllManager.instance.UIManager.EnemyKillCountController.UpdateKillCounter();
+        AllManager.instance.UIManager.EnemyKillCountController.UpdateKillCounter(AllManager.instance.GamemodeManager.KillCount++);
         UnitFactory.instance.Release(this.gameObject.GetComponent<EnemyUnit>());
     }
 }

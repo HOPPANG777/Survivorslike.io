@@ -18,11 +18,18 @@ public class GameModeController : MonoBehaviour, IGameMode
     [TabGroup("Controller")][Tooltip("카메라 컨트롤러")][SerializeField] private CameraController _cameraController;
     public CameraController CameraController { get { return _cameraController; } }
 
+    [TabGroup("Controller")][Tooltip("스폰 컨트롤러")][SerializeField] private RandomEnemySpawner _randomEnemySpawner;
+    public RandomEnemySpawner RandomEnemySpawner { get { return _randomEnemySpawner; } }
+
     [TabGroup("Game")][Tooltip("타이머")][SerializeField] private float _gameTime;
     public float GameTime { get { return _gameTime; } }
 
+    [TabGroup("Game")][Tooltip("킬 카운트")][SerializeField] private int _killCount;
+    public int KillCount { get { return _killCount; } set { _killCount = value; } }
+
     [TabGroup("Player")][Tooltip("플레이어")][SerializeField] private GameObject _player;
     public GameObject Player { get { return _player; } }
+
 
 
     private void Update()
@@ -84,6 +91,7 @@ public class GameModeController : MonoBehaviour, IGameMode
     public void GameStart()
     {
         _gameTime = 0;
+        _killCount = 0;
         UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();

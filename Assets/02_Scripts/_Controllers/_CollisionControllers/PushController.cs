@@ -6,9 +6,10 @@ public class PushController : ICollision
     {
         if (a is IPushable pa && b is IPushable pb)
         {
-            var dir = (b.Position - a.Position).normalized;
-            pa.Push(-dir);
-            pb.Push(dir);
+            // 실제 Delta 벡터 (정규화 NO)
+            Vector3 delta = b.Position - a.Position;
+            pa.Push(-delta);
+            pb.Push(delta);
         }
     }
 }

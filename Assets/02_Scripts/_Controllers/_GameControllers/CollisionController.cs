@@ -16,7 +16,7 @@ public class CollisionController : MonoBehaviour
     {
         _controller = new SpatialHashCollisionController(CellSize);
 
-        _responders.Add(new HittedController(0.0f));
+        _responders.Add(new HittedController());
         _responders.Add(new PushController());
     }
 

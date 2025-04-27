@@ -257,3 +257,4 @@ MonoBehaviour:
   _shootInterval: 0
   _bulletSpawnPoint: {fileID: 6879154302317584246}
   _bulletData: {fileID: 11400000, guid: 35a76948f1ce155469a8cc4cd054c855, type: 2}
+  _shootTimer: 0

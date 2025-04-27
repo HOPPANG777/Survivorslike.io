@@ -2210,8 +2210,8 @@ Camera:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.16353686, g: 0.29156286, b: 0.46226418, a: 0}
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.59607846, g: 0.59607846, b: 0.59607846, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -6604,9 +6604,11 @@ MonoBehaviour:
     SerializationNodes: []
   _configs:
   - Prefab: {fileID: 6879154302317584246, guid: 38518d429e914174995519febea2084d, type: 3}
-    InitialSize: 10
+    InitialSize: 100
+  - Prefab: {fileID: 2423636656322011951, guid: dc5c55d8e3e49b9428e21585b0200c15, type: 3}
+    InitialSize: 100
   - Prefab: {fileID: 177575347635178658, guid: 05f5a69eb139d194c87ff142654c3dd5, type: 3}
-    InitialSize: 10
+    InitialSize: 1000
 --- !u!4 &1131158582
 Transform:
   m_ObjectHideFlags: 0
@@ -12787,11 +12789,25 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _enemyData: {fileID: 11400000, guid: fe925474c60dd4e47a1353742e4d4e7d, type: 2}
-  _spawnPoints: []
+  _spawnEntries:
+  - EnemyData: {fileID: 11400000, guid: fe925474c60dd4e47a1353742e4d4e7d, type: 2}
+    StartTime: 0
+    EndTime: 300
+    Interval: 3
+    MaxCount: 50
+    Timer: 0
+    SpawnedCount: 0
+  - EnemyData: {fileID: 11400000, guid: 30395190b4497354c86810e587f23314, type: 2}
+    StartTime: 30
+    EndTime: 300
+    Interval: 2
+    MaxCount: 50
+    Timer: 0
+    SpawnedCount: 0
+  _bossSpawnTime: 301
+  _bossData: {fileID: 0}
+  _bossSpawnPoint: {fileID: 0}
   _offCameraMargin: 1
-  _spawnInterval: 5
-  _maxEnemies: 10
 --- !u!1 &1546737402
 GameObject:
   m_ObjectHideFlags: 0
@@ -14642,8 +14658,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 50, y: 0}
+  m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1773737285
 MonoBehaviour:
@@ -14665,7 +14681,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ': 0'
+  m_text: "\t : 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
   m_sharedMaterial: {fileID: -6526450835220043527, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
@@ -20915,6 +20931,8 @@ MonoBehaviour:
   _entries:
   - Data: {fileID: 11400000, guid: fe925474c60dd4e47a1353742e4d4e7d, type: 2}
     Prefab: {fileID: 6879154302317584246, guid: 38518d429e914174995519febea2084d, type: 3}
+  - Data: {fileID: 11400000, guid: 30395190b4497354c86810e587f23314, type: 2}
+    Prefab: {fileID: 2423636656322011951, guid: dc5c55d8e3e49b9428e21585b0200c15, type: 3}
 --- !u!4 &2047221278
 Transform:
   m_ObjectHideFlags: 0
@@ -29751,7 +29769,9 @@ MonoBehaviour:
   _gameMode: 0
   _tileMapController: {fileID: 1838589378}
   _cameraController: {fileID: 1398061044}
+  _randomEnemySpawner: {fileID: 1523479656}
   _gameTime: 0
+  _killCount: 0
   _player: {fileID: 962865886}
 --- !u!1 &2124534694
 GameObject:

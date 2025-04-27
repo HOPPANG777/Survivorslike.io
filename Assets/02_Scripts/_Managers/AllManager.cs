@@ -31,6 +31,7 @@ public class AllManager : Singleton<AllManager>
 
         _uiController.Init();
         _collisionController.Init();
+        GamemodeManager.RandomEnemySpawner.Init();
         GamemodeManager.GameStart();
     }
 }

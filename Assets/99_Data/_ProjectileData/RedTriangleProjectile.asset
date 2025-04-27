@@ -16,7 +16,6 @@ MonoBehaviour:
     _damage: 10
     _projectileSpeed: 5
     _lifetime: 3
-    _collisionRadius: 1
     _knockbackForce: 1
     _pierceCount: 0
     _explosionRadius: 0
@@ -28,4 +27,4 @@ MonoBehaviour:
   _soundName: ProjectileSound
   _soundType: 2
   _soundClip: {fileID: 0}
-  _collisionRadius: 0.2
+  _collisionRadius: 0.5

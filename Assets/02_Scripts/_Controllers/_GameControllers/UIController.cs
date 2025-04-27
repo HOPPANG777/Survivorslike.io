@@ -77,6 +77,7 @@ public class UIController : MonoBehaviour
     {
         PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(1);
         _playerCurrentExpBarController.UpdatePlayerCurrentExpBar(0);
+        EnemyKillCountController.UpdateKillCounter(0);
         _backManager.InitializeToTitle();
     }
 }

@@ -5,91 +5,101 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class RandomEnemySpawner : SerializedMonoBehaviour
 {
-    [TabGroup("Spawn Settings")][Tooltip("스폰할 적 데이터 SO")][SerializeField] private UnitBaseSO _enemyData;
-    [TabGroup("Spawn Settings")][Tooltip("스폰 지점(빈 값 시 카메라 밖 랜덤)")][SerializeField] private Transform[] _spawnPoints;
-    [TabGroup("Spawn Settings")][Tooltip("카메라 밖으로부터 떨어진 거리")][SerializeField] private float _offCameraMargin = 1f;
-    [TabGroup("Spawn Settings")][Tooltip("스폰 간격 (초)")][SerializeField] private float _spawnInterval = 5f;
-    [TabGroup("Spawn Settings")][Tooltip("최대 활성 적 개수")][SerializeField] private int _maxEnemies = 10;
+    [TabGroup("Spawn Settings")][Tooltip("다양한 몬스터 스폰 설정 리스트")] [SerializeField] private List<SpawnEntry> _spawnEntries = new List<SpawnEntry>();
+    [TabGroup("Spawn Settings")][Tooltip("보스 스폰 시간(초)")] [SerializeField] private float _bossSpawnTime = 60f;
+    [TabGroup("Spawn Settings")][Tooltip("보스 데이터 SO")][SerializeField]private UnitBaseSO _bossData;
+    [TabGroup("Spawn Settings")][Tooltip("보스 스폰 위치")][SerializeField]private Transform _bossSpawnPoint;
 
-    private float _timer;
-    private readonly List<UnitBase> _activeEnemies = new List<UnitBase>();
+    private float _elapsedTime;
+    private bool _bossSpawned;
     private IUnitFactory _factory;
 
-    private void Start()
+    public void Init()
     {
         _factory = UnitFactory.instance;
+        _elapsedTime = 0f;
+        _bossSpawned = false;
+
+        // 구조체 리스트 초기화: 복사 후 필드 설정, 다시 대입
+        for (int i = 0; i < _spawnEntries.Count; i++)
+        {
+            SpawnEntry entry = _spawnEntries[i];
+            entry.Timer = 0f;
+            entry.SpawnedCount = 0;
+            _spawnEntries[i] = entry;
+        }
     }
 
     private void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-        _timer += Time.deltaTime;
-        if (_timer < _spawnInterval) return;
+        _elapsedTime += Time.deltaTime;
 
-        _timer -= _spawnInterval;
-        if (_activeEnemies.Count >= _maxEnemies) return;
-
-        SpawnOne();
-    }
-
-    private void SpawnOne()
-    {
-        Vector3 spawnPos;
-
-        if (_spawnPoints != null && _spawnPoints.Length > 0)
+        // 보스 스폰 조건
+        if (!_bossSpawned && _elapsedTime >= _bossSpawnTime)
         {
-            // 지정된 지점 중 랜덤 선택
-            int idx = Random.Range(0, _spawnPoints.Length);
-            spawnPos = _spawnPoints[idx].position;
+            ClearAllEnemies();
+            SpawnBoss();
+            _bossSpawned = true;
+            return;
         }
-        else
-        {
-            // 카메라 바깥 랜덤 스폰
-            Camera cam = Camera.main;
-            float halfH = cam.orthographicSize;
-            float halfW = halfH * cam.aspect;
-            Vector3 center = cam.transform.position;
-            float m = _offCameraMargin;
 
-            switch (Random.Range(0, 4))
+        // 보스 이전에 일반 몬스터 스폰
+        if (_bossSpawned) return;
+
+        for (int i = 0; i < _spawnEntries.Count; i++)
+        {
+            var entry = _spawnEntries[i];
+            if (_elapsedTime < entry.StartTime || _elapsedTime > entry.EndTime) continue;
+
+            if (entry.SpawnedCount >= entry.MaxCount) continue;
+
+            entry.Timer += Time.deltaTime;
+            if (entry.Timer < entry.Interval)
             {
-                case 0: // 왼쪽
-                    spawnPos = new Vector3(center.x - halfW - m, Random.Range(center.y - halfH, center.y + halfH), 0f);
-                    break;
-                case 1: // 오른쪽
-                    spawnPos = new Vector3(center.x + halfW + m, Random.Range(center.y - halfH, center.y + halfH), 0f);
-                    break;
-                case 2: // 위
-                    spawnPos = new Vector3(Random.Range(center.x - halfW, center.x + halfW), center.y + halfH + m, 0f);
-                    break;
-                default: // 아래
-                    spawnPos = new Vector3(Random.Range(center.x - halfW, center.x + halfW), center.y - halfH - m, 0f);
-                    break;
+                _spawnEntries[i] = entry;
+                continue;
             }
+
+            entry.Timer -= entry.Interval;
+            _spawnEntries[i] = entry;
+
+            // 스폰 실행
+            Vector3 pos = GetRandomOffCameraPosition();
+            var enemy = _factory.Create(entry.EnemyData, pos);
+            entry.SpawnedCount++;
+            _spawnEntries[i] = entry;
         }
-
-        var enemy = _factory.Create(_enemyData, spawnPos);
-        _activeEnemies.Add(enemy);
     }
 
-    private void OnEnemyDeath(UnitBase enemy)
+    private Vector3 GetRandomOffCameraPosition()
     {
-        _factory.Release(enemy);
-        _activeEnemies.Remove(enemy);
-    }
-
-    /// <summary>
-    /// 활성화된 모든 적 제거 및 타이머 초기화
-    /// </summary>
-    public void ClearAll()
-    {
-        foreach (var e in _activeEnemies)
+        Camera cam = Camera.main;
+        float halfH = cam.orthographicSize;
+        float halfW = halfH * cam.aspect;
+        Vector3 center = cam.transform.position;
+        float m = _offCameraMargin;
+        switch (Random.Range(0, 4))
         {
-            _factory.Release(e);
+            case 0: return new Vector3(center.x - halfW - m, Random.Range(center.y - halfH, center.y + halfH), 0f);
+            case 1: return new Vector3(center.x + halfW + m, Random.Range(center.y - halfH, center.y + halfH), 0f);
+            case 2: return new Vector3(Random.Range(center.x - halfW, center.x + halfW), center.y + halfH + m, 0f);
+            default: return new Vector3(Random.Range(center.x - halfW, center.x + halfW), center.y - halfH - m, 0f);
         }
-        _activeEnemies.Clear();
-        _timer = 0f;
     }
-}
 
+    private void SpawnBoss()
+    {
+        Vector3 pos = _bossSpawnPoint != null ? _bossSpawnPoint.position : GetRandomOffCameraPosition();
+        _factory.Create(_bossData, pos);
+    }
+
+    private void ClearAllEnemies()
+    {
+        UnitFactory.instance.ReleaseAll();
+    }
+
+    // _offCameraMargin 필드도 유지
+    [TabGroup("Spawn Settings")][SerializeField] private float _offCameraMargin = 1f;
+}

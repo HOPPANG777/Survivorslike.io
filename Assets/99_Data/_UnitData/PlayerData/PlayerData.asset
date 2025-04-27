@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   _unitAttribute:
-    _health: 200
-    _currentHealth: 200
-    _maxHealth: 200
+    _health: 1000000
+    _currentHealth: 1000000
+    _maxHealth: 1000000
     _moveSpeed: 5
     _damage: 0
     _defense: 5
@@ -33,7 +33,7 @@ MonoBehaviour:
   _soundName: Player
   _soundType: 2
   _soundClip: {fileID: 0}
-  _collisionRadius: 0.2
+  _collisionRadius: 0.5
   _playerAttribute:
     _playerGetExpRange: 2
     _luck: 1
