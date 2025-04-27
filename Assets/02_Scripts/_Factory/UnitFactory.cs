@@ -17,6 +17,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
     {
         _pool = PoolManager.instance;
         _map = new Dictionary<UnitBaseSO, GameObject>(_entries.Count);
+
         for (int i = 0; i < _entries.Count; i++)
         {
             var e = _entries[i];

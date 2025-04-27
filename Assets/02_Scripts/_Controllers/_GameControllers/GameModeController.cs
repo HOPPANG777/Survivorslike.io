@@ -84,6 +84,8 @@ public class GameModeController : MonoBehaviour, IGameMode
     public void GameStart()
     {
         _gameTime = 0;
+        UnitFactory.instance.ReleaseAll();
+        ProjectileFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
         Player.GetComponent<PlayerUnit>().SetStatus();
         Player.transform.position = Vector3.zero;

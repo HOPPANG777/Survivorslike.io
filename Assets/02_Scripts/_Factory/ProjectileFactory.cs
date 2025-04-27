@@ -26,27 +26,21 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
         }
     }
 
-    public GameObject Create(ProjectileBaseSO data, Vector3 position, Quaternion rotation)
+    public ProjectileBase Create(ProjectileBaseSO data, Vector3 position, Quaternion rotation)
     {
-        if (!_map.TryGetValue(data, out var prefab))
-        {
-            Debug.LogError($"ProjectileFactory: 매핑된 Prefab이 없습니다! Data = {data.name}");
-            return null;
-        }
-
+        if (!_map.TryGetValue(data, out var prefab)) return null;
         var go = _pool.Get(prefab);
-        go.transform.position = position;
+        go.transform.position = position;   
         go.transform.rotation = rotation;
 
         var projectile = go.GetComponent<ProjectileBase>();
-
         projectile.ProjectileBaseData = data;
         projectile.SetStatus();
 
         // 활성 유닛으로 등록
         _activeProjectiles.Add(projectile);
 
-        return go;
+        return projectile;
     }
 
     public void Release(ProjectileBase projectile)
