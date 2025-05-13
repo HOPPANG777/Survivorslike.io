@@ -36,8 +36,8 @@ public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
     {
         if (_player == null)
         {
-            _player = AllManager.instance.GamemodeManager.Player;
-            //Debug.LogError("Player 할당되지 않았습니다!");
+            //_player = AllManager.instance.GamemodeManager.Player;
+            Debug.LogError("Player 할당되지 않았습니다!");
             return false;
         }
         else
