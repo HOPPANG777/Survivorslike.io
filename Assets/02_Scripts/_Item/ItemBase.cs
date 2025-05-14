@@ -20,18 +20,18 @@ public abstract class ItemBase : MonoBehaviour, ICollidable
     {
         _renderer = GetComponent<SpriteRenderer>();
         _initialScale = transform.localScale;
-        var go = GameObject.FindGameObjectWithTag("Player");
+        var go = AllManager.instance.GamemodeManager.Player;
         if (go != null) _player = go.transform;
     }
 
-    private void OnEnable()
+    public virtual void SetStatus()
     {
+        // SO로부터 필드 초기화
+        _itemData.SetData(_itemData);
+        _renderer.sprite = _itemData.Icon;
+        transform.localScale = _initialScale;
+        gameObject.SetActive(true);
         AllManager.instance.CollisionManager.RegisterCollidable(this);
-    }
-
-    private void OnDisable()
-    {
-        AllManager.instance.CollisionManager.UnregisterCollidable(this);
     }
 
     public virtual void Initialize(ItemBaseSO data, Vector3 position)
@@ -64,6 +64,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable
 
     protected virtual void OnUse()
     {
+        AllManager.instance.CollisionManager.UnregisterCollidable(this);
         gameObject.SetActive(false);
         ItemFactory.instance.Release(this);
     }

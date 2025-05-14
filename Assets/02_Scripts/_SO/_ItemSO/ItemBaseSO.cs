@@ -21,4 +21,18 @@ public abstract class ItemBaseSO : ScriptableObject
     public float AttractSpeed { get { return _attractSpeed; } set { _attractSpeed = value; } }
 
     public abstract void Apply(GameObject user);
+
+    public virtual void SetData(ItemBaseSO data)
+    {
+        this.ItemName = data.ItemName;
+
+        this.Icon = data.Icon;
+
+        this.CollisionRadius = data.CollisionRadius;
+
+        this.AttractRange = data.AttractRange;
+
+        this.AttractRange = data.AttractRange;
+
+    }
 }

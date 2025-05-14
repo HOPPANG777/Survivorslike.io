@@ -83,9 +83,6 @@ public struct EnemyableAttribute
 {
     //public UnitAttribute Base;
 
-    [TabGroup("EnemyableAttribute")][Tooltip("적이 가지고 있는 경험치")][SerializeField] private float _enemyExp;
-    public float EnemyExp { get { return _enemyExp; } set { _enemyExp = value; } }
-
     [TabGroup("EnemyableAttribute")][Tooltip("적이 가지고 있는 경험치")][SerializeField] private float _enemyPushStrength;
     public float EnemyPushStrength { get { return _enemyPushStrength; } set { _enemyPushStrength = value; } }
 }
