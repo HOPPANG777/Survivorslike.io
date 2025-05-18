@@ -4,34 +4,9 @@ using Sirenix.OdinInspector;
 public class EnemyExpDropController : MonoBehaviour
 {
     [TabGroup("Enemy")][Tooltip("적")][SerializeField] private GameObject _enemy;
-    public GameObject Enemy { get { return _enemy; } set { _enemy = value; } }
-
     [TabGroup("Enemy")][Tooltip("적의 현재 포지션")][SerializeField] private IPositionProvider _enemyPosition;
-    public IPositionProvider EnemyPosition { get { return _enemyPosition; } set { _enemyPosition = value; } }
-
-    [TabGroup("EnemyExp")][SerializeField] private float _expValue;
-    public float ExpValue { get { return _expValue; } set { _expValue = value; } }
-
-    [TabGroup("EnemyExp")][SerializeField] private GameObject _enemyGem;
-    public GameObject EnemyGem { get { return _enemyGem; } set { _enemyGem = value; } }
-
-    [TabGroup("Interface")][SerializeField] private IUnitAttribute<EnemyableAttribute> _enemyAttribute;
-    public IUnitAttribute<EnemyableAttribute> EnemyAttribute { get { return _enemyAttribute; } set { _enemyAttribute = value; } }  
-
-    public void Start()
-    {
-        _enemy = this.gameObject;
-        if (CheckEnemy() == false) return;
-        if (CheckEnemyAttribute() == false) return;
-    }
-
-    public void Update()
-    {
-        if (CheckEnemyPosition() == false) return;
-
-
-    }
-
+    [TabGroup("Exp")][SerializeField] private ItemBaseSO _expData;
+   
     private bool CheckEnemy()
     {
         if (!_enemy)
@@ -60,21 +35,25 @@ public class EnemyExpDropController : MonoBehaviour
         }
     }
 
-    private bool CheckEnemyAttribute()
+    public void EnemyDropExp()
     {
-        if (this.TryGetComponent<IUnitAttribute<EnemyableAttribute>>(out var attribute))
+        if (CheckEnemyPosition() == false) return;
+        if (CheckEnemy() == false) return;
+
+        if (_expData == null || _enemyPosition == null)
         {
-            _enemyAttribute = attribute;
-            return true;
+            Debug.LogError("EnemyShooter: Bullet Data 또는 SpawnPoint 할당 누락");
+            return;
         }
-        else
+
+        // 팩토리에서 꺼내 쓰기
+        var go = ItemFactory.instance.Create(_expData, _enemyPosition.Position);
+
+        if (go == null)
         {
-            Debug.LogError("IEnemyAttribute 컴포넌트를 찾을 수 없습니다!");
-            return false;
+            Debug.LogError("EnemyShooter: ProjectileFactory에서 생성 실패");
+            return;
         }
     }
-
     
-
-
 }

@@ -51,7 +51,8 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     //[Header("IAttacker")]
     public float AttackPower { get { return Attributes.UnitDamage; } }
 
-    private bool isDead = false;
+    [TabGroup("Unit Dead")][Tooltip("죽었는지 확인")][SerializeField]  private bool isDead = false;
+    public bool IsDead { get { return isDead; } }
 
     protected virtual void Start()
     {

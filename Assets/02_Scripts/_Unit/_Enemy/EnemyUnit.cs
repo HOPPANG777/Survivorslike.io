@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //==============================================================================
@@ -63,6 +64,9 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
     {
         base.Dead();
         AllManager.instance.UIManager.EnemyKillCountController.UpdateKillCounter(AllManager.instance.GamemodeManager.KillCount++);
+        var enemyExpController = this.GetComponent<EnemyExpDropController>();
+        if (enemyExpController == null) return;
+        enemyExpController.EnemyDropExp();
         UnitFactory.instance.Release(this.gameObject.GetComponent<EnemyUnit>());
     }
 }

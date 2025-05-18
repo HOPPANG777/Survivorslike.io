@@ -21,13 +21,9 @@ public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
     [TabGroup("Interface")][SerializeField] private IUnitAttribute<UnitAttribute> _enemyAttribute;
     public IUnitAttribute<UnitAttribute> EnemyAttribute { get { return _enemyAttribute; } }
 
-    private void Start()
-    {
-        if (CheckEnemyMoveTarget() == false) return;
-    }
-
     private void Update()
     {
+        if (CheckEnemyMoveTarget() == false) return;
         Move();
         Rotate();
     }
@@ -36,8 +32,8 @@ public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
     {
         if (_player == null)
         {
-            //_player = AllManager.instance.GamemodeManager.Player;
-            Debug.LogError("Player 할당되지 않았습니다!");
+            _player = AllManager.instance.GamemodeManager.Player;
+            //Debug.LogError("Player 할당되지 않았습니다!");
             return false;
         }
         else

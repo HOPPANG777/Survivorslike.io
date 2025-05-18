@@ -27,16 +27,26 @@ public class ItemFactory : SerializedSingleton<ItemFactory>, IItemFactory
         if (!_map.TryGetValue(data, out var prefab)) return null;
         var go = _pool.Get(prefab);
         go.transform.position = position;
+        go.transform.localScale = Vector3.one;
+
         var item = go.GetComponent<ItemBase>();
-        item.Initialize(data, position);
+        item.ItemData = data;
+        item.SetStatus();
+
         _activeItems.Add(item);
+        
         return item;
     }
 
     public void Release(ItemBase item)
     {
         if (item == null) return;
-        if (_activeItems.Contains(item)) _activeItems.Remove(item);
+
+        if (_activeItems.Contains(item))
+        {
+            _activeItems.Remove(item);
+        }
+
         item.gameObject.SetActive(false);
         _pool.Return(item.gameObject);
     }
@@ -45,10 +55,14 @@ public class ItemFactory : SerializedSingleton<ItemFactory>, IItemFactory
     {
         for (int i = _activeItems.Count - 1; i >= 0; i--)
         {
-            var item = _activeItems[i];
-            item.gameObject.SetActive(false);
-            _pool.Return(item.gameObject);
+            var item = _activeItems[i];        
+            if (item != null)
+            {
+                item.gameObject.SetActive(false);
+                _pool.Return(item.gameObject);
+            }
         }
         _activeItems.Clear();
     }
+
 }

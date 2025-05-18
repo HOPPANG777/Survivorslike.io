@@ -31,8 +31,5 @@ public abstract class ItemBaseSO : ScriptableObject
         this.CollisionRadius = data.CollisionRadius;
 
         this.AttractRange = data.AttractRange;
-
-        this.AttractRange = data.AttractRange;
-
     }
 }

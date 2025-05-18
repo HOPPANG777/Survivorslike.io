@@ -5944,6 +5944,7 @@ MonoBehaviour:
   _soundClip: {fileID: 0}
   _soundSource: {fileID: 0}
   _collisionRadius: 0
+  isDead: 0
   _playerAttribute:
     _playerGetExpRange: 0
     _luck: 0
@@ -6276,7 +6277,7 @@ Transform:
   m_GameObject: {fileID: 1019233234}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10000, y: 10000, z: 10000}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6611,8 +6612,8 @@ MonoBehaviour:
     InitialSize: 1000
   - Prefab: {fileID: 5791335069791730190, guid: 98757a4eff70bca4a8242d8fa3d80872, type: 3}
     InitialSize: 100
-  - Prefab: {fileID: 0}
-    InitialSize: 5
+  - Prefab: {fileID: 758083600495834113, guid: 83b1ef53306fb8741a4133358ba87fc6, type: 3}
+    InitialSize: 200
 --- !u!4 &1131158582
 Transform:
   m_ObjectHideFlags: 0
@@ -14251,8 +14252,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _entries:
-  - Data: {fileID: 0}
-    Prefab: {fileID: 0}
+  - Data: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}
+    Prefab: {fileID: 758083600495834113, guid: 83b1ef53306fb8741a4133358ba87fc6, type: 3}
 --- !u!1 &1758966038
 GameObject:
   m_ObjectHideFlags: 0
