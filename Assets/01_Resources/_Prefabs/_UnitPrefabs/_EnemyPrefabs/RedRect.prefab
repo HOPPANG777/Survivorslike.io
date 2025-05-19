@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7430687385615709209}
   - component: {fileID: 364129054019700013}
   - component: {fileID: 1939052725359910934}
+  - component: {fileID: -6523763708947494958}
   m_Layer: 0
   m_Name: RedRect
   m_TagString: Untagged
@@ -222,8 +223,8 @@ MonoBehaviour:
   _soundClip: {fileID: 0}
   _soundSource: {fileID: 0}
   _collisionRadius: 0
+  isDead: 0
   _enemyAttribute:
-    _enemyExp: 0
     _enemyPushStrength: 0
 --- !u!114 &1939052725359910934
 MonoBehaviour:
@@ -241,3 +242,17 @@ MonoBehaviour:
   _angle: 0
   _moveDirection: {x: 0, y: 0, z: 0}
   _rotatoinDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &-6523763708947494958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423636656322011951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2167c64a5c40f542beb3f1cd29feef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
+  _expData: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}

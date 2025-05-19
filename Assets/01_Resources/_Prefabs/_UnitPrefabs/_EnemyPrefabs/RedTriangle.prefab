@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3558355394932326184}
   - component: {fileID: 557547552164954388}
   - component: {fileID: 5763328382807929352}
+  - component: {fileID: 4555120093081484299}
   m_Layer: 0
   m_Name: RedTriangle
   m_TagString: Untagged
@@ -223,8 +224,8 @@ MonoBehaviour:
   _soundClip: {fileID: 0}
   _soundSource: {fileID: 0}
   _collisionRadius: 0
+  isDead: 0
   _enemyAttribute:
-    _enemyExp: 0
     _enemyPushStrength: 0
 --- !u!114 &557547552164954388
 MonoBehaviour:
@@ -258,3 +259,17 @@ MonoBehaviour:
   _bulletSpawnPoint: {fileID: 6879154302317584246}
   _bulletData: {fileID: 11400000, guid: 35a76948f1ce155469a8cc4cd054c855, type: 2}
   _shootTimer: 0
+--- !u!114 &4555120093081484299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6879154302317584246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2167c64a5c40f542beb3f1cd29feef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
+  _expData: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}

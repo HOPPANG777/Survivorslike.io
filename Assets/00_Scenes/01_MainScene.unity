@@ -6614,6 +6614,8 @@ MonoBehaviour:
     InitialSize: 100
   - Prefab: {fileID: 758083600495834113, guid: 83b1ef53306fb8741a4133358ba87fc6, type: 3}
     InitialSize: 200
+  - Prefab: {fileID: 5730023950293293173, guid: bd535a5e61b5a244ca09bf6dbb299564, type: 3}
+    InitialSize: 100
 --- !u!4 &1131158582
 Transform:
   m_ObjectHideFlags: 0
@@ -12813,6 +12815,13 @@ MonoBehaviour:
     StartTime: 60
     EndTime: 300
     Interval: 5
+    MaxCount: 50
+    Timer: 0
+    SpawnedCount: 0
+  - EnemyData: {fileID: 11400000, guid: 620ed35295d62e74fbea396b5b2d5702, type: 2}
+    StartTime: 120
+    EndTime: 300
+    Interval: 10
     MaxCount: 50
     Timer: 0
     SpawnedCount: 0
@@ -21003,6 +21012,8 @@ MonoBehaviour:
     Prefab: {fileID: 2423636656322011951, guid: dc5c55d8e3e49b9428e21585b0200c15, type: 3}
   - Data: {fileID: 11400000, guid: 141d348b8d494774387090185bd1e19c, type: 2}
     Prefab: {fileID: 5791335069791730190, guid: 98757a4eff70bca4a8242d8fa3d80872, type: 3}
+  - Data: {fileID: 11400000, guid: 620ed35295d62e74fbea396b5b2d5702, type: 2}
+    Prefab: {fileID: 5730023950293293173, guid: bd535a5e61b5a244ca09bf6dbb299564, type: 3}
 --- !u!4 &2047221278
 Transform:
   m_ObjectHideFlags: 0

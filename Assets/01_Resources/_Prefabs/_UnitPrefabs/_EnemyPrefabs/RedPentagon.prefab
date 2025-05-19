@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7762059921523044077}
   - component: {fileID: 2832254851441757282}
   - component: {fileID: 2702774503643604812}
+  - component: {fileID: -6665614443969439678}
+  - component: {fileID: -1473653696058622703}
   m_Layer: 0
   m_Name: RedPentagon
   m_TagString: Untagged
@@ -125,8 +127,8 @@ MonoBehaviour:
   _soundClip: {fileID: 0}
   _soundSource: {fileID: 0}
   _collisionRadius: 0
+  isDead: 0
   _enemyAttribute:
-    _enemyExp: 0
     _enemyPushStrength: 0
 --- !u!114 &2832254851441757282
 MonoBehaviour:
@@ -164,3 +166,31 @@ MonoBehaviour:
   _soundType: 0
   _soundClip: {fileID: 0}
   _soundSource: {fileID: 0}
+--- !u!114 &-6665614443969439678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791335069791730190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2167c64a5c40f542beb3f1cd29feef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
+  _expData: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}
+--- !u!114 &-1473653696058622703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791335069791730190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2167c64a5c40f542beb3f1cd29feef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
+  _expData: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}
