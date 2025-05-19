@@ -92,6 +92,7 @@ public class GameModeController : MonoBehaviour, IGameMode
     {
         _gameTime = 0;
         _killCount = 0;
+        RandomEnemySpawner.Init();
         UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
