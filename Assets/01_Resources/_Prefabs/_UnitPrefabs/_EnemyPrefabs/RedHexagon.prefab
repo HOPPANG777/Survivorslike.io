@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35e359e9fdf812418d308e1da59b865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shield: {fileID: 8809243185765177415}
+  _shield: {fileID: 0}
   _rotationSpeed: 360
-  _angleOffset: 5
+  _angleOffset: -180
 --- !u!114 &-6745777544402684965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +271,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

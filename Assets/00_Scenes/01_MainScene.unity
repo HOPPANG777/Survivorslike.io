@@ -12819,7 +12819,7 @@ MonoBehaviour:
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 620ed35295d62e74fbea396b5b2d5702, type: 2}
-    StartTime: 120
+    StartTime: 110
     EndTime: 300
     Interval: 10
     MaxCount: 50
