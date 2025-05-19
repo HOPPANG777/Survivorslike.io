@@ -70,7 +70,7 @@ public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision
     public void OnCollision(ICollidable a, ICollidable b)
     {
         // shield vs projectile ¸¸ Ã³¸®
-        if (a == this && b is IProjectileAttribute<ProjectileAttribute>)
+        if (a == this.gameObject.GetComponent<ICollidable>() && b is IProjectileAttribute<ProjectileAttribute>)
         {
             // ÇÁ·ÎÁ§Å¸ÀÏ ÄÄÆ÷³ÍÆ® È¹µæ
             var projGO = (b as Component).gameObject;
