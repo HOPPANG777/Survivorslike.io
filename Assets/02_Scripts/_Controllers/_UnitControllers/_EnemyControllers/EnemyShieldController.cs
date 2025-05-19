@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyShieldController : MonoBehaviour
+public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision
 {
     [Tooltip("회전시킬 방패 Transform (자기 자신일 수도 있고, 자식일 수도 있습니다)")]
     [SerializeField] private GameObject _shield;
@@ -10,6 +10,13 @@ public class EnemyShieldController : MonoBehaviour
 
     [Tooltip("방패가 기본 바라보는 방향 오프셋 (Sprite가 0°일 때 전방을 가리키지 않으면 조정)")]
     [SerializeField] private float _angleOffset = 0f;
+
+    [Tooltip("방패 충돌 반지름")]
+    [SerializeField] private float _shieldRadius = 0.75f;
+
+    public Vector3 Position { get { return transform.position; } }
+    public float CollisionRadius { get { return _shieldRadius; } set { _shieldRadius = value; } }
+
 
     private GameObject _player;
 
@@ -39,7 +46,8 @@ public class EnemyShieldController : MonoBehaviour
     {
         if (_shield == null)
         {
-            _shield = this.transform.GetChild(0).gameObject; ;
+            //_shield = this.transform.GetChild(0).gameObject;
+            _shield = this.gameObject;
             //Debug.LogError("Shield 할당되지 않았습니다!");
             return false;
         }
@@ -48,7 +56,33 @@ public class EnemyShieldController : MonoBehaviour
             return true;
         }
     }
+    private void OnEnable()
+    {
+        AllManager.instance.CollisionManager.RegisterCollidable(this);
+    }
 
+    private void OnDisable()
+    {
+        AllManager.instance.CollisionManager.UnregisterCollidable(this);
+    }
+
+    // ICollision: 충돌 페어(a=this shield, b=other) 호출
+    public void OnCollision(ICollidable a, ICollidable b)
+    {
+        // shield vs projectile 만 처리
+        if (a == this && b is IProjectileAttribute<ProjectileAttribute>)
+        {
+            // 프로젝타일 컴포넌트 획득
+            var projGO = (b as Component).gameObject;
+            var proj = projGO.GetComponent<ProjectileBase>();
+            if (proj != null)
+            {
+                // 무효화: 풀로 반환
+                ProjectileFactory.instance.Release(proj);
+                // (선택) 이펙트나 사운드 재생
+            }
+        }
+    }
     private void EnemyShieldMove()
     {
         // 1) 플레이어 방향 계산

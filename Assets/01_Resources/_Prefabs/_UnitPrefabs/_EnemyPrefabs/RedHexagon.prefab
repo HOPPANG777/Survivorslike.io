@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6034077886788364846}
   - component: {fileID: 3710331478056748986}
   - component: {fileID: 995044130190483152}
-  - component: {fileID: 1550067675351240523}
   - component: {fileID: -6745777544402684965}
   m_Layer: 0
   m_Name: RedHexagon
@@ -161,21 +160,6 @@ MonoBehaviour:
   _angle: 0
   _moveDirection: {x: 0, y: 0, z: 0}
   _rotatoinDirection: {x: 0, y: 0, z: 0}
---- !u!114 &1550067675351240523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5730023950293293173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e35e359e9fdf812418d308e1da59b865, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shield: {fileID: 0}
-  _rotationSpeed: 360
-  _angleOffset: -180
 --- !u!114 &-6745777544402684965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 649093532737689437}
   - component: {fileID: 8911048571129776676}
+  - component: {fileID: 8066557974499606876}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -277,3 +262,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8066557974499606876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8809243185765177415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35e359e9fdf812418d308e1da59b865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shield: {fileID: 0}
+  _rotationSpeed: 360
+  _angleOffset: -180
+  _shieldRadius: 1
