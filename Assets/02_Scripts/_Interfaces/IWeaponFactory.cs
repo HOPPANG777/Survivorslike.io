@@ -1,16 +1,8 @@
 using UnityEngine;
 
-public class IWeaponFactory : MonoBehaviour
+public interface IWeaponFactory
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    WeaponBase Create(WeaponBaseSO data, Vector3 position, Quaternion rotation);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Release(WeaponBase unit);
 }
