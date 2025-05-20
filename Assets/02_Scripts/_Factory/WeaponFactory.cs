@@ -33,8 +33,8 @@ public class WeaponFactory : SerializedSingleton<UnitFactory>, IWeaponFactory
         go.transform.rotation = rotation;
 
         var weapon = go.GetComponent<WeaponBase>();
-        //weapon.UnitBaseData = data;
-        //weapon.SetStatus();
+        weapon.WeaponBaseData = data;
+        weapon.SetStatus();
 
         // 활성 유닛으로 등록
         _activeWeapons.Add(weapon);

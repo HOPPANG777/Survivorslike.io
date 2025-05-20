@@ -8,7 +8,7 @@ using UnityEngine;
 //------------------------------------------------------------------------------
 // 모든 투사체가 상속받아 공통 로직(이동, 수명, 충돌 등록/해제, 공격력 등)을 갖습니다.
 //------------------------------------------------------------------------------
-public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<ProjectileAttribute> , ICollidable , IAttacker , IDead
+public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<ProjectileAttribute> , ICollidable , IAttacker , IDead, ISetStatus
 {
     [Header("Projectile Base")]
     [TabGroup("Projectile Base")][Tooltip("Projectile Data")][SerializeField] protected ProjectileBaseSO _projectileBaseData;

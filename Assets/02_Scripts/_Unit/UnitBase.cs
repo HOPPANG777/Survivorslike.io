@@ -48,8 +48,8 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] protected float _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius; } }
 
-    //[Header("IAttacker")]
-    public float AttackPower { get { return Attributes.UnitDamage; } }
+    [Header("IAttacker")]
+    public virtual float AttackPower { get { return Attributes.UnitDamage; } }
 
     [TabGroup("Unit Dead")][Tooltip("죽었는지 확인")][SerializeField]  private bool isDead = false;
     public bool IsDead { get { return isDead; } }

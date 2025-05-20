@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public abstract class ItemBase : MonoBehaviour, ICollidable
+public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus
 {
     [TabGroup("Item Base")][Tooltip("Item SO ตฅภฬลอ")][SerializeField] private ItemBaseSO _itemData;
     public ItemBaseSO ItemData { get { return _itemData; } set { _itemData = value; } }
