@@ -2,7 +2,7 @@ using NUnit.Framework;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>//, IAttacker
+public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>, IWeaponDisableMember//, IAttacker
 {
     [TabGroup("Weapon Base")][Tooltip("Weapon Data")][SerializeField] protected WeaponBaseSO _weaponBaseData;
     public WeaponBaseSO WeaponBaseData { get { return _weaponBaseData; } set { _weaponBaseData = value; } }
@@ -12,6 +12,9 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     [TabGroup("Weapon Base")][Tooltip("팀 타입")][SerializeField] protected TeamType _teamType;
     public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
+
+    [TabGroup("Unit Base")][Tooltip("무기 비활성화 타입")][SerializeField] protected WeaponDisableType _weaponDisableType;
+    public WeaponDisableType WeaponDisableType { get { return _weaponDisableType; } set { _weaponDisableType = value; } }
 
     [TabGroup("Weapon Base")][Tooltip("무기 능력치")][SerializeField] protected WeaponAttribute _weaponAttribute;
     public WeaponAttribute Attributes { get { return _weaponAttribute; } set { _weaponAttribute = value; } }
@@ -78,8 +81,29 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public virtual void CheckDead()
     {
-        if (isDead) return;
-        //if (_weaponBaseData.IsDead) isDead = true;
+        switch (WeaponDisableType)
+        {
+            case WeaponDisableType.WEAPONDISABLETYPE_NONE:
+                {
+                    // 이게 디폴트
+                    // Dead();
+                }
+                break;
+            case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
+                {
+                    // 무기 관통이나 반사를 통해서 카운트가 감소되서 0이 되면 사라지는 무기
+                    if (Attributes.WeaponDisableCount > 0) return;
+                    Dead();
+                }
+                break;
+            case WeaponDisableType.WEAPONDISABLETYPE_TIME:
+                {
+                    // 무기 사용시간이 지나면 사라지는 무기
+                    if (Attributes.WeaponDisableTime > 0) return;
+                    Dead();
+                }
+                break;
+        }
     }
 
     public virtual void Dead()

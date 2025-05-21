@@ -33,4 +33,10 @@ public struct WeaponAttribute
     
     [TabGroup("Attribute")][Tooltip("사거리 보너스")][SerializeField] private float _rangeBonus; 
     public float RangeBonus { get { return _rangeBonus; } set { _rangeBonus = value; } }
+
+    [TabGroup("Attribute")][Tooltip("무기 비활성화 카운트(관통, 반사등)")][SerializeField] private int _weaponDisableCount;
+    public int WeaponDisableCount { get { return _weaponDisableCount; } set { _weaponDisableCount = value; } }
+
+    [TabGroup("Attribute")][Tooltip("무기 활성화 수명(일정시간 뒤 비활성화 되는 무기)")][SerializeField] private float _weaponDisableTime;
+    public float WeaponDisableTime { get { return _weaponDisableTime; } set { _weaponDisableTime = value; } }
 }

@@ -19,7 +19,13 @@ public class WeaponBaseSO : ScriptableObject, ISetSOData<WeaponBaseSO>, IWeaponA
     
     [TabGroup("Weapon Data")][Tooltip("무기 속성")][SerializeField] private WeaponAttribute _weaponAttribute; 
     public WeaponAttribute Attributes { get { return _weaponAttribute; } set { _weaponAttribute = value; } }
-    
+
+    [TabGroup("Weapon Data")][Tooltip("팀 타입")][SerializeField] protected TeamType _teamType;
+    public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
+
+    [TabGroup("Weapon Data")][Tooltip("팀 타입")][SerializeField] protected WeaponDisableType _weaponDisableType;
+    public WeaponDisableType WeaponDisableType { get { return _weaponDisableType; } set { _weaponDisableType = value; } }
+
     [TabGroup("Sound")][Tooltip("사운드 이름")][SerializeField] private string _soundName; 
     public string SoundName { get { return _soundName; } }
     
@@ -38,11 +44,21 @@ public class WeaponBaseSO : ScriptableObject, ISetSOData<WeaponBaseSO>, IWeaponA
     public virtual void SetData(WeaponBaseSO data)
     {
         this._weaponName = data._weaponName;
+
         this._weaponSprite = data._weaponSprite;
+
+        this._teamType = data._teamType;
+
+        this._weaponDisableType = data._weaponDisableType;
+
         this._weaponAttribute = data._weaponAttribute;
+
         this._soundName = data._soundName;
+
         this._soundType = data._soundType;
+
         this._soundClip = data._soundClip;
+
         this._collisionRadius = data._collisionRadius;
     }
 }
