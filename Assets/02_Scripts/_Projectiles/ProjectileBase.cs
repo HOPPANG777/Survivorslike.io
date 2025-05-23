@@ -47,23 +47,30 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
     [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][SerializeField] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
 
-    //[Header("IAttacker")]
+    [Header("IAttacker")]
     public float AttackPower { get { return Attributes.ProjectileDamage; } }
 
     private float _age;
 
     private bool isDead = false;
 
+    // 새로 추가: 이 투사체를 발사한 무기 참조
+    public WeaponBase OwnerWeapon { get; private set; }
+    private WeaponDisableType _disableType;
+    private float _remainingLifeTime;
+    private int _remainingPierceCount;
+
     // 1) Start 에서 SetStatus 호출
     protected virtual void Start()
     {
-        SetStatus();
+        //SetStatus();
     }
 
     // 2) Update 에서 이동 & 수명 체크
     protected virtual void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        _remainingLifeTime -= Time.deltaTime;
         Move();
         CheckDead();
     }
@@ -90,12 +97,47 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
         isDead = false;
     }
 
+
+    // (1) SetStatus 시 ownerWeapon을 함께 주입
+    public void SetStatus(WeaponBase ownerWeapon)
+    {
+        OwnerWeapon = ownerWeapon;
+
+        // SO 데이터 복제
+        _projectileBaseData.SetData(_projectileBaseData);
+        _projectileAttributes = _projectileBaseData.ProjectileAttribute;
+        _projectileName = _projectileBaseData.ProjectileName;
+
+        var statsProv = OwnerWeapon.GetComponent<AttackStatsProvider>();
+        _projectileAttributes.LifeTime += statsProv.AttackDuration;
+        _projectileAttributes.PierceCount += statsProv.WeaponDisableCount;
+
+        // 내부 카운터 초기화
+        _remainingLifeTime = _projectileAttributes.LifeTime;
+        _remainingPierceCount = _projectileAttributes.PierceCount;
+
+        _teamType = _projectileBaseData.TeamType;
+        _disableType = OwnerWeapon.WeaponDisableType;
+
+        _soundName = _projectileBaseData.SoundName;
+        _soundType = _projectileBaseData.SoundType;
+        _soundClip = _projectileBaseData.SoundClip;
+        _soundSource = this.gameObject.GetComponent<AudioSource>();
+        
+        _collisionRadius = _projectileBaseData.CollisionRadius;
+        
+        AllManager.instance.CollisionManager.RegisterCollidable(this);
+        
+        _age = 0f;
+        isDead = false;
+    }
+
     /// <summary>
     /// 투사체 이동 로직 (transform.up 방향으로 보내줌)
     /// </summary>
     protected virtual void Move()
     {
-        transform.position += transform.up * Attributes.ProjectileSpeed * Time.deltaTime;
+        
     }
 
     /// <summary>
@@ -103,10 +145,28 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
     /// </summary>
     public virtual void CheckDead()
     {
-        _age += Time.deltaTime;
-        if (_age >= Attributes.Lifetime)
+        switch (_disableType)
         {
-            Dead();
+            case WeaponDisableType.WEAPONDISABLETYPE_NONE:
+                {
+                    // 이게 디폴트
+                    // Dead();
+                }
+                break;
+            case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
+                {
+                    // 무기 관통이나 반사를 통해서 카운트가 감소되서 0이 되면 사라지는 무기
+                    if (_remainingLifeTime > 0) return;
+                    Dead();
+                }
+                break;
+            case WeaponDisableType.WEAPONDISABLETYPE_TIME:
+                {
+                    // 무기 사용시간이 지나면 사라지는 무기
+                    if (_remainingPierceCount > 0) return;
+                    Dead();
+                }
+                break;
         }
     }
 
@@ -125,6 +185,12 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
         ProjectileFactory.instance.Release(this);
 
         isDead = true;
+    }
+
+    public void OnCollision(ICollidable self, ICollidable other)
+    {
+        _remainingPierceCount--;
+        CheckDead();
     }
 
     /// <summary>

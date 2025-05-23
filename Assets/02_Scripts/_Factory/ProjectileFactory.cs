@@ -43,6 +43,23 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
         return projectile;
     }
 
+    public ProjectileBase Create(ProjectileBaseSO data, Vector3 position, Quaternion rotation, WeaponBase weapon)
+    {
+        if (!_map.TryGetValue(data, out var prefab)) return null;
+        var go = _pool.Get(prefab);
+        go.transform.position = position;
+        go.transform.rotation = rotation;
+
+        var projectile = go.GetComponent<ProjectileBase>();
+        projectile.ProjectileBaseData = data;
+        projectile.SetStatus(weapon);
+
+        // 활성 유닛으로 등록
+        _activeProjectiles.Add(projectile);
+
+        return projectile;
+    }
+
     public void Release(ProjectileBase projectile)
     {
         if (projectile == null) return;

@@ -17,7 +17,7 @@ public struct ProjectileAttribute
     public float ProjectileSpeed { get { return _projectileSpeed; } set { _projectileSpeed = value; } }
 
     [TabGroup("Attribute")][Tooltip("투사체 존속 시간(초)")][SerializeField] private float _lifetime;
-    public float Lifetime { get { return _lifetime; } set { _lifetime = value; } }
+    public float LifeTime { get { return _lifetime; } set { _lifetime = value; } }
 
     [TabGroup("Attribute")][Tooltip("넉백 세기")][SerializeField] private float _knockbackForce;
     public float KnockbackForce { get { return _knockbackForce; } set { _knockbackForce = value; } }

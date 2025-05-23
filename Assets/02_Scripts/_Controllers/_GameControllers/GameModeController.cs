@@ -93,8 +93,10 @@ public class GameModeController : MonoBehaviour, IGameMode
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
+        Player.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
         UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
+        WeaponFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
         Player.GetComponent<PlayerUnit>().SetStatus();
         Player.transform.position = Vector3.zero;
@@ -120,6 +122,17 @@ public class GameModeController : MonoBehaviour, IGameMode
 
     public void GameOver()
     {
+        _gameTime = 0;
+        _killCount = 0;
+        RandomEnemySpawner.Init();
+        Player.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
+        UnitFactory.instance.ReleaseAll();
+        ProjectileFactory.instance.ReleaseAll();
+        WeaponFactory.instance.ReleaseAll();
+        AllManager.instance.UIManager.ResetUI();
+        Player.GetComponent<PlayerUnit>().SetStatus();
+        Player.transform.position = Vector3.zero;
+        Player.gameObject.SetActive(false);
         GameMode = GameModeType.GAMEMODE_GAMEOVER;
     }
 

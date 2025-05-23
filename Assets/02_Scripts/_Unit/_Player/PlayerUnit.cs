@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 //==============================================================================
@@ -8,7 +9,7 @@ using UnityEngine;
 //	
 //==============================================================================
 
-public class PlayerUnit : UnitBase, IPlayerAttribute
+public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder
 {
     [Header("Player Unit")]
     private PlayerUnitSO _playerData;
@@ -16,6 +17,9 @@ public class PlayerUnit : UnitBase, IPlayerAttribute
 
     [TabGroup("Player Unit")][Tooltip("Player Attribute")][SerializeField] private PlayerableAttribute _playerAttribute;
     public new PlayerableAttribute Attributes { get { return _playerAttribute; } set { _playerAttribute = value; } }
+
+    [TabGroup("Player Unit")][Tooltip("Weapon Holder")][SerializeField] private List<WeaponBase> _equippedWeapons = new List<WeaponBase>();
+    public List<WeaponBase> EquippedWeapons { get { return _equippedWeapons; } }
 
     protected override void Start()
     {

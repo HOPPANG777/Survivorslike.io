@@ -6,6 +6,7 @@
 // ISetSOData 인터페이스로 런타임 복제 시 값을 복사할 수 있게 합니다.
 //==============================================================================
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "WeaponData/WeaponBaseSO", order = 0)]
@@ -16,9 +17,13 @@ public class WeaponBaseSO : ScriptableObject, ISetSOData<WeaponBaseSO>, IWeaponA
     
     [TabGroup("Weapon Data")][Tooltip("무기 아이콘")][SerializeField] private Sprite _weaponSprite; 
     public Sprite WeaponSprite { get { return _weaponSprite; } set { _weaponSprite = value; } }
-    
-    [TabGroup("Weapon Data")][Tooltip("무기 속성")][SerializeField] private WeaponAttribute _weaponAttribute; 
-    public WeaponAttribute Attributes { get { return _weaponAttribute; } set { _weaponAttribute = value; } }
+
+    [TabGroup("Weapon Data")][Tooltip("레벨별 무기 속성 (0번 = 레벨1, 1번 = 레벨2, ...)")][SerializeField] private List<WeaponAttribute> _levelAttributes;
+    public List<WeaponAttribute> LevelAttributes { get { return _levelAttributes; } }
+    public WeaponAttribute Attributes { get { return _levelAttributes[0]; } set { } }
+
+    [TabGroup("Leveling")][Tooltip("이 무기의 최대 레벨")][SerializeField] private int _maxLevel;
+    public int MaxLevel { get { return _maxLevel; } set { _maxLevel = value; } }
 
     [TabGroup("Weapon Data")][Tooltip("팀 타입")][SerializeField] protected TeamType _teamType;
     public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
@@ -51,7 +56,7 @@ public class WeaponBaseSO : ScriptableObject, ISetSOData<WeaponBaseSO>, IWeaponA
 
         this._weaponDisableType = data._weaponDisableType;
 
-        this._weaponAttribute = data._weaponAttribute;
+        this._levelAttributes = data._levelAttributes;
 
         this._soundName = data._soundName;
 

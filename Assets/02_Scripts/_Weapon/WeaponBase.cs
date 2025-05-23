@@ -1,8 +1,9 @@
 using NUnit.Framework;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>, IWeaponDisableMember//, IAttacker
+public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>, IWeaponDisableMember, IWeaponLevel, IWeaponAttackFunction//, IAttacker
 {
     [TabGroup("Weapon Base")][Tooltip("Weapon Data")][SerializeField] protected WeaponBaseSO _weaponBaseData;
     public WeaponBaseSO WeaponBaseData { get { return _weaponBaseData; } set { _weaponBaseData = value; } }
@@ -43,22 +44,53 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
     [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] protected float _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius; } }
 
-    [Header("IAttacker")]
+    //[Header("IAttacker")]
     //public float AttackPower { get { return Attributes.UnitDamage * Weapon.Attributes.DamageMultiplier + Weapon.Attributes.FlatDamage; } }
 
     [TabGroup("Weapon Dead")][Tooltip("죽었는지 확인")][SerializeField] private bool isDead = false;
     public bool IsDead { get { return isDead; } }
+
+    public int CurrentLevel { get; set; }
+
+    public int MaxLevel => _weaponBaseData.MaxLevel;
 
     public void Update()
     {
         
     }
 
-    public void SoundPlay()
+    public virtual void Shoot()
     {
 
     }
 
+    public virtual void Melee()
+    {
+
+    }
+
+    public bool LevelUp()
+    {
+        if (CurrentLevel >= MaxLevel) return false;
+        CurrentLevel++;
+        ApplyLevelAttributes();
+        return true;
+    }
+
+    public void ApplyLevelAttributes()
+    {
+        // 레벨에 맞는 속성표에서 가져와서 적용
+        int idx = Mathf.Clamp(CurrentLevel - 1, 0, _weaponBaseData.LevelAttributes.Count - 1);
+        _weaponAttribute = _weaponBaseData.LevelAttributes[idx];
+    }
+
+    public void SoundPlay()
+    {
+
+    }
+    
+    //나선 계단 장수풍뎅이 폐허의 마을 무화과 타르트 장수풍뎅이 돌로로사의 길 장수풍뎅이 특이점 지오토 엔젤 자양화 장수풍뎅이 특이점 비밀의 황제
+    
     public void SoundStop()
     {
 
@@ -66,17 +98,18 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public virtual void SetStatus()
     {
-       //_weaponBaseData.SetData(WeaponBaseData);
-       //_weaponAttribute = _weaponBaseData.WeaponAttribute;
-       //_weaponName = _weaponBaseData.WeaponName;
-       //_collisionRadius = _weaponBaseData.CollisionRadius;
-       //_teamType = _weaponBaseData.TeamType;
-       //_soundName = _weaponBaseData.SoundName;
-       //_soundType = _weaponBaseData.SoundType;
-       //_soundClip = _weaponBaseData.SoundClip;
-       //_soundSource = this.gameObject.GetComponent<AudioSource>();
-       //AllManager.instance.CollisionManager.RegisterCollidable(this);
-       //isDead = false;
+        _weaponBaseData.SetData(WeaponBaseData);
+        _weaponAttribute = _weaponBaseData.LevelAttributes[CurrentLevel];
+        _weaponName = _weaponBaseData.WeaponName;
+        _collisionRadius = _weaponBaseData.CollisionRadius;
+        _teamType = _weaponBaseData.TeamType;
+        _weaponDisableType = _weaponBaseData.WeaponDisableType;
+        _soundName = _weaponBaseData.SoundName;
+        _soundType = _weaponBaseData.SoundType;
+        _soundClip = _weaponBaseData.SoundClip;
+        _soundSource = this.gameObject.GetComponent<AudioSource>();
+        AllManager.instance.CollisionManager.RegisterCollidable(this);
+        isDead = false;
     }
 
     public virtual void CheckDead()

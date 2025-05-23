@@ -28,11 +28,14 @@ public struct WeaponAttribute
     [TabGroup("Attribute")][Tooltip("투사체 개수 보너스")][SerializeField] private int _projectileCountBonus; 
     public int ProjectileCountBonus { get { return _projectileCountBonus; } set { _projectileCountBonus = value; } }
     
-    [TabGroup("Attribute")][Tooltip("투사체 속도 보너스")][SerializeField] private float _projectileSpeedBonus; 
-    public float ProjectileSpeedBonus { get { return _projectileSpeedBonus; } set { _projectileSpeedBonus = value; } }
-    
     [TabGroup("Attribute")][Tooltip("사거리 보너스")][SerializeField] private float _rangeBonus; 
     public float RangeBonus { get { return _rangeBonus; } set { _rangeBonus = value; } }
+
+    [TabGroup("Attribute")][Tooltip("공격 쿨다운")][SerializeField] private float _attackCooldown; 
+    public float AttackCooldown { get { return _attackCooldown; } set { _attackCooldown = value; } }
+
+    [TabGroup("Attribute")][Tooltip("넉백 강도")][SerializeField] private float _knockbackForce; 
+    public float KnockbackForce { get { return _knockbackForce; } set { _knockbackForce = value; } }
 
     [TabGroup("Attribute")][Tooltip("무기 비활성화 카운트(관통, 반사등)")][SerializeField] private int _weaponDisableCount;
     public int WeaponDisableCount { get { return _weaponDisableCount; } set { _weaponDisableCount = value; } }

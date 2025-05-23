@@ -5,11 +5,13 @@ public class RedTriangleProjectile : ProjectileBase
     protected override void Start()
     {
         base.Start();
+        SetStatus();
     }
 
     protected override void Update()
     {
         base.Update();
+        Debug.Log(AttackPower);
     }
 
     public override void SetStatus()
@@ -20,6 +22,7 @@ public class RedTriangleProjectile : ProjectileBase
     protected override void Move()
     {
         base.Move();
+        transform.position += transform.up * Attributes.ProjectileSpeed * Time.deltaTime;
     }
 
     public override void CheckDead()
