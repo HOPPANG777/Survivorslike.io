@@ -48,17 +48,18 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
     public Vector3 Position { get { return _position; } }
 
     [Header("IAttacker")]
-    public float AttackPower { get { return Attributes.ProjectileDamage; } }
+    public float AttackPower { get; set; }
 
-    private float _age;
+    protected float _age;
 
     private bool isDead = false;
 
     // 새로 추가: 이 투사체를 발사한 무기 참조
     public WeaponBase OwnerWeapon { get; private set; }
-    private WeaponDisableType _disableType;
+    private WeaponDisableType _disableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
     private float _remainingLifeTime;
     private int _remainingPierceCount;
+    public int RemainingPierceCount { get { return _remainingPierceCount; } set { _remainingPierceCount = value; } }
 
     // 1) Start 에서 SetStatus 호출
     protected virtual void Start()
@@ -86,6 +87,9 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
         _projectileBaseData.SetData(ProjectileBaseData);
         _projectileAttributes = _projectileBaseData.ProjectileAttribute;
         _projectileName = _projectileBaseData.ProjectileName;
+        _remainingLifeTime = _projectileAttributes.LifeTime;
+        _remainingPierceCount = _projectileAttributes.PierceCount;
+        AttackPower = _projectileAttributes.ProjectileDamage;
         _teamType = _projectileBaseData.TeamType;
         _soundName = _projectileBaseData.SoundName;
         _soundType = _projectileBaseData.SoundType;
@@ -111,10 +115,11 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
         var statsProv = OwnerWeapon.GetComponent<AttackStatsProvider>();
         _projectileAttributes.LifeTime += statsProv.AttackDuration;
         _projectileAttributes.PierceCount += statsProv.WeaponDisableCount;
-
+        
         // 내부 카운터 초기화
         _remainingLifeTime = _projectileAttributes.LifeTime;
         _remainingPierceCount = _projectileAttributes.PierceCount;
+        AttackPower = statsProv.AttackPower;
 
         _teamType = _projectileBaseData.TeamType;
         _disableType = OwnerWeapon.WeaponDisableType;
@@ -150,7 +155,9 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
             case WeaponDisableType.WEAPONDISABLETYPE_NONE:
                 {
                     // 이게 디폴트
-                    // Dead();
+                    _age += Time.deltaTime;
+                    if (_age < _remainingLifeTime ) return;
+                    Dead();
                 }
                 break;
             case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
@@ -185,20 +192,5 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
         ProjectileFactory.instance.Release(this);
 
         isDead = true;
-    }
-
-    public void OnCollision(ICollidable self, ICollidable other)
-    {
-        _remainingPierceCount--;
-        CheckDead();
-    }
-
-    /// <summary>
-    /// 충돌 이후 추가 후처리를 위해 서브클래스가 오버라이드할 수 있는 위치
-    /// (예: 폭발, 관통 카운트 감소 등)
-    /// </summary>
-    public virtual void OnPostCollision(ICollidable other)
-    {
-
     }
 }

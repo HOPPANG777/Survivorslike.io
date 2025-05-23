@@ -11,6 +11,13 @@ public class HittedController : ICollision
             if (target.TeamType == attacker.TeamType) return; // 같은 팀이면 충돌 무시
 
             target.Hitted(attacker.AttackPower);
+
+            // 2) 때린 쪽이 ProjectileBase이면 카운트 감소 후 0 이하일 때 Dead()
+            if (attacker is ProjectileBase proj)
+            {
+                proj.RemainingPierceCount--;
+                proj.CheckDead();
+            }
         }
     }
 }

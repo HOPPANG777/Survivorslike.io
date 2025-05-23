@@ -5,13 +5,11 @@ public class RedTriangleProjectile : ProjectileBase
     protected override void Start()
     {
         base.Start();
-        SetStatus();
     }
 
     protected override void Update()
     {
         base.Update();
-        Debug.Log(AttackPower);
     }
 
     public override void SetStatus()
@@ -35,10 +33,6 @@ public class RedTriangleProjectile : ProjectileBase
         base.Dead();
     }
 
-    public override void OnPostCollision(ICollidable other)
-    {
-        base.OnPostCollision(other);
-    }
 }
 
 //// 예시로 폭발형 투사체라면

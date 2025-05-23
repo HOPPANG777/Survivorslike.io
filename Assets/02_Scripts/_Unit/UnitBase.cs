@@ -54,6 +54,11 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     [TabGroup("Unit Dead")][Tooltip("죽었는지 확인")][SerializeField]  private bool isDead = false;
     public bool IsDead { get { return isDead; } }
 
+    [Header("Invincibility")][Tooltip("피격 후 무적 지속 시간 (초)")][SerializeField] protected float _invincibleDuration = 0.5f;
+
+    // 다음에 맞을 수 있는 시점 (Time.time 기준)
+    private float _nextHittableTime = 0f;
+
     protected virtual void Start()
     {
         SetStatus();
@@ -88,13 +93,28 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         _soundSource = this.gameObject.GetComponent<AudioSource>();
         AllManager.instance.CollisionManager.RegisterCollidable(this);
         isDead = false;
+
+        // 무적 타이머 초기화: 스폰 직후 즉시 피격 가능
+        _nextHittableTime = Time.time;
     }
 
     public virtual void Hitted(float damageValue)
     {
-        var damageReduction = damageValue * (100f / (100f + this.Attributes.UnitDefense));
+      // 무적 중이면 무시
+        if (Time.time < _nextHittableTime)
+        {
+            return;
+        }
 
-        this._unitAttribute.UnitCurrentHealth -= (damageReduction);
+        // 실제 데미지 계산
+        float damageReduction = damageValue * (100f / (100f + this.Attributes.UnitDefense));
+        this._unitAttribute.UnitCurrentHealth -= damageReduction;
+
+        // 즉시 사망 체크
+        CheckDead();
+
+        // 무적 시간 설정
+        _nextHittableTime = Time.time + _invincibleDuration;
     }
 
     public virtual void CheckDead()

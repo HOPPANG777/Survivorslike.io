@@ -17,7 +17,7 @@ MonoBehaviour:
     _projectileSpeed: 5
     _lifetime: 3
     _knockbackForce: 1
-    _pierceCount: 0
+    _pierceCount: 1
     _explosionRadius: 0
     _isHoming: 0
     _homingStrength: 0
