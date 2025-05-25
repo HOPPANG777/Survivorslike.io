@@ -15,8 +15,23 @@ public class HittedController : ICollision
             // 2) 때린 쪽이 ProjectileBase이면 카운트 감소 후 0 이하일 때 Dead()
             if (attacker is ProjectileBase proj)
             {
-                proj.RemainingPierceCount--;
-                proj.CheckDead();
+                switch (proj.DisableType)
+                {
+                    case WeaponDisableType.WEAPONDISABLETYPE_NONE:
+                        {
+                            proj.RemainingPierceCount--;
+                            proj.CheckDead();
+                        }
+                        break;
+                    case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
+                        {
+                            proj.RemainingPierceCount--;
+                            proj.CheckDead();
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

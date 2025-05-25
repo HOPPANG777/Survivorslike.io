@@ -26,6 +26,18 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
     [TabGroup("Projectile Base")][Tooltip("팀 타입")][SerializeField] protected TeamType _teamType;
     public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
 
+    // 새로 추가: 이 투사체를 발사한 무기 참조
+    public WeaponBase OwnerWeapon { get; private set; }
+
+    [TabGroup("Weapon Base")][Tooltip("비활성화 타입")][SerializeField] private WeaponDisableType _disableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
+    public WeaponDisableType DisableType { get { return _disableType; } set { _disableType = value; } }
+
+    [TabGroup("Weapon Base")][Tooltip("비활성화 시간")][SerializeField] private float _remainingLifeTime;
+    public float RemainingLifeTime { get { return _remainingLifeTime; } set { _remainingLifeTime = value; } }
+
+    [TabGroup("Weapon Base")][Tooltip("비활성화 카운트")][SerializeField] private int _remainingPierceCount;
+    public int RemainingPierceCount { get { return _remainingPierceCount; } set { _remainingPierceCount = value; } }
+
     [Header("Projectile Sound")]
     // 사용할 사운드 이름
     [TabGroup("Projectile Sound")][Tooltip("사운드 이름")][SerializeField] protected string _soundName;
@@ -53,13 +65,6 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
     protected float _age;
 
     private bool isDead = false;
-
-    // 새로 추가: 이 투사체를 발사한 무기 참조
-    public WeaponBase OwnerWeapon { get; private set; }
-    private WeaponDisableType _disableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
-    private float _remainingLifeTime;
-    private int _remainingPierceCount;
-    public int RemainingPierceCount { get { return _remainingPierceCount; } set { _remainingPierceCount = value; } }
 
     // 1) Start 에서 SetStatus 호출
     protected virtual void Start()
