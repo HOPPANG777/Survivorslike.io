@@ -75,7 +75,7 @@ public struct PlayerableAttribute
     public float PlayerCurrentExp { get { return _playerCurrentExp; } set { _playerCurrentExp = value; } }
 
     [TabGroup("PlayerableAttribute")][Tooltip("플레이어 레벨")][SerializeField] private float _playerLevel;
-    public float PlayerLevel { get { return _playerLevel; } set { _playerLevel = value; } }
+    public int PlayerLevel { get { return _playerLevel; } set { _playerLevel = value; } }
 }
 
 [Serializable]
