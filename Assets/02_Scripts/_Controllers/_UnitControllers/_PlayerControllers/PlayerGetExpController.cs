@@ -7,7 +7,7 @@ public class PlayerGetExpController : MonoBehaviour
     [TabGroup("Player")][SerializeField] private PlayerUnit _player;
     public PlayerUnit Player => _player;
 
-    private PlayerLevelController _levelController;
+    private PlayerLevelUpController _levelController;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class PlayerGetExpController : MonoBehaviour
         _player = AllManager.instance.GamemodeManager.Player.GetComponent<PlayerUnit>();
 
         // 레벨업 담당 컴포넌트 캐싱
-        _levelController = GetComponent<PlayerLevelController>();
+        _levelController = GetComponent<PlayerLevelUpController>();
     }
 
     private bool PlayerCheck()
