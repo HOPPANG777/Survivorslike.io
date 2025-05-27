@@ -31,6 +31,9 @@ public class WeaponBaseSO : ScriptableObject, ISetSOData<WeaponBaseSO>, IWeaponA
     [TabGroup("Weapon Data")][Tooltip("팀 타입")][SerializeField] protected WeaponDisableType _weaponDisableType;
     public WeaponDisableType WeaponDisableType { get { return _weaponDisableType; } set { _weaponDisableType = value; } }
 
+    [TabGroup("Weapon Data")][Tooltip("무기 타입")][SerializeField] private WeaponType _weaponType;
+    public WeaponType WeaponType { get { return _weaponType; } set { _weaponType = value; } }
+
     [TabGroup("Sound")][Tooltip("사운드 이름")][SerializeField] private string _soundName; 
     public string SoundName { get { return _soundName; } }
     
@@ -55,6 +58,8 @@ public class WeaponBaseSO : ScriptableObject, ISetSOData<WeaponBaseSO>, IWeaponA
         this._teamType = data._teamType;
 
         this._weaponDisableType = data._weaponDisableType;
+
+        this._weaponType = data._weaponType;
 
         this._levelAttributes = data._levelAttributes;
 

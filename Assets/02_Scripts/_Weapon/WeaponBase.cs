@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>, IWeaponDisableMember, IWeaponLevel, IWeaponAttackFunction//, IAttacker
+public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>, IWeaponDisableMember, IWeaponLevel, IWeaponAttackFunction, IWeaponMember//, IAttacker
 {
     [TabGroup("Weapon Base")][Tooltip("Weapon Data")][SerializeField] protected WeaponBaseSO _weaponBaseData;
     public WeaponBaseSO WeaponBaseData { get { return _weaponBaseData; } set { _weaponBaseData = value; } }
@@ -19,6 +19,9 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     [TabGroup("Weapon Base")][Tooltip("무기 능력치")][SerializeField] protected WeaponAttribute _weaponAttribute;
     public WeaponAttribute Attributes { get { return _weaponAttribute; } set { _weaponAttribute = value; } }
+
+    [TabGroup("Weapon Base")][Tooltip("무기 타입")][SerializeField] protected WeaponType _weaponType;
+    public WeaponType WeaponType { get { return _weaponType; } set { _weaponType = value; } }
 
     [Header("Weapon Sound")]
     // 사용할 사운드 이름
