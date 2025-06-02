@@ -1,10 +1,12 @@
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
+public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus, IAttacker
 {
     private IUnitAttribute<UnitAttribute> _unitAttr;
     private IWeaponHolder _weaponHolder;
+    private TeamType _teamType = TeamType.TEAMTYPE_ALLY;
+    public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
 
     public void SetStatus()
     {

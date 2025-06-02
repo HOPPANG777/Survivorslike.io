@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>, IWeaponDisableMember, IWeaponLevel, IWeaponAttackFunction, IWeaponMember//, IAttacker
+public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>, IWeaponDisableMember, IWeaponLevel, IWeaponAttackFunction, IWeaponMember
 {
     [TabGroup("Weapon Base")][Tooltip("Weapon Data")][SerializeField] protected WeaponBaseSO _weaponBaseData;
     public WeaponBaseSO WeaponBaseData { get { return _weaponBaseData; } set { _weaponBaseData = value; } }
@@ -46,9 +46,6 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] protected float _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius; } }
-
-    //[Header("IAttacker")]
-    //public float AttackPower { get { return Attributes.UnitDamage * Weapon.Attributes.DamageMultiplier + Weapon.Attributes.FlatDamage; } }
 
     [TabGroup("Weapon Dead")][Tooltip("죽었는지 확인")][SerializeField] private bool isDead = false;
     public bool IsDead { get { return isDead; } }
