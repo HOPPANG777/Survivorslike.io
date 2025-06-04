@@ -10,7 +10,7 @@ public class ExpItem : ItemBase
     { 
         get 
         {  
-            var player = GameObject.FindGameObjectWithTag("Player")?.GetComponent<PlayerUnit>();
+            var player = AllManager.instance.GamemodeManager.Player.GetComponent <PlayerUnit>();
             if (player != null) return player.Attributes.PlayerGetExpRange;
             return base.CurrentAttractRange;
         }
@@ -29,12 +29,16 @@ public class ExpItem : ItemBase
     protected override void Collect()
     {
         base.Collect();
-        _expData.Apply(Player.gameObject);
     }
 
-    protected override void OnUse()
+    public override void CheckDead()
     {
-        base.OnUse();
+        base.CheckDead();
+    }
+
+    public override void Dead()
+    {
+        base.Dead();
     }
 
     protected override void PlayerGetItem()

@@ -45,17 +45,11 @@ public class PlayerLevelUpController : MonoBehaviour
             curExp -= needed;
             curLevel++;
 
-            // ④ 레벨업 보상: 기본 스탯 (UnitBase)와 플레이어 전용 스탯 동시 처리
-            // — 최대 체력 10% 증가
-            uAttr.UnitMaxHealth += 0.1f;
-            uAttr.UnitCurrentHealth = uAttr.UnitMaxHealth;
-            // — (필요하면 다른 UnitAttribute 보상도 여기에)
-
-            // — 플레이어 전용 보상 (예: 플레이어 레벨업 포인트 등)
-            // pAttr.PlayerGetExpRange += 0.1f; // 예시
-
             // 레벨업 이펙트/UI
             AllManager.instance.UIManager.LevelUpPage();
+
+            // ④ 레벨업 보상: 
+
 
             // 다음 레벨 필요 EXP 갱신
             needed = GetExpForLevel(curLevel);

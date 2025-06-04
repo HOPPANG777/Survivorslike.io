@@ -34,6 +34,8 @@ public class ItemFactory : SerializedSingleton<ItemFactory>, IItemFactory
         item.SetStatus();
 
         _activeItems.Add(item);
+
+        Debug.Log("»ý¼º");
         
         return item;
     }

@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus
+public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead
 {
     [TabGroup("Item Base")][Tooltip("Item SO µ¥ÀÌÅÍ")][SerializeField] private ItemBaseSO _itemData;
     public ItemBaseSO ItemData { get { return _itemData; } set { _itemData = value; } }
@@ -52,19 +52,27 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus
 
     virtual protected void Collect()
     {
+        if (_player == null) return;
         _itemData.Apply(_player.gameObject);
-        OnUse();
+        CheckDead();
     }
 
-    virtual protected void OnUse()
+    virtual public void CheckDead()
+    {
+        Dead();
+    }
+
+    virtual public void Dead()
     {
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
-        gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
         ItemFactory.instance.Release(this);
     }
 
     virtual protected void PlayerGetItem()
     {
+        if (_player == null) return;
+
         float dist = Vector3.Distance(this.transform.position, _player.transform.position);
         if (dist > CurrentAttractRange) return;
 

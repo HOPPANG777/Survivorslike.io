@@ -35,7 +35,7 @@ MonoBehaviour:
   _soundClip: {fileID: 0}
   _collisionRadius: 0.5
   _playerAttribute:
-    _playerGetExpRange: 2
+    _playerGetExpRange: 1
     _luck: 1
     _playerCurrentExp: 0
     _playerLevel: 1

@@ -15,6 +15,6 @@ MonoBehaviour:
   _itemName: Exp
   _icon: {fileID: 21300000, guid: 0473f737660bc364fbd799a401f59395, type: 3}
   _collisionRadius: 1
-  _attractRange: 0
+  _attractRange: 0.5
   _attractSpeed: 0
-  _expAmount: 5
+  _expAmount: 2

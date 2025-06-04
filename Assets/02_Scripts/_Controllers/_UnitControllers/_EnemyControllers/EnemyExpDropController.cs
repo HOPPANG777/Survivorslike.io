@@ -12,7 +12,7 @@ public class EnemyExpDropController : MonoBehaviour
         if (!_enemy)
         {
             //_enemy = this.gameObject;
-            Debug.LogError("Enemy 컴포넌트를 찾을 수 없습니다!");
+            //Debug.LogError("Enemy 컴포넌트를 찾을 수 없습니다!");
             return false;
         }
         else
@@ -38,11 +38,11 @@ public class EnemyExpDropController : MonoBehaviour
     public void EnemyDropExp()
     {
         if (CheckEnemyPosition() == false) return;
-        if (CheckEnemy() == false) return;
+        //if (CheckEnemy() == false) return;
 
         if (_expData == null || _enemyPosition == null)
         {
-            Debug.LogError("EnemyShooter: Bullet Data 또는 SpawnPoint 할당 누락");
+            Debug.LogError("EnemyDropExp: Item Data 또는 SpawnPoint 할당 누락");
             return;
         }
 
@@ -51,7 +51,7 @@ public class EnemyExpDropController : MonoBehaviour
 
         if (go == null)
         {
-            Debug.LogError("EnemyShooter: ProjectileFactory에서 생성 실패");
+            Debug.LogError("EnemyDropExp: ItemFactory에서 생성 실패");
             return;
         }
     }

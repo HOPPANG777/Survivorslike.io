@@ -48,6 +48,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
     public float CollisionRadius { get { return _collisionRadius; } }
 
     [TabGroup("Weapon Dead")][Tooltip("죽었는지 확인")][SerializeField] private bool isDead = false;
+   
     public bool IsDead { get { return isDead; } }
 
     public int CurrentLevel { get; set; }
