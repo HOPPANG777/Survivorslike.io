@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class UIController : MonoBehaviour
 
     [TabGroup("Controller")][Tooltip("플레이어 레벨 카운터 컨트롤러")][SerializeField] private PlayerCurrentLevelCountController _playerCurrentLevelCountController;
     public PlayerCurrentLevelCountController PlayerCurrentLevelCountController { get { return _playerCurrentLevelCountController; } }
+
+    [TabGroup("Controller")][Tooltip("레벨업 아이템 이미지 슬라이드 컨트롤러")][SerializeField] private SlideInImagesController _slideInImagesController;
+    public SlideInImagesController SlideInImagesController { get { return _slideInImagesController; } }
+
 
     [TabGroup("UIPage")][Tooltip("Back Manager")][SerializeField] private UIBackController _backManager;
     [TabGroup("UIPage")][Tooltip("Page List")][SerializeField] private List<GameObject> _pageList;
@@ -59,6 +64,8 @@ public class UIController : MonoBehaviour
     {
         AllManager.instance.GamemodeManager.GameLevelUp();
         _backManager.NavigateTo(_pageList[5], SlideDirection.SLIDE_LEFT, SlideDirection.SLIDE_RIGHT);
+        _slideInImagesController.SetStatus();
+        _slideInImagesController.Move();
     }
 
     public void GameOverPage()

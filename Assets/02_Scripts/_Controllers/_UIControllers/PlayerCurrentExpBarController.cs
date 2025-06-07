@@ -48,6 +48,8 @@ public class PlayerCurrentExpBarController : MonoBehaviour
 
     public void UpdateExpBarBlinking()
     {
+        _playerCurrentExpBar.fillAmount = 1f;
+
         // 1) 시간 누적
         _elapsed += Time.deltaTime * _speed;
 
