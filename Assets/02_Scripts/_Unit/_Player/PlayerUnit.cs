@@ -21,6 +21,7 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder
     [TabGroup("Player Unit")][Tooltip("Weapon Holder")][SerializeField] private List<WeaponBase> _equippedWeapons = new List<WeaponBase>();
     public List<WeaponBase> EquippedWeapons { get { return _equippedWeapons; } }
 
+
     protected override void Start()
     {
         base.Start();

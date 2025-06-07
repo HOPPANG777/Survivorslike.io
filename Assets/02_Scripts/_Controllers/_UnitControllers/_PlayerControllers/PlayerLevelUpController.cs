@@ -48,9 +48,6 @@ public class PlayerLevelUpController : MonoBehaviour
             // 레벨업 이펙트/UI
             AllManager.instance.UIManager.LevelUpPage();
 
-            // ④ 레벨업 보상: 
-
-
             // 다음 레벨 필요 EXP 갱신
             needed = GetExpForLevel(curLevel);
         }

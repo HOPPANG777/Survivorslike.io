@@ -1,8 +1,9 @@
 using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIBackController : MonoBehaviour, IUIBack
+public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
 {
     [TabGroup("UIPages")][Tooltip("등록할 UI 페이지들 (첫 번째는 시작 페이지)")][SerializeField] private List<GameObject> _pages;
 
@@ -55,8 +56,7 @@ public class UIBackController : MonoBehaviour, IUIBack
         {
             var page = _pages[i];
             var rect = page.GetComponent<RectTransform>();
-            if (rect != null)
-                rect.anchoredPosition = _initialPositions[i];
+            if (rect != null) rect.anchoredPosition = _initialPositions[i];
 
             page.SetActive(i == 0);
         }
@@ -64,6 +64,40 @@ public class UIBackController : MonoBehaviour, IUIBack
         // 현재 페이지 참조 초기화
         _currentPage = _pages.Count > 0 ? _pages[0] : null;
         _currentSlider = _currentPage != null ? _currentPage.GetComponent<UISliderController>() : null;
+    }
+
+    /// <summary>
+    /// 현재 페이지(ingame)는 그대로 두고, page를 overlay로 슬라이드 인 시킵니다.
+    /// </summary>
+    public void OverlayIn(GameObject page, SlideDirection inDirection)
+    {
+        // 1) 위치 초기화
+        var idx = _pages.IndexOf(page);
+        var rect = page.GetComponent<RectTransform>();
+        rect.anchoredPosition = _initialPositions[idx];
+
+        // 2) 그냥 켜기 + 슬라이드
+        page.SetActive(true);
+        var slider = page.GetComponent<UISliderController>();
+        slider.Slide(inDirection);
+    }
+
+    /// <summary>
+    /// overlay로 띄운 page를 슬라이드 아웃하고, 비활성화합니다.
+    /// </summary>
+    public void OverlayOut(GameObject page, SlideDirection outDirection)
+    {
+        var slider = page.GetComponent<UISliderController>();
+        slider.Slide(outDirection);
+        // 슬라이드가 끝나는 시점을 알 수 있다면 콜백을 걸어서 비활성화하거나,
+        // MoveDuration 후에 비활성화해 주세요:
+        StartCoroutine(DisableAfter(page, slider.MoveDuration));
+    }
+
+    public IEnumerator DisableAfter(GameObject page, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        page.SetActive(false);
     }
 
     public void NavigateTo(GameObject page, SlideDirection outDirection, SlideDirection inDirection)

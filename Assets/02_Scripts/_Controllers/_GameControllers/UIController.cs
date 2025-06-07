@@ -63,9 +63,18 @@ public class UIController : MonoBehaviour
     public void LevelUpPage()
     {
         AllManager.instance.GamemodeManager.GameLevelUp();
-        _backManager.NavigateTo(_pageList[5], SlideDirection.SLIDE_LEFT, SlideDirection.SLIDE_RIGHT);
+        // Ingame 패널은 그대로, 레벨업 페이지만 overlay
+        _backManager.OverlayIn(_pageList[5], SlideDirection.SLIDE_RIGHT);
+
+        // 이미지 슬라이드도 리셋→재생
         _slideInImagesController.SetStatus();
         _slideInImagesController.Move();
+    }
+
+    public void OnWeaponChosen()  // 무기 선택 콜백에서 호출
+    {
+        // 레벨업 패널만 겉으로 슬라이드 아웃
+        _backManager.OverlayOut(_pageList[5], SlideDirection.SLIDE_LEFT);
     }
 
     public void GameOverPage()

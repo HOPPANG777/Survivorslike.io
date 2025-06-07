@@ -63,7 +63,8 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
     public override void Dead()
     {
         base.Dead();
-        AllManager.instance.UIManager.EnemyKillCountController.UpdateKillCounter(AllManager.instance.GamemodeManager.KillCount++);
+        AllManager.instance.GamemodeManager.KillCount++;
+        AllManager.instance.UIManager.EnemyKillCountController.UpdateKillCounter(AllManager.instance.GamemodeManager.KillCount);
         var enemyExpController = this.GetComponent<EnemyExpDropController>();
         if (enemyExpController == null) return;
         enemyExpController.EnemyDropExp();
