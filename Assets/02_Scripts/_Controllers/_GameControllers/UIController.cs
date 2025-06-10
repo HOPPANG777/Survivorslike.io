@@ -24,6 +24,9 @@ public class UIController : MonoBehaviour
     [TabGroup("Controller")][Tooltip("레벨업 아이템 이미지 슬라이드 컨트롤러")][SerializeField] private SlideInImagesController _slideInImagesController;
     public SlideInImagesController SlideInImagesController { get { return _slideInImagesController; } }
 
+    [TabGroup("Controller")][Tooltip("레벨업시 아이템 선택 컨트롤러")][SerializeField] private WeaponSelectionController _weaponSelectionController;
+    public WeaponSelectionController WeaponSelectionController { get { return _weaponSelectionController; } }
+
 
     [TabGroup("UIPage")][Tooltip("Back Manager")][SerializeField] private UIBackController _backManager;
     [TabGroup("UIPage")][Tooltip("Page List")][SerializeField] private List<GameObject> _pageList;
@@ -65,6 +68,8 @@ public class UIController : MonoBehaviour
         AllManager.instance.GamemodeManager.GameLevelUp();
         // Ingame 패널은 그대로, 레벨업 페이지만 overlay
         _backManager.OverlayIn(_pageList[5], SlideDirection.SLIDE_RIGHT);
+
+        _weaponSelectionController.OpenSelection();
 
         // 이미지 슬라이드도 리셋→재생
         _slideInImagesController.SetStatus();
