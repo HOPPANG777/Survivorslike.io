@@ -9,7 +9,7 @@ using UnityEngine;
 //	
 //==============================================================================
 
-public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder
+public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHolder
 {
     [Header("Player Unit")]
     private PlayerUnitSO _playerData;
@@ -30,6 +30,16 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder
     protected override void Update()
     {
         base.Update();
+    }
+
+    public IReadOnlyList<WeaponBase> GetOwnedWeaponTypes()
+    {
+        return _equippedWeapons;
+    }
+
+    public void AddWeapon(WeaponType type)
+    {
+
     }
 
     public override void SetStatus()
