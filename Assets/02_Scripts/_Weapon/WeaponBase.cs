@@ -115,28 +115,9 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public virtual void CheckDead()
     {
-        switch (WeaponDisableType)
+        if (AllManager.instance.GamemodeManager.GameMode == GameModeType.GAMEMODE_GAMECLEAR || AllManager.instance.GamemodeManager.GameMode == GameModeType.GAMEMODE_GAMEOVER)
         {
-            case WeaponDisableType.WEAPONDISABLETYPE_NONE:
-                {
-                    // 이게 디폴트
-                    // Dead();
-                }
-                break;
-            case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
-                {
-                    // 무기 관통이나 반사를 통해서 카운트가 감소되서 0이 되면 사라지는 무기
-                    if (Attributes.WeaponDisableCount > 0) return;
-                    Dead();
-                }
-                break;
-            case WeaponDisableType.WEAPONDISABLETYPE_TIME:
-                {
-                    // 무기 사용시간이 지나면 사라지는 무기
-                    if (Attributes.WeaponDisableTime > 0) return;
-                    Dead();
-                }
-                break;
+            Dead();
         }
     }
 
