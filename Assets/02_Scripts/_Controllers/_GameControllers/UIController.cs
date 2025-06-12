@@ -99,7 +99,7 @@ public class UIController : MonoBehaviour
     public void ResetUI()
     {
         PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(1);
-        _playerCurrentExpBarController.UpdatePlayerCurrentExpBar(0);
+        _playerCurrentExpBarController.RevertPlayerCurreontExpBar();
         EnemyKillCountController.UpdateKillCounter(0);
         _backManager.InitializeToTitle();
     }
