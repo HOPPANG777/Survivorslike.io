@@ -46,9 +46,7 @@ public class PlayerGetExpController : MonoBehaviour
         _player.Attributes = attr;
 
         // 4) 레벨업 시도 (남은 경험치, UI 업데이트 포함)
-        if (_levelController != null)
-            _levelController.TryLevelUp();
-        else
-            Debug.LogWarning("PlayerLevelController가 없습니다. 레벨업이 동작하지 않습니다.");
+        if (_levelController != null) _levelController.TryLevelUp();
+        else Debug.LogWarning("PlayerLevelController가 없습니다. 레벨업이 동작하지 않습니다.");
     }
 }

@@ -39,7 +39,26 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
 
     public void AddWeapon(WeaponType type)
     {
+        // 1. 이미 소유한 무기라면 → 레벨만 올리고 끝
+        for (int i = 0; i < _equippedWeapons.Count; i++)
+        {
+            WeaponBase weaponEquipped = _equippedWeapons[i];
+            if (weaponEquipped.WeaponType == type)
+            {
+                weaponEquipped.LevelUp(); // 무기 레벨업
+                return;
+            }
+        }
 
+        // 2. 없다면 → 팩토리로 생성, 플레이어 자식으로 붙이고 리스트에 추가
+        var weapon = WeaponFactory.instance.Create(type, this.transform);
+        if (weapon == null)
+        {
+            Debug.LogWarning($"WeaponFactory에서 {type} 무기 생성 실패");
+            return;
+        }
+
+        _equippedWeapons.Add(weapon);
     }
 
     public override void SetStatus()

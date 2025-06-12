@@ -108,6 +108,7 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         if (_playerHolderObj != null) _playerHolder.AddWeapon(chosen);
 
         // 2) ÆÐ³Î ¼û±è
-        _itemPanel.SetActive(false);
+        //_itemPanel.SetActive(false);
+        AllManager.instance.UIManager.OnWeaponChosen();
     }
 }

@@ -1,12 +1,13 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponSelectionUIController : SerializedMonoBehaviour
 {
-    [TabGroup("Weapon Choice UI")][SerializeField] private Text _label;  // 무기 이름 표시용
     [TabGroup("Weapon Choice UI")][SerializeField] private Image _icon;   // 무기 아이콘 표시용(필요 시)
+    [TabGroup("Weapon Choice UI")][SerializeField] private TextMeshProUGUI _label;  // 무기 이름 표시용
 
     private System.Action _onClick;
 

@@ -80,6 +80,8 @@ public class UIController : MonoBehaviour
     {
         // 레벨업 패널만 겉으로 슬라이드 아웃
         _backManager.OverlayOut(_pageList[5], SlideDirection.SLIDE_LEFT);
+        _playerCurrentExpBarController.RevertPlayerCurreontExpBar();
+        AllManager.instance.GamemodeManager.GameIngame();  // 게임 모드 복원
     }
 
     public void GameOverPage()

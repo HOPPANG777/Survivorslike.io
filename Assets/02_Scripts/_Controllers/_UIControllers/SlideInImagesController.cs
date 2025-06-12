@@ -57,7 +57,7 @@ public class SlideInImagesController : MonoBehaviour, IMoveable, ISetStatus
     {
         int n = _images.Count;
         // 3) 왼쪽 바깥(offX)에서 시작
-        float offX = -1000f; // 예: 화면 왼쪽 밖
+        float offX = -Screen.width; // 예: 화면 왼쪽 밖
 
         for (int i = 0; i < n; i++)
         {
