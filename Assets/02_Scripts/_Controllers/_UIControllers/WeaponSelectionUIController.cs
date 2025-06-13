@@ -8,6 +8,7 @@ public class WeaponSelectionUIController : SerializedMonoBehaviour
 {
     [TabGroup("Weapon Choice UI")][SerializeField] private Image _icon;   // 무기 아이콘 표시용(필요 시)
     [TabGroup("Weapon Choice UI")][SerializeField] private TextMeshProUGUI _label;  // 무기 이름 표시용
+    [TabGroup("Weapon Choice UI")][SerializeField] private TextMeshProUGUI _statLabel; // 스탯 차이 표시용
 
     private System.Action _onClick;
 
@@ -23,9 +24,10 @@ public class WeaponSelectionUIController : SerializedMonoBehaviour
     /// <summary>
     /// 버튼의 표시 정보 설정
     /// </summary>
-    public void SetData(WeaponType type, string weaponName)
+    public void SetData(WeaponType type, string weaponName, string statText)
     {
         if (_label != null) _label.text = weaponName;
+        if (_statLabel != null) _statLabel.text = statText;
         // 아이콘을 사용한다면
         // 아이콘 딕셔너리에서 스프라이트 할당
         if (_icon != null && _weaponLabel != null && _weaponLabel.TryGetValue(type, out var sprite))

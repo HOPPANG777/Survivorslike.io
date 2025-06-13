@@ -87,9 +87,23 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
             if (i < take)
             {
                 _choiceButtons[i].gameObject.SetActive(true);
-                var data = _weaponFactory.GetWeaponData(_currentChoices[i]);
-                var name = data != null ? data.WeaponName : _currentChoices[i].ToString();
-                _choiceButtons[i].SetData(_currentChoices[i], name);
+                var type = _currentChoices[i];
+                var data = _weaponFactory.GetWeaponData(type);
+                var name = data != null ? data.WeaponName : type.ToString();
+
+                // 현재 레벨과 다음 레벨 스탯 비교 문자열 생성
+                string diffText = string.Empty;
+                if (data != null)
+                {
+                    var owned = ownedWeapons.Find(w => w.WeaponType == type);
+                    int currentLevel = owned != null ? owned.CurrentLevel : 0;
+
+                    WeaponAttribute nextAttr = data.LevelAttributes[Mathf.Clamp(currentLevel, 0, data.LevelAttributes.Count - 1)];
+                    WeaponAttribute currAttr = currentLevel > 0 ? data.LevelAttributes[Mathf.Clamp(currentLevel - 1, 0, data.LevelAttributes.Count - 1)] : new WeaponAttribute();
+                    diffText = BuildDiffString(nextAttr, currAttr);
+                }
+
+                _choiceButtons[i].SetData(type, name, diffText);
             }
             else
             {
@@ -113,5 +127,36 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         // 2) 패널 숨김
         //_itemPanel.SetActive(false);
         AllManager.instance.UIManager.OnWeaponChosen();
+    }
+
+    private string BuildDiffString(WeaponAttribute next, WeaponAttribute current)
+    {
+        List<string> parts = new List<string>();
+
+        void AddFloat(string label, float diff)
+        {
+            if (Mathf.Approximately(diff, 0f)) return;
+            parts.Add($"{label} {(diff > 0 ? "+" : string.Empty)}{diff:0.#}");
+        }
+
+        void AddInt(string label, int diff)
+        {
+            if (diff == 0) return;
+            parts.Add($"{label} {(diff > 0 ? "+" : string.Empty)}{diff}");
+        }
+
+        AddFloat("Damage", next.FlatDamage - current.FlatDamage);
+        AddFloat("Dmg%", next.DamageMultiplier - current.DamageMultiplier);
+        AddFloat("Crit", next.CriticalDamage - current.CriticalDamage);
+        AddFloat("Crit%", next.CriticalChance - current.CriticalChance);
+        AddFloat("AS", next.AttackSpeedMultiplier - current.AttackSpeedMultiplier);
+        AddInt("Count", next.ProjectileCountBonus - current.ProjectileCountBonus);
+        AddFloat("Range", next.RangeBonus - current.RangeBonus);
+        AddFloat("CD", next.AttackCooldown - current.AttackCooldown);
+        AddFloat("Knock", next.KnockbackForce - current.KnockbackForce);
+        AddInt("Disable", next.WeaponDisableCount - current.WeaponDisableCount);
+        AddFloat("Stun", next.WeaponDisableTime - current.WeaponDisableTime);
+
+        return string.Join(", ", parts);
     }
 }
