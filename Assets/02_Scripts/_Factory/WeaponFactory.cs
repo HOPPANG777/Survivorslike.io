@@ -5,13 +5,13 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
 {
-    [TabGroup("Unit Factory")][Tooltip("UnitData SO ¡ê Prefab ¸ÅÇÎ")][SerializeField] private List<WeaponPrefabEntry> _entries = new List<WeaponPrefabEntry>();
+    [TabGroup("Unit Factory")][Tooltip("UnitData SO â†” Prefab ë§¤í•‘")][SerializeField] private List<WeaponPrefabEntry> _entries = new List<WeaponPrefabEntry>();
 
     private IPoolManager _pool;
     private Dictionary<WeaponBaseSO, GameObject> _map;
     private Dictionary<WeaponType, WeaponBaseSO> _typeToSO;
 
-    // È°¼ºÈ­µÈ(»ı¼ºµÈ) À¯´Ö ¸ñ·Ï
+    // í™œì„±í™”ëœ(ìƒì„±ëœ) ìœ ë‹› ëª©ë¡
     private readonly List<WeaponBase> _activeWeapons = new List<WeaponBase>();
 
     private void Start()
@@ -26,7 +26,7 @@ public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
             if (e.Data != null && e.Prefab != null)
             {
                 _map[e.Data] = e.Prefab;
-                _typeToSO[e.Data.WeaponType] = e.Data; // SO¿¡ WeaponType ÇÁ·ÎÆÛÆ¼°¡ ÀÖÀ½
+                _typeToSO[e.Data.WeaponType] = e.Data; // SOì— WeaponType í”„ë¡œí¼í‹°ê°€ ìˆìŒ
             }
         }
     }
@@ -42,7 +42,7 @@ public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
     //    weapon.WeaponBaseData = data;
     //    weapon.SetStatus();
 
-    //    // È°¼º À¯´ÖÀ¸·Î µî·Ï
+    //    // í™œì„± ìœ ë‹›ìœ¼ë¡œ ë“±ë¡
     //    _activeWeapons.Add(weapon);
 
     //    return weapon;
@@ -61,17 +61,23 @@ public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
         weapon.WeaponBaseData = data;
         weapon.SetStatus();
 
-        // È°¼º À¯´ÖÀ¸·Î µî·Ï
+        // í™œì„± ìœ ë‹›ìœ¼ë¡œ ë“±ë¡
         _activeWeapons.Add(weapon);
         
         return weapon;
+    }
+
+    public WeaponBaseSO GetWeaponData(WeaponType type)
+    {
+        _typeToSO.TryGetValue(type, out var data);
+        return data;
     }
 
     public void Release(WeaponBase weapon)
     {
         if (weapon == null) return;
 
-        // È°¼º ¸ñ·Ï¿¡¼­ Á¦°Å
+        // í™œì„± ëª©ë¡ì—ì„œ ì œê±°
         if (_activeWeapons.Contains(weapon))
         {
             _activeWeapons.Remove(weapon);

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class WeaponSelectionUIController : SerializedMonoBehaviour
 {
-    [TabGroup("Weapon Choice UI")][SerializeField] private Image _icon;   // ¹«±â ¾ÆÀÌÄÜ Ç¥½Ã¿ë(ÇÊ¿ä ½Ã)
-    [TabGroup("Weapon Choice UI")][SerializeField] private TextMeshProUGUI _label;  // ¹«±â ÀÌ¸§ Ç¥½Ã¿ë
+    [TabGroup("Weapon Choice UI")][SerializeField] private Image _icon;   // ë¬´ê¸° ì•„ì´ì½˜ í‘œì‹œìš©(í•„ìš” ì‹œ)
+    [TabGroup("Weapon Choice UI")][SerializeField] private TextMeshProUGUI _label;  // ë¬´ê¸° ì´ë¦„ í‘œì‹œìš©
 
     private System.Action _onClick;
 
@@ -21,21 +21,21 @@ public class WeaponSelectionUIController : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// ¹öÆ°ÀÇ Ç¥½Ã Á¤º¸ ¼³Á¤
+    /// ë²„íŠ¼ì˜ í‘œì‹œ ì •ë³´ ì„¤ì •
     /// </summary>
-    public void SetData(WeaponType type)
+    public void SetData(WeaponType type, string weaponName)
     {
-        if (_label != null) _label.text = type.ToString();
-        // ¾ÆÀÌÄÜÀ» »ç¿ëÇÑ´Ù¸é
-        // ¾ÆÀÌÄÜ µñ¼Å³Ê¸®¿¡¼­ ½ºÇÁ¶óÀÌÆ® ÇÒ´ç
+        if (_label != null) _label.text = weaponName;
+        // ì•„ì´ì½˜ì„ ì‚¬ìš©í•œë‹¤ë©´
+        // ì•„ì´ì½˜ ë”•ì…”ë„ˆë¦¬ì—ì„œ ìŠ¤í”„ë¼ì´íŠ¸ í• ë‹¹
         if (_icon != null && _weaponLabel != null && _weaponLabel.TryGetValue(type, out var sprite))
         {
             _icon.sprite = sprite;
-            _icon.enabled = true; // È¤½Ã ºñÈ°¼ºÈ­µÇ¾î ÀÖÀ¸¸é
+            _icon.enabled = true; // í˜¹ì‹œ ë¹„í™œì„±í™”ë˜ì–´ ìˆìœ¼ë©´
         }
         else if (_icon != null)
         {
-            _icon.enabled = false; // ÇØ´ç Å¸ÀÔ ½ºÇÁ¶óÀÌÆ® ¾øÀ¸¸é °¨Ãß±â(¼±ÅÃ)
+            _icon.enabled = false; // í•´ë‹¹ íƒ€ì… ìŠ¤í”„ë¼ì´íŠ¸ ì—†ìœ¼ë©´ ê°ì¶”ê¸°(ì„ íƒ)
         }
     }
 }
