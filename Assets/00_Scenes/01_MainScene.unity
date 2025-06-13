@@ -184,7 +184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 52.5}
+  m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &33839047
@@ -2962,7 +2962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -110}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &313016696
@@ -2985,7 +2985,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WEAPON_SNIPER
+  m_text: "\uC2A4\uB098\uC774\uD37C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
   m_sharedMaterial: {fileID: -6526450835220043527, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
@@ -3012,13 +3012,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3819,29 +3819,29 @@ MonoBehaviour:
     SerializationNodes: []
   _entries:
   - Data: {fileID: 11400000, guid: f927922029c8c8740bb0ae821a629bff, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: 5678cf41311f6864cb0fd40fa7b962e5, type: 3}
   - Data: {fileID: 11400000, guid: 2dc7f623c6a50044aa3e8bc8d7356601, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: d3e8f543f72f8c244aefa18794898810, type: 3}
   - Data: {fileID: 11400000, guid: 35c053856b8a57749bfe82876fb21b06, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: e19351255b8b0ea42a39563ff8bd5a4e, type: 3}
   - Data: {fileID: 11400000, guid: a3179ce59ef100b46889bbc454a03e07, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: bacc89abc1b9a0e4f898c850b0be3f40, type: 3}
   - Data: {fileID: 11400000, guid: 460fd416858a6574399f22e8f96aa46f, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: 7a69bf496780e7543a734573ebf0b1f3, type: 3}
   - Data: {fileID: 11400000, guid: 73c6ebd20eb56d44a8c55ad4709b8092, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: a590376b4895dba4e833473b430eea19, type: 3}
   - Data: {fileID: 11400000, guid: f7355929da56e8046bc6570c1cc41c92, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: 1d7fb7dd28a70b240a7b68466f447587, type: 3}
   - Data: {fileID: 11400000, guid: 1347cf58d9ed9864fb641d7d9c7d61f4, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: f8672dd5a29fdc64bb3aeb8f131fe6b9, type: 3}
   - Data: {fileID: 11400000, guid: c31e2945450fd93438efc4e137da3935, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: 15be43286ac769b4a9b05995e3c777c4, type: 3}
   - Data: {fileID: 11400000, guid: 6da176240cb16f2458df9cc9a2a23c93, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: 4ccc09b1b41dec842b48c0152aee8f8e, type: 3}
   - Data: {fileID: 11400000, guid: 3d541d3528832594eabf8eb197ecaaaf, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: 9c0ab5444f8e4114d99f8777e63763d9, type: 3}
   - Data: {fileID: 11400000, guid: 2e692fbd18bb2f749a7647e3137a9cc8, type: 2}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 9132914363161966335, guid: 1cd3518516d27dc4a8475492d8826c22, type: 3}
 --- !u!1 &373994097
 GameObject:
   m_ObjectHideFlags: 0
@@ -4224,7 +4224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 52.5}
+  m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428691709
@@ -8123,6 +8123,30 @@ MonoBehaviour:
     InitialSize: 200
   - Prefab: {fileID: 5730023950293293173, guid: bd535a5e61b5a244ca09bf6dbb299564, type: 3}
     InitialSize: 100
+  - Prefab: {fileID: 9132914363161966335, guid: 5678cf41311f6864cb0fd40fa7b962e5, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: d3e8f543f72f8c244aefa18794898810, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: e19351255b8b0ea42a39563ff8bd5a4e, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: 1cd3518516d27dc4a8475492d8826c22, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: bacc89abc1b9a0e4f898c850b0be3f40, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: 7a69bf496780e7543a734573ebf0b1f3, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: a590376b4895dba4e833473b430eea19, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: 1d7fb7dd28a70b240a7b68466f447587, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: f8672dd5a29fdc64bb3aeb8f131fe6b9, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: 15be43286ac769b4a9b05995e3c777c4, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: 4ccc09b1b41dec842b48c0152aee8f8e, type: 3}
+    InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: 9c0ab5444f8e4114d99f8777e63763d9, type: 3}
+    InitialSize: 5
 --- !u!4 &1131158582
 Transform:
   m_ObjectHideFlags: 0
@@ -8625,7 +8649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -110}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241387343
@@ -8648,7 +8672,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WEAPON_SNIPER
+  m_text: "\uC2A4\uB098\uC774\uD37C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
   m_sharedMaterial: {fileID: -6526450835220043527, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
@@ -8675,13 +8699,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -13880,7 +13904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 52.5}
+  m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443083851
@@ -22259,7 +22283,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -110}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999736140
@@ -22282,7 +22306,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WEAPON_SNIPER
+  m_text: "\uC2A4\uB098\uC774\uD37C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
   m_sharedMaterial: {fileID: -6526450835220043527, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
@@ -22309,13 +22333,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
