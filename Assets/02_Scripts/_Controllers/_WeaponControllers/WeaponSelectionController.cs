@@ -1,6 +1,7 @@
-using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
@@ -95,7 +96,7 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
                 string diffText = string.Empty;
                 if (data != null)
                 {
-                    var owned = ownedWeapons.Find(w => w.WeaponType == type);
+                    var owned = ownedWeapons.FirstOrDefault(w => w.WeaponType == type);
                     int currentLevel = owned != null ? owned.CurrentLevel : 0;
 
                     WeaponAttribute nextAttr = data.LevelAttributes[Mathf.Clamp(currentLevel, 0, data.LevelAttributes.Count - 1)];
