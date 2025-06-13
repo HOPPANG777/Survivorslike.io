@@ -10,7 +10,7 @@ public class PlayerCurrentExpBarController : MonoBehaviour
     [TabGroup("Controller")][Tooltip("플레이어 경험치 바 점멸 스피드")][SerializeField] private float _speed;     // 1.0f 기준 
     [TabGroup("Controller")][Tooltip("플레이어 경험치 바 점멸 스피드")][SerializeField] private float _elapsed;   // 누적 시간
 
-    private Color _expBaseColor = new Color(0, 188, 255, 255);
+    private Color _expBaseColor = new Color(0, 113, 246, 255);
 
     public void UpdatePlayerCurrentExpBar(float fillAmount)
     {
@@ -22,37 +22,6 @@ public class PlayerCurrentExpBarController : MonoBehaviour
         _playerCurrentExpBar.fillAmount = 0f;
         _playerCurrentExpBar.color = _expBaseColor;
     }
-
-    //public void UpdateExpBarBlinking()
-    //{
-    //    Color color = _playerCurrentExpBar.color;
-
-    //    if (_blinking)
-    //    {
-    //        float Max_B = 1.0f;
-
-    //        _currentBlue += _speed * Time.deltaTime;
-    //        if (_currentBlue >= Max_B)
-    //        {
-    //            _currentBlue = Max_B;
-    //            _blinking = false;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        float Min_B = 0.0f;
-
-    //        _currentBlue -= _speed * Time.deltaTime;
-    //        if (_currentBlue <= Min_B)
-    //        {
-    //            _currentBlue = Min_B;
-    //            _blinking = true;
-    //        }
-    //    }
-
-    //    color.b = _currentBlue;
-    //    _playerCurrentExpBar.color = color;
-    //}
 
     public void UpdateExpBarBlinking()
     {

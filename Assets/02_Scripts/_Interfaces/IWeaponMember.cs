@@ -19,5 +19,6 @@ public enum WeaponType
     WEAPON_WIPE,    // 뱀서의 채찍
     WEAPON_SHOVEL,  // 야전삽 = 휘둘러서 공격
     WEAPON_DRONE,   // 드론 = 뱀서의 비둘기
-    WEAPON_LASER    // 레이저 = 뱀서의 룬트레이서
+    WEAPON_LASER,    // 레이저 = 뱀서의 룬트레이서
+    WEAPON_ENERGYSHILD // 에너지 실드 = 뱀서의 마늘
 }

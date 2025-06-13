@@ -36,7 +36,8 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         WeaponType.WEAPON_WIPE,
         WeaponType.WEAPON_SHOVEL,
         WeaponType.WEAPON_DRONE,
-        WeaponType.WEAPON_LASER
+        WeaponType.WEAPON_LASER,
+        WeaponType.WEAPON_ENERGYSHILD
     };
 
     private void Start()
