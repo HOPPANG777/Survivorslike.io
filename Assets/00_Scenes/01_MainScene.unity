@@ -1229,6 +1229,7 @@ MonoBehaviour:
       Data: 
   _icon: {fileID: 33839047}
   _label: {fileID: 1241387343}
+  _statLabel: {fileID: 1241387343}
 --- !u!114 &153705047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2114,6 +2115,7 @@ MonoBehaviour:
       Data: 
   _icon: {fileID: 428691709}
   _label: {fileID: 1999736140}
+  _statLabel: {fileID: 1999736140}
 --- !u!114 &230656344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5370,6 +5372,7 @@ MonoBehaviour:
       Data: 
   _icon: {fileID: 1443083851}
   _label: {fileID: 313016696}
+  _statLabel: {fileID: 313016696}
 --- !u!114 &609678605
 MonoBehaviour:
   m_ObjectHideFlags: 0
