@@ -6,24 +6,24 @@ using UnityEngine.UI;
 public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
 {
     [TabGroup("UI")]
-    [Tooltip("¹«±â ¼±ÅÃ ÆĞ³Î(¹öÆ° 3°³ Æ÷ÇÔ)")]
+    [Tooltip("ë¬´ê¸° ì„ íƒ íŒ¨ë„(ë²„íŠ¼ 3ê°œ í¬í•¨)")]
     [SerializeField] private GameObject _itemPanel;
 
     [TabGroup("UI")]
-    [Tooltip("¹öÆ° 3°³ (Left¡æRight ¼ø)")]
-    [SerializeField] private List<WeaponSelectionUIController> _choiceButtons; // ¹öÆ° ÄÄÆ÷³ÍÆ®
+    [Tooltip("ë²„íŠ¼ 3ê°œ (Leftâ†’Right ìˆœ)")]
+    [SerializeField] private List<WeaponSelectionUIController> _choiceButtons; // ë²„íŠ¼ ì»´í¬ë„ŒíŠ¸
 
     [Header("Dependencies")]
-    [SerializeField] private MonoBehaviour _playerHolderObj;  // IPlayerHolder ±¸ÇöÃ¼ (PlayerUnit)
-    [SerializeField] private MonoBehaviour _weaponFactoryObj; // IWeaponFactory ±¸ÇöÃ¼
+    [SerializeField] private MonoBehaviour _playerHolderObj;  // IPlayerHolder êµ¬í˜„ì²´ (PlayerUnit)
+    [SerializeField] private MonoBehaviour _weaponFactoryObj; // IWeaponFactory êµ¬í˜„ì²´
 
     private IPlayerHolder _playerHolder;
     private IWeaponFactory _weaponFactory;
 
-    // ÀÌ¹ø ·¹º§¾÷¿¡ »ÌÈù 3°³ÀÇ ÈÄº¸
+    // ì´ë²ˆ ë ˆë²¨ì—…ì— ë½‘íŒ 3ê°œì˜ í›„ë³´
     private WeaponType[] _currentChoices = new WeaponType[0];
 
-    // °íÁ¤µÈ 11°³ ¹«±â Å¸ÀÔ ¸ñ·Ï
+    // ê³ ì •ëœ 11ê°œ ë¬´ê¸° íƒ€ì… ëª©ë¡
     private static readonly WeaponType[] _allWeapons =
     {
         WeaponType.WEAPON_SNIPER,
@@ -44,20 +44,20 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         _playerHolder = (IPlayerHolder)_playerHolderObj;
         _weaponFactory = (IWeaponFactory)_weaponFactoryObj;
 
-        // ¹öÆ°¿¡ ÀÎµ¦½º Äİ¹é µî·Ï
+        // ë²„íŠ¼ì— ì¸ë±ìŠ¤ ì½œë°± ë“±ë¡
         for (int i = 0; i < _choiceButtons.Count; i++)
         {
-            int idx = i; // ·ÎÄÃ º¹»ç
+            int idx = i; // ë¡œì»¬ ë³µì‚¬
             _choiceButtons[idx].Init(() => SelectedIndex(idx));
         }
 
         _itemPanel.SetActive(false);
     }
 
-    /// <summary>·¹º§¾÷ ½Ã ¿ÜºÎ¿¡¼­ È£Ãâ</summary>
+    /// <summary>ë ˆë²¨ì—… ì‹œ ì™¸ë¶€ì—ì„œ í˜¸ì¶œ</summary>
     public void OpenSelection()
     {
-        // 1) ÈÄº¸ Ç® ÀÛ¼º (º¸À¯ ¹«±â´Â Á¦¿Ü)
+        // 1) í›„ë³´ í’€ ì‘ì„± (ë³´ìœ  ë¬´ê¸°ëŠ” ì œì™¸)
         var candidates = new List<WeaponType>(_allWeapons);
         var ownedWeapons = _playerHolder.GetOwnedWeaponTypes();
         for (int i = 0; i < ownedWeapons.Count; i++)
@@ -74,19 +74,21 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         }
 
 
-        // 2) ¼ÅÇÃ & ¾Õ 3°³ ÃßÃâ
+        // 2) ì…”í”Œ & ì• 3ê°œ ì¶”ì¶œ
         ShuffleUtils.Shuffle(candidates);
         int take = candidates.Count < 3 ? candidates.Count : 3;
         _currentChoices = new WeaponType[take];
         for (int i = 0; i < take; i++) _currentChoices[i] = candidates[i];
 
-        // 3) ¹öÆ° ¶óº§¡¤¾ÆÀÌÄÜ ¼¼ÆÃ
+        // 3) ë²„íŠ¼ ë¼ë²¨Â·ì•„ì´ì½˜ ì„¸íŒ…
         for (int i = 0; i < _choiceButtons.Count; i++)
         {
             if (i < take)
             {
                 _choiceButtons[i].gameObject.SetActive(true);
-                _choiceButtons[i].SetData(_currentChoices[i]);
+                var data = _weaponFactory.GetWeaponData(_currentChoices[i]);
+                var name = data != null ? data.WeaponName : _currentChoices[i].ToString();
+                _choiceButtons[i].SetData(_currentChoices[i], name);
             }
             else
             {
@@ -97,17 +99,17 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         _itemPanel.SetActive(true);
     }
 
-    /// <summary>¹«±â ¹öÆ°ÀÌ ´­¸± ¶§ ISelectedIndex ÀÎÅÍÆäÀÌ½º·Î È£Ãâ</summary>
+    /// <summary>ë¬´ê¸° ë²„íŠ¼ì´ ëˆŒë¦´ ë•Œ ISelectedIndex ì¸í„°í˜ì´ìŠ¤ë¡œ í˜¸ì¶œ</summary>
     public void SelectedIndex(int index)
     {
         if (index < 0 || index >= _currentChoices.Length) return;
 
         WeaponType chosen = _currentChoices[index];
 
-        // 1) ¹«±â »ı¼º & ÀåÂø
+        // 1) ë¬´ê¸° ìƒì„± & ì¥ì°©
         if (_playerHolderObj != null) _playerHolder.AddWeapon(chosen);
 
-        // 2) ÆĞ³Î ¼û±è
+        // 2) íŒ¨ë„ ìˆ¨ê¹€
         //_itemPanel.SetActive(false);
         AllManager.instance.UIManager.OnWeaponChosen();
     }
