@@ -31,16 +31,23 @@ public class ProjectileBaseSO : ScriptableObject, ISetSOData<ProjectileBaseSO>
     [TabGroup("Collision")][Tooltip("충돌 반경")][SerializeField] protected float _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius; } }
 
-    public virtual void SetData(ProjectileBaseSO projectileData)
+    public virtual void SetData(ProjectileBaseSO data)
     {
-        this.ProjectileAttribute = projectileData.ProjectileAttribute;
-        this.ProjectileSprite = projectileData.ProjectileSprite;
-        this.ProjectileName = projectileData.ProjectileName;
-        this.TeamType = projectileData.TeamType;
-        this._soundName = projectileData._soundName;
-        this._soundType = projectileData._soundType;
-        this._soundClip = projectileData._soundClip;
-        this._collisionRadius = projectileData._collisionRadius;
+        this.ProjectileAttribute = data.ProjectileAttribute;
+
+        this.ProjectileSprite = data.ProjectileSprite;
+
+        this.ProjectileName = data.ProjectileName;
+
+        this.TeamType = data.TeamType;
+
+        this._soundName = data._soundName;
+
+        this._soundType = data._soundType;
+
+        this._soundClip = data._soundClip;
+
+        this._collisionRadius = data._collisionRadius;
     }
 }
 

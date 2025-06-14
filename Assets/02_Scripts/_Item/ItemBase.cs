@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead
+public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, ISpeakable
 {
     [TabGroup("Item Base")][Tooltip("Item SO 데이터")][SerializeField] private ItemBaseSO _itemData;
     public ItemBaseSO ItemData { get { return _itemData; } set { _itemData = value; } }
@@ -11,6 +11,23 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead
 
     public Vector3 Position { get { return transform.position; } }
     public float CollisionRadius { get { return _itemData.CollisionRadius; } set { /*noop*/ } }
+
+    [Header("Sound")]
+    // 사용할 사운드 이름
+    [TabGroup("Sound")][Tooltip("사운드 이름")][SerializeField] protected string _soundName;
+    public string SoundName { get { return _soundName; } }
+
+    // 사용할 사운드 타입
+    [TabGroup("Sound")][Tooltip("사운드 타입")][SerializeField] protected SoundType _soundType;
+    public SoundType SoundType { get { return _soundType; } }
+
+    // 사용할 오디오 클립
+    [TabGroup("Sound")][Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
+    public AudioClip SoundClip { get { return _soundClip; } }
+
+    // 오디오를 출력할 주체
+    [TabGroup("Sound")][Tooltip("오디오를 출력할 주체")][SerializeField] protected AudioSource _soundSource;
+    public AudioSource SoundSource { get { return _soundSource; } }
 
     [TabGroup("Item Base")][Tooltip("Player")][SerializeField] private GameObject _player;
     public GameObject Player { get { return _player; } }
@@ -26,6 +43,16 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead
         if (_player == null) return;
 
         PlayerGetItem();
+    }
+
+    public virtual void SoundPlay()
+    {
+
+    }
+
+    public virtual void SoundStop()
+    {
+
     }
 
     public virtual void SetStatus()
@@ -44,11 +71,14 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead
 
         _baseAttractRange = _itemData.AttractRange;
 
+        _soundName = _itemData.SoundName;
+        _soundType = _itemData.SoundType;
+        _soundClip = _itemData.SoundClip;
+        _soundSource = this.gameObject.GetComponent<AudioSource>();
+
         gameObject.SetActive(true);
         AllManager.instance.CollisionManager.RegisterCollidable(this);
     }
-
-
 
     virtual protected void Collect()
     {

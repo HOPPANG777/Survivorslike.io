@@ -20,6 +20,15 @@ public abstract class ItemBaseSO : ScriptableObject
     [TabGroup("Item Data")][Tooltip("끌어당김 속도")][SerializeField] private float _attractSpeed;
     public float AttractSpeed { get { return _attractSpeed; } set { _attractSpeed = value; } }
 
+    [TabGroup("Sound")][Tooltip("사운드 이름")][SerializeField] private string _soundName;
+    public string SoundName { get { return _soundName; } }
+
+    [TabGroup("Sound")][Tooltip("사운드 타입")][SerializeField] private SoundType _soundType;
+    public SoundType SoundType { get { return _soundType; } }
+
+    [TabGroup("Sound")][Tooltip("오디오 클립")][SerializeField] private AudioClip _soundClip;
+    public AudioClip SoundClip { get { return _soundClip; } }
+
     public abstract void Apply(GameObject user);
 
     public virtual void SetData(ItemBaseSO data)
@@ -31,5 +40,11 @@ public abstract class ItemBaseSO : ScriptableObject
         this.CollisionRadius = data.CollisionRadius;
 
         this.AttractRange = data.AttractRange;
+
+        this._soundName = data._soundName;
+
+        this._soundType = data._soundType;
+        
+        this._soundClip = data._soundClip;
     }
 }
