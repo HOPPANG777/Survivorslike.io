@@ -92,7 +92,7 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
                 var name = data != null ? data.WeaponName : type.ToString();
 
                 // 현재 레벨과 다음 레벨 스탯 비교 문자열 생성
-                string diffText = string.Empty;
+                List<WeaponStatDiff> diffStats = null;
                 if (data != null)
                 {
                     var owned = ownedWeapons.FirstOrDefault(w => w.WeaponType == type);
@@ -100,10 +100,10 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
 
                     WeaponAttribute nextAttr = data.LevelAttributes[Mathf.Clamp(currentLevel, 0, data.LevelAttributes.Count - 1)];
                     WeaponAttribute currAttr = currentLevel > 0 ? data.LevelAttributes[Mathf.Clamp(currentLevel - 1, 0, data.LevelAttributes.Count - 1)] : new WeaponAttribute();
-                    diffText = BuildDiffString(nextAttr, currAttr);
+                    diffStats = BuildDiffList(nextAttr, currAttr);
                 }
 
-                _choiceButtons[i].SetData(type, name, diffText);
+                _choiceButtons[i].SetData(type, name, diffStats);
             }
             else
             {
@@ -129,20 +129,20 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         AllManager.instance.UIManager.OnWeaponChosen();
     }
 
-    private string BuildDiffString(WeaponAttribute next, WeaponAttribute current)
+    private List<WeaponStatDiff> BuildDiffList(WeaponAttribute next, WeaponAttribute current)
     {
-        List<string> parts = new List<string>();
+        var list = new List<WeaponStatDiff>();
 
         void AddFloat(string label, float diff)
         {
             if (Mathf.Approximately(diff, 0f)) return;
-            parts.Add($"{label} {(diff > 0 ? "+" : string.Empty)}{diff:0.#}");
+            list.Add(new WeaponStatDiff(label, diff));
         }
 
         void AddInt(string label, int diff)
         {
             if (diff == 0) return;
-            parts.Add($"{label} {(diff > 0 ? "+" : string.Empty)}{diff}");
+            list.Add(new WeaponStatDiff(label, diff));
         }
 
         AddFloat("Damage", next.FlatDamage - current.FlatDamage);
@@ -157,6 +157,6 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         AddInt("Pirece", next.WeaponDisableCount - current.WeaponDisableCount);
         AddFloat("Time", next.WeaponDisableTime - current.WeaponDisableTime);
 
-        return string.Join(", ", parts);
+        return list;
     }
 }
