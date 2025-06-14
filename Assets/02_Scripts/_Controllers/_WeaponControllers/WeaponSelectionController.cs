@@ -69,8 +69,7 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
             {
                 for (int j = candidates.Count - 1; j >= 0; j--)
                 {
-                    if (candidates[j] == weapon.WeaponType)
-                        candidates.RemoveAt(j);
+                    if (candidates[j] == weapon.WeaponType) candidates.RemoveAt(j);
                 }
             }
         }
@@ -155,8 +154,8 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         AddFloat("Range", next.RangeBonus - current.RangeBonus);
         AddFloat("CD", next.AttackCooldown - current.AttackCooldown);
         AddFloat("Knock", next.KnockbackForce - current.KnockbackForce);
-        AddInt("Disable", next.WeaponDisableCount - current.WeaponDisableCount);
-        AddFloat("Stun", next.WeaponDisableTime - current.WeaponDisableTime);
+        AddInt("Pirece", next.WeaponDisableCount - current.WeaponDisableCount);
+        AddFloat("Time", next.WeaponDisableTime - current.WeaponDisableTime);
 
         return string.Join(", ", parts);
     }
