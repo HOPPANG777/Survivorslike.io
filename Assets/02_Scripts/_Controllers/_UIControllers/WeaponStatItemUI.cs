@@ -17,8 +17,9 @@ public class WeaponStatItemUI : MonoBehaviour
 
         if (_valueLabel != null)
         {
-            string sign = value > 0 ? "+" : string.Empty;
+            string sign = value > 0 ? "+ " : string.Empty;
             _valueLabel.text = $"{sign}{value:0.#}";
         }
     }
+
 }

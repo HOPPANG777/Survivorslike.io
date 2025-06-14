@@ -184,7 +184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 125}
+  m_AnchoredPosition: {x: 0, y: 175}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &33839047
@@ -970,7 +970,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1280, y: 0}
-  m_SizeDelta: {x: 450, y: 600}
+  m_SizeDelta: {x: 500, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &153705043
 MonoBehaviour:
@@ -1041,6 +1041,17 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 21300000, guid: a1867495d86089a4c912ab2cec2dfc12, type: 3}
+    - {fileID: 21300000, guid: 38c3b38979b46314897717f0e5d83797, type: 3}
+    - {fileID: 21300000, guid: ef4bd9c704896e441912367abd17263c, type: 3}
+    - {fileID: 21300000, guid: a9b1a0d0f08f01e43ad306b6eefc42d2, type: 3}
+    - {fileID: 21300000, guid: 0b0a53a238c78be44bed25845fdceff5, type: 3}
+    - {fileID: 21300000, guid: eaebd060e2e24524d9299a708a4784f5, type: 3}
+    - {fileID: 21300000, guid: c09518e25944393448aa79bddf17ddac, type: 3}
+    - {fileID: 21300000, guid: 20a711894bee9fa4abf48988f6c7bbb8, type: 3}
+    - {fileID: 21300000, guid: 061afb2bcb7955b4a930fe55e5bad51f, type: 3}
+    - {fileID: 21300000, guid: d5f2166473c76cd40a316ae3cc29ca47, type: 3}
+    - {fileID: 21300000, guid: 1ed8371ada101704ea9ccda8f528d04c, type: 3}
     - {fileID: 21300000, guid: 8f8435a10ddd29c4cb49ab9cb1936934, type: 3}
     - {fileID: 21300000, guid: 2b7ddaf789fe86745a4748ad31500d9e, type: 3}
     - {fileID: 21300000, guid: 49fccc9e8401b714ebcfa5c6fd548140, type: 3}
@@ -1058,13 +1069,165 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: _weaponLabel
+    - Name: _statIcons
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[WeaponType, Assembly-CSharp],[UnityEngine.Sprite,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.Sprite,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[WeaponType, Assembly-CSharp]],
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 11
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Damage
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Dmg%
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Crit
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Crit%
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: AS
+    - Name: $v
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Count
+    - Name: $v
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Range
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: CD
+    - Name: $v
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Knock
+    - Name: $v
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Pirece
+    - Name: $v
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Time
+    - Name: $v
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _weaponLabel
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[WeaponType, Assembly-CSharp],[UnityEngine.Sprite,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[WeaponType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -1086,7 +1249,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 10
-      Data: 0
+      Data: 11
     - Name: 
       Entry: 8
       Data: 
@@ -1098,7 +1261,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 1
+      Data: 12
     - Name: 
       Entry: 8
       Data: 
@@ -1110,7 +1273,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 10
-      Data: 2
+      Data: 13
     - Name: 
       Entry: 8
       Data: 
@@ -1122,7 +1285,7 @@ MonoBehaviour:
       Data: 4
     - Name: $v
       Entry: 10
-      Data: 3
+      Data: 14
     - Name: 
       Entry: 8
       Data: 
@@ -1134,7 +1297,7 @@ MonoBehaviour:
       Data: 5
     - Name: $v
       Entry: 10
-      Data: 4
+      Data: 15
     - Name: 
       Entry: 8
       Data: 
@@ -1146,7 +1309,7 @@ MonoBehaviour:
       Data: 6
     - Name: $v
       Entry: 10
-      Data: 5
+      Data: 16
     - Name: 
       Entry: 8
       Data: 
@@ -1158,7 +1321,7 @@ MonoBehaviour:
       Data: 7
     - Name: $v
       Entry: 10
-      Data: 6
+      Data: 17
     - Name: 
       Entry: 8
       Data: 
@@ -1170,7 +1333,7 @@ MonoBehaviour:
       Data: 9
     - Name: $v
       Entry: 10
-      Data: 7
+      Data: 18
     - Name: 
       Entry: 8
       Data: 
@@ -1182,7 +1345,7 @@ MonoBehaviour:
       Data: 10
     - Name: $v
       Entry: 10
-      Data: 8
+      Data: 19
     - Name: 
       Entry: 8
       Data: 
@@ -1194,7 +1357,7 @@ MonoBehaviour:
       Data: 11
     - Name: $v
       Entry: 10
-      Data: 9
+      Data: 20
     - Name: 
       Entry: 8
       Data: 
@@ -1206,7 +1369,7 @@ MonoBehaviour:
       Data: 8
     - Name: $v
       Entry: 10
-      Data: 10
+      Data: 21
     - Name: 
       Entry: 8
       Data: 
@@ -1218,7 +1381,7 @@ MonoBehaviour:
       Data: 12
     - Name: $v
       Entry: 10
-      Data: 11
+      Data: 22
     - Name: 
       Entry: 8
       Data: 
@@ -1230,7 +1393,9 @@ MonoBehaviour:
       Data: 
   _icon: {fileID: 33839047}
   _label: {fileID: 1241387343}
-  _statLabel: {fileID: 2088780367}
+  _statLabel: {fileID: 2088780370}
+  _statListParent: {fileID: 2088780366}
+  _statItemPrefab: {fileID: 7213110917194016117, guid: e2c7d9872c91e9f4d9c13ca74bdd61b7, type: 3}
 --- !u!114 &153705047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,6 +1450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 166298289}
   - component: {fileID: 166298291}
+  - component: {fileID: 166298292}
   - component: {fileID: 166298290}
   m_Layer: 0
   m_Name: WeaponAttribute3
@@ -1309,7 +1475,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -135}
+  m_AnchoredPosition: {x: 0, y: -80}
   m_SizeDelta: {x: 430, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &166298290
@@ -1332,7 +1498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC18D\uC131"
+  m_text: ' '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
   m_sharedMaterial: {fileID: -6526450835220043527, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
@@ -1411,6 +1577,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166298288}
   m_CullTransparentMesh: 1
+--- !u!114 &166298292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166298288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 75, y: 75}
+  m_Spacing: {x: 150, y: -5}
+  m_Constraint: 2
+  m_ConstraintCount: 4
 --- !u!1 &184437541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,7 +2183,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1920, y: 0}
-  m_SizeDelta: {x: 450, y: 600}
+  m_SizeDelta: {x: 500, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &230656340
 MonoBehaviour:
@@ -2064,6 +2254,17 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 21300000, guid: a1867495d86089a4c912ab2cec2dfc12, type: 3}
+    - {fileID: 21300000, guid: 38c3b38979b46314897717f0e5d83797, type: 3}
+    - {fileID: 21300000, guid: ef4bd9c704896e441912367abd17263c, type: 3}
+    - {fileID: 21300000, guid: a9b1a0d0f08f01e43ad306b6eefc42d2, type: 3}
+    - {fileID: 21300000, guid: 0b0a53a238c78be44bed25845fdceff5, type: 3}
+    - {fileID: 21300000, guid: eaebd060e2e24524d9299a708a4784f5, type: 3}
+    - {fileID: 21300000, guid: c09518e25944393448aa79bddf17ddac, type: 3}
+    - {fileID: 21300000, guid: 20a711894bee9fa4abf48988f6c7bbb8, type: 3}
+    - {fileID: 21300000, guid: 061afb2bcb7955b4a930fe55e5bad51f, type: 3}
+    - {fileID: 21300000, guid: d5f2166473c76cd40a316ae3cc29ca47, type: 3}
+    - {fileID: 21300000, guid: 1ed8371ada101704ea9ccda8f528d04c, type: 3}
     - {fileID: 21300000, guid: 8f8435a10ddd29c4cb49ab9cb1936934, type: 3}
     - {fileID: 21300000, guid: 2b7ddaf789fe86745a4748ad31500d9e, type: 3}
     - {fileID: 21300000, guid: 49fccc9e8401b714ebcfa5c6fd548140, type: 3}
@@ -2081,13 +2282,165 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: _weaponLabel
+    - Name: _statIcons
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[WeaponType, Assembly-CSharp],[UnityEngine.Sprite,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.Sprite,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[WeaponType, Assembly-CSharp]],
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 11
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Damage
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Dmg%
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Crit
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Crit%
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: AS
+    - Name: $v
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Count
+    - Name: $v
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Range
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: CD
+    - Name: $v
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Knock
+    - Name: $v
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Pirece
+    - Name: $v
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Time
+    - Name: $v
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _weaponLabel
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[WeaponType, Assembly-CSharp],[UnityEngine.Sprite,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[WeaponType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -2109,7 +2462,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 10
-      Data: 0
+      Data: 11
     - Name: 
       Entry: 8
       Data: 
@@ -2121,7 +2474,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 1
+      Data: 12
     - Name: 
       Entry: 8
       Data: 
@@ -2133,7 +2486,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 10
-      Data: 2
+      Data: 13
     - Name: 
       Entry: 8
       Data: 
@@ -2145,7 +2498,7 @@ MonoBehaviour:
       Data: 4
     - Name: $v
       Entry: 10
-      Data: 3
+      Data: 14
     - Name: 
       Entry: 8
       Data: 
@@ -2157,7 +2510,7 @@ MonoBehaviour:
       Data: 5
     - Name: $v
       Entry: 10
-      Data: 4
+      Data: 15
     - Name: 
       Entry: 8
       Data: 
@@ -2169,7 +2522,7 @@ MonoBehaviour:
       Data: 6
     - Name: $v
       Entry: 10
-      Data: 5
+      Data: 16
     - Name: 
       Entry: 8
       Data: 
@@ -2181,7 +2534,7 @@ MonoBehaviour:
       Data: 7
     - Name: $v
       Entry: 10
-      Data: 6
+      Data: 17
     - Name: 
       Entry: 8
       Data: 
@@ -2193,7 +2546,7 @@ MonoBehaviour:
       Data: 9
     - Name: $v
       Entry: 10
-      Data: 7
+      Data: 18
     - Name: 
       Entry: 8
       Data: 
@@ -2205,7 +2558,7 @@ MonoBehaviour:
       Data: 10
     - Name: $v
       Entry: 10
-      Data: 8
+      Data: 19
     - Name: 
       Entry: 8
       Data: 
@@ -2217,7 +2570,7 @@ MonoBehaviour:
       Data: 11
     - Name: $v
       Entry: 10
-      Data: 9
+      Data: 20
     - Name: 
       Entry: 8
       Data: 
@@ -2229,7 +2582,7 @@ MonoBehaviour:
       Data: 8
     - Name: $v
       Entry: 10
-      Data: 10
+      Data: 21
     - Name: 
       Entry: 8
       Data: 
@@ -2241,7 +2594,7 @@ MonoBehaviour:
       Data: 12
     - Name: $v
       Entry: 10
-      Data: 11
+      Data: 22
     - Name: 
       Entry: 8
       Data: 
@@ -2254,6 +2607,8 @@ MonoBehaviour:
   _icon: {fileID: 428691709}
   _label: {fileID: 1999736140}
   _statLabel: {fileID: 1245712445}
+  _statListParent: {fileID: 1245712444}
+  _statItemPrefab: {fileID: 7213110917194016117, guid: e2c7d9872c91e9f4d9c13ca74bdd61b7, type: 3}
 --- !u!114 &230656344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3102,7 +3457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -75}
+  m_AnchoredPosition: {x: 0, y: 2.6}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &313016696
@@ -4364,7 +4719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 125}
+  m_AnchoredPosition: {x: 0, y: 175}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428691709
@@ -5251,7 +5606,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -2560, y: 0}
-  m_SizeDelta: {x: 450, y: 600}
+  m_SizeDelta: {x: 500, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609678601
 MonoBehaviour:
@@ -5322,6 +5677,17 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 21300000, guid: a1867495d86089a4c912ab2cec2dfc12, type: 3}
+    - {fileID: 21300000, guid: 38c3b38979b46314897717f0e5d83797, type: 3}
+    - {fileID: 21300000, guid: ef4bd9c704896e441912367abd17263c, type: 3}
+    - {fileID: 21300000, guid: a9b1a0d0f08f01e43ad306b6eefc42d2, type: 3}
+    - {fileID: 21300000, guid: 0b0a53a238c78be44bed25845fdceff5, type: 3}
+    - {fileID: 21300000, guid: eaebd060e2e24524d9299a708a4784f5, type: 3}
+    - {fileID: 21300000, guid: c09518e25944393448aa79bddf17ddac, type: 3}
+    - {fileID: 21300000, guid: 20a711894bee9fa4abf48988f6c7bbb8, type: 3}
+    - {fileID: 21300000, guid: 061afb2bcb7955b4a930fe55e5bad51f, type: 3}
+    - {fileID: 21300000, guid: d5f2166473c76cd40a316ae3cc29ca47, type: 3}
+    - {fileID: 21300000, guid: 1ed8371ada101704ea9ccda8f528d04c, type: 3}
     - {fileID: 21300000, guid: 8f8435a10ddd29c4cb49ab9cb1936934, type: 3}
     - {fileID: 21300000, guid: 2b7ddaf789fe86745a4748ad31500d9e, type: 3}
     - {fileID: 21300000, guid: 49fccc9e8401b714ebcfa5c6fd548140, type: 3}
@@ -5339,13 +5705,165 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: _weaponLabel
+    - Name: _statIcons
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[WeaponType, Assembly-CSharp],[UnityEngine.Sprite,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.Sprite,
         UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[WeaponType, Assembly-CSharp]],
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 11
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Damage
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Dmg%
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Crit
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Crit%
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: AS
+    - Name: $v
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Count
+    - Name: $v
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Range
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: CD
+    - Name: $v
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Knock
+    - Name: $v
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Pirece
+    - Name: $v
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Time
+    - Name: $v
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _weaponLabel
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[WeaponType, Assembly-CSharp],[UnityEngine.Sprite,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[WeaponType, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -5367,7 +5885,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 10
-      Data: 0
+      Data: 11
     - Name: 
       Entry: 8
       Data: 
@@ -5379,7 +5897,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 1
+      Data: 12
     - Name: 
       Entry: 8
       Data: 
@@ -5391,7 +5909,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 10
-      Data: 2
+      Data: 13
     - Name: 
       Entry: 8
       Data: 
@@ -5403,7 +5921,7 @@ MonoBehaviour:
       Data: 4
     - Name: $v
       Entry: 10
-      Data: 3
+      Data: 14
     - Name: 
       Entry: 8
       Data: 
@@ -5415,7 +5933,7 @@ MonoBehaviour:
       Data: 5
     - Name: $v
       Entry: 10
-      Data: 4
+      Data: 15
     - Name: 
       Entry: 8
       Data: 
@@ -5427,7 +5945,7 @@ MonoBehaviour:
       Data: 6
     - Name: $v
       Entry: 10
-      Data: 5
+      Data: 16
     - Name: 
       Entry: 8
       Data: 
@@ -5439,7 +5957,7 @@ MonoBehaviour:
       Data: 7
     - Name: $v
       Entry: 10
-      Data: 6
+      Data: 17
     - Name: 
       Entry: 8
       Data: 
@@ -5451,7 +5969,7 @@ MonoBehaviour:
       Data: 9
     - Name: $v
       Entry: 10
-      Data: 7
+      Data: 18
     - Name: 
       Entry: 8
       Data: 
@@ -5463,7 +5981,7 @@ MonoBehaviour:
       Data: 10
     - Name: $v
       Entry: 10
-      Data: 8
+      Data: 19
     - Name: 
       Entry: 8
       Data: 
@@ -5475,7 +5993,7 @@ MonoBehaviour:
       Data: 11
     - Name: $v
       Entry: 10
-      Data: 9
+      Data: 20
     - Name: 
       Entry: 8
       Data: 
@@ -5487,7 +6005,7 @@ MonoBehaviour:
       Data: 8
     - Name: $v
       Entry: 10
-      Data: 10
+      Data: 21
     - Name: 
       Entry: 8
       Data: 
@@ -5499,7 +6017,7 @@ MonoBehaviour:
       Data: 12
     - Name: $v
       Entry: 10
-      Data: 11
+      Data: 22
     - Name: 
       Entry: 8
       Data: 
@@ -5512,6 +6030,8 @@ MonoBehaviour:
   _icon: {fileID: 1443083851}
   _label: {fileID: 313016696}
   _statLabel: {fileID: 166298290}
+  _statListParent: {fileID: 166298289}
+  _statItemPrefab: {fileID: 7213110917194016117, guid: e2c7d9872c91e9f4d9c13ca74bdd61b7, type: 3}
 --- !u!114 &609678605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8791,7 +9311,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -75}
+  m_AnchoredPosition: {x: 0, y: 2.6}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241387343
@@ -9039,6 +9559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1245712444}
   - component: {fileID: 1245712446}
+  - component: {fileID: 1245712447}
   - component: {fileID: 1245712445}
   m_Layer: 0
   m_Name: WeaponAttribute2
@@ -9063,7 +9584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -135}
+  m_AnchoredPosition: {x: 0, y: -80}
   m_SizeDelta: {x: 430, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1245712445
@@ -9086,7 +9607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC18D\uC131"
+  m_text: ' '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
   m_sharedMaterial: {fileID: -6526450835220043527, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
@@ -9165,6 +9686,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245712443}
   m_CullTransparentMesh: 1
+--- !u!114 &1245712447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245712443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 75, y: 75}
+  m_Spacing: {x: 150, y: -5}
+  m_Constraint: 2
+  m_ConstraintCount: 4
 --- !u!1 &1291706653
 GameObject:
   m_ObjectHideFlags: 0
@@ -14182,7 +14727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 125}
+  m_AnchoredPosition: {x: 0, y: 175}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443083851
@@ -22561,7 +23106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -75}
+  m_AnchoredPosition: {x: 0, y: 2.6}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999736140
@@ -31776,7 +32321,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2088780366}
   - component: {fileID: 2088780368}
-  - component: {fileID: 2088780367}
+  - component: {fileID: 2088780369}
+  - component: {fileID: 2088780370}
   m_Layer: 0
   m_Name: WeaponAttribute1
   m_TagString: Untagged
@@ -31800,10 +32346,42 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -135}
+  m_AnchoredPosition: {x: 0, y: -80}
   m_SizeDelta: {x: 430, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2088780367
+--- !u!222 &2088780368
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088780365}
+  m_CullTransparentMesh: 1
+--- !u!114 &2088780369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088780365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 75, y: 75}
+  m_Spacing: {x: 150, y: -5}
+  m_Constraint: 2
+  m_ConstraintCount: 4
+--- !u!114 &2088780370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31823,7 +32401,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC18D\uC131"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
   m_sharedMaterial: {fileID: -6526450835220043527, guid: 6831f9976b2fff84a9ef3cacc3c151e8, type: 2}
@@ -31894,14 +32472,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &2088780368
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088780365}
-  m_CullTransparentMesh: 1
 --- !u!1 &2099639580
 GameObject:
   m_ObjectHideFlags: 0
