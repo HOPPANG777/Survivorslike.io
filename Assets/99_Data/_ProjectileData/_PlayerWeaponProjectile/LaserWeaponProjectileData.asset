@@ -23,6 +23,7 @@ MonoBehaviour:
     _homingStrength: 0
   _projectileSprite: {fileID: 0}
   _projectileName: LaserWeaponProjectile
+  _weaponType: 11
   _teamType: 1
   _soundName: 
   _soundType: 2

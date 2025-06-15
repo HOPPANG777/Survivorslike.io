@@ -8,46 +8,46 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
     [TabGroup("Weapon Base")][Tooltip("Weapon Data")][SerializeField] protected WeaponBaseSO _weaponBaseData;
     public WeaponBaseSO WeaponBaseData { get { return _weaponBaseData; } set { _weaponBaseData = value; } }
 
-    [TabGroup("Weapon Base")][Tooltip("¹«±â ÀÌ¸§")][SerializeField] protected string _weaponName;
+    [TabGroup("Weapon Base")][Tooltip("ë¬´ê¸° ì´ë¦„")][SerializeField] protected string _weaponName;
     public string WeaponName { get { return _weaponName; } set { _weaponName = value; } }
 
-    [TabGroup("Weapon Base")][Tooltip("ÆÀ Å¸ÀÔ")][SerializeField] protected TeamType _teamType;
+    [TabGroup("Weapon Base")][Tooltip("íŒ€ íƒ€ì…")][SerializeField] protected TeamType _teamType;
     public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
 
-    [TabGroup("Unit Base")][Tooltip("¹«±â ºñÈ°¼ºÈ­ Å¸ÀÔ")][SerializeField] protected WeaponDisableType _weaponDisableType;
+    [TabGroup("Unit Base")][Tooltip("ë¬´ê¸° ë¹„í™œì„±í™” íƒ€ì…")][SerializeField] protected WeaponDisableType _weaponDisableType;
     public WeaponDisableType WeaponDisableType { get { return _weaponDisableType; } set { _weaponDisableType = value; } }
 
-    [TabGroup("Weapon Base")][Tooltip("¹«±â ´É·ÂÄ¡")][SerializeField] protected WeaponAttribute _weaponAttribute;
+    [TabGroup("Weapon Base")][Tooltip("ë¬´ê¸° ëŠ¥ë ¥ì¹˜")][SerializeField] protected WeaponAttribute _weaponAttribute;
     public WeaponAttribute Attributes { get { return _weaponAttribute; } set { _weaponAttribute = value; } }
 
-    [TabGroup("Weapon Base")][Tooltip("¹«±â Å¸ÀÔ")][SerializeField] protected WeaponType _weaponType;
+    [TabGroup("Weapon Base")][Tooltip("ë¬´ê¸° íƒ€ì…")][SerializeField] protected WeaponType _weaponType;
     public WeaponType WeaponType { get { return _weaponType; } set { _weaponType = value; } }
 
     [Header("Weapon Sound")]
-    // »ç¿ëÇÒ »ç¿îµå ÀÌ¸§
-    [TabGroup("Weapon Sound")][Tooltip("»ç¿îµå ÀÌ¸§")][SerializeField] protected string _soundName;
+    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ ì´ë¦„
+    [TabGroup("Weapon Sound")][Tooltip("ì‚¬ìš´ë“œ ì´ë¦„")][SerializeField] protected string _soundName;
     public string SoundName { get { return _soundName; } }
 
-    // »ç¿ëÇÒ »ç¿îµå Å¸ÀÔ
-    [TabGroup("Weapon Sound")][Tooltip("»ç¿îµå Å¸ÀÔ")][SerializeField] protected SoundType _soundType;
+    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ íƒ€ì…
+    [TabGroup("Weapon Sound")][Tooltip("ì‚¬ìš´ë“œ íƒ€ì…")][SerializeField] protected SoundType _soundType;
     public SoundType SoundType { get { return _soundType; } }
 
-    // »ç¿ëÇÒ ¿Àµğ¿À Å¬¸³
-    [TabGroup("Weapon Sound")][Tooltip("¿Àµğ¿À Å¬¸³")][SerializeField] protected AudioClip _soundClip;
+    // ì‚¬ìš©í•  ì˜¤ë””ì˜¤ í´ë¦½
+    [TabGroup("Weapon Sound")][Tooltip("ì˜¤ë””ì˜¤ í´ë¦½")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
-    // ¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼
-    [TabGroup("Weapon Sound")][Tooltip("¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼")][SerializeField] protected AudioSource _soundSource;
+    // ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´
+    [TabGroup("Weapon Sound")][Tooltip("ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´")][SerializeField] protected AudioSource _soundSource;
     public AudioSource SoundSource { get { return _soundSource; } }
 
     [Header("ICollidable")]
-    [TabGroup("ICollidable")][Tooltip("°´Ã¼ÀÇ Æ÷Áö¼ÇÀ» ¹Ş´Â")][SerializeField] protected Vector3 _position => this.transform.position;
+    [TabGroup("ICollidable")][Tooltip("ê°ì²´ì˜ í¬ì§€ì…˜ì„ ë°›ëŠ”")][SerializeField] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
 
-    [TabGroup("ICollidable")][Tooltip("°´Ã¼ÀÇ Æ÷Áö¼ÇÀ» ¹Ş´Â(±×¸®°í 100 ºĞÀ²·Î º¸½Ê½Ã¿À µû¶ó¼­ 50ÀÏˆÛ 0.5f°¡ µË´Ï´Ù.)")][SerializeField] protected float _collisionRadius;
+    [TabGroup("ICollidable")][Tooltip("ê°ì²´ì˜ í¬ì§€ì…˜ì„ ë°›ëŠ”(ê·¸ë¦¬ê³  100 ë¶„ìœ¨ë¡œ ë³´ì‹­ì‹œì˜¤ ë”°ë¼ì„œ 50ì¼Âˆ 0.5fê°€ ë©ë‹ˆë‹¤.)")][SerializeField] protected float _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius; } }
 
-    [TabGroup("Weapon Dead")][Tooltip("Á×¾ú´ÂÁö È®ÀÎ")][SerializeField] private bool isDead = false;
+    [TabGroup("Weapon Dead")][Tooltip("ì£½ì—ˆëŠ”ì§€ í™•ì¸")][SerializeField] private bool isDead = false;
    
     public bool IsDead { get { return isDead; } }
 
@@ -85,7 +85,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public void ApplyLevelAttributes()
     {
-        // ·¹º§¿¡ ¸Â´Â ¼Ó¼ºÇ¥¿¡¼­ °¡Á®¿Í¼­ Àû¿ë
+        // ë ˆë²¨ì— ë§ëŠ” ì†ì„±í‘œì—ì„œ ê°€ì ¸ì™€ì„œ ì ìš©
         int idx = Mathf.Clamp(CurrentLevel - 1, 0, _weaponBaseData.LevelAttributes.Count - 1);
         _weaponAttribute = _weaponBaseData.LevelAttributes[idx];
     }
@@ -95,7 +95,8 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     }
     
-    //³ª¼± °è´Ü Àå¼öÇ³µ­ÀÌ ÆóÇãÀÇ ¸¶À» ¹«È­°ú Å¸¸£Æ® Àå¼öÇ³µ­ÀÌ µ¹·Î·Î»çÀÇ ±æ Àå¼öÇ³µ­ÀÌ Æ¯ÀÌÁ¡ Áö¿ÀÅä ¿£Á© ÀÚ¾çÈ­ Àå¼öÇ³µ­ÀÌ Æ¯ÀÌÁ¡ ºñ¹ĞÀÇ È²Á¦
+        _weaponType = _weaponBaseData.WeaponType;
+    //ë‚˜ì„  ê³„ë‹¨ ì¥ìˆ˜í’ë…ì´ íí—ˆì˜ ë§ˆì„ ë¬´í™”ê³¼ íƒ€ë¥´íŠ¸ ì¥ìˆ˜í’ë…ì´ ëŒë¡œë¡œì‚¬ì˜ ê¸¸ ì¥ìˆ˜í’ë…ì´ íŠ¹ì´ì  ì§€ì˜¤í†  ì—”ì ¤ ìì–‘í™” ì¥ìˆ˜í’ë…ì´ íŠ¹ì´ì  ë¹„ë°€ì˜ í™©ì œ
     
     public virtual void SoundStop()
     {

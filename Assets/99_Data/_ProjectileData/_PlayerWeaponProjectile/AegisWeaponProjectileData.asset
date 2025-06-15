@@ -23,6 +23,7 @@ MonoBehaviour:
     _homingStrength: 0
   _projectileSprite: {fileID: 21300000, guid: 1182d4dffc911c549a0feec65d7f7baf, type: 3}
   _projectileName: AegisWeaponProjectile
+  _weaponType: 5
   _teamType: 1
   _soundName: 
   _soundType: 2

@@ -23,6 +23,7 @@ MonoBehaviour:
     _homingStrength: 0
   _projectileSprite: {fileID: 0}
   _projectileName: WipeWeaponProjectile
+  _weaponType: 8
   _teamType: 1
   _soundName: 
   _soundType: 2

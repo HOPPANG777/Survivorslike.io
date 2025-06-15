@@ -23,6 +23,7 @@ MonoBehaviour:
     _homingStrength: 0
   _projectileSprite: {fileID: 0}
   _projectileName: BombWeaponProjectile
+  _weaponType: 6
   _teamType: 1
   _soundName: 
   _soundType: 2
