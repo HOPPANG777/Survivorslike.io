@@ -10,7 +10,6 @@ public class ProjectileBaseSO : ScriptableObject, ISetSOData<ProjectileBaseSO>
     [TabGroup("ProjectileBaseSO")][Tooltip("Associated Weapon Type")][SerializeField] protected WeaponType _weaponType;
     public WeaponType WeaponType { get { return _weaponType; } set { _weaponType = value; } }
 
-        this._weaponType = data._weaponType;
     [TabGroup("ProjectileBaseSO")][Tooltip("Projectile 스프라이트")][SerializeField] protected Sprite _projectileSprite;
     public Sprite ProjectileSprite { get { return _projectileSprite; } set { _projectileSprite = value; } }
 
@@ -44,6 +43,8 @@ public class ProjectileBaseSO : ScriptableObject, ISetSOData<ProjectileBaseSO>
         this.ProjectileName = data.ProjectileName;
 
         this.TeamType = data.TeamType;
+
+        this.WeaponType = data.WeaponType;
 
         this._soundName = data._soundName;
 

@@ -6,14 +6,13 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjectileFactory
 {
-                _typeToSO[e.Data.WeaponType] = e.Data;
+    [TabGroup("Projectile Factory")][Tooltip("ProjectileSO  Prefab  Ʈ")][SerializeField] private List<ProjectilePrefabEntry> _entries;
 
-    public ProjectileBaseSO GetProjectileData(WeaponType type)
-    {
-        _typeToSO.TryGetValue(type, out var data);
-        return data;
-    }
+    private IPoolManager _pool;
+    private Dictionary<ProjectileBaseSO, GameObject> _map;
+    private Dictionary<WeaponType, ProjectileBaseSO> _typeToSO;
 
+    // Ȱȭ() ߻ü 
     private readonly List<ProjectileBase> _activeProjectiles = new List<ProjectileBase>();
 
     private void Start()
@@ -28,7 +27,7 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
             if (e.Data != null && e.Prefab != null)
             {
                 _map[e.Data] = e.Prefab;
-                //_typeToSO[e.Data.WeaponType] = e.Data;
+                _typeToSO[e.Data.WeaponType] = e.Data;
             }
         }
     }
@@ -67,11 +66,12 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
         return projectile;
     }
 
-    //public WeaponBaseSO GetWeaponData(WeaponType type)
-    //{
-        //_typeToSO.TryGetValue(type, out var data);
-        //return data;
-    //}
+    public ProjectileBaseSO GetProjectileData(WeaponType type)
+    {
+        _typeToSO.TryGetValue(type, out var data);
+        return data;
+    }
+
     public void Release(ProjectileBase projectile)
     {
         if (projectile == null) return;

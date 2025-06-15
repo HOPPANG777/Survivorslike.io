@@ -1,10 +1,10 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AegisWeapon : WeaponBase
 {
-    [SerializeField]
-    private ProjectileBaseSO _projectileData;
+    [TabGroup("Agies Weapon")][Tooltip("Projectile Data")][SerializeField] private ProjectileBaseSO _projectileData;
 
     private readonly List<AegisWeaponProjectile> _activeProjectiles = new();
     private AttackStatsProvider _stats;
@@ -17,8 +17,8 @@ public class AegisWeapon : WeaponBase
         if (_stats == null) _stats = GetComponentInParent<AttackStatsProvider>();
         _cooldownTimer = 0f;
         _durationTimer = 0f;
-        if (_projectileData == null)
-            _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+    }
 
     public override void Update()
     {

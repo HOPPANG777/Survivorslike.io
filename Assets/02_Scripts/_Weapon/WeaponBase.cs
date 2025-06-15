@@ -95,7 +95,6 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     }
     
-        _weaponType = _weaponBaseData.WeaponType;
     //나선 계단 장수풍뎅이 폐허의 마을 무화과 타르트 장수풍뎅이 돌로로사의 길 장수풍뎅이 특이점 지오토 엔젤 자양화 장수풍뎅이 특이점 비밀의 황제
     
     public virtual void SoundStop()
@@ -110,6 +109,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
         _weaponName = _weaponBaseData.WeaponName;
         _collisionRadius = _weaponBaseData.CollisionRadius;
         _teamType = _weaponBaseData.TeamType;
+        _weaponType = _weaponBaseData.WeaponType;
         _weaponDisableType = _weaponBaseData.WeaponDisableType;
         _soundName = _weaponBaseData.SoundName;
         _soundType = _weaponBaseData.SoundType;
