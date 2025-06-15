@@ -355,8 +355,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -7821,6 +7821,30 @@ MonoBehaviour:
   _entries:
   - Data: {fileID: 11400000, guid: 35a76948f1ce155469a8cc4cd054c855, type: 2}
     Prefab: {fileID: 177575347635178658, guid: 05f5a69eb139d194c87ff142654c3dd5, type: 3}
+  - Data: {fileID: 11400000, guid: e4dc348ef0a55734ba46091d21062d14, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: 4586b6ccede34014190a41558491d466, type: 3}
+  - Data: {fileID: 11400000, guid: 0133b1863708cd048a61e76916809bb6, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: cdc19e3b2b95eee4da864141914832f8, type: 3}
+  - Data: {fileID: 11400000, guid: 58fdb871688417a48b0f592bd50096ab, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: e7b2f8c0ce9b3cb4a86f2443cc42dc90, type: 3}
+  - Data: {fileID: 11400000, guid: e1da4211fb8eb944aa247cbfa8f25189, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: 260cca7304fecf44ba682420fcca7b64, type: 3}
+  - Data: {fileID: 11400000, guid: af5dfc6a4b5dbc7408f4c1742ea75e13, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: 5ecbff425958f4442825d80334e47677, type: 3}
+  - Data: {fileID: 11400000, guid: 69645128e71e62042915cab5ff945330, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: e98f52dc1431d9c4185c4d57b930c0aa, type: 3}
+  - Data: {fileID: 11400000, guid: 231403cd08cd6ce498e3c632a1597ebb, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: 041b570b18b5d004783a27d13c9e6e50, type: 3}
+  - Data: {fileID: 11400000, guid: c7c26d5f29b77c842a9344a16546c55c, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: 549ada9983c9a6941821b90779bd22c8, type: 3}
+  - Data: {fileID: 11400000, guid: dbc2c8b60777f584ba771cb11fe43082, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: 07167aa1814f6bc48b1fa35315bb3fa9, type: 3}
+  - Data: {fileID: 11400000, guid: d857856b56bc52d4699682ca68c3356d, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: 2b2a93075918df640b4419f1bcee5b07, type: 3}
+  - Data: {fileID: 11400000, guid: a12f5723eaeafa143997b7fe069a33fc, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: fcd9432bc8b5b624aa5b68e8bf41285b, type: 3}
+  - Data: {fileID: 11400000, guid: 00caafc9d4595054a84ccfca1d384ee1, type: 2}
+    Prefab: {fileID: 9132914363161966335, guid: e40de99e5ae998746b99ed8b78b2c0d2, type: 3}
 --- !u!1 &933880321
 GameObject:
   m_ObjectHideFlags: 0
@@ -8809,6 +8833,30 @@ MonoBehaviour:
     InitialSize: 5
   - Prefab: {fileID: 9132914363161966335, guid: 9c0ab5444f8e4114d99f8777e63763d9, type: 3}
     InitialSize: 5
+  - Prefab: {fileID: 9132914363161966335, guid: 4586b6ccede34014190a41558491d466, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: cdc19e3b2b95eee4da864141914832f8, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: e7b2f8c0ce9b3cb4a86f2443cc42dc90, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: 260cca7304fecf44ba682420fcca7b64, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: 5ecbff425958f4442825d80334e47677, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: e98f52dc1431d9c4185c4d57b930c0aa, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: 041b570b18b5d004783a27d13c9e6e50, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: 549ada9983c9a6941821b90779bd22c8, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: 07167aa1814f6bc48b1fa35315bb3fa9, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: 2b2a93075918df640b4419f1bcee5b07, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: fcd9432bc8b5b624aa5b68e8bf41285b, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 9132914363161966335, guid: e40de99e5ae998746b99ed8b78b2c0d2, type: 3}
+    InitialSize: 1000
 --- !u!4 &1131158582
 Transform:
   m_ObjectHideFlags: 0
