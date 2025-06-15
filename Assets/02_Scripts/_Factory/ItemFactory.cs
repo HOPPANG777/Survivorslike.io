@@ -19,7 +19,14 @@ public class ItemFactory : SerializedSingleton<ItemFactory>, IItemFactory
     {
         _pool = PoolManager.instance;
         _map = new Dictionary<ItemBaseSO, GameObject>(_entries.Count);
-        foreach (var e in _entries) if (e.Data != null && e.Prefab != null) _map[e.Data] = e.Prefab;
+        for (int i = 0; i < _entries.Count; i++)
+        {
+            var e = _entries[i];
+            if (e.Data != null && e.Prefab != null)
+            {
+                _map[e.Data] = e.Prefab;
+            }
+        }
     }
 
     public ItemBase Create(ItemBaseSO data, Vector3 position)
