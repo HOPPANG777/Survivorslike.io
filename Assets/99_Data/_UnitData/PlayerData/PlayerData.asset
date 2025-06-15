@@ -38,4 +38,4 @@ MonoBehaviour:
     _playerGetExpRange: 1
     _luck: 1
     _playerCurrentExp: 0
-    _playerLevel: 1
+    _playerLevel: 0
