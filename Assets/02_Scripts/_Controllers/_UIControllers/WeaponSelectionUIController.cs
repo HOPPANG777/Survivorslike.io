@@ -33,11 +33,15 @@ public class WeaponSelectionUIController : SerializedMonoBehaviour
 
         if (_statListParent != null && _statItemPrefab != null)
         {
-            foreach (Transform child in _statListParent) Destroy(child.gameObject);
+            for (int i = 0; i < _statListParent.childCount; i++)
+            {
+                Destroy(_statListParent.GetChild(i).gameObject);
+            }
             if (stats != null)
             {
-                foreach (var s in stats)
+                for (int i = 0; i < stats.Count; i++)
                 {
+                    var s = stats[i];
                     var item = Instantiate(_statItemPrefab, _statListParent);
                     Sprite icon = null;
                     if (_statIcons != null) _statIcons.TryGetValue(s.Label, out icon);
@@ -49,8 +53,9 @@ public class WeaponSelectionUIController : SerializedMonoBehaviour
         {
             // fallback: 문자열로 표현
             var parts = new List<string>();
-            foreach (var s in stats)
+            for (int i = 0; i < stats.Count; i++)
             {
+                var s = stats[i];
                 string sign = s.Value > 0 ? "+" : string.Empty;
                 parts.Add($"{s.Label} {sign}{s.Value:0.#}");
             }
