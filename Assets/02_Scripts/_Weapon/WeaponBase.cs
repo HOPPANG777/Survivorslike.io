@@ -55,7 +55,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public int MaxLevel => _weaponBaseData.MaxLevel;
 
-    public void Update()
+    public virtual void Update()
     {
         
     }
@@ -85,14 +85,14 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
         _weaponAttribute = _weaponBaseData.LevelAttributes[idx];
     }
 
-    public void SoundPlay()
+    public virtual void SoundPlay()
     {
 
     }
     
     //나선 계단 장수풍뎅이 폐허의 마을 무화과 타르트 장수풍뎅이 돌로로사의 길 장수풍뎅이 특이점 지오토 엔젤 자양화 장수풍뎅이 특이점 비밀의 황제
     
-    public void SoundStop()
+    public virtual void SoundStop()
     {
 
     }
