@@ -17,8 +17,8 @@ public class AegisWeapon : WeaponBase
         if (_stats == null) _stats = GetComponentInParent<AttackStatsProvider>();
         _cooldownTimer = 0f;
         _durationTimer = 0f;
-        if (_projectileData == null)
-            _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        //_projectileData = ProjectileFactory.instance.
+    }
 
     public override void Update()
     {

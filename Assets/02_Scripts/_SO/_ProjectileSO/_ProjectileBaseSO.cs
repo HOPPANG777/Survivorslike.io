@@ -7,32 +7,28 @@ public class ProjectileBaseSO : ScriptableObject, ISetSOData<ProjectileBaseSO>
     [TabGroup("ProjectileBaseSO")][SerializeField] protected ProjectileAttribute _projectileAttribute;
     public ProjectileAttribute ProjectileAttribute { get { return _projectileAttribute; } set { _projectileAttribute = value; } }
 
-    [TabGroup("ProjectileBaseSO")][Tooltip("Associated Weapon Type")][SerializeField] protected WeaponType _weaponType;
-    public WeaponType WeaponType { get { return _weaponType; } set { _weaponType = value; } }
-
-        this._weaponType = data._weaponType;
-    [TabGroup("ProjectileBaseSO")][Tooltip("Projectile ìŠ¤í”„ë¼ì´íŠ¸")][SerializeField] protected Sprite _projectileSprite;
+    [TabGroup("ProjectileBaseSO")][Tooltip("Projectile ½ºÇÁ¶óÀÌÆ®")][SerializeField] protected Sprite _projectileSprite;
     public Sprite ProjectileSprite { get { return _projectileSprite; } set { _projectileSprite = value; } }
 
-    [TabGroup("ProjectileBaseSO")][Tooltip("Projectile ì´ë¦„")][SerializeField] protected string _projectileName;
+    [TabGroup("ProjectileBaseSO")][Tooltip("Projectile ÀÌ¸§")][SerializeField] protected string _projectileName;
     public string ProjectileName { get { return _projectileName; } set { _projectileName = value; } }
 
-    [TabGroup("ProjectileBaseSO")][Tooltip("íŒ€ íƒ€ì…")][SerializeField] protected TeamType _teamType;
+    [TabGroup("ProjectileBaseSO")][Tooltip("ÆÀ Å¸ÀÔ")][SerializeField] protected TeamType _teamType;
     public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
 
-    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ ì´ë¦„
-    [TabGroup("Sound")][Tooltip("ì‚¬ìš´ë“œ ì´ë¦„")][SerializeField] protected string _soundName;
+    // »ç¿ëÇÒ »ç¿îµå ÀÌ¸§
+    [TabGroup("Sound")][Tooltip("»ç¿îµå ÀÌ¸§")][SerializeField] protected string _soundName;
     public string SoundName { get { return _soundName; } }
 
-    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ íƒ€ì…
-    [TabGroup("Sound")][Tooltip("ì‚¬ìš´ë“œ íƒ€ì…")][SerializeField] protected SoundType _soundType;
+    // »ç¿ëÇÒ »ç¿îµå Å¸ÀÔ
+    [TabGroup("Sound")][Tooltip("»ç¿îµå Å¸ÀÔ")][SerializeField] protected SoundType _soundType;
     public SoundType SoundType { get { return _soundType; } }
 
-    // ì‚¬ìš©í•  ì˜¤ë””ì˜¤ í´ë¦½
-    [TabGroup("Sound")][Tooltip("ì˜¤ë””ì˜¤ í´ë¦½")][SerializeField] protected AudioClip _soundClip;
+    // »ç¿ëÇÒ ¿Àµğ¿À Å¬¸³
+    [TabGroup("Sound")][Tooltip("¿Àµğ¿À Å¬¸³")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
-    [TabGroup("Collision")][Tooltip("ì¶©ëŒ ë°˜ê²½")][SerializeField] protected float _collisionRadius;
+    [TabGroup("Collision")][Tooltip("Ãæµ¹ ¹İ°æ")][SerializeField] protected float _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius; } }
 
     public virtual void SetData(ProjectileBaseSO data)

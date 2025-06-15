@@ -23,7 +23,6 @@ MonoBehaviour:
     _homingStrength: 0
   _projectileSprite: {fileID: 0}
   _projectileName: ShovelWeaponProjectile
-  _weaponType: 9
   _teamType: 1
   _soundName: 
   _soundType: 2
