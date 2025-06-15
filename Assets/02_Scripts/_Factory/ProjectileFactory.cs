@@ -6,13 +6,14 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjectileFactory
 {
-    [TabGroup("Projectile Factory")][Tooltip("ProjectileSO ¡æ Prefab ¸ÅÇÎ ¸®½ºÆ®")][SerializeField] private List<ProjectilePrefabEntry> _entries;
+                _typeToSO[e.Data.WeaponType] = e.Data;
 
-    private IPoolManager _pool;
-    private Dictionary<ProjectileBaseSO, GameObject> _map;
-    private Dictionary<WeaponType, ProjectileBaseSO> _typeToSO;
+    public ProjectileBaseSO GetProjectileData(WeaponType type)
+    {
+        _typeToSO.TryGetValue(type, out var data);
+        return data;
+    }
 
-    // È°¼ºÈ­µÈ(»ı¼ºµÈ) ¹ß»çÃ¼ ¸ñ·Ï
     private readonly List<ProjectileBase> _activeProjectiles = new List<ProjectileBase>();
 
     private void Start()
@@ -43,7 +44,7 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
         projectile.ProjectileBaseData = data;
         projectile.SetStatus();
 
-        // È°¼º À¯´ÖÀ¸·Î µî·Ï
+        // í™œì„± ìœ ë‹›ìœ¼ë¡œ ë“±ë¡
         _activeProjectiles.Add(projectile);
 
         return projectile;
@@ -60,7 +61,7 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
         projectile.ProjectileBaseData = data;
         projectile.SetStatus(weapon);
 
-        // È°¼º À¯´ÖÀ¸·Î µî·Ï
+        // í™œì„± ìœ ë‹›ìœ¼ë¡œ ë“±ë¡
         _activeProjectiles.Add(projectile);
 
         return projectile;
@@ -75,7 +76,7 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
     {
         if (projectile == null) return;
 
-        // È°¼º ¸ñ·Ï¿¡¼­ Á¦°Å
+        // í™œì„± ëª©ë¡ì—ì„œ ì œê±°
         if (_activeProjectiles.Contains(projectile))
         {
             _activeProjectiles.Remove(projectile);
