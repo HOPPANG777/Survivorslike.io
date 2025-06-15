@@ -7,10 +7,7 @@ using UnityEngine;
 public class ItemFactory : SerializedSingleton<ItemFactory>, IItemFactory
 {
     [TabGroup("Item Factory")]
-        for (int i = 0; i < _entries.Count; i++) {
-            var e = _entries[i];
-            if (e.Data != null && e.Prefab != null) _map[e.Data] = e.Prefab;
-        }
+    [Tooltip("Item SO ¡ê Prefab ¸ÅÇÎ")]
     [SerializeField]
     private List<ItemPrefabEntry> _entries = new List<ItemPrefabEntry>();
 

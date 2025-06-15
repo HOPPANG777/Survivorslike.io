@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public interface IUIOverlay
 {
@@ -6,5 +7,5 @@ public interface IUIOverlay
 
     void OverlayOut(GameObject page, SlideDirection outDirection);
 
-    void DisableAfter(GameObject page, float delay);
+    IEnumerator DisableAfter(GameObject page, float delay);
 }

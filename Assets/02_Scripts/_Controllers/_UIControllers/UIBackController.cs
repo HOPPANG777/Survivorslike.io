@@ -1,20 +1,13 @@
 using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
 {
-    private struct DisableEntry
-    {
-        public GameObject Page;
-        public float Remaining;
-    }
-    private readonly List<DisableEntry> _disableEntries = new List<DisableEntry>();
+    [TabGroup("UIPages")][Tooltip("µî·ÏÇÒ UI ÆäÀÌÁöµé (Ã¹ ¹øÂ°´Â ½ÃÀÛ ÆäÀÌÁö)")][SerializeField] private List<GameObject> _pages;
 
-
-    [TabGroup("UIPages")][Tooltip("ë“±ë¡í•  UI í˜ì´ì§€ë“¤ (ì²« ë²ˆì§¸ëŠ” ì‹œì‘ í˜ì´ì§€)")][SerializeField] private List<GameObject> _pages;
-
-    // ë„¤ë¹„ê²Œì´ì…˜ ê¸°ë¡ êµ¬ì¡°ì²´
+    // ³×ºñ°ÔÀÌ¼Ç ±â·Ï ±¸Á¶Ã¼
     private struct NavEntry
     {
         public GameObject Page;
@@ -23,25 +16,25 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
         public SlideDirection InDirection;
     }
 
-    [TabGroup("UIPages")][Tooltip("íˆìŠ¤í† ë¦¬ ìŠ¤íƒ")][SerializeField] private readonly Stack<NavEntry> _history = new Stack<NavEntry>();
-    [TabGroup("UIPages")][Tooltip("í˜„ì¬ í˜ì´ì§€")][SerializeField] private GameObject _currentPage;
-    [TabGroup("UIPages")][Tooltip("í˜„ì¬ ìŠ¬ë¼ì´ë”")][SerializeField] private UISliderController _currentSlider;
-    [TabGroup("UIPages")][Tooltip("ìƒì„±ì‹œ í¬ì§€ì…˜ ë¦¬ìŠ¤íŠ¸")][SerializeField] private List<Vector2> _initialPositions;
+    [TabGroup("UIPages")][Tooltip("È÷½ºÅä¸® ½ºÅÃ")][SerializeField] private readonly Stack<NavEntry> _history = new Stack<NavEntry>();
+    [TabGroup("UIPages")][Tooltip("ÇöÀç ÆäÀÌÁö")][SerializeField] private GameObject _currentPage;
+    [TabGroup("UIPages")][Tooltip("ÇöÀç ½½¶óÀÌ´õ")][SerializeField] private UISliderController _currentSlider;
+    [TabGroup("UIPages")][Tooltip("»ı¼º½Ã Æ÷Áö¼Ç ¸®½ºÆ®")][SerializeField] private List<Vector2> _initialPositions;
 
     public void Init()
     {
-        // ëª¨ë“  í˜ì´ì§€ ë¹„í™œì„±í™”
+        // ¸ğµç ÆäÀÌÁö ºñÈ°¼ºÈ­
         for (int i = 0; i < _pages.Count; i++) _pages[i].SetActive(false);
 
-        // ì´ˆê¸° ìœ„ì¹˜ ë¦¬ìŠ¤íŠ¸ ìƒì„±
+        // ÃÊ±â À§Ä¡ ¸®½ºÆ® »ı¼º
         _initialPositions = new List<Vector2>(_pages.Count);
         {
-            // ì´ˆê¸° ìœ„ì¹˜ ìˆ˜ì§‘ (ë ˆì´ì•„ì›ƒì´ ì™„ë£Œëœ í›„ ìœ„ì¹˜ë¥¼ ì •í™•íˆ ì¡ê¸° ìœ„í•´ Startì—ì„œ ìˆ˜í–‰)
+            // ÃÊ±â À§Ä¡ ¼öÁı (·¹ÀÌ¾Æ¿ôÀÌ ¿Ï·áµÈ ÈÄ À§Ä¡¸¦ Á¤È®È÷ Àâ±â À§ÇØ Start¿¡¼­ ¼öÇà)
             _initialPositions = new List<Vector2>(_pages.Count);
             for (int i = 0; i < _pages.Count; i++)
             {
                 var rect = _pages[i].GetComponent<RectTransform>();
-                // ì´ ì‹œì ì— í˜ì´ì§€ê°€ ë¹„í™œì„±í™”ë˜ì–´ë„ RectTransform ê°’ì„ ì½ì„ ìˆ˜ ìˆìŒ
+                // ÀÌ ½ÃÁ¡¿¡ ÆäÀÌÁö°¡ ºñÈ°¼ºÈ­µÇ¾îµµ RectTransform °ªÀ» ÀĞÀ» ¼ö ÀÖÀ½
                 _initialPositions.Add(rect != null ? rect.anchoredPosition : Vector2.zero);
             }
 
@@ -50,15 +43,15 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
     }
 
     /// <summary>
-    /// UIë¥¼ ì´ˆê¸° íƒ€ì´í‹€ ìƒíƒœë¡œ ë¦¬ì…‹í•©ë‹ˆë‹¤.
-    /// ê²Œì„ ì¬ì‹œì‘ ì‹œ í˜¸ì¶œí•˜ì„¸ìš”.
+    /// UI¸¦ ÃÊ±â Å¸ÀÌÆ² »óÅÂ·Î ¸®¼ÂÇÕ´Ï´Ù.
+    /// °ÔÀÓ Àç½ÃÀÛ ½Ã È£ÃâÇÏ¼¼¿ä.
     /// </summary>
     public void InitializeToTitle()
     {
-        // íˆìŠ¤í† ë¦¬ í´ë¦¬ì–´
+        // È÷½ºÅä¸® Å¬¸®¾î
         _history.Clear();
 
-        // ëª¨ë“  í˜ì´ì§€ ë¦¬ì…‹: ìœ„ì¹˜ ë° í™œì„±í™”
+        // ¸ğµç ÆäÀÌÁö ¸®¼Â: À§Ä¡ ¹× È°¼ºÈ­
         for (int i = 0; i < _pages.Count; i++)
         {
             var page = _pages[i];
@@ -68,35 +61,36 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
             page.SetActive(i == 0);
         }
 
-        // í˜„ì¬ í˜ì´ì§€ ì°¸ì¡° ì´ˆê¸°í™”
+        // ÇöÀç ÆäÀÌÁö ÂüÁ¶ ÃÊ±âÈ­
         _currentPage = _pages.Count > 0 ? _pages[0] : null;
         _currentSlider = _currentPage != null ? _currentPage.GetComponent<UISliderController>() : null;
     }
 
     /// <summary>
-        DisableAfter(page, slider.MoveDuration);
-    public void DisableAfter(GameObject page, float delay)
-        _disableEntries.Add(new DisableEntry { Page = page, Remaining = delay });
-        // 1) ìœ„ì¹˜ ì´ˆê¸°í™”
+    /// ÇöÀç ÆäÀÌÁö(ingame)´Â ±×´ë·Î µÎ°í, page¸¦ overlay·Î ½½¶óÀÌµå ÀÎ ½ÃÅµ´Ï´Ù.
+    /// </summary>
+    public void OverlayIn(GameObject page, SlideDirection inDirection)
+    {
+        // 1) À§Ä¡ ÃÊ±âÈ­
         var idx = _pages.IndexOf(page);
         var rect = page.GetComponent<RectTransform>();
         rect.anchoredPosition = _initialPositions[idx];
 
-        // 2) ê·¸ëƒ¥ ì¼œê¸° + ìŠ¬ë¼ì´ë“œ
+        // 2) ±×³É ÄÑ±â + ½½¶óÀÌµå
         page.SetActive(true);
         var slider = page.GetComponent<UISliderController>();
         slider.Slide(inDirection);
     }
 
     /// <summary>
-    /// overlayë¡œ ë„ìš´ pageë¥¼ ìŠ¬ë¼ì´ë“œ ì•„ì›ƒí•˜ê³ , ë¹„í™œì„±í™”í•©ë‹ˆë‹¤.
+    /// overlay·Î ¶ç¿î page¸¦ ½½¶óÀÌµå ¾Æ¿ôÇÏ°í, ºñÈ°¼ºÈ­ÇÕ´Ï´Ù.
     /// </summary>
     public void OverlayOut(GameObject page, SlideDirection outDirection)
     {
         var slider = page.GetComponent<UISliderController>();
         slider.Slide(outDirection);
-        // ìŠ¬ë¼ì´ë“œê°€ ëë‚˜ëŠ” ì‹œì ì„ ì•Œ ìˆ˜ ìˆë‹¤ë©´ ì½œë°±ì„ ê±¸ì–´ì„œ ë¹„í™œì„±í™”í•˜ê±°ë‚˜,
-        // MoveDuration í›„ì— ë¹„í™œì„±í™”í•´ ì£¼ì„¸ìš”:
+        // ½½¶óÀÌµå°¡ ³¡³ª´Â ½ÃÁ¡À» ¾Ë ¼ö ÀÖ´Ù¸é Äİ¹éÀ» °É¾î¼­ ºñÈ°¼ºÈ­ÇÏ°Å³ª,
+        // MoveDuration ÈÄ¿¡ ºñÈ°¼ºÈ­ÇØ ÁÖ¼¼¿ä:
         StartCoroutine(DisableAfter(page, slider.MoveDuration));
     }
 
@@ -108,7 +102,7 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
 
     public void NavigateTo(GameObject page, SlideDirection outDirection, SlideDirection inDirection)
     {
-        // ê°™ì€ í˜ì´ì§€ í´ë¦­ ì‹œ ë’¤ë¡œ ê°€ê¸°
+        // °°Àº ÆäÀÌÁö Å¬¸¯ ½Ã µÚ·Î °¡±â
         if (page == _currentPage)
         {
             GoBack();
@@ -119,14 +113,14 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
         bool isTargetRoot = _pages.Count > 0 && page == _pages[0];
         bool isIngame = AllManager.instance.GamemodeManager.GameMode == GameModeType.GAMEMODE_GAMESTART;
 
-        // ê¸°ë¡ì— ë‚¨ê¸°ê¸°
+        // ±â·Ï¿¡ ³²±â±â
         _history.Push(new NavEntry { Page = _currentPage, Slider = _currentSlider, OutDirection = outDirection, InDirection = inDirection });
 
-        // í˜„ì¬ í˜ì´ì§€ ì²˜ë¦¬
+        // ÇöÀç ÆäÀÌÁö Ã³¸®
         if (isCurrentRoot && !isIngame) _currentPage.SetActive(false);
         else _currentSlider.Slide(outDirection);
 
-        // ëª©í‘œ í˜ì´ì§€ ìœ„ì¹˜ ì´ˆê¸°í™” í›„ í™œì„±í™” ë° ìŠ¬ë¼ì´ë“œ ì¸
+        // ¸ñÇ¥ ÆäÀÌÁö À§Ä¡ ÃÊ±âÈ­ ÈÄ È°¼ºÈ­ ¹× ½½¶óÀÌµå ÀÎ
         var nextRect = page.GetComponent<RectTransform>();
         if (nextRect != null) nextRect.anchoredPosition = _initialPositions[_pages.IndexOf(page)];
 
@@ -138,25 +132,7 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
         _currentSlider = nextSlider;
     }
 
-    private void Update()
-    {
-        for (int i = _disableEntries.Count - 1; i >= 0; i--)
-        {
-            var entry = _disableEntries[i];
-            entry.Remaining -= Time.deltaTime;
-            if (entry.Remaining <= 0f)
-            {
-                if (entry.Page != null) entry.Page.SetActive(false);
-                _disableEntries.RemoveAt(i);
-            }
-            else
-            {
-                _disableEntries[i] = entry;
-            }
-        }
-    }
-
-    [Button("ë’¤ë¡œ ê°€ê¸°", ButtonSizes.Large)]
+    [Button("µÚ·Î °¡±â", ButtonSizes.Large)]
     public void GoBack()
     {
         if (_history.Count == 0) return;
@@ -165,10 +141,10 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
         bool previousIsRoot = _pages.Count > 0 && entry.Page == _pages[0];
         bool isIngame = AllManager.instance.GamemodeManager.GameMode == GameModeType.GAMEMODE_GAMESTART;
 
-        // í˜„ì¬ í˜ì´ì§€ ìŠ¬ë¼ì´ë“œ ì•„ì›ƒ
+        // ÇöÀç ÆäÀÌÁö ½½¶óÀÌµå ¾Æ¿ô
         _currentSlider.Slide(Opposite(entry.InDirection));
 
-        // ì´ì „ í˜ì´ì§€ í™œì„±í™”
+        // ÀÌÀü ÆäÀÌÁö È°¼ºÈ­
         entry.Page.SetActive(true);
         if (!(previousIsRoot && !isIngame)) entry.Slider.Slide(Opposite(entry.OutDirection));
 
