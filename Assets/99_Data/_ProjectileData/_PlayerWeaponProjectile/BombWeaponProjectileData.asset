@@ -21,11 +21,11 @@ MonoBehaviour:
     _explosionRadius: 0
     _isHoming: 0
     _homingStrength: 0
+  _weaponType: 6
   _projectileSprite: {fileID: 0}
   _projectileName: BombWeaponProjectile
-  _weaponType: 6
   _teamType: 1
-  _soundName: 
+  _soundName: BombWeaponProjectileSFX
   _soundType: 2
   _soundClip: {fileID: 0}
   _collisionRadius: 1

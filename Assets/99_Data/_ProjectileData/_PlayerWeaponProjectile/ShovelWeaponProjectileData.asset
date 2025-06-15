@@ -21,11 +21,11 @@ MonoBehaviour:
     _explosionRadius: 0
     _isHoming: 0
     _homingStrength: 0
+  _weaponType: 9
   _projectileSprite: {fileID: 0}
   _projectileName: ShovelWeaponProjectile
-  _weaponType: 9
   _teamType: 1
-  _soundName: 
+  _soundName: ShovelWeaponProjectileSFX
   _soundType: 2
   _soundClip: {fileID: 0}
   _collisionRadius: 1

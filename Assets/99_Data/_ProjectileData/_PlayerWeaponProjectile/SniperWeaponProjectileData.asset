@@ -21,11 +21,11 @@ MonoBehaviour:
     _explosionRadius: 0
     _isHoming: 0
     _homingStrength: 0
+  _weaponType: 1
   _projectileSprite: {fileID: 0}
   _projectileName: SniperWeaponProjectile
-  _weaponType: 1
   _teamType: 1
-  _soundName: 
+  _soundName: SniperWeaponProjectileSFX
   _soundType: 2
   _soundClip: {fileID: 0}
   _collisionRadius: 1

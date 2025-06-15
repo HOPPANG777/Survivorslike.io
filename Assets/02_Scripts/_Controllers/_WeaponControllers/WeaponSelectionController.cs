@@ -24,7 +24,7 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
     // 이번 레벨업에 뽑힌 3개의 후보
     private WeaponType[] _currentChoices = new WeaponType[0];
 
-    // 고정된 11개 무기 타입 목록
+    // 고정된 12개 무기 타입 목록
     private static readonly WeaponType[] _allWeapons =
     {
         WeaponType.WEAPON_SNIPER,
