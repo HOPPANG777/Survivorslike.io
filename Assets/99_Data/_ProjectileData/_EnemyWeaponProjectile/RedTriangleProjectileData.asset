@@ -15,7 +15,7 @@ MonoBehaviour:
   _projectileAttribute:
     _damage: 10
     _projectileSpeed: 5
-    _lifetime: 3
+    _lifetime: 5
     _knockbackForce: 1
     _pierceCount: 1
     _explosionRadius: 0

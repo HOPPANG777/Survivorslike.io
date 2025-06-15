@@ -70,6 +70,11 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     }
 
+    public virtual void ReleaseProjectile()
+    {
+        
+    }
+
     public bool LevelUp()
     {
         if (CurrentLevel >= MaxLevel) return false;

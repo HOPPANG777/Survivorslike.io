@@ -8,7 +8,7 @@ using UnityEngine;
 //------------------------------------------------------------------------------
 // 모든 투사체가 상속받아 공통 로직(이동, 수명, 충돌 등록/해제, 공격력 등)을 갖습니다.
 //------------------------------------------------------------------------------
-public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<ProjectileAttribute> , ICollidable , IAttacker , IDead, ISetStatus, ISpeakable
+public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<ProjectileAttribute> , ICollidable , IAttacker , IDead, ISetStatus, ISpeakable, ICameraBoundDetectable, IOutOfCameraKillable
 {
     [Header("Projectile Base")]
     [TabGroup("Projectile Base")][Tooltip("Projectile Data")][SerializeField] protected ProjectileBaseSO _projectileBaseData;
@@ -65,6 +65,15 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
     protected float _age;
 
     private bool isDead = false;
+
+    private bool _isOut = false;
+
+    private float _outTimer = 0f;
+
+    private float _killDelay = 3f;
+
+    public bool IsOutOfCamera => _isOut;
+
 
     // 1) Start 에서 SetStatus 호출
     protected virtual void Start()
@@ -165,6 +174,8 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
     /// </summary>
     public virtual void CheckDead()
     {
+        UpdateCameraBound();
+
         switch (_disableType)
         {
             case WeaponDisableType.WEAPONDISABLETYPE_NONE:
@@ -207,5 +218,56 @@ public abstract class ProjectileBase: MonoBehaviour , IProjectileAttribute<Proje
         ProjectileFactory.instance.Release(this);
 
         isDead = true;
+    }
+
+    public void UpdateCameraBound()
+    {
+        bool nowOut = CheckOutOfCamera();
+        if (nowOut && !_isOut)
+        {
+            _isOut = true;
+            _outTimer = 0f;
+            OnExitCamera();
+        }
+        else if (!nowOut && _isOut)
+        {
+            _isOut = false;
+            _outTimer = 0f;
+            OnEnterCamera();
+        }
+
+        // 밖에 있는 동안
+        if (_isOut)
+        {
+            _outTimer += Time.deltaTime;
+            OnOutOfCamera(_outTimer);
+        }
+    }
+
+    public void OnExitCamera()
+    {
+        // 처음 나갈 때 동작(효과음 등)
+        Debug.Log("카메라 밖으로 나감!");
+    }
+
+    public void OnEnterCamera()
+    {
+        // 다시 들어오면
+        Debug.Log("카메라 안으로 들어옴!");
+    }
+
+    public void OnOutOfCamera(float outTime)
+    {
+        // 밖에 나가있는 시간 체크 후 죽이기
+        if (outTime >= _killDelay) Dead();
+    }
+
+    private bool CheckOutOfCamera()
+    {
+        if (Camera.main == null) return false;
+        Vector3 pos = transform.position;
+        Vector3 min = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+        Vector3 max = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
+        return pos.x < min.x || pos.x > max.x || pos.y < min.y || pos.y > max.y;
     }
 }
