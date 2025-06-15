@@ -8,8 +8,9 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
 {
     [TabGroup("Projectile Factory")][Tooltip("ProjectileSO → Prefab 매핑 리스트")][SerializeField] private List<ProjectilePrefabEntry> _entries;
 
-    private Dictionary<ProjectileBaseSO, GameObject> _map;
     private IPoolManager _pool;
+    private Dictionary<ProjectileBaseSO, GameObject> _map;
+    private Dictionary<WeaponType, ProjectileBaseSO> _typeToSO;
 
     // 활성화된(생성된) 발사체 목록
     private readonly List<ProjectileBase> _activeProjectiles = new List<ProjectileBase>();
@@ -18,11 +19,16 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
     {
         _pool = PoolManager.instance;
         _map = new Dictionary<ProjectileBaseSO, GameObject>(_entries.Count);
+        _typeToSO = new Dictionary<WeaponType, ProjectileBaseSO>(_entries.Count);
 
         for (int i = 0; i < _entries.Count; i++)
         {
             var e = _entries[i];
-            if (e.Data != null && e.Prefab != null) _map[e.Data] = e.Prefab;
+            if (e.Data != null && e.Prefab != null)
+            {
+                _map[e.Data] = e.Prefab;
+                //_typeToSO[e.Data.WeaponType] = e.Data;
+            }
         }
     }
 
@@ -60,6 +66,11 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
         return projectile;
     }
 
+    //public WeaponBaseSO GetWeaponData(WeaponType type)
+    //{
+        //_typeToSO.TryGetValue(type, out var data);
+        //return data;
+    //}
     public void Release(ProjectileBase projectile)
     {
         if (projectile == null) return;
