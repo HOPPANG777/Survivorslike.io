@@ -93,7 +93,6 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         _soundSource = this.gameObject.GetComponent<AudioSource>();
         AllManager.instance.CollisionManager.RegisterCollidable(this);
         isDead = false;
-
         // 무적 타이머 초기화: 스폰 직후 즉시 피격 가능
         _nextHittableTime = Time.time;
     }

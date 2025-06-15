@@ -21,7 +21,7 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
     [TabGroup("Player Unit")][Tooltip("Weapon Holder")][SerializeField] private List<WeaponBase> _equippedWeapons = new List<WeaponBase>();
     public List<WeaponBase> EquippedWeapons { get { return _equippedWeapons; } }
 
-
+    [TabGroup("Player Unit")][Tooltip("AttackStatsProvider")][SerializeField] private AttackStatsProvider _attackStatsProvider;
     protected override void Start()
     {
         base.Start();
@@ -66,6 +66,8 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
         base.SetStatus();
         _playerData = _unitBaseData as PlayerUnitSO;
         _playerAttribute = _playerData.PlayerAttribute;
+        _attackStatsProvider = this.gameObject.GetComponent<AttackStatsProvider>();
+        _attackStatsProvider.SetStatus();
     }
 
     public override void Hitted(float damageValue)
