@@ -247,13 +247,13 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     public void OnExitCamera()
     {
         // 처음 나갈 때 동작(효과음 등)
-        Debug.Log("카메라 밖으로 나감!");
+        //Debug.Log("카메라 밖으로 나감!");
     }
 
     public void OnEnterCamera()
     {
         // 다시 들어오면
-        Debug.Log("카메라 안으로 들어옴!");
+        //Debug.Log("카메라 안으로 들어옴!");
     }
 
     public void OnOutOfCamera(float outTime)

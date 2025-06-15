@@ -76,4 +76,24 @@ public class AegisWeaponProjectile : ProjectileBase
         _shrinking = true;
         _shrinkTimer = 0f;
     }
+
+    public override void SoundPlay()
+    {
+        base.SoundPlay();
+    }
+
+    public override void SoundStop()
+    {
+        base.SoundStop();
+    }
+
+    public override void CheckDead()
+    {
+        base.CheckDead();
+    }
+
+    public override void Dead()
+    {
+        base.Dead();
+    }
 }

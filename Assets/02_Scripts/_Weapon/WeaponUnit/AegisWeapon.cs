@@ -50,7 +50,7 @@ public class AegisWeapon : WeaponBase
         int count = Mathf.Max(1, _stats.ProjectileCount);
         for (int i = 0; i < count; i++)
         {
-            var proj = ProjectileFactory.instance.Create(_projectileData, transform.position, Quaternion.identity, this) as AegisWeaponProjectile;
+            var proj = ProjectileFactory.instance.Create(_projectileData, transform.position, Quaternion.identity, this.gameObject.GetComponent<WeaponBase>()) as AegisWeaponProjectile;
             if (proj != null)
             {
                 proj.Initialize(i, count);
