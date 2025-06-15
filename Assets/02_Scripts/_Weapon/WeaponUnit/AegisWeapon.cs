@@ -62,7 +62,7 @@ public class AegisWeapon : WeaponBase
         }
         _durationTimer = _stats.AttackDuration;
 
-        if (!string.IsNullOrEmpty(SoundName)) SoundManager.instance.PlaySound(SoundName);
+        //if (!string.IsNullOrEmpty(SoundName)) SoundManager.instance.PlaySound(SoundName);
     }
 
     public override void ReleaseProjectile()

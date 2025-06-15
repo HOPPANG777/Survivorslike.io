@@ -136,7 +136,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
         _projectileAttributes = _projectileBaseData.ProjectileAttribute;
         _projectileName = _projectileBaseData.ProjectileName;
 
-        var statsProv = OwnerWeapon.GetComponent<AttackStatsProvider>();
+        var statsProv = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
         _projectileAttributes.LifeTime += statsProv.AttackDuration;
         _projectileAttributes.PierceCount += statsProv.WeaponDisableCount;
         
