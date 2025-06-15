@@ -18,7 +18,12 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         {
             float baseDmg = _unitAttr.Attributes.UnitDamage;
             float total = baseDmg;
-            foreach (var w in _weaponHolder.EquippedWeapons) total += (baseDmg * w.Attributes.DamageMultiplier) + w.Attributes.FlatDamage;
+            var weapons = _weaponHolder.EquippedWeapons;
+            for (int i = 0; i < weapons.Count; ++i)
+            {
+                var w = weapons[i];
+                total += (baseDmg * w.Attributes.DamageMultiplier) + w.Attributes.FlatDamage;
+            }
             return total;
         }
     }
@@ -28,7 +33,11 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float speed = _unitAttr.Attributes.UnitAttackSpeed;
-            foreach (var w in _weaponHolder.EquippedWeapons) speed *= w.Attributes.AttackSpeedMultiplier;
+            var weapons = _weaponHolder.EquippedWeapons;
+            for (int i = 0; i < weapons.Count; ++i)
+            {
+                speed *= weapons[i].Attributes.AttackSpeedMultiplier;
+            }
             return speed;
         }
     }
@@ -38,7 +47,11 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             int cnt = _unitAttr.Attributes.UnitProjectileNumber;
-            foreach (var w in _weaponHolder.EquippedWeapons) cnt += w.Attributes.ProjectileCountBonus;
+            var weapons = _weaponHolder.EquippedWeapons;
+            for (int i = 0; i < weapons.Count; ++i)
+            {
+                cnt += weapons[i].Attributes.ProjectileCountBonus;
+            }
             return cnt;
         }
     }
@@ -48,7 +61,11 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float rng = _unitAttr.Attributes.UnitAttackRange;
-            foreach (var w in _weaponHolder.EquippedWeapons) rng += w.Attributes.RangeBonus;
+            var weapons = _weaponHolder.EquippedWeapons;
+            for (int i = 0; i < weapons.Count; ++i)
+            {
+                rng += weapons[i].Attributes.RangeBonus;
+            }
             return rng;
         }
     }
@@ -58,7 +75,11 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float dur = _unitAttr.Attributes.UnitAttackDuration;
-            foreach (var w in _weaponHolder.EquippedWeapons) dur += w.Attributes.WeaponDisableTime;
+            var weapons = _weaponHolder.EquippedWeapons;
+            for (int i = 0; i < weapons.Count; ++i)
+            {
+                dur += weapons[i].Attributes.WeaponDisableTime;
+            }
             return dur;
         }
     }
@@ -68,7 +89,11 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float cd = _unitAttr.Attributes.UnitAttackCoolDown;
-            foreach (var w in _weaponHolder.EquippedWeapons) cd += w.Attributes.AttackCooldown;
+            var weapons = _weaponHolder.EquippedWeapons;
+            for (int i = 0; i < weapons.Count; ++i)
+            {
+                cd += weapons[i].Attributes.AttackCooldown;
+            }
             return cd;
         }
     }
@@ -78,7 +103,11 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float kb = _unitAttr.Attributes.UnitKnockbackForce;
-            foreach (var w in _weaponHolder.EquippedWeapons) kb += w.Attributes.KnockbackForce;
+            var weapons = _weaponHolder.EquippedWeapons;
+            for (int i = 0; i < weapons.Count; ++i)
+            {
+                kb += weapons[i].Attributes.KnockbackForce;
+            }
             return kb;
         }
     }
@@ -88,9 +117,12 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             int dc = 0;
-            foreach (var w in _weaponHolder.EquippedWeapons) dc += w.Attributes.WeaponDisableCount;
+            var weapons = _weaponHolder.EquippedWeapons;
+            for (int i = 0; i < weapons.Count; ++i)
+            {
+                dc += weapons[i].Attributes.WeaponDisableCount;
+            }
             return dc;
         }
     }
 }
-

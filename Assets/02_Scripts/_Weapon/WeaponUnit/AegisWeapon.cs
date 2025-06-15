@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AegisWeapon : WeaponBase
@@ -14,7 +15,7 @@ public class AegisWeapon : WeaponBase
     public override void SetStatus()
     {
         base.SetStatus();
-        if (_stats == null) _stats = GetComponentInParent<AttackStatsProvider>();
+        if (_stats == null) _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
         _cooldownTimer = 0f;
         _durationTimer = 0f;
         if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
@@ -24,6 +25,8 @@ public class AegisWeapon : WeaponBase
     {
         base.Update();
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
+        //if (_stats == null) Debug.Log("¾È³ç!");
 
         if (_durationTimer > 0f)
         {
