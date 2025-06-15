@@ -6,25 +6,25 @@ using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
-    [TabGroup("Controller")][Tooltip("Å¸ÀÌ¸Ó ÄÁÆ®·Ñ·¯")][SerializeField] private IngameClockController _ingameClockController;
+    [TabGroup("Controller")][Tooltip("íƒ€ì´ë¨¸ ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private IngameClockController _ingameClockController;
     public IngameClockController IngameClockController { get { return _ingameClockController; } }
 
-    [TabGroup("Controller")][Tooltip("ÇÃ·¹ÀÌ¾î Ã¼·Â ¹Ù ÄÁÆ®·Ñ·¯")][SerializeField] private PlayerCurrentHealthBarController _playerCurrentHealthBarController;
+    [TabGroup("Controller")][Tooltip("í”Œë ˆì´ì–´ ì²´ë ¥ ë°” ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private PlayerCurrentHealthBarController _playerCurrentHealthBarController;
     public PlayerCurrentHealthBarController PlayerCurrentHealthBarController { get { return _playerCurrentHealthBarController; } }
 
-    [TabGroup("Controller")][Tooltip("ÇÃ·¹ÀÌ¾î °æÇèÄ¡ ¹Ù ÄÁÆ®·Ñ·¯")][SerializeField] private PlayerCurrentExpBarController _playerCurrentExpBarController;
+    [TabGroup("Controller")][Tooltip("í”Œë ˆì´ì–´ ê²½í—˜ì¹˜ ë°” ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private PlayerCurrentExpBarController _playerCurrentExpBarController;
     public PlayerCurrentExpBarController PlayerCurrentExpBarController { get { return _playerCurrentExpBarController; } }
 
-    [TabGroup("Controller")][Tooltip("Àû Å³ Ä«¿îÅÍ ÄÁÆ®·Ñ·¯")][SerializeField] private EnemyKillCountController _enemyKillCountController;
+    [TabGroup("Controller")][Tooltip("ì  í‚¬ ì¹´ìš´í„° ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private EnemyKillCountController _enemyKillCountController;
     public EnemyKillCountController EnemyKillCountController { get { return _enemyKillCountController; } }
 
-    [TabGroup("Controller")][Tooltip("ÇÃ·¹ÀÌ¾î ·¹º§ Ä«¿îÅÍ ÄÁÆ®·Ñ·¯")][SerializeField] private PlayerCurrentLevelCountController _playerCurrentLevelCountController;
+    [TabGroup("Controller")][Tooltip("í”Œë ˆì´ì–´ ë ˆë²¨ ì¹´ìš´í„° ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private PlayerCurrentLevelCountController _playerCurrentLevelCountController;
     public PlayerCurrentLevelCountController PlayerCurrentLevelCountController { get { return _playerCurrentLevelCountController; } }
 
-    [TabGroup("Controller")][Tooltip("·¹º§¾÷ ¾ÆÀÌÅÛ ÀÌ¹ÌÁö ½½¶óÀÌµå ÄÁÆ®·Ñ·¯")][SerializeField] private SlideInImagesController _slideInImagesController;
+    [TabGroup("Controller")][Tooltip("ë ˆë²¨ì—… ì•„ì´í…œ ì´ë¯¸ì§€ ìŠ¬ë¼ì´ë“œ ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private SlideInImagesController _slideInImagesController;
     public SlideInImagesController SlideInImagesController { get { return _slideInImagesController; } }
 
-    [TabGroup("Controller")][Tooltip("·¹º§¾÷½Ã ¾ÆÀÌÅÛ ¼±ÅÃ ÄÁÆ®·Ñ·¯")][SerializeField] private WeaponSelectionController _weaponSelectionController;
+    [TabGroup("Controller")][Tooltip("ë ˆë²¨ì—…ì‹œ ì•„ì´í…œ ì„ íƒ ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private WeaponSelectionController _weaponSelectionController;
     public WeaponSelectionController WeaponSelectionController { get { return _weaponSelectionController; } }
 
 
@@ -54,8 +54,16 @@ public class UIController : MonoBehaviour
 
     public void IngamePage()
     {
-        AllManager.instance.GamemodeManager.GameIngame();
         _backManager.NavigateTo(_pageList[3], SlideDirection.SLIDE_UP, SlideDirection.SLIDE_RIGHT);
+
+        var player = AllManager.instance.GamemodeManager.Player.GetComponent<PlayerUnit>();
+        if (player.Attributes.PlayerLevel <= 0)
+        {
+            LevelUpPage();
+            return;
+        }
+
+        AllManager.instance.GamemodeManager.GameIngame();
     }
 
     public void KeyPage()
@@ -66,22 +74,32 @@ public class UIController : MonoBehaviour
     public void LevelUpPage()
     {
         AllManager.instance.GamemodeManager.GameLevelUp();
-        // Ingame ÆĞ³ÎÀº ±×´ë·Î, ·¹º§¾÷ ÆäÀÌÁö¸¸ overlay
+
+        var player = AllManager.instance.GamemodeManager.Player.GetComponent<PlayerUnit>();
+        if (player.Attributes.PlayerLevel <= 0)
+        {
+            var attr = player.Attributes;
+            attr.PlayerLevel = 1;
+            player.Attributes = attr;
+            AllManager.instance.UIManager.PlayerCurrentLevelCountController.UpdateLevelCounter(1);
+        }
+
+        // Ingame íŒ¨ë„ì€ ê·¸ëŒ€ë¡œ, ë ˆë²¨ì—… í˜ì´ì§€ë§Œ overlay
         _backManager.OverlayIn(_pageList[5], SlideDirection.SLIDE_RIGHT);
 
         _weaponSelectionController.OpenSelection();
 
-        // ÀÌ¹ÌÁö ½½¶óÀÌµåµµ ¸®¼Â¡æÀç»ı
+        // ì´ë¯¸ì§€ ìŠ¬ë¼ì´ë“œë„ ë¦¬ì…‹â†’ì¬ìƒ
         _slideInImagesController.SetStatus();
         _slideInImagesController.Move();
     }
 
-    public void OnWeaponChosen()  // ¹«±â ¼±ÅÃ Äİ¹é¿¡¼­ È£Ãâ
+    public void OnWeaponChosen()  // ë¬´ê¸° ì„ íƒ ì½œë°±ì—ì„œ í˜¸ì¶œ
     {
-        // ·¹º§¾÷ ÆĞ³Î¸¸ °ÑÀ¸·Î ½½¶óÀÌµå ¾Æ¿ô
+        // ë ˆë²¨ì—… íŒ¨ë„ë§Œ ê²‰ìœ¼ë¡œ ìŠ¬ë¼ì´ë“œ ì•„ì›ƒ
         _backManager.OverlayOut(_pageList[5], SlideDirection.SLIDE_LEFT);
         _playerCurrentExpBarController.RevertPlayerCurreontExpBar();
-        AllManager.instance.GamemodeManager.GameIngame();  // °ÔÀÓ ¸ğµå º¹¿ø
+        AllManager.instance.GamemodeManager.GameIngame();  // ê²Œì„ ëª¨ë“œ ë³µì›
     }
 
     public void GameOverPage()
