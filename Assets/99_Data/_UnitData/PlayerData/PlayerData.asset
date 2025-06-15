@@ -17,7 +17,7 @@ MonoBehaviour:
     _currentHealth: 200
     _maxHealth: 200
     _moveSpeed: 5
-    _damage: 100
+    _damage: 0
     _defense: 5
     _criticalDamage: 1.5
     _criticalChance: 5

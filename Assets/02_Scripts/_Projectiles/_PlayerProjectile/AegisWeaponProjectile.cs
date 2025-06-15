@@ -11,6 +11,7 @@ public class AegisWeaponProjectile : ProjectileBase
     private float _shrinkTimer;
 
     public int Index { get; private set; }
+
     public int MaxCount { get; private set; }
 
     public void Initialize(int index, int maxCount)
