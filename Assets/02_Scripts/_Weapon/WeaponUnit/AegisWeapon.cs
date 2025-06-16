@@ -37,11 +37,19 @@ public class AegisWeapon : WeaponBase
         }
         else
         {
-            _cooldownTimer += Time.deltaTime;
-            if (_stats != null && _cooldownTimer >= _stats.AttackCooldown)
+            if (_cooldownTimer == 0f)
             {
-                _cooldownTimer = 0f;
-                Shoot();
+                Shoot();                  // ÀÏ´Ü ÇÑ ¹ø ¹Ù·Î ½ô
+                _cooldownTimer += Time.deltaTime;
+            }
+            else
+            {
+                _cooldownTimer += Time.deltaTime;
+                if (_stats != null && _cooldownTimer >= _stats.AttackCooldown)
+                {
+                    _cooldownTimer = 0f;
+                    Shoot();              // ÄðÅ¸ÀÓ¸¶´Ù ½ô
+                }
             }
         }
     }
