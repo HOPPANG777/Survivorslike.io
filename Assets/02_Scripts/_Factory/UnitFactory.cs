@@ -39,7 +39,8 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
         _activeUnits.Add(unit);
         if (data is EnemyUnitSO)
         {
-            var uiGo = _uiFactory.Create(UIType.UI_ENEMY_HEALTHBAR, unit.transform);
+            var parent = UIPoolManager.instance != null ? UIPoolManager.instance.CanvasRoot : null;
+            var uiGo = _uiFactory.Create(UIType.UI_ENEMY_HEALTHBAR, parent);
             if (uiGo != null)
             {
                 var bar = uiGo.GetComponent<EnemyHealthBar>();
