@@ -16,14 +16,7 @@ public class EnemyHealthBar : MonoBehaviour
     {
         _positionProvider = positionProvider;
         _attributeProvider = attributeProvider;
-    }
-
-    private void Awake()
-    {
-        if (_uiCamera == null)
-        {
-            _uiCamera = Camera.main;
-        }
+        _uiCamera = AllManager.instance.GamemodeManager.CameraController.MainCamera;
     }
 
     private void LateUpdate()
