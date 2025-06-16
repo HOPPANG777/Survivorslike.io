@@ -16,6 +16,7 @@ public class AegisWeapon : WeaponBase
     {
         base.SetStatus();
         if (_stats == null) _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+        _stats.SetTargetWeapon(this);
         _cooldownTimer = 0f;
         _durationTimer = 0f;
         if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
@@ -26,7 +27,9 @@ public class AegisWeapon : WeaponBase
         base.Update();
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-        //if (_stats == null) Debug.Log("�ȳ�!");
+            if (_stats != null) _stats.SetTargetWeapon(this);
+        _stats.SetTargetWeapon(this);
+        //if (_stats == null) Debug.Log("¾È³ç!");
 
         if (_durationTimer > 0f)
         {

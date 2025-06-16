@@ -5,11 +5,18 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
 {
     private IUnitAttribute<UnitAttribute> _unitAttr;
     private IWeaponHolder _weaponHolder;
+    private WeaponBase _targetWeapon;
 
     public void SetStatus()
     {
         _unitAttr = this.GetComponent<IUnitAttribute<UnitAttribute>>();
         _weaponHolder = this.GetComponent<IWeaponHolder>();
+        _targetWeapon = null;
+    }
+
+    public void SetTargetWeapon(WeaponBase weapon)
+    {
+        _targetWeapon = weapon;
     }
 
     public float AttackPower
@@ -18,11 +25,10 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         {
             float baseDmg = _unitAttr.Attributes.UnitDamage;
             float total = baseDmg;
-            var weapons = _weaponHolder.EquippedWeapons;
-            for (int i = 0; i < weapons.Count; ++i)
+            if (_targetWeapon != null)
             {
-                var w = weapons[i];
-                total += (baseDmg * w.Attributes.DamageMultiplier) + w.Attributes.FlatDamage;
+                total += (baseDmg * _targetWeapon.Attributes.DamageMultiplier) +
+                         _targetWeapon.Attributes.FlatDamage;
             }
             return total;
         }
@@ -33,10 +39,9 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float speed = _unitAttr.Attributes.UnitAttackSpeed;
-            var weapons = _weaponHolder.EquippedWeapons;
-            for (int i = 0; i < weapons.Count; ++i)
+            if (_targetWeapon != null)
             {
-                speed *= weapons[i].Attributes.AttackSpeedMultiplier;
+                speed *= _targetWeapon.Attributes.AttackSpeedMultiplier;
             }
             return speed;
         }
@@ -47,10 +52,9 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             int cnt = _unitAttr.Attributes.UnitProjectileNumber;
-            var weapons = _weaponHolder.EquippedWeapons;
-            for (int i = 0; i < weapons.Count; ++i)
+            if (_targetWeapon != null)
             {
-                cnt += weapons[i].Attributes.ProjectileCountBonus;
+                cnt += _targetWeapon.Attributes.ProjectileCountBonus;
             }
             return cnt;
         }
@@ -61,10 +65,9 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float rng = _unitAttr.Attributes.UnitAttackRange;
-            var weapons = _weaponHolder.EquippedWeapons;
-            for (int i = 0; i < weapons.Count; ++i)
+            if (_targetWeapon != null)
             {
-                rng += weapons[i].Attributes.RangeBonus;
+                rng += _targetWeapon.Attributes.RangeBonus;
             }
             return rng;
         }
@@ -75,10 +78,9 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float dur = _unitAttr.Attributes.UnitAttackDuration;
-            var weapons = _weaponHolder.EquippedWeapons;
-            for (int i = 0; i < weapons.Count; ++i)
+            if (_targetWeapon != null)
             {
-                dur += weapons[i].Attributes.WeaponDisableTime;
+                dur += _targetWeapon.Attributes.WeaponDisableTime;
             }
             return dur;
         }
@@ -89,10 +91,9 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float cd = _unitAttr.Attributes.UnitAttackCoolDown;
-            var weapons = _weaponHolder.EquippedWeapons;
-            for (int i = 0; i < weapons.Count; ++i)
+            if (_targetWeapon != null)
             {
-                cd += weapons[i].Attributes.AttackCooldown;
+                cd += _targetWeapon.Attributes.AttackCooldown;
             }
             return cd;
         }
@@ -103,10 +104,9 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             float kb = _unitAttr.Attributes.UnitKnockbackForce;
-            var weapons = _weaponHolder.EquippedWeapons;
-            for (int i = 0; i < weapons.Count; ++i)
+            if (_targetWeapon != null)
             {
-                kb += weapons[i].Attributes.KnockbackForce;
+                kb += _targetWeapon.Attributes.KnockbackForce;
             }
             return kb;
         }
@@ -117,10 +117,9 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
         get
         {
             int dc = 0;
-            var weapons = _weaponHolder.EquippedWeapons;
-            for (int i = 0; i < weapons.Count; ++i)
+            if (_targetWeapon != null)
             {
-                dc += weapons[i].Attributes.WeaponDisableCount;
+                dc += _targetWeapon.Attributes.WeaponDisableCount;
             }
             return dc;
         }

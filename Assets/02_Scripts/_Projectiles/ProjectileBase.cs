@@ -6,7 +6,7 @@ using UnityEngine;
 //------------------------------------------------------------------------------
 // ProjectileBase
 //------------------------------------------------------------------------------
-// ¸ğµç Åõ»çÃ¼°¡ »ó¼Ó¹Ş¾Æ °øÅë ·ÎÁ÷(ÀÌµ¿, ¼ö¸í, Ãæµ¹ µî·Ï/ÇØÁ¦, °ø°İ·Â µî)À» °®½À´Ï´Ù.
+// ëª¨ë“  íˆ¬ì‚¬ì²´ê°€ ìƒì†ë°›ì•„ ê³µí†µ ë¡œì§(ì´ë™, ìˆ˜ëª…, ì¶©ëŒ ë“±ë¡/í•´ì œ, ê³µê²©ë ¥ ë“±)ì„ ê°–ìŠµë‹ˆë‹¤.
 //------------------------------------------------------------------------------
 public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<ProjectileAttribute> , ICollidable , IAttacker , IDead, ISetStatus, ISpeakable, ICameraBoundDetectable, IOutOfCameraKillable
 {
@@ -14,49 +14,49 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     [TabGroup("Projectile Base")][Tooltip("Projectile Data")][SerializeField] protected ProjectileBaseSO _projectileBaseData;
     public ProjectileBaseSO ProjectileBaseData { get { return _projectileBaseData; } set { _projectileBaseData = value; } }
 
-    [TabGroup("Projectile")] [Tooltip("Åõ»çÃ¼ ¼Ó¼º (ScriptableObject¿¡¼­ ÇÒ´çµÈ °ª)")][OdinSerialize] protected ProjectileAttribute _projectileAttributes;
+    [TabGroup("Projectile")] [Tooltip("íˆ¬ì‚¬ì²´ ì†ì„± (ScriptableObjectì—ì„œ í• ë‹¹ëœ ê°’)")][OdinSerialize] protected ProjectileAttribute _projectileAttributes;
     public ProjectileAttribute Attributes { get { return _projectileAttributes; }set { _projectileAttributes = value; }}
 
-    [TabGroup("Collision")] [Tooltip("Ãæµ¹ ¹İÁö¸§")][SerializeField] private float _collisionRadius;
+    [TabGroup("Collision")] [Tooltip("ì¶©ëŒ ë°˜ì§€ë¦„")][SerializeField] private float _collisionRadius;
     public float CollisionRadius{ get { return _collisionRadius; }}
 
-    [TabGroup("Projectile Base")][Tooltip("¹ß»çÃ¼ ÀÌ¸§")][SerializeField] protected string _projectileName;
+    [TabGroup("Projectile Base")][Tooltip("ë°œì‚¬ì²´ ì´ë¦„")][SerializeField] protected string _projectileName;
     public string ProjectileName { get { return _projectileName; } set { _projectileName = value; } }   
 
-    [TabGroup("Projectile Base")][Tooltip("ÆÀ Å¸ÀÔ")][SerializeField] protected TeamType _teamType;
+    [TabGroup("Projectile Base")][Tooltip("íŒ€ íƒ€ì…")][SerializeField] protected TeamType _teamType;
     public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
 
-    // »õ·Î Ãß°¡: ÀÌ Åõ»çÃ¼¸¦ ¹ß»çÇÑ ¹«±â ÂüÁ¶
+    // ìƒˆë¡œ ì¶”ê°€: ì´ íˆ¬ì‚¬ì²´ë¥¼ ë°œì‚¬í•œ ë¬´ê¸° ì°¸ì¡°
     public WeaponBase OwnerWeapon { get; private set; }
 
-    [TabGroup("Weapon Base")][Tooltip("ºñÈ°¼ºÈ­ Å¸ÀÔ")][SerializeField] private WeaponDisableType _disableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
+    [TabGroup("Weapon Base")][Tooltip("ë¹„í™œì„±í™” íƒ€ì…")][SerializeField] private WeaponDisableType _disableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
     public WeaponDisableType DisableType { get { return _disableType; } set { _disableType = value; } }
 
-    [TabGroup("Weapon Base")][Tooltip("ºñÈ°¼ºÈ­ ½Ã°£")][SerializeField] private float _remainingLifeTime;
+    [TabGroup("Weapon Base")][Tooltip("ë¹„í™œì„±í™” ì‹œê°„")][SerializeField] private float _remainingLifeTime;
     public float RemainingLifeTime { get { return _remainingLifeTime; } set { _remainingLifeTime = value; } }
 
-    [TabGroup("Weapon Base")][Tooltip("ºñÈ°¼ºÈ­ Ä«¿îÆ®")][SerializeField] private int _remainingPierceCount;
+    [TabGroup("Weapon Base")][Tooltip("ë¹„í™œì„±í™” ì¹´ìš´íŠ¸")][SerializeField] private int _remainingPierceCount;
     public int RemainingPierceCount { get { return _remainingPierceCount; } set { _remainingPierceCount = value; } }
 
     [Header("Projectile Sound")]
-    // »ç¿ëÇÒ »ç¿îµå ÀÌ¸§
-    [TabGroup("Projectile Sound")][Tooltip("»ç¿îµå ÀÌ¸§")][SerializeField] protected string _soundName;
+    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ ì´ë¦„
+    [TabGroup("Projectile Sound")][Tooltip("ì‚¬ìš´ë“œ ì´ë¦„")][SerializeField] protected string _soundName;
     public string SoundName { get { return _soundName; } }
 
-    // »ç¿ëÇÒ »ç¿îµå Å¸ÀÔ
-    [TabGroup("Projectile Sound")][Tooltip("»ç¿îµå Å¸ÀÔ")][SerializeField] protected SoundType _soundType;
+    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ íƒ€ì…
+    [TabGroup("Projectile Sound")][Tooltip("ì‚¬ìš´ë“œ íƒ€ì…")][SerializeField] protected SoundType _soundType;
     public SoundType SoundType { get { return _soundType; } }
 
-    // »ç¿ëÇÒ ¿Àµğ¿À Å¬¸³
-    [TabGroup("Projectile Sound")][Tooltip("¿Àµğ¿À Å¬¸³")][SerializeField] protected AudioClip _soundClip;
+    // ì‚¬ìš©í•  ì˜¤ë””ì˜¤ í´ë¦½
+    [TabGroup("Projectile Sound")][Tooltip("ì˜¤ë””ì˜¤ í´ë¦½")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
-    // ¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼
-    [TabGroup("Projectile Sound")][Tooltip("¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼")][SerializeField] protected AudioSource _soundSource;
+    // ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´
+    [TabGroup("Projectile Sound")][Tooltip("ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´")][SerializeField] protected AudioSource _soundSource;
     public AudioSource SoundSource { get { return _soundSource; } }
 
     [Header("ICollidable")]
-    [TabGroup("ICollidable")][Tooltip("°´Ã¼ÀÇ Æ÷Áö¼ÇÀ» ¹Ş´Â")][SerializeField] protected Vector3 _position => this.transform.position;
+    [TabGroup("ICollidable")][Tooltip("ê°ì²´ì˜ í¬ì§€ì…˜ì„ ë°›ëŠ”")][SerializeField] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
 
     [Header("IAttacker")]
@@ -75,13 +75,13 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     public bool IsOutOfCamera => _isOut;
 
 
-    // 1) Start ¿¡¼­ SetStatus È£Ãâ
+    // 1) Start ì—ì„œ SetStatus í˜¸ì¶œ
     protected virtual void Start()
     {
         //SetStatus();
     }
 
-    // 2) Update ¿¡¼­ ÀÌµ¿ & ¼ö¸í Ã¼Å©
+    // 2) Update ì—ì„œ ì´ë™ & ìˆ˜ëª… ì²´í¬
     protected virtual void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
@@ -101,10 +101,10 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     }
 
     /// <summary>
-    /// Åõ»çÃ¼°¡ ²¨Áú ¶§(¶Ç´Â Àç»ç¿ë Á÷Àü¿¡) ¹İµå½Ã ºÒ·¯¾ß ÇÒ ÃÊ±âÈ­ ·ÎÁ÷
-    /// - Ãæµ¹ ¹İÁö¸§ ¼³Á¤
-    /// - CollisionManager µî·Ï
-    /// - ¼ö¸í Å¸ÀÌ¸Ó ÃÊ±âÈ­
+    /// íˆ¬ì‚¬ì²´ê°€ êº¼ì§ˆ ë•Œ(ë˜ëŠ” ì¬ì‚¬ìš© ì§ì „ì—) ë°˜ë“œì‹œ ë¶ˆëŸ¬ì•¼ í•  ì´ˆê¸°í™” ë¡œì§
+    /// - ì¶©ëŒ ë°˜ì§€ë¦„ ì„¤ì •
+    /// - CollisionManager ë“±ë¡
+    /// - ìˆ˜ëª… íƒ€ì´ë¨¸ ì´ˆê¸°í™”
     /// </summary>
     public virtual void SetStatus()
     {
@@ -126,12 +126,15 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     }
 
 
-    // (1) SetStatus ½Ã ownerWeaponÀ» ÇÔ²² ÁÖÀÔ
-    public void SetStatus(WeaponBase ownerWeapon)
-    {
-        OwnerWeapon = ownerWeapon;
+        if (statsProv != null)
+        {
+            statsProv.SetTargetWeapon(ownerWeapon);
+            _projectileAttributes.LifeTime += statsProv.AttackDuration;
+            _projectileAttributes.PierceCount += statsProv.WeaponDisableCount;
+            AttackPower = statsProv.AttackPower;
+        }
 
-        // SO µ¥ÀÌÅÍ º¹Á¦
+        //  Ä« Ê±È­
         _projectileBaseData.SetData(_projectileBaseData);
         _projectileAttributes = _projectileBaseData.ProjectileAttribute;
         _projectileName = _projectileBaseData.ProjectileName;
@@ -140,7 +143,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
         _projectileAttributes.LifeTime += statsProv.AttackDuration;
         _projectileAttributes.PierceCount += statsProv.WeaponDisableCount;
         
-        // ³»ºÎ Ä«¿îÅÍ ÃÊ±âÈ­
+        // ë‚´ë¶€ ì¹´ìš´í„° ì´ˆê¸°í™”
         _remainingLifeTime = _projectileAttributes.LifeTime;
         _remainingPierceCount = _projectileAttributes.PierceCount;
         AttackPower = statsProv.AttackPower;
@@ -162,7 +165,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     }
 
     /// <summary>
-    /// Åõ»çÃ¼ ÀÌµ¿ ·ÎÁ÷ (transform.up ¹æÇâÀ¸·Î º¸³»ÁÜ)
+    /// íˆ¬ì‚¬ì²´ ì´ë™ ë¡œì§ (transform.up ë°©í–¥ìœ¼ë¡œ ë³´ë‚´ì¤Œ)
     /// </summary>
     protected virtual void Move()
     {
@@ -170,7 +173,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     }
 
     /// <summary>
-    /// ¼ö¸í ¸¸·á ½Ã ÀÚµ¿ Á¦°Å (Dead È£Ãâ)
+    /// ìˆ˜ëª… ë§Œë£Œ ì‹œ ìë™ ì œê±° (Dead í˜¸ì¶œ)
     /// </summary>
     public virtual void CheckDead()
     {
@@ -180,7 +183,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
         {
             case WeaponDisableType.WEAPONDISABLETYPE_NONE:
                 {
-                    // ÀÌ°Ô µğÆúÆ®
+                    // ì´ê²Œ ë””í´íŠ¸
                     _age += Time.deltaTime;
                     if (_age < _remainingLifeTime ) return;
                     Dead();
@@ -188,14 +191,14 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
                 break;
             case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
                 {
-                    // ¹«±â °üÅëÀÌ³ª ¹İ»ç¸¦ ÅëÇØ¼­ Ä«¿îÆ®°¡ °¨¼ÒµÇ¼­ 0ÀÌ µÇ¸é »ç¶óÁö´Â ¹«±â
+                    // ë¬´ê¸° ê´€í†µì´ë‚˜ ë°˜ì‚¬ë¥¼ í†µí•´ì„œ ì¹´ìš´íŠ¸ê°€ ê°ì†Œë˜ì„œ 0ì´ ë˜ë©´ ì‚¬ë¼ì§€ëŠ” ë¬´ê¸°
                     if (_remainingLifeTime > 0) return;
                     Dead();
                 }
                 break;
             case WeaponDisableType.WEAPONDISABLETYPE_TIME:
                 {
-                    // ¹«±â »ç¿ë½Ã°£ÀÌ Áö³ª¸é »ç¶óÁö´Â ¹«±â
+                    // ë¬´ê¸° ì‚¬ìš©ì‹œê°„ì´ ì§€ë‚˜ë©´ ì‚¬ë¼ì§€ëŠ” ë¬´ê¸°
                     if (_remainingPierceCount > 0) return;
                     Dead();
                 }
@@ -204,17 +207,17 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     }
 
     /// <summary>
-    /// IDead ±¸Çö: CollisionManager ¿¡¼­ ÇØÁ¦ÇÏ°í
-    /// Ç® ¸Å´ÏÀú·Î ¹İÈ¯
+    /// IDead êµ¬í˜„: CollisionManager ì—ì„œ í•´ì œí•˜ê³ 
+    /// í’€ ë§¤ë‹ˆì €ë¡œ ë°˜í™˜
     /// </summary>
     public virtual void Dead()
     {
         if (isDead == true) return;
 
-        // Ãæµ¹ ½Ã½ºÅÛ¿¡¼­ ÇØÁ¦
+        // ì¶©ëŒ ì‹œìŠ¤í…œì—ì„œ í•´ì œ
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
 
-        // Ç®·Î ¹İÈ¯
+        // í’€ë¡œ ë°˜í™˜
         ProjectileFactory.instance.Release(this);
 
         isDead = true;
@@ -236,7 +239,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
             OnEnterCamera();
         }
 
-        // ¹Û¿¡ ÀÖ´Â µ¿¾È
+        // ë°–ì— ìˆëŠ” ë™ì•ˆ
         if (_isOut)
         {
             _outTimer += Time.deltaTime;
@@ -246,19 +249,19 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
 
     public void OnExitCamera()
     {
-        // Ã³À½ ³ª°¥ ¶§ µ¿ÀÛ(È¿°úÀ½ µî)
-        //Debug.Log("Ä«¸Ş¶ó ¹ÛÀ¸·Î ³ª°¨!");
+        // ì²˜ìŒ ë‚˜ê°ˆ ë•Œ ë™ì‘(íš¨ê³¼ìŒ ë“±)
+        //Debug.Log("ì¹´ë©”ë¼ ë°–ìœ¼ë¡œ ë‚˜ê°!");
     }
 
     public void OnEnterCamera()
     {
-        // ´Ù½Ã µé¾î¿À¸é
-        //Debug.Log("Ä«¸Ş¶ó ¾ÈÀ¸·Î µé¾î¿È!");
+        // ë‹¤ì‹œ ë“¤ì–´ì˜¤ë©´
+        //Debug.Log("ì¹´ë©”ë¼ ì•ˆìœ¼ë¡œ ë“¤ì–´ì˜´!");
     }
 
     public void OnOutOfCamera(float outTime)
     {
-        // ¹Û¿¡ ³ª°¡ÀÖ´Â ½Ã°£ Ã¼Å© ÈÄ Á×ÀÌ±â
+        // ë°–ì— ë‚˜ê°€ìˆëŠ” ì‹œê°„ ì²´í¬ í›„ ì£½ì´ê¸°
         if (outTime >= _killDelay) Dead();
     }
 
