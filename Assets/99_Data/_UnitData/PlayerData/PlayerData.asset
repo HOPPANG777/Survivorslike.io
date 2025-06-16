@@ -17,16 +17,16 @@ MonoBehaviour:
     _currentHealth: 200
     _maxHealth: 200
     _moveSpeed: 5
-    _damage: 0
+    _damage: 1
     _defense: 5
     _criticalDamage: 1.5
     _criticalChance: 5
     _projectileNumber: 0
-    _attackSpeed: 5
-    _attackRange: 2
+    _attackSpeed: 0.5
+    _attackRange: 1
     _attackDuration: 0
     _attackCoolDown: 0
-    _knockbackForce: 0
+    _knockbackForce: 1
   _unitSprite: {fileID: 21300000, guid: a00fe705d046a0146abadb7668ff56bc, type: 3}
   _unitName: Player
   _teamType: 1

@@ -34,9 +34,9 @@ public class AegisWeaponProjectile : ProjectileBase
         UpdateScale();
     }
 
-    public override void SetStatus()
+    public override void SetStatus(WeaponBase ownerWeapon)
     {
-        base.SetStatus();
+        base.SetStatus(ownerWeapon);
         // DisableType를 직접 제어하기 위해 NONE으로 설정
         DisableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
     }

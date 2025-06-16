@@ -25,7 +25,7 @@ MonoBehaviour:
     _attackCooldown: 5
     _knockbackForce: 1
     _weaponDisableCount: 0
-    _weaponDisableTime: 2
+    _weaponDisableTime: 4
   - _flatDamage: 20
     _damageMultiplier: 0
     _criticalDamage: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     _attackCooldown: 5
     _knockbackForce: 1
     _weaponDisableCount: 0
-    _weaponDisableTime: 3
+    _weaponDisableTime: 4
   - _flatDamage: 25
     _damageMultiplier: 0
     _criticalDamage: 0

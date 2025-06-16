@@ -126,7 +126,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     }
 
 
-    public void SetStatus(WeaponBase ownerWeapon)
+    public virtual void SetStatus(WeaponBase ownerWeapon)
     {
         OwnerWeapon = ownerWeapon;
         _projectileBaseData.SetData(_projectileBaseData);

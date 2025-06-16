@@ -27,8 +27,7 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
             float total = baseDmg;
             if (_targetWeapon != null)
             {
-                total += (baseDmg * _targetWeapon.Attributes.DamageMultiplier) +
-                         _targetWeapon.Attributes.FlatDamage;
+                total += (baseDmg * _targetWeapon.Attributes.DamageMultiplier) + _targetWeapon.Attributes.FlatDamage;
             }
             return total;
         }
