@@ -126,6 +126,15 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     }
 
 
+    public void SetStatus(WeaponBase ownerWeapon)
+    {
+        OwnerWeapon = ownerWeapon;
+        _projectileBaseData.SetData(_projectileBaseData);
+        _projectileAttributes = _projectileBaseData.ProjectileAttribute;
+        _projectileName = _projectileBaseData.ProjectileName;
+
+        var statsProv = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+
         if (statsProv != null)
         {
             statsProv.SetTargetWeapon(ownerWeapon);
@@ -134,19 +143,9 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
             AttackPower = statsProv.AttackPower;
         }
 
-        //  ī ʱȭ
-        _projectileBaseData.SetData(_projectileBaseData);
-        _projectileAttributes = _projectileBaseData.ProjectileAttribute;
-        _projectileName = _projectileBaseData.ProjectileName;
-
-        var statsProv = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
-        _projectileAttributes.LifeTime += statsProv.AttackDuration;
-        _projectileAttributes.PierceCount += statsProv.WeaponDisableCount;
-        
         // 내부 카운터 초기화
         _remainingLifeTime = _projectileAttributes.LifeTime;
         _remainingPierceCount = _projectileAttributes.PierceCount;
-        AttackPower = statsProv.AttackPower;
 
         _teamType = _projectileBaseData.TeamType;
         _disableType = OwnerWeapon.WeaponDisableType;

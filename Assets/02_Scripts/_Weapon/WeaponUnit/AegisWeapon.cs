@@ -27,9 +27,8 @@ public class AegisWeapon : WeaponBase
         base.Update();
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-            if (_stats != null) _stats.SetTargetWeapon(this);
+        if (_stats != null) _stats.SetTargetWeapon(this);
         _stats.SetTargetWeapon(this);
-        //if (_stats == null) Debug.Log("¾È³ç!");
 
         if (_durationTimer > 0f)
         {
@@ -61,6 +60,10 @@ public class AegisWeapon : WeaponBase
             {
                 proj.Initialize(i, count);
                 _activeProjectiles.Add(proj);
+            }
+            else if (proj == null)
+            {
+                Debug.LogError("Failed to create AegisWeaponProjectile. Check if the prefab is set correctly in ProjectileFactory.");
             }
         }
         _durationTimer = _stats.AttackDuration;

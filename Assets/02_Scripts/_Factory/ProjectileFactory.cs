@@ -12,7 +12,6 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
     private Dictionary<ProjectileBaseSO, GameObject> _map;
     private Dictionary<WeaponType, ProjectileBaseSO> _typeToSO;
 
-    // Ȱȭ() ߻ü 
     private readonly List<ProjectileBase> _activeProjectiles = new List<ProjectileBase>();
 
     private void Start()
