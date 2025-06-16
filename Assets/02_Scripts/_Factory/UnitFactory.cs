@@ -12,6 +12,8 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
     private IUIFactory _uiFactory;
 
     private readonly List<UnitBase> _activeUnits = new List<UnitBase>();
+    // Map each spawned unit to its health bar so we can properly release it
+    private readonly Dictionary<UnitBase, EnemyHealthBar> _unitBars = new Dictionary<UnitBase, EnemyHealthBar>();
 
     private void Start()
     {
@@ -49,6 +51,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
                 if (bar != null && pos != null && attr != null)
                 {
                     bar.Bind(pos, attr);
+                    _unitBars[unit] = bar;
                 }
             }
         }
@@ -65,10 +68,10 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
             _activeUnits.Remove(unit);
         }
 
-        var bar = unit.GetComponentInChildren<EnemyHealthBar>();
-        if (bar != null)
+        if (_unitBars.TryGetValue(unit, out var bar))
         {
             _uiFactory.Release(bar.gameObject);
+            _unitBars.Remove(unit);
         }
         unit.gameObject.SetActive(false);
         _pool.Return(unit.gameObject);
@@ -81,15 +84,16 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
             var unit = _activeUnits[i];
             if (unit != null)
             {
-                var bar = unit.GetComponentInChildren<EnemyHealthBar>();
-                if (bar != null)
+                if (_unitBars.TryGetValue(unit, out var bar))
                 {
                     _uiFactory.Release(bar.gameObject);
+                    _unitBars.Remove(unit);
                 }
                 unit.gameObject.SetActive(false);
                 _pool.Return(unit.gameObject);
             }
         }
         _activeUnits.Clear();
+        _unitBars.Clear();
     }
 }
