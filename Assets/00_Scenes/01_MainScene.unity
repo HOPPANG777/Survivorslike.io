@@ -7682,7 +7682,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _entries: []
+  _entries:
+  - Type: 1
+    Prefab: {fileID: 582681880845817058, guid: 43c04eb6df9dda64e83db28a96b9fdd7, type: 3}
 --- !u!1 &900324526
 GameObject:
   m_ObjectHideFlags: 0
@@ -8911,6 +8913,8 @@ MonoBehaviour:
   - Prefab: {fileID: 9132914363161966335, guid: fcd9432bc8b5b624aa5b68e8bf41285b, type: 3}
     InitialSize: 1000
   - Prefab: {fileID: 9132914363161966335, guid: e40de99e5ae998746b99ed8b78b2c0d2, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 582681880845817058, guid: 43c04eb6df9dda64e83db28a96b9fdd7, type: 3}
     InitialSize: 1000
 --- !u!4 &1131158582
 Transform:
