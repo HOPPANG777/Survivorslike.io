@@ -5,7 +5,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class UIFactory : SerializedSingleton<UIFactory>, IUIFactory
 {
-    [TabGroup("UI Factory")][SerializeField]
+    [TabGroup("UI Factory")]
+    [SerializeField]
     private List<UIPrefabEntry> _entries = new List<UIPrefabEntry>();
 
     private IPoolManager _pool;
