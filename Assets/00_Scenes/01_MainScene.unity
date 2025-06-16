@@ -8104,6 +8104,7 @@ MonoBehaviour:
     _playerCurrentExp: 0
     _playerLevel: 0
   _equippedWeapons: []
+  _attackStatsProvider: {fileID: 0}
 --- !u!114 &962865892
 MonoBehaviour:
   m_ObjectHideFlags: 0
