@@ -31,16 +31,6 @@ public class EnemyHealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_positionProvider == null)
-        {
-            Debug.Log("EnemyHealthBar: PositionProvider is not assigned!");
-        }
-
-        if (_attributeProvider == null)
-        {
-            Debug.Log("EnemyHealthBar: Attribute is not assigned!");
-        }
-
         if (_positionProvider == null || _attributeProvider == null) return;
 
         Vector3 worldPos = _positionProvider.Position + _offset;
@@ -58,7 +48,5 @@ public class EnemyHealthBar : MonoBehaviour
         {
             _fillImage.fillAmount = attr.UnitCurrentHealth / attr.UnitMaxHealth;
         }
-
-        Debug.Log($"HealthBar Position: {this.transform.position}, Fill Amount: {_fillImage.fillAmount}");
     }
 }
