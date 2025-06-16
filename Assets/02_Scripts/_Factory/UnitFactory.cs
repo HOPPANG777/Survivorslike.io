@@ -5,12 +5,33 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
 {
-    [TabGroup("Unit Factory")][Tooltip("UnitData SO ¡ê Prefab ¸ÅÇÎ")][SerializeField] private List<UnitPrefabEntry> _entries = new List<UnitPrefabEntry>();
+    private IUIFactory _uiFactory;
+        _uiFactory = UIFactory.instance;
+        if (data is EnemyUnitSO) {
+            var uiGo = _uiFactory.Create(UIType.UI_ENEMY_HEALTHBAR, unit.transform);
+            if (uiGo != null) {
+                var bar = uiGo.GetComponent<EnemyHealthBar>();
+                var pos = unit as IPositionProvider;
+                var attr = unit as IUnitAttribute<UnitAttribute>;
+                if (bar != null && pos != null && attr != null) {
+                    bar.Bind(pos, attr);
+                }
+            }
+        }
+        var bar = unit.GetComponentInChildren<EnemyHealthBar>();
+        if (bar != null) {
+            _uiFactory.Release(bar.gameObject);
+        }
+            var bar = unit.GetComponentInChildren<EnemyHealthBar>();
+            if (bar != null) {
+                _uiFactory.Release(bar.gameObject);
+            }
+    [TabGroup("Unit Factory")][Tooltip("UnitData SO â†” Prefab ë§¤í•‘")][SerializeField] private List<UnitPrefabEntry> _entries = new List<UnitPrefabEntry>();
 
     private Dictionary<UnitBaseSO, GameObject> _map;
     private IPoolManager _pool;
 
-    // È°¼ºÈ­µÈ(»ı¼ºµÈ) À¯´Ö ¸ñ·Ï
+    // í™œì„±í™”ëœ(ìƒì„±ëœ) ìœ ë‹› ëª©ë¡
     private readonly List<UnitBase> _activeUnits = new List<UnitBase>();
 
     private void Start()
@@ -35,7 +56,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
         unit.UnitBaseData = data;
         unit.SetStatus();
 
-        // È°¼º À¯´ÖÀ¸·Î µî·Ï
+        // í™œì„± ìœ ë‹›ìœ¼ë¡œ ë“±ë¡
         _activeUnits.Add(unit);
 
         return unit;
@@ -45,7 +66,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
     {
         if (unit == null) return;
         
-        // È°¼º ¸ñ·Ï¿¡¼­ Á¦°Å
+        // í™œì„± ëª©ë¡ì—ì„œ ì œê±°
         if (_activeUnits.Contains(unit))
         {
             _activeUnits.Remove(unit);
