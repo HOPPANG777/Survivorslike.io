@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RedRectData
   m_EditorClassIdentifier: 
   _unitAttribute:
-    _health: 100
-    _currentHealth: 100
-    _maxHealth: 100
+    _health: 60
+    _currentHealth: 60
+    _maxHealth: 60
     _moveSpeed: 2.5
     _damage: 5
     _defense: 1
@@ -35,5 +35,4 @@ MonoBehaviour:
   _soundClip: {fileID: 0}
   _collisionRadius: 0.5
   _enemyAttribute:
-    _enemyExp: 25
     _enemyPushStrength: 1

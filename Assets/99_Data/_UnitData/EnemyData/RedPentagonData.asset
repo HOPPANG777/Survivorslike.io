@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RedPentagonData
   m_EditorClassIdentifier: 
   _unitAttribute:
-    _health: 200
-    _currentHealth: 200
-    _maxHealth: 200
+    _health: 70
+    _currentHealth: 70
+    _maxHealth: 70
     _moveSpeed: 2.5
     _damage: 10
     _defense: 1
@@ -35,5 +35,4 @@ MonoBehaviour:
   _soundClip: {fileID: 0}
   _collisionRadius: 0.5
   _enemyAttribute:
-    _enemyExp: 25
     _enemyPushStrength: 1

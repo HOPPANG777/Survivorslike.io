@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RedHexagonData
   m_EditorClassIdentifier: 
   _unitAttribute:
-    _health: 300
-    _currentHealth: 300
-    _maxHealth: 300
+    _health: 100
+    _currentHealth: 100
+    _maxHealth: 100
     _moveSpeed: 2
     _damage: 10
     _defense: 5
