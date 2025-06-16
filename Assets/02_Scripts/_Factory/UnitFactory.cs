@@ -45,7 +45,12 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
             var uiGo = _uiFactory.Create(UIType.UI_ENEMY_HEALTHBAR, parent);
             if (uiGo != null)
             {
-                var bar = uiGo.GetComponent<EnemyHealthBar>();
+                EnemyHealthBar bar = null;
+                if (uiGo.transform.childCount > 0)
+                {
+                    var child = uiGo.transform.GetChild(0);
+                    bar = child.GetComponent<EnemyHealthBar>();
+                }
                 var pos = unit as IPositionProvider;
                 var attr = unit as IUnitAttribute<UnitAttribute>;
                 if (bar != null && pos != null && attr != null)

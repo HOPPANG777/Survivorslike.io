@@ -16,21 +16,41 @@ public class EnemyHealthBar : MonoBehaviour
     {
         _positionProvider = positionProvider;
         _attributeProvider = attributeProvider;
-        _uiCamera = AllManager.instance.GamemodeManager.CameraController.MainCamera;
+        //_uiCamera = AllManager.instance.GamemodeManager.CameraController.MainCamera;
+    }
+
+    private void Awake()
+    {
+        // Fallback to Camera.main if no camera was assigned (e.g. when the
+        // object is edited in Prefab Mode and cannot reference scene objects).
+        if (_uiCamera == null)
+        {
+            _uiCamera = Camera.main;
+        }
     }
 
     private void LateUpdate()
     {
+        if (_positionProvider == null)
+        {
+            Debug.Log("EnemyHealthBar: PositionProvider is not assigned!");
+        }
+
+        if (_attributeProvider == null)
+        {
+            Debug.Log("EnemyHealthBar: Attribute is not assigned!");
+        }
+
         if (_positionProvider == null || _attributeProvider == null) return;
 
         Vector3 worldPos = _positionProvider.Position + _offset;
         if (_uiCamera != null && GetComponentInParent<Canvas>()?.renderMode != RenderMode.WorldSpace)
         {
-            transform.position = _uiCamera.WorldToScreenPoint(worldPos);
+            this.transform.position = _uiCamera.WorldToScreenPoint(worldPos);
         }
         else
         {
-            transform.position = worldPos;
+            this.transform.position = worldPos;
         }
 
         UnitAttribute attr = _attributeProvider.Attributes;
@@ -38,5 +58,7 @@ public class EnemyHealthBar : MonoBehaviour
         {
             _fillImage.fillAmount = attr.UnitCurrentHealth / attr.UnitMaxHealth;
         }
+
+        Debug.Log($"HealthBar Position: {this.transform.position}, Fill Amount: {_fillImage.fillAmount}");
     }
 }
