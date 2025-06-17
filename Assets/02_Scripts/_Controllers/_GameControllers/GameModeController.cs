@@ -28,8 +28,8 @@ public class GameModeController : MonoBehaviour, IGameMode
     public int KillCount { get { return _killCount; } set { _killCount = value; } }
 
     [TabGroup("Player")][Tooltip("Player Data")][SerializeField] private PlayerUnitSO _playerData;
+
     private GameObject _playerInstance;
-    private UnitFactory _unitFactory;
     public GameObject Player { get { return _playerInstance; } }
 
     private void Update()
@@ -90,8 +90,6 @@ public class GameModeController : MonoBehaviour, IGameMode
 
     public void GameStart()
     {
-        _unitFactory = UnitFactory.instance;
-
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
@@ -103,12 +101,12 @@ public class GameModeController : MonoBehaviour, IGameMode
             unitPrev.EquippedWeapons.Clear();
         }
 
-        _unitFactory.ReleaseAll();
+        UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         WeaponFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
 
-        var playerUnit = _unitFactory.Create(_playerData, Vector3.zero) as PlayerUnit;
+        var playerUnit = UnitFactory.instance.Create(_playerData, Vector3.zero) as PlayerUnit;
         _playerInstance = playerUnit != null ? playerUnit.gameObject : null;
 
         if (playerUnit != null)
@@ -152,7 +150,7 @@ public class GameModeController : MonoBehaviour, IGameMode
             var unit = _playerInstance.GetComponent<PlayerUnit>();
             unit.EquippedWeapons.Clear();
         }
-        _unitFactory.ReleaseAll();
+        UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         WeaponFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
@@ -170,7 +168,7 @@ public class GameModeController : MonoBehaviour, IGameMode
         if (_playerInstance != null)
         {
             var unit = _playerInstance.GetComponent<PlayerUnit>();
-            _unitFactory.Release(unit);
+            UnitFactory.instance.Release(unit);
             _playerInstance = null;
         }
         GameMode = GameModeType.GAMEMODE_NONE;
