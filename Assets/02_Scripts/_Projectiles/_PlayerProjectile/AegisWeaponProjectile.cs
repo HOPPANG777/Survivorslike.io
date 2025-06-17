@@ -80,6 +80,9 @@ public class AegisWeaponProjectile : ProjectileBase
         if (_shrinking) return;
         _shrinking = true;
         _shrinkTimer = 0f;
+        // 수명 카운트를 초기화하여 즉시 사라지는 것을 방지
+        RemainingLifeTime = ScaleDuration;
+        _age = 0f;
     }
 
     public override void SoundPlay()
@@ -94,6 +97,13 @@ public class AegisWeaponProjectile : ProjectileBase
 
     public override void CheckDead()
     {
+        if (_shrinking)
+        {
+            // 카메라 밖으로 나갔는지 체크는 유지
+            UpdateCameraBound();
+            return;
+        }
+
         base.CheckDead();
     }
 

@@ -28,9 +28,9 @@ public class GameModeController : MonoBehaviour, IGameMode
     public int KillCount { get { return _killCount; } set { _killCount = value; } }
 
     [TabGroup("Player")][Tooltip("플레이어")][SerializeField] private GameObject _player;
-    public GameObject Player { get { return _player; } }
-
-
+    private GameObject _playerInstance;
+    private IPoolManager _pool;
+    public GameObject Player { get { return _playerInstance; } }
 
     private void Update()
     {
@@ -90,17 +90,40 @@ public class GameModeController : MonoBehaviour, IGameMode
 
     public void GameStart()
     {
+        _pool = PoolManager.instance;
+        if (_player != null)
+        {
+            _player.SetActive(false);
+        }
+
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
-        Player.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
+        //Player.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
+
+        if (_playerInstance != null)
+        {
+            _playerInstance.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
+            _pool.Return(_playerInstance);
+        }
+
+        _playerInstance = _pool.Get(_player);
+        _playerInstance.transform.position = Vector3.zero;
+
         UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         WeaponFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
-        Player.GetComponent<PlayerUnit>().SetStatus();
-        Player.transform.position = Vector3.zero;
-        Player.gameObject.SetActive(false);
+        //Player.GetComponent<PlayerUnit>().SetStatus();
+        //Player.transform.position = Vector3.zero;
+        //Player.gameObject.SetActive(false);
+
+        var unit = _playerInstance.GetComponent<PlayerUnit>();
+        unit.SetStatus();
+        unit.EquippedWeapons.Clear();
+
+        _playerInstance.SetActive(false);
+
         GameMode = GameModeType.GAMEMODE_GAMESTART;
     }
 
@@ -111,7 +134,12 @@ public class GameModeController : MonoBehaviour, IGameMode
 
     public void GameIngame()
     {
-        Player.gameObject.SetActive(true);
+        //Player.gameObject.SetActive(true);
+        if (_playerInstance != null)
+        {
+            _playerInstance.SetActive(true);
+        }
+
         GameMode = GameModeType.GAMEMODE_INGAME;
     }
 
@@ -125,14 +153,21 @@ public class GameModeController : MonoBehaviour, IGameMode
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
-        Player.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
+        //Player.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
+        if (_playerInstance != null)
+        {
+            _playerInstance.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
+            _pool.Return(_playerInstance);
+            _playerInstance = null;
+        }
         UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         WeaponFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
-        Player.GetComponent<PlayerUnit>().SetStatus();
-        Player.transform.position = Vector3.zero;
-        Player.gameObject.SetActive(false);
+        //Player.GetComponent<PlayerUnit>().SetStatus();
+        //Player.transform.position = Vector3.zero;
+        //Player.gameObject.SetActive(false);
+        _player.SetActive(false); // keep prefab hidden
         GameMode = GameModeType.GAMEMODE_GAMEOVER;
     }
 
@@ -143,6 +178,11 @@ public class GameModeController : MonoBehaviour, IGameMode
 
     public void GameExit()
     {
+        if (_playerInstance != null)
+        {
+            _pool.Return(_playerInstance);
+            _playerInstance = null;
+        }
         GameMode = GameModeType.GAMEMODE_NONE;
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

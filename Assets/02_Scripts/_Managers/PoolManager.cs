@@ -60,8 +60,13 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
             Destroy(instance);
             return;
         }
+        if (!_pools.TryGetValue(prefab, out var queue))
+        {
+            queue = new Queue<GameObject>();
+            _pools[prefab] = queue;
+        }
         instance.SetActive(false);
-        _pools[prefab].Enqueue(instance);
+        queue.Enqueue(instance);
     }
 
     // 인터페이스 상속 구현 (프리팹 없이 직접 Return 호출)
