@@ -49,6 +49,7 @@ public class CollisionController : MonoBehaviour
 
     void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         // 1) 충돌 검출 대상: 미리 등록된 리스트만 사용
         var entities = _collidables;
 

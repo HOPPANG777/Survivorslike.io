@@ -20,6 +20,7 @@ public class EnemyShooterController : MonoBehaviour, IShoot
 
     private void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         _shootTimer += Time.deltaTime;
         if (_shootTimer >= _shootInterval)
         {

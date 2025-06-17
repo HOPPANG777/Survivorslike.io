@@ -49,6 +49,7 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable, ISetSt
 
     private void LateUpdate()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         Dash();
     }
 

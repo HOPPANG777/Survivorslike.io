@@ -59,6 +59,7 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
 
     private void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         Teleport();
     }
 

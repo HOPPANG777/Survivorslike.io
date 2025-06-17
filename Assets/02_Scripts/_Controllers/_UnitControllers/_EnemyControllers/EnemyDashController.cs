@@ -49,6 +49,7 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
 
     private void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         Dash();
     }
 

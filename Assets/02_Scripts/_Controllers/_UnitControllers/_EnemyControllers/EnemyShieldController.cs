@@ -22,6 +22,7 @@ public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision
 
     private void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (CheckEnemyMoveTarget() == false) return;
         if (CheckShieldTarget() == false) return;
 

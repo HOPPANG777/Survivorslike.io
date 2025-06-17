@@ -28,6 +28,7 @@ public class PlayerMouseDirectionController : MonoBehaviour, IRotationable, ISet
 
     private void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         Rotate();
     }
 

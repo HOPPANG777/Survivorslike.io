@@ -23,6 +23,7 @@ public class EnemyMoveController : MonoBehaviour, IMoveable, IRotationable
 
     private void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (CheckEnemyMoveTarget() == false) return;
         Move();
         Rotate();

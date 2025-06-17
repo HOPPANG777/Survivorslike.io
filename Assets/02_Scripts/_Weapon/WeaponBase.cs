@@ -57,7 +57,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public virtual void Update()
     {
-        
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public virtual void Shoot()
@@ -77,7 +77,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public bool LevelUp()
     {
-        if (CurrentLevel >= MaxLevel) return false;
+        if (CurrentLevel >= MaxLevel - 1) return false;
         CurrentLevel++;
         ApplyLevelAttributes();
         return true;
@@ -86,7 +86,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
     public void ApplyLevelAttributes()
     {
         // 레벨에 맞는 속성표에서 가져와서 적용
-        int idx = Mathf.Clamp(CurrentLevel - 1, 0, _weaponBaseData.LevelAttributes.Count - 1);
+        int idx = Mathf.Clamp(CurrentLevel, 0, _weaponBaseData.LevelAttributes.Count - 1);
         _weaponAttribute = _weaponBaseData.LevelAttributes[idx];
     }
 
@@ -105,7 +105,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
     public virtual void SetStatus()
     {
         _weaponBaseData.SetData(WeaponBaseData);
-        _weaponAttribute = _weaponBaseData.LevelAttributes[CurrentLevel];
+        _weaponAttribute = _weaponBaseData.LevelAttributes[Mathf.Clamp(CurrentLevel, 0, _weaponBaseData.LevelAttributes.Count - 1)];
         _weaponName = _weaponBaseData.WeaponName;
         _collisionRadius = _weaponBaseData.CollisionRadius;
         _teamType = _weaponBaseData.TeamType;

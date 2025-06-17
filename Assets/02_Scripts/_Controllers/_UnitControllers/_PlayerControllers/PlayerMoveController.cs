@@ -25,6 +25,7 @@ public class PlayerMoveController : MonoBehaviour, IMoveable, ISetStatus
 
     private void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         Move();
     }
 
