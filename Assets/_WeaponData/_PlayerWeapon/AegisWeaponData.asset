@@ -25,7 +25,7 @@ MonoBehaviour:
     _attackCooldown: 5
     _knockbackForce: 1
     _weaponDisableCount: 0
-    _weaponDisableTime: 4
+    _weaponDisableTime: 6
   - _flatDamage: 40
     _damageMultiplier: 0
     _criticalDamage: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     _attackCooldown: 5
     _knockbackForce: 1
     _weaponDisableCount: 0
-    _weaponDisableTime: 4
+    _weaponDisableTime: 6
   - _flatDamage: 45
     _damageMultiplier: 0
     _criticalDamage: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     _attackCooldown: 5
     _knockbackForce: 1
     _weaponDisableCount: 0
-    _weaponDisableTime: 4
+    _weaponDisableTime: 7
   - _flatDamage: 50
     _damageMultiplier: 0
     _criticalDamage: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
     _attackCooldown: 5
     _knockbackForce: 1
     _weaponDisableCount: 0
-    _weaponDisableTime: 4
+    _weaponDisableTime: 8
   - _flatDamage: 70
     _damageMultiplier: 0
     _criticalDamage: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
     _attackCooldown: 5
     _knockbackForce: 1
     _weaponDisableCount: 0
-    _weaponDisableTime: 5
+    _weaponDisableTime: 10
   _maxLevel: 5
   _teamType: 1
   _weaponDisableType: 2
