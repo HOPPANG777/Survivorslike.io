@@ -14,6 +14,7 @@ public class AegisWeapon : WeaponBase
     [TabGroup("Agies Weapon")][Tooltip("ShrinkDuration")][SerializeField] private const float ShrinkDuration = 0.1f;
     [TabGroup("Agies Weapon")][Tooltip("_isShrinking")][SerializeField] private bool _isShrinking;
     [TabGroup("Agies Weapon")][Tooltip("_shrinkTimer")][SerializeField] private float _shrinkTimer;
+    [TabGroup("Agies Weapon")][Tooltip("_lastProjectileCount")][SerializeField] private int _lastProjectileCount = -1;
 
     public override void SetStatus()
     {
@@ -26,6 +27,7 @@ public class AegisWeapon : WeaponBase
         _shrinkTimer = 0f;
         transform.localScale = Vector3.one;
         if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        _lastProjectileCount = Mathf.Max(1, _stats.GetProjectileCount(this));
     }
 
     public override void Update()
@@ -43,6 +45,15 @@ public class AegisWeapon : WeaponBase
         if (_projectileData == null || _stats == null) return;
         if (_stats != null) _stats.SetTargetWeapon(this);
         _stats.SetTargetWeapon(this);
+
+        int currentCount = Mathf.Max(1, _stats.GetProjectileCount(this));
+        if (currentCount != _lastProjectileCount)
+        {
+            ReleaseProjectile();
+            _cooldownTimer = 0f;
+            _durationTimer = 0f;
+            _lastProjectileCount = currentCount;
+        }
 
         if (_durationTimer > 0f)
         {
@@ -89,6 +100,7 @@ public class AegisWeapon : WeaponBase
             }
         }
         _durationTimer = _stats.GetAttackDuration(this);
+        _lastProjectileCount = count;
 
         //if (!string.IsNullOrEmpty(SoundName)) SoundManager.instance.PlaySound(SoundName);
     }
