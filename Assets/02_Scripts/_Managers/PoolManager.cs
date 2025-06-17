@@ -5,20 +5,29 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
 {
-    [TabGroup("PoolManager")][Tooltip("Ç® ¼³Á¤ ¸®½ºÆ®")][SerializeField] private List<PoolConfig> _configs;
+    [TabGroup("PoolManager")][Tooltip("í’€ ì„¤ì • ë¦¬ìŠ¤íŠ¸")][SerializeField] private List<PoolConfig> _configs;
 
-    // Prefab -> ÀÎ½ºÅÏ½º Å¥
+    // Prefab -> ì¸ìŠ¤í„´ìŠ¤ í
     private Dictionary<GameObject, Queue<GameObject>> _pools;
 
-    // ÀÎ½ºÅÏ½º -> Prefab ¸ÅÇÎ
+    // ì¸ìŠ¤í„´ìŠ¤ -> Prefab ë§¤í•‘
     private Dictionary<GameObject, GameObject> _instanceToPrefab;
+
+    private bool _initialized;
 
     public void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        if (_initialized) return;
+
         _pools = new Dictionary<GameObject, Queue<GameObject>>(_configs.Count);
         _instanceToPrefab = new Dictionary<GameObject, GameObject>(_configs.Count * 2);
 
-        // °¢ ÇÁ¸®ÆÕº° Å¥ ÃÊ±âÈ­
+        // ê° í”„ë¦¬íŒ¹ë³„ í ì´ˆê¸°í™”
         for (int i = 0; i < _configs.Count; i++)
         {
             var prefab = _configs[i].Prefab;
@@ -32,9 +41,11 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
             }
             _pools[prefab] = queue;
         }
+
+        _initialized = true;
     }
 
-    // Ç®¿¡¼­ ²¨³»°Å³ª »õ·Î »ı¼º
+    // í’€ì—ì„œ êº¼ë‚´ê±°ë‚˜ ìƒˆë¡œ ìƒì„±
     public GameObject Get(GameObject prefab)
     {
         if (_pools.TryGetValue(prefab, out var queue) && queue.Count > 0)
@@ -48,10 +59,10 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
         return inst;
     }
 
-    // ÀÎÅÍÆäÀÌ½º »ó¼Ó ±¸Çö (ÇÁ¸®ÆÕ ¾øÀÌ Á÷Á¢ Get È£Ãâ ºÒ°¡)
+    // ì¸í„°í˜ì´ìŠ¤ ìƒì† êµ¬í˜„ (í”„ë¦¬íŒ¹ ì—†ì´ ì§ì ‘ Get í˜¸ì¶œ ë¶ˆê°€)
     GameObject IObjectPool.Get() => null;
 
-    // ¹İÈ¯
+    // ë°˜í™˜
     public void Return(GameObject instance)
     {
         if (instance == null) return;
@@ -69,6 +80,6 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
         queue.Enqueue(instance);
     }
 
-    // ÀÎÅÍÆäÀÌ½º »ó¼Ó ±¸Çö (ÇÁ¸®ÆÕ ¾øÀÌ Á÷Á¢ Return È£Ãâ)
+    // ì¸í„°í˜ì´ìŠ¤ ìƒì† êµ¬í˜„ (í”„ë¦¬íŒ¹ ì—†ì´ ì§ì ‘ Return í˜¸ì¶œ)
     void IObjectPool.Return(GameObject instance) => Return(instance);
 }

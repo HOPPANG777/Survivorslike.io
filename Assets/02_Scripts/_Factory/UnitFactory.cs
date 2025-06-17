@@ -10,6 +10,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
     private Dictionary<UnitBaseSO, GameObject> _map;
     private IPoolManager _pool;
     private IUIFactory _uiFactory;
+    private bool _initialized;
 
     private readonly List<UnitBase> _activeUnits = new List<UnitBase>();
     // Map each spawned unit to its health bar so we can properly release it
@@ -17,6 +18,13 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        if (_initialized) return;
+
         _uiFactory = UIFactory.instance;
         _pool = PoolManager.instance;
         _map = new Dictionary<UnitBaseSO, GameObject>(_entries.Count);
@@ -26,10 +34,16 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
             var e = _entries[i];
             if (e.Data != null && e.Prefab != null) _map[e.Data] = e.Prefab;
         }
+
+        _initialized = true;
     }
 
     public UnitBase Create(UnitBaseSO data, Vector3 position)
     {
+        if (!_initialized)
+        {
+            Init();
+        }
         if (!_map.TryGetValue(data, out var prefab)) return null;
         var go = _pool.Get(prefab);
         go.transform.position = position;

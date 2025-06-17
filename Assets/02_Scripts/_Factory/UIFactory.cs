@@ -12,9 +12,17 @@ public class UIFactory : SerializedSingleton<UIFactory>, IUIFactory
     private IPoolManager _pool;
     private Dictionary<UIType, GameObject> _map;
     private readonly List<GameObject> _activeUIs = new List<GameObject>();
+    private bool _initialized;
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        if (_initialized) return;
+
         _pool = PoolManager.instance;
         _map = new Dictionary<UIType, GameObject>(_entries.Count);
         for (int i = 0; i < _entries.Count; i++)
@@ -25,10 +33,16 @@ public class UIFactory : SerializedSingleton<UIFactory>, IUIFactory
                 _map[e.Type] = e.Prefab;
             }
         }
+
+        _initialized = true;
     }
 
     public GameObject Create(UIType type, Transform parent = null)
     {
+        if (!_initialized)
+        {
+            Init();
+        }
         if (!_map.TryGetValue(type, out var prefab)) return null;
         var go = _pool.Get(prefab);
         if (parent != null) go.transform.SetParent(parent, false);

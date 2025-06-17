@@ -5,9 +5,9 @@ using UnityEngine.InputSystem.XR;
 //==============================================================================
 // AllManager
 //==============================================================================
-// °ÔÀÓÀ» ÅëÁ¦ÇÏ´Â ÄÁÆ®·Ñ·¯¿¡ Á¢±Ù ÇÒ ¼ö ÀÖµµ·Ï ½Ì±ÛÅæÀ» ÀÌ¿ëÇØ¼­ 
-// ¸¸µç ¸Å´ÏÀú ÇØ´ç ¸Å´ÏÀú´Â ´Ù¾çÇÑ °ÔÀÓÀ» °ü¸®ÇÏ´Â ¿©·¯ ÄÁÆ®·Ñ·¯¿¡ Á¢±ÙÇÒ ¼ö ÀÖ´Â
-// À¯ÀÏÇÑ Åë·Î
+// ê²Œì„ì„ í†µì œí•˜ëŠ” ì»¨íŠ¸ë¡¤ëŸ¬ì— ì ‘ê·¼ í•  ìˆ˜ ìˆë„ë¡ ì‹±ê¸€í†¤ì„ ì´ìš©í•´ì„œ 
+// ë§Œë“  ë§¤ë‹ˆì € í•´ë‹¹ ë§¤ë‹ˆì €ëŠ” ë‹¤ì–‘í•œ ê²Œì„ì„ ê´€ë¦¬í•˜ëŠ” ì—¬ëŸ¬ ì»¨íŠ¸ë¡¤ëŸ¬ì— ì ‘ê·¼í•  ìˆ˜ ìˆëŠ”
+// ìœ ì¼í•œ í†µë¡œ
 //==============================================================================
 public class AllManager : Singleton<AllManager>
 {
@@ -25,12 +25,19 @@ public class AllManager : Singleton<AllManager>
         Screen.SetResolution(1920, 1080, true);
         Application.targetFrameRate = 60;
 
-        if (GamemodeManager == null) Debug.Log("GameModeContoller°¡ ¾ø½À´Ï´Ù.");
-        if (CollisionManager == null) Debug.Log("CollisionController°¡ ¾ø½À´Ï´Ù.");
-        if (UIManager == null) Debug.Log("UIController°¡ ¾ø½À´Ï´Ù.");
+        if (GamemodeManager == null) Debug.Log("GameModeContollerê°€ ì—†ìŠµë‹ˆë‹¤.");
+        if (CollisionManager == null) Debug.Log("CollisionControllerê°€ ì—†ìŠµë‹ˆë‹¤.");
+        if (UIManager == null) Debug.Log("UIControllerê°€ ì—†ìŠµë‹ˆë‹¤.");
 
         _uiController.Init();
         _collisionController.Init();
+
+        PoolManager.instance.Init();
+        UIFactory.instance.Init();
+        UnitFactory.instance.Init();
+        WeaponFactory.instance.Init();
+        ProjectileFactory.instance.Init();
+
         GamemodeManager.GameStart();
     }
 }
