@@ -202,7 +202,7 @@ MonoBehaviour:
   _collisionRadius: 0
   _projectileName: 
   _teamType: 0
-  _disableType: 0
+  _disableType: 1
   _remainingLifeTime: 0
   _remainingPierceCount: 0
   _soundName: 

@@ -32,7 +32,7 @@ public class GameModeController : MonoBehaviour, IGameMode
 
     [TabGroup("Player")][Tooltip("Player Data")][SerializeField] private PlayerUnitSO _playerData;
 
-    private GameObject _playerInstance;
+    [TabGroup("Player")][Tooltip("Player")][SerializeField] private GameObject _playerInstance;
     public GameObject Player { get { return _playerInstance; } }
 
     private void Update()
@@ -96,7 +96,6 @@ public class GameModeController : MonoBehaviour, IGameMode
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
-        //Player.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
 
         if (_playerInstance != null)
         {
@@ -107,6 +106,8 @@ public class GameModeController : MonoBehaviour, IGameMode
         UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         WeaponFactory.instance.ReleaseAll();
+        ItemFactory.instance.ReleaseAll();
+        UIFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
 
         var playerUnit = UnitFactory.instance.Create(_playerData, Vector3.zero) as PlayerUnit;
@@ -152,16 +153,22 @@ public class GameModeController : MonoBehaviour, IGameMode
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
+
         if (_playerInstance != null)
         {
             var unit = _playerInstance.GetComponent<PlayerUnit>();
             unit.EquippedWeapons.Clear();
         }
+
         UnitFactory.instance.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         WeaponFactory.instance.ReleaseAll();
+        ItemFactory.instance.ReleaseAll();
+        UIFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
+
         _playerInstance = null;
+
         GameMode = GameModeType.GAMEMODE_GAMEOVER;
     }
 

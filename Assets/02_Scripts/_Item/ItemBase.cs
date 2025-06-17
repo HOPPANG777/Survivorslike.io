@@ -40,7 +40,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
 
     virtual protected void Update()
     {
-        if (_player == null) return;
+        if (AllManager.instance.GamemodeManager.Player == null) return;
 
         PlayerGetItem();
     }
