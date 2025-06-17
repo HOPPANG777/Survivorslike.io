@@ -47,4 +47,24 @@ public class BombWeaponProjectile : ProjectileBase
 
         return Vector3.Lerp(d, e, value);
     }
+
+    public override void CheckDead()
+    {
+        base.CheckDead();
+    }
+
+    public override void Dead()
+    {
+        base.Dead();
+    }
+
+    public override void SoundPlay()
+    {
+        base.SoundPlay();
+    }
+
+    public override void SoundStop()
+    {
+        base.SoundStop();
+    }
 }

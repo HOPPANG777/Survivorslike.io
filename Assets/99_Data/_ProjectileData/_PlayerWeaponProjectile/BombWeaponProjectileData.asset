@@ -22,7 +22,7 @@ MonoBehaviour:
     _isHoming: 0
     _homingStrength: 0
   _weaponType: 6
-  _projectileSprite: {fileID: 0}
+  _projectileSprite: {fileID: 21300000, guid: 10aec7f79b4e1db44a6d45dce20ff428, type: 3}
   _projectileName: BombWeaponProjectile
   _teamType: 1
   _soundName: BombWeaponProjectileSFX
