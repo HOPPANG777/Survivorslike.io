@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(PlayerUnit))]
-public class PlayerLevelUpController : MonoBehaviour
+public class PlayerLevelUpController : MonoBehaviour, ISetStatus
 {
     [Header("Leveling Formula")]
     [Tooltip("레벨1 → 2에 필요한 EXP(젬 개수)")]
@@ -15,7 +15,7 @@ public class PlayerLevelUpController : MonoBehaviour
     private PlayerCurrentExpBarController _expBar;
     private PlayerCurrentLevelCountController _levelCounter;
 
-    private void Awake()
+    public void SetStatus()
     {
         _unitAttr = GetComponent<IUnitAttribute<UnitAttribute>>();
         _playerAttr = GetComponent<IUnitAttribute<PlayerableAttribute>>();

@@ -2,18 +2,18 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(PlayerUnit))]
-public class PlayerGetExpController : MonoBehaviour
+public class PlayerGetExpController : MonoBehaviour, ISetStatus
 {
-    [TabGroup("Player")][SerializeField] private PlayerUnit _player;
-    public PlayerUnit Player => _player;
+    [TabGroup("Player")][SerializeField] private GameObject _player;
+    public GameObject Player { get { return _player; } }
 
     private PlayerLevelUpController _levelController;
 
-    private void Awake()
+    public void SetStatus()
     {
         // 씬에 하나만 있는 AllManager 에서 플레이어를 가져오거나,
         // 미리 인스펙터에 드래그해 두셔도 됩니다.
-        _player = AllManager.instance.GamemodeManager.Player.GetComponent<PlayerUnit>();
+        _player = AllManager.instance.GamemodeManager.Player;
 
         // 레벨업 담당 컴포넌트 캐싱
         _levelController = GetComponent<PlayerLevelUpController>();
@@ -36,14 +36,16 @@ public class PlayerGetExpController : MonoBehaviour
     {
         if (!PlayerCheck()) return;
 
+        var player = _player.GetComponent<PlayerUnit>();
+
         // 1) struct 복사
-        var attr = _player.Attributes;
+        var attr = player.Attributes;
 
         // 2) 현재 경험치 증가
         attr.PlayerCurrentExp += expAmount;
 
         // 3) 다시 할당
-        _player.Attributes = attr;
+        player.Attributes = attr;
 
         // 4) 레벨업 시도 (남은 경험치, UI 업데이트 포함)
         if (_levelController != null) _levelController.TryLevelUp();

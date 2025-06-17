@@ -48,6 +48,14 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
 
     private void Start()
     {
+
+    }
+
+    public void Init()
+    {
+        _playerHolderObj = AllManager.instance.GamemodeManager.Player.GetComponent<PlayerUnit>();
+        _weaponFactoryObj = WeaponFactory.instance;
+
         _playerHolder = (IPlayerHolder)_playerHolderObj;
         _weaponFactory = (IWeaponFactory)_weaponFactoryObj;
 

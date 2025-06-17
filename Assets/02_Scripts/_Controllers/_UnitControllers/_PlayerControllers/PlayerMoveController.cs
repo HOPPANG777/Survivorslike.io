@@ -7,7 +7,7 @@ using UnityEngine;
 // Player의 이동을 담당하는 Controller
 //
 //==============================================================================
-public class PlayerMoveController : MonoBehaviour, IMoveable
+public class PlayerMoveController : MonoBehaviour, IMoveable, ISetStatus
 {
     [TabGroup("Target")][SerializeField] private GameObject _player;
     public GameObject Player { get { return _player; } }
@@ -17,6 +17,11 @@ public class PlayerMoveController : MonoBehaviour, IMoveable
 
     [TabGroup("Interface")][SerializeField] private IUnitAttribute<UnitAttribute> _playerAttribute;
     public IUnitAttribute<UnitAttribute> PlayerAttribute { get { return _playerAttribute; } }
+
+    public void SetStatus()
+    {
+        _player = AllManager.instance.GamemodeManager.Player;
+    }
 
     private void Update()
     {

@@ -37,6 +37,7 @@ public class AllManager : Singleton<AllManager>
         UnitFactory.instance.Init();
         WeaponFactory.instance.Init();
         ProjectileFactory.instance.Init();
+        ItemFactory.instance.Init();
 
         GamemodeManager.GameStart();
     }

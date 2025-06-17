@@ -18,7 +18,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
 
     private void Start()
     {
-        Init();
+        //Init();
     }
 
     public void Init()

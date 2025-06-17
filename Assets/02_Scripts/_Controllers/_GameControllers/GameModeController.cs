@@ -27,6 +27,9 @@ public class GameModeController : MonoBehaviour, IGameMode
     [TabGroup("Game")][Tooltip("킬 카운트")][SerializeField] private int _killCount;
     public int KillCount { get { return _killCount; } set { _killCount = value; } }
 
+    [TabGroup("Game")][Tooltip("무기 선택기")][SerializeField] private WeaponSelectionController _weaponSelectionController;
+    public WeaponSelectionController WeaponSelectionController { get { return _weaponSelectionController; } }
+
     [TabGroup("Player")][Tooltip("Player Data")][SerializeField] private PlayerUnitSO _playerData;
 
     private GameObject _playerInstance;
@@ -108,6 +111,10 @@ public class GameModeController : MonoBehaviour, IGameMode
 
         var playerUnit = UnitFactory.instance.Create(_playerData, Vector3.zero) as PlayerUnit;
         _playerInstance = playerUnit != null ? playerUnit.gameObject : null;
+
+        _tileMapController.Init();
+        _cameraController.Init();
+        _weaponSelectionController.Init();
 
         if (playerUnit != null)
         {

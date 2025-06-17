@@ -33,6 +33,11 @@ public class TileMapController : MonoBehaviour, IMoveable
     [TabGroup("Direction")][SerializeField] private Vector3 _moveDirection;
     public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
+    public void Init()
+    {
+        _tileMapTarget = AllManager.instance.GamemodeManager.Player;
+    }
+
     private bool CheckTileMap()
     {
         if (_tileMapTarget.TryGetComponent<IPositionProvider>(out var provider))

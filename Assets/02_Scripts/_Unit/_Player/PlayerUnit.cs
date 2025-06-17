@@ -68,6 +68,11 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
         _playerAttribute = _playerData.PlayerAttribute;
         _attackStatsProvider = this.gameObject.GetComponent<AttackStatsProvider>();
         _attackStatsProvider.SetStatus();
+        this.gameObject.GetComponent<PlayerDashController>().SetStatus();
+        this.gameObject.GetComponent<PlayerGetExpController>().SetStatus();
+        this.gameObject.GetComponent<PlayerLevelUpController>().SetStatus();
+        this.gameObject.GetComponent<PlayerMouseDirectionController>().SetStatus();
+        this.gameObject.GetComponent<PlayerMoveController>().SetStatus();
     }
 
     public override void Hitted(float damageValue)

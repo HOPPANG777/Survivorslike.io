@@ -17,7 +17,7 @@ public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
 
     private void Start()
     {
-        Init();
+        //Init();
     }
 
     public void Init()

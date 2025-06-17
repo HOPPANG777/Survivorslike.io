@@ -16,7 +16,7 @@ public class UIFactory : SerializedSingleton<UIFactory>, IUIFactory
 
     private void Start()
     {
-        Init();
+        //Init();
     }
 
     public void Init()

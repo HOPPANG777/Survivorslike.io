@@ -27,6 +27,11 @@ public class CameraController : MonoBehaviour, IMoveable
     [TabGroup("Direction")][SerializeField] private Vector3 _moveDirection;
     public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
+    public void Init()
+    {
+        _cameraTarget = AllManager.instance.GamemodeManager.Player;
+    }
+
     private bool CheckCamera()
     {
         if (_cameraTarget.TryGetComponent<IPositionProvider>(out var provider))

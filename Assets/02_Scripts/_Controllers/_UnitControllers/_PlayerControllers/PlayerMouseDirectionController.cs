@@ -7,7 +7,7 @@ using UnityEngine;
 // Player의 회전을 담당하는 Controller
 //
 //==============================================================================
-public class PlayerMouseDirectionController : MonoBehaviour, IRotationable
+public class PlayerMouseDirectionController : MonoBehaviour, IRotationable, ISetStatus
 {
     [TabGroup("Target")][Tooltip("타겟")][SerializeField] private GameObject _player;
     public GameObject Player { get { return _player; } }
@@ -20,6 +20,11 @@ public class PlayerMouseDirectionController : MonoBehaviour, IRotationable
 
     [TabGroup("PlayerMouseDirection")][Tooltip("회전 속도(그리고 100 분율로 보십시오 따라서 50일댸 0.5f가 됩니다.)")][SerializeField] private int _rotationSpeed; // 0이면 즉시회전, >0이면 부드럽게 회전
     public float RotationSpeed { get { return _rotationSpeed / 100f; } }
+
+    public void SetStatus()
+    {
+        _player = AllManager.instance.GamemodeManager.Player;
+    }
 
     private void Update()
     {

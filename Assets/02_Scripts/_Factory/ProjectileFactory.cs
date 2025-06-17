@@ -17,7 +17,7 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
 
     private void Start()
     {
-        Init();
+        //Init();
     }
 
     public void Init()

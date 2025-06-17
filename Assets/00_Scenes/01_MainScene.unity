@@ -32504,6 +32504,7 @@ MonoBehaviour:
   _randomEnemySpawner: {fileID: 1523479656}
   _gameTime: 0
   _killCount: 0
+  _weaponSelectionController: {fileID: 68180935}
   _playerData: {fileID: 11400000, guid: 7a2f241fc871b634b8c11944b3303ab2, type: 2}
 --- !u!1 &2124534694
 GameObject:

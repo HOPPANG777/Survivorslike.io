@@ -17,6 +17,11 @@ public class ItemFactory : SerializedSingleton<ItemFactory>, IItemFactory
 
     private void Start()
     {
+        //Init();
+    }
+
+    public void Init()
+    {
         _pool = PoolManager.instance;
         _map = new Dictionary<ItemBaseSO, GameObject>(_entries.Count);
         for (int i = 0; i < _entries.Count; i++)

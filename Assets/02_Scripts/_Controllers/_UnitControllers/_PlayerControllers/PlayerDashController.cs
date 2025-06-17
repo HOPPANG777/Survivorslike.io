@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable
+public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable, ISetStatus
 {
     [TabGroup("Target")][SerializeField] private GameObject _player;
     public GameObject Player { get { return _player; } }
@@ -41,6 +41,11 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable
     private Vector3 _dashDir;
     private Vector3 _dashTarget;
     private float _dashTimer;
+
+    public void SetStatus()
+    {
+        _player = AllManager.instance.GamemodeManager.Player;
+    }
 
     private void LateUpdate()
     {
