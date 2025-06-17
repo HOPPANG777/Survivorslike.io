@@ -13,9 +13,17 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
     private Dictionary<WeaponType, ProjectileBaseSO> _typeToSO;
 
     private readonly List<ProjectileBase> _activeProjectiles = new List<ProjectileBase>();
+    private bool _initialized;
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        if (_initialized) return;
+
         _pool = PoolManager.instance;
         _map = new Dictionary<ProjectileBaseSO, GameObject>(_entries.Count);
         _typeToSO = new Dictionary<WeaponType, ProjectileBaseSO>(_entries.Count);
@@ -29,10 +37,16 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
                 _typeToSO[e.Data.WeaponType] = e.Data;
             }
         }
+
+        _initialized = true;
     }
 
     public ProjectileBase Create(ProjectileBaseSO data, Vector3 position, Quaternion rotation)
     {
+        if (!_initialized)
+        {
+            Init();
+        }
         if (!_map.TryGetValue(data, out var prefab)) return null;
         var go = _pool.Get(prefab);
         go.transform.position = position;   
@@ -50,6 +64,10 @@ public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjec
 
     public ProjectileBase Create(ProjectileBaseSO data, Vector3 position, Quaternion rotation, WeaponBase weapon)
     {
+        if (!_initialized)
+        {
+            Init();
+        }
         if (!_map.TryGetValue(data, out var prefab)) return null;
         var go = _pool.Get(prefab);
         go.transform.position = position;

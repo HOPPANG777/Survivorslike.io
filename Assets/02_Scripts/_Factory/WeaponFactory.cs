@@ -13,9 +13,17 @@ public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
 
     // 활성화된(생성된) 유닛 목록
     private readonly List<WeaponBase> _activeWeapons = new List<WeaponBase>();
+    private bool _initialized;
 
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        if (_initialized) return;
+
         _pool = PoolManager.instance;
         _map = new Dictionary<WeaponBaseSO, GameObject>(_entries.Count);
         _typeToSO = new Dictionary<WeaponType, WeaponBaseSO>(_entries.Count);
@@ -29,6 +37,8 @@ public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
                 _typeToSO[e.Data.WeaponType] = e.Data; // SO에 WeaponType 프로퍼티가 있음
             }
         }
+
+        _initialized = true;
     }
 
     //public WeaponBase Create(WeaponBaseSO data, Vector3 position, Quaternion rotation)
@@ -50,6 +60,10 @@ public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
 
     public WeaponBase Create(WeaponType type, Transform parent = null)
     {
+        if (!_initialized)
+        {
+            Init();
+        }
         if (!_typeToSO.TryGetValue(type, out var data)) return null;
         var go = _pool.Get(_map[data]);
 
