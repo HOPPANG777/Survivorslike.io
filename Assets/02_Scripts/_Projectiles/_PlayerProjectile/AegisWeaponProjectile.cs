@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class AegisWeaponProjectile : ProjectileBase
 {
-    private const float ScaleDuration = 0.2f;
+    // 눈에 띄는 생성/소멸 이펙트를 위해 기존보다 빠르고 크게 스케일을 변화시킨다.
+    private const float ScaleDuration = 0.1f;
+    private const float TargetScale = 1.2f;
 
     private AttackStatsProvider _stats;
     private Transform _center;
@@ -58,7 +60,7 @@ public class AegisWeaponProjectile : ProjectileBase
         {
             _shrinkTimer += Time.deltaTime;
             float t = 1f - Mathf.Clamp01(_shrinkTimer / ScaleDuration);
-            transform.localScale = Vector3.one * t;
+            transform.localScale = Vector3.one * TargetScale * t;
             if (_shrinkTimer >= ScaleDuration) Dead();
         }
         else
@@ -66,9 +68,10 @@ public class AegisWeaponProjectile : ProjectileBase
             if (_scaleTimer < ScaleDuration)
             {
                 _scaleTimer += Time.deltaTime;
-                float t = Mathf.Clamp01(_scaleTimer / ScaleDuration);
-                transform.localScale = Vector3.one * t;
             }
+
+            float t = Mathf.Clamp01(_scaleTimer / ScaleDuration);
+            transform.localScale = Vector3.one * TargetScale * t;
         }
     }
 
