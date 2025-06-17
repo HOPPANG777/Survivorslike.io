@@ -10,13 +10,15 @@ public class AegisWeaponProjectile : ProjectileBase
     private Transform _center;
     private float _scaleTimer;
     private bool _shrinking;
-    private float _shrinkTimer;
+    private float _spawnTime;
+    private float _lifeTime;
+    private float _shrinkStartTime;
 
     public int Index { get; private set; }
 
     public int MaxCount { get; private set; }
 
-    public void Initialize(int index, int maxCount)
+    public void Initialize(int index, int maxCount, float spawnTime, float lifeTime)
     {
         Index = index;
         MaxCount = maxCount;
@@ -25,13 +27,16 @@ public class AegisWeaponProjectile : ProjectileBase
         transform.localScale = Vector3.zero;
         _scaleTimer = 0f;
         _shrinking = false;
-        _shrinkTimer = 0f;
+        _spawnTime = spawnTime;
+        _lifeTime = lifeTime;
+        _shrinkStartTime = 0f;
     }
 
     protected override void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-        base.Update();
+        Move();
+        CheckDead();
         UpdateScale();
     }
 
@@ -57,10 +62,10 @@ public class AegisWeaponProjectile : ProjectileBase
     {
         if (_shrinking)
         {
-            _shrinkTimer += Time.deltaTime;
-            float t = 1f - Mathf.Clamp01(_shrinkTimer / ScaleDuration);
+            float elapsed = Time.time - _shrinkStartTime;
+            float t = 1f - Mathf.Clamp01(elapsed / ScaleDuration);
             transform.localScale = Vector3.one * TargetScale * t;
-            if (_shrinkTimer >= ScaleDuration) Dead();
+            if (elapsed >= ScaleDuration) Dead();
         }
         else
         {
@@ -78,10 +83,7 @@ public class AegisWeaponProjectile : ProjectileBase
     {
         if (_shrinking) return;
         _shrinking = true;
-        _shrinkTimer = 0f;
-        // 수명 카운트를 초기화하여 즉시 사라지는 것을 방지
-        RemainingLifeTime = ScaleDuration;
-        _age = 0f;
+        _shrinkStartTime = Time.time;
     }
 
     public override void SoundPlay()
@@ -96,23 +98,17 @@ public class AegisWeaponProjectile : ProjectileBase
 
     public override void CheckDead()
     {
-        base.CheckDead();
+        UpdateCameraBound();
+
         if (_shrinking)
         {
-            // 카메라 밖으로 나갔는지 체크는 유지
-            UpdateCameraBound();
             return;
         }
-
-        // base.CheckDead()에서 바로 Dead()가 호출되어 축소 효과가 생략되는 경우가 있어
-        // 직접 조건을 검사하여 축소 과정을 거치도록 한다.
-        UpdateCameraBound();
 
         switch (DisableType)
         {
             case WeaponDisableType.WEAPONDISABLETYPE_NONE:
-                _age += Time.deltaTime;
-                if (_age < RemainingLifeTime) return;
+                if (Time.time < _spawnTime + _lifeTime) return;
                 StartShrink();
                 break;
             case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
