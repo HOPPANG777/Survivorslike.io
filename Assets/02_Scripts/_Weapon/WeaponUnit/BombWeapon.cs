@@ -28,7 +28,7 @@ public class BombWeapon : WeaponBase
         if (_cooldownTimer > 0f)
         {
             _cooldownTimer += Time.deltaTime;
-            if (_stats != null && _cooldownTimer >= _stats.AttackCooldown)
+            if (_stats != null && _cooldownTimer >= _stats.GetAttackCooldown(this))
             {
                 _cooldownTimer = 0f;
                 Shoot();
@@ -46,7 +46,7 @@ public class BombWeapon : WeaponBase
         base.Shoot();
         if (_projectileData == null || _stats == null) return;
 
-        int count = Mathf.Max(1, _stats.ProjectileCount);
+        int count = Mathf.Max(1, _stats.GetProjectileCount(this));
         for (int i = 0; i < count; i++)
         {
             var proj = ProjectileFactory.instance.Create(_projectileData, transform.position, Quaternion.identity, this) as BombWeaponProjectile;

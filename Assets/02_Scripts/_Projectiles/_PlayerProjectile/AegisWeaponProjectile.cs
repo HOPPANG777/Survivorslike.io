@@ -25,7 +25,6 @@ public class AegisWeaponProjectile : ProjectileBase
         transform.localScale = Vector3.zero;
         _scaleTimer = 0f;
         _shrinking = false;
-        if (_stats != null) _stats.SetTargetWeapon(OwnerWeapon);
         _shrinkTimer = 0f;
     }
 
@@ -46,10 +45,9 @@ public class AegisWeaponProjectile : ProjectileBase
     protected override void Move()
     {
         if (_center == null || _stats == null) return;
-        if (_stats != null) _stats.SetTargetWeapon(OwnerWeapon);
-        float angle = Time.time * _stats.AttackSpeed * 360f;
+        float angle = Time.time * _stats.GetAttackSpeed(OwnerWeapon) * 360f;
         float rad = Mathf.Deg2Rad * (angle + Index * (360f / MaxCount));
-        float range = _stats.AttackRange;
+        float range = _stats.GetAttackRange(OwnerWeapon);
         Vector3 offset = new Vector3(Mathf.Sin(rad) * range, Mathf.Cos(rad) * range, 0f);
         transform.position = _center.position + offset;
     }
