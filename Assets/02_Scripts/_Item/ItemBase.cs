@@ -109,7 +109,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
         Vector3 dir = (_player.transform.position - this.transform.position).normalized;
         this.transform.position += dir * 0.05f;
 
-        if (this.transform.localScale.x > 0.01f) this.transform.localScale -= Vector3.one * 0.02f;
+        if (this.transform.localScale.x > 0.01f) this.transform.localScale -= Vector3.one * Time.deltaTime;
 
         if (dist < 0.1f) Collect();
     }

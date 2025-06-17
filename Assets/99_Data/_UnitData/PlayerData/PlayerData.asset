@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   _unitAttribute:
-    _health: 200
-    _currentHealth: 200
-    _maxHealth: 200
+    _health: 1000
+    _currentHealth: 1000
+    _maxHealth: 1000
     _moveSpeed: 5
     _damage: 0
     _defense: 5
