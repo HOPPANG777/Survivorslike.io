@@ -11,6 +11,9 @@ public class AegisWeapon : WeaponBase
     private AttackStatsProvider _stats;
     private float _cooldownTimer;
     private float _durationTimer;
+    private const float ShrinkDuration = 0.1f;
+    private bool _isShrinking;
+    private float _shrinkTimer;
 
     public override void SetStatus()
     {
@@ -19,12 +22,22 @@ public class AegisWeapon : WeaponBase
         _stats.SetTargetWeapon(this);
         _cooldownTimer = 0f;
         _durationTimer = 0f;
+        _isShrinking = false;
+        _shrinkTimer = 0f;
+        transform.localScale = Vector3.one;
         if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
     }
 
     public override void Update()
     {
         base.Update();
+        if (_isShrinking) {
+            _shrinkTimer += Time.deltaTime;
+            float t = 1f - Mathf.Clamp01(_shrinkTimer / ShrinkDuration);
+            transform.localScale = Vector3.one * t;
+            if (_shrinkTimer >= ShrinkDuration) { base.Dead(); }
+            return;
+        }
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         if (_stats != null) _stats.SetTargetWeapon(this);
@@ -39,7 +52,7 @@ public class AegisWeapon : WeaponBase
         {
             if (_cooldownTimer == 0f)
             {
-                Shoot();                  // ÀÏ´Ü ÇÑ ¹ø ¹Ù·Î ½ô
+                Shoot();                  // ì¼ë‹¨ í•œ ë²ˆ ë°”ë¡œ ì¨
                 _cooldownTimer += Time.deltaTime;
             }
             else
@@ -48,7 +61,7 @@ public class AegisWeapon : WeaponBase
                 if (_stats != null && _cooldownTimer >= _stats.AttackCooldown)
                 {
                     _cooldownTimer = 0f;
-                    Shoot();              // ÄğÅ¸ÀÓ¸¶´Ù ½ô
+                    Shoot();              // ì¿¨íƒ€ì„ë§ˆë‹¤ ì¨
                 }
             }
         }
@@ -90,7 +103,9 @@ public class AegisWeapon : WeaponBase
 
     public override void Dead()
     {
+        if (_isShrinking) return;
         ReleaseProjectile();
-        base.Dead();
+        _isShrinking = true;
+        _shrinkTimer = 0f;
     }
 }

@@ -104,7 +104,26 @@ public class AegisWeaponProjectile : ProjectileBase
             return;
         }
 
-        base.CheckDead();
+        // base.CheckDead()에서 바로 Dead()가 호출되어 축소 효과가 생략되는 경우가 있어
+        // 직접 조건을 검사하여 축소 과정을 거치도록 한다.
+        UpdateCameraBound();
+
+        switch (DisableType)
+        {
+            case WeaponDisableType.WEAPONDISABLETYPE_NONE:
+                _age += Time.deltaTime;
+                if (_age < RemainingLifeTime) return;
+                StartShrink();
+                break;
+            case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
+                if (RemainingLifeTime > 0) return;
+                StartShrink();
+                break;
+            case WeaponDisableType.WEAPONDISABLETYPE_TIME:
+                if (RemainingPierceCount > 0) return;
+                StartShrink();
+                break;
+        }
     }
 
     public override void Dead()
