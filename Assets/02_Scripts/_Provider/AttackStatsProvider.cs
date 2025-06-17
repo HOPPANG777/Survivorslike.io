@@ -123,4 +123,89 @@ public class AttackStatsProvider : MonoBehaviour, IAttackStats, ISetStatus
             return dc;
         }
     }
+
+    //======================================================================
+    // Explicit calculation methods
+    //======================================================================
+
+    public float GetAttackPower(WeaponBase weapon)
+    {
+        float baseDmg = _unitAttr.Attributes.UnitDamage;
+        float total = baseDmg;
+        if (weapon != null)
+        {
+            total += (baseDmg * weapon.Attributes.DamageMultiplier) + weapon.Attributes.FlatDamage;
+        }
+        return total;
+    }
+
+    public float GetAttackSpeed(WeaponBase weapon)
+    {
+        float speed = _unitAttr.Attributes.UnitAttackSpeed;
+        if (weapon != null)
+        {
+            speed *= weapon.Attributes.AttackSpeedMultiplier;
+        }
+        return speed;
+    }
+
+    public int GetProjectileCount(WeaponBase weapon)
+    {
+        int cnt = _unitAttr.Attributes.UnitProjectileNumber;
+        if (weapon != null)
+        {
+            cnt += weapon.Attributes.ProjectileCountBonus;
+        }
+        return cnt;
+    }
+
+    public float GetAttackRange(WeaponBase weapon)
+    {
+        float rng = _unitAttr.Attributes.UnitAttackRange;
+        if (weapon != null)
+        {
+            rng += weapon.Attributes.RangeBonus;
+        }
+        return rng;
+    }
+
+    public float GetAttackDuration(WeaponBase weapon)
+    {
+        float dur = _unitAttr.Attributes.UnitAttackDuration;
+        if (weapon != null)
+        {
+            dur += weapon.Attributes.WeaponDisableTime;
+        }
+        return dur;
+    }
+
+    public float GetAttackCooldown(WeaponBase weapon)
+    {
+        float cd = _unitAttr.Attributes.UnitAttackCoolDown;
+        if (weapon != null)
+        {
+            cd += weapon.Attributes.AttackCooldown;
+        }
+        return cd;
+    }
+
+    public float GetKnockbackForce(WeaponBase weapon)
+    {
+        float kb = _unitAttr.Attributes.UnitKnockbackForce;
+        if (weapon != null)
+        {
+            kb += weapon.Attributes.KnockbackForce;
+        }
+        return kb;
+    }
+
+    public int GetWeaponDisableCount(WeaponBase weapon)
+    {
+        int dc = 0;
+        if (weapon != null)
+        {
+            dc += weapon.Attributes.WeaponDisableCount;
+        }
+        return dc;
+    }
 }

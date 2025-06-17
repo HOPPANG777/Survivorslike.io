@@ -58,7 +58,7 @@ public class AegisWeapon : WeaponBase
             else
             {
                 _cooldownTimer += Time.deltaTime;
-                if (_stats != null && _cooldownTimer >= _stats.AttackCooldown)
+                if (_stats != null && _cooldownTimer >= _stats.GetAttackCooldown(this))
                 {
                     _cooldownTimer = 0f;
                     Shoot();              // 쿨타임마다 쏨
@@ -73,7 +73,7 @@ public class AegisWeapon : WeaponBase
         if (_projectileData == null || _stats == null) return;
 
         ReleaseProjectile();
-        int count = Mathf.Max(1, _stats.ProjectileCount);
+        int count = Mathf.Max(1, _stats.GetProjectileCount(this));
         for (int i = 0; i < count; i++)
         {
             var proj = ProjectileFactory.instance.Create(_projectileData, transform.position, Quaternion.identity, this.gameObject.GetComponent<WeaponBase>()) as AegisWeaponProjectile;
@@ -87,7 +87,7 @@ public class AegisWeapon : WeaponBase
                 Debug.LogError("Failed to create AegisWeaponProjectile. Check if the prefab is set correctly in ProjectileFactory.");
             }
         }
-        _durationTimer = _stats.AttackDuration;
+        _durationTimer = _stats.GetAttackDuration(this);
 
         //if (!string.IsNullOrEmpty(SoundName)) SoundManager.instance.PlaySound(SoundName);
     }

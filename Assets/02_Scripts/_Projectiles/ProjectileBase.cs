@@ -137,10 +137,9 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
 
         if (statsProv != null)
         {
-            statsProv.SetTargetWeapon(ownerWeapon);
-            _projectileAttributes.LifeTime += statsProv.AttackDuration;
-            _projectileAttributes.PierceCount += statsProv.WeaponDisableCount;
-            AttackPower = statsProv.AttackPower;
+            _projectileAttributes.LifeTime += statsProv.GetAttackDuration(ownerWeapon);
+            _projectileAttributes.PierceCount += statsProv.GetWeaponDisableCount(ownerWeapon);
+            AttackPower = statsProv.GetAttackPower(ownerWeapon);
         }
 
         // 내부 카운터 초기화
