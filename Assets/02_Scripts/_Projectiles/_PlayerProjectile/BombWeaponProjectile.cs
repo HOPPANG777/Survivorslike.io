@@ -12,6 +12,11 @@ public class BombWeaponProjectile : ProjectileBase
     private float _timer;
     private float _lifeTime;
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     public void Initialize(Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4)
     {
         _p1 = p1;
