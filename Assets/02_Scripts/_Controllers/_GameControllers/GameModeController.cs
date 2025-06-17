@@ -4,32 +4,32 @@ using UnityEngine;
 //==============================================================================
 // GameModeController
 //==============================================================================
-// GameÀÇ Àü¹İÀûÀÎ ÁøÇàÀ» ´ã´çÇÏ´Â Controller
+// Gameì˜ ì „ë°˜ì ì¸ ì§„í–‰ì„ ë‹´ë‹¹í•˜ëŠ” Controller
 //
 //==============================================================================
 public class GameModeController : MonoBehaviour, IGameMode
 {
-    [TabGroup("GameMode")][Tooltip("°ÔÀÓ¸ğµå Å¸ÀÔ")][SerializeField] private GameModeType _gameMode;
+    [TabGroup("GameMode")][Tooltip("ê²Œì„ëª¨ë“œ íƒ€ì…")][SerializeField] private GameModeType _gameMode;
     public GameModeType GameMode { get { return _gameMode; } set { _gameMode = value; } }
     
-    [TabGroup("Controller")][Tooltip("Å¸ÀÏ¸Ê ÄÁÆ®·Ñ·¯")][SerializeField] private TileMapController _tileMapController;
+    [TabGroup("Controller")][Tooltip("íƒ€ì¼ë§µ ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private TileMapController _tileMapController;
     public TileMapController TileMapController { get { return _tileMapController; } }
 
-    [TabGroup("Controller")][Tooltip("Ä«¸Ş¶ó ÄÁÆ®·Ñ·¯")][SerializeField] private CameraController _cameraController;
+    [TabGroup("Controller")][Tooltip("ì¹´ë©”ë¼ ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private CameraController _cameraController;
     public CameraController CameraController { get { return _cameraController; } }
 
-    [TabGroup("Controller")][Tooltip("½ºÆù ÄÁÆ®·Ñ·¯")][SerializeField] private RandomEnemySpawner _randomEnemySpawner;
+    [TabGroup("Controller")][Tooltip("ìŠ¤í° ì»¨íŠ¸ë¡¤ëŸ¬")][SerializeField] private RandomEnemySpawner _randomEnemySpawner;
     public RandomEnemySpawner RandomEnemySpawner { get { return _randomEnemySpawner; } }
 
-    [TabGroup("Game")][Tooltip("Å¸ÀÌ¸Ó")][SerializeField] private float _gameTime;
+    [TabGroup("Game")][Tooltip("íƒ€ì´ë¨¸")][SerializeField] private float _gameTime;
     public float GameTime { get { return _gameTime; } }
 
-    [TabGroup("Game")][Tooltip("Å³ Ä«¿îÆ®")][SerializeField] private int _killCount;
+    [TabGroup("Game")][Tooltip("í‚¬ ì¹´ìš´íŠ¸")][SerializeField] private int _killCount;
     public int KillCount { get { return _killCount; } set { _killCount = value; } }
 
-    [TabGroup("Player")][Tooltip("ÇÃ·¹ÀÌ¾î")][SerializeField] private GameObject _player;
+    [TabGroup("Player")][Tooltip("Player Data")][SerializeField] private PlayerUnitSO _playerData;
     private GameObject _playerInstance;
-    private IPoolManager _pool;
+    private UnitFactory _unitFactory;
     public GameObject Player { get { return _playerInstance; } }
 
     private void Update()
@@ -48,8 +48,8 @@ public class GameModeController : MonoBehaviour, IGameMode
                 break;
             case GameModeType.GAMEMODE_GAMESTART:
                 {
-                    if (TileMapController == null) Debug.Log("TileMapController°¡ ÂüÁ¶µÇÁö ¾Ê¾Ò½À´Ï´Ù!");
-                    if (CameraController == null) Debug.Log("CameraController°¡ ÂüÁ¶µÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+                    if (TileMapController == null) Debug.Log("TileMapControllerê°€ ì°¸ì¡°ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
+                    if (CameraController == null) Debug.Log("CameraControllerê°€ ì°¸ì¡°ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
                 }
                 break;
             case GameModeType.GAMEMODE_INGAME:
@@ -83,18 +83,14 @@ public class GameModeController : MonoBehaviour, IGameMode
                 }
                 break;
             default:
-                Debug.Log("°ÔÀÓ ¸ğµå Å¸ÀÔÀÌ Á¦´ë·Î Á¤ÀÇµÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+                Debug.Log("ê²Œì„ ëª¨ë“œ íƒ€ì…ì´ ì œëŒ€ë¡œ ì •ì˜ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
                 break;
         }
     }
 
     public void GameStart()
     {
-        _pool = PoolManager.instance;
-        if (_player != null)
-        {
-            _player.SetActive(false);
-        }
+        _unitFactory = UnitFactory.instance;
 
         _gameTime = 0;
         _killCount = 0;
@@ -103,26 +99,24 @@ public class GameModeController : MonoBehaviour, IGameMode
 
         if (_playerInstance != null)
         {
-            _playerInstance.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
-            _pool.Return(_playerInstance);
+            var unitPrev = _playerInstance.GetComponent<PlayerUnit>();
+            unitPrev.EquippedWeapons.Clear();
         }
 
-        _playerInstance = _pool.Get(_player);
-        _playerInstance.transform.position = Vector3.zero;
-
-        UnitFactory.instance.ReleaseAll();
+        _unitFactory.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         WeaponFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
-        //Player.GetComponent<PlayerUnit>().SetStatus();
-        //Player.transform.position = Vector3.zero;
-        //Player.gameObject.SetActive(false);
 
-        var unit = _playerInstance.GetComponent<PlayerUnit>();
-        unit.SetStatus();
-        unit.EquippedWeapons.Clear();
+        var playerUnit = _unitFactory.Create(_playerData, Vector3.zero) as PlayerUnit;
+        _playerInstance = playerUnit != null ? playerUnit.gameObject : null;
 
-        _playerInstance.SetActive(false);
+        if (playerUnit != null)
+        {
+            playerUnit.SetStatus();
+            playerUnit.EquippedWeapons.Clear();
+            _playerInstance.SetActive(false);
+        }
 
         GameMode = GameModeType.GAMEMODE_GAMESTART;
     }
@@ -153,21 +147,16 @@ public class GameModeController : MonoBehaviour, IGameMode
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
-        //Player.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
         if (_playerInstance != null)
         {
-            _playerInstance.GetComponent<PlayerUnit>().EquippedWeapons.Clear();
-            _pool.Return(_playerInstance);
-            _playerInstance = null;
+            var unit = _playerInstance.GetComponent<PlayerUnit>();
+            unit.EquippedWeapons.Clear();
         }
-        UnitFactory.instance.ReleaseAll();
+        _unitFactory.ReleaseAll();
         ProjectileFactory.instance.ReleaseAll();
         WeaponFactory.instance.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
-        //Player.GetComponent<PlayerUnit>().SetStatus();
-        //Player.transform.position = Vector3.zero;
-        //Player.gameObject.SetActive(false);
-        _player.SetActive(false); // keep prefab hidden
+        _playerInstance = null;
         GameMode = GameModeType.GAMEMODE_GAMEOVER;
     }
 
@@ -180,7 +169,8 @@ public class GameModeController : MonoBehaviour, IGameMode
     {
         if (_playerInstance != null)
         {
-            _pool.Return(_playerInstance);
+            var unit = _playerInstance.GetComponent<PlayerUnit>();
+            _unitFactory.Release(unit);
             _playerInstance = null;
         }
         GameMode = GameModeType.GAMEMODE_NONE;
