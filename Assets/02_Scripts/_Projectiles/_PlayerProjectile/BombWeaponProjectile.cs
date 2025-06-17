@@ -3,6 +3,7 @@ using UnityEngine;
 public class BombWeaponProjectile : ProjectileBase
 {
     [SerializeField] private float _rotationSpeed = 360f;
+    [SerializeField] private float _dropSpeedMultiplier = 2f;
 
     private Vector3 _p1;
     private Vector3 _p2;
@@ -25,11 +26,12 @@ public class BombWeaponProjectile : ProjectileBase
         base.SetStatus(ownerWeapon);
         _lifeTime = Attributes.LifeTime;
         _timer = 0f;
+        RemainingLifeTime = _lifeTime / _dropSpeedMultiplier;
     }
 
     protected override void Move()
     {
-        _timer += Time.deltaTime;
+        _timer += Time.deltaTime * _dropSpeedMultiplier;
         float t = _lifeTime > 0f ? Mathf.Clamp01(_timer / _lifeTime) : 1f;
         Vector3 pos = CalculateBezier(_p1, _p2, _p3, _p4, t);
         transform.position = pos;
@@ -51,6 +53,10 @@ public class BombWeaponProjectile : ProjectileBase
     public override void CheckDead()
     {
         base.CheckDead();
+        if (_timer >= _lifeTime)
+        {
+            Dead();
+        }
     }
 
     public override void Dead()
@@ -60,11 +66,17 @@ public class BombWeaponProjectile : ProjectileBase
 
     public override void SoundPlay()
     {
-        base.SoundPlay();
+        if (!string.IsNullOrEmpty(SoundName))
+        {
+            SoundManager.instance.PlaySound(SoundName);
+        }
     }
 
     public override void SoundStop()
     {
-        base.SoundStop();
+        if (SoundSource != null)
+        {
+            SoundSource.Stop();
+        }
     }
 }
