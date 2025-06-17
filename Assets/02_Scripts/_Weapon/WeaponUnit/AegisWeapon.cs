@@ -86,12 +86,14 @@ public class AegisWeapon : WeaponBase
 
         ReleaseProjectile();
         int count = Mathf.Max(1, _stats.GetProjectileCount(this));
+        float spawnTime = Time.time;
+        float lifeTime = _stats.GetAttackDuration(this);
         for (int i = 0; i < count; i++)
         {
             var proj = ProjectileFactory.instance.Create(_projectileData, transform.position, Quaternion.identity, this.gameObject.GetComponent<WeaponBase>()) as AegisWeaponProjectile;
             if (proj != null)
             {
-                proj.Initialize(i, count);
+                proj.Initialize(i, count, spawnTime, lifeTime);
                 _activeProjectiles.Add(proj);
             }
             else if (proj == null)
@@ -99,7 +101,7 @@ public class AegisWeapon : WeaponBase
                 Debug.LogError("Failed to create AegisWeaponProjectile. Check if the prefab is set correctly in ProjectileFactory.");
             }
         }
-        _durationTimer = _stats.GetAttackDuration(this);
+        _durationTimer = lifeTime;
         _lastProjectileCount = count;
 
         //if (!string.IsNullOrEmpty(SoundName)) SoundManager.instance.PlaySound(SoundName);
