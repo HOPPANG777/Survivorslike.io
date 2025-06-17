@@ -14,6 +14,7 @@ public class BombWeaponProjectile : ProjectileBase
 
     protected override void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         base.Update();
     }
 

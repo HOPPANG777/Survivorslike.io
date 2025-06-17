@@ -7,13 +7,13 @@ public class AegisWeapon : WeaponBase
 {
     [TabGroup("Agies Weapon")][Tooltip("Projectile Data")][SerializeField] private ProjectileBaseSO _projectileData;
 
-    private readonly List<AegisWeaponProjectile> _activeProjectiles = new();
-    private AttackStatsProvider _stats;
-    private float _cooldownTimer;
-    private float _durationTimer;
-    private const float ShrinkDuration = 0.1f;
-    private bool _isShrinking;
-    private float _shrinkTimer;
+    [TabGroup("Agies Weapon")][Tooltip("_activeProjectiles")][SerializeField] private readonly List<AegisWeaponProjectile> _activeProjectiles = new();
+    [TabGroup("Agies Weapon")][Tooltip("_stats")][SerializeField] private AttackStatsProvider _stats;
+    [TabGroup("Agies Weapon")][Tooltip("_cooldownTimer")][SerializeField] private float _cooldownTimer;
+    [TabGroup("Agies Weapon")][Tooltip("_durationTimer")][SerializeField] private float _durationTimer;
+    [TabGroup("Agies Weapon")][Tooltip("ShrinkDuration")][SerializeField] private const float ShrinkDuration = 0.1f;
+    [TabGroup("Agies Weapon")][Tooltip("_isShrinking")][SerializeField] private bool _isShrinking;
+    [TabGroup("Agies Weapon")][Tooltip("_shrinkTimer")][SerializeField] private float _shrinkTimer;
 
     public override void SetStatus()
     {
@@ -30,16 +30,17 @@ public class AegisWeapon : WeaponBase
 
     public override void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         base.Update();
-        if (_isShrinking) {
+        if (_isShrinking) 
+        {
             _shrinkTimer += Time.deltaTime;
             float t = 1f - Mathf.Clamp01(_shrinkTimer / ShrinkDuration);
             transform.localScale = Vector3.one * t;
             if (_shrinkTimer >= ShrinkDuration) { base.Dead(); }
             return;
         }
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-
+        if (_projectileData == null || _stats == null) return;
         if (_stats != null) _stats.SetTargetWeapon(this);
         _stats.SetTargetWeapon(this);
 

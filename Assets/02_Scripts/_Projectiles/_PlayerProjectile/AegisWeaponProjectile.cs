@@ -30,8 +30,8 @@ public class AegisWeaponProjectile : ProjectileBase
 
     protected override void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         base.Update();
-        Move();
         UpdateScale();
     }
 
@@ -44,6 +44,7 @@ public class AegisWeaponProjectile : ProjectileBase
 
     protected override void Move()
     {
+        base.Move();
         if (_center == null || _stats == null) return;
         float angle = Time.time * _stats.GetAttackSpeed(OwnerWeapon) * 360f;
         float rad = Mathf.Deg2Rad * (angle + Index * (360f / MaxCount));
@@ -95,6 +96,7 @@ public class AegisWeaponProjectile : ProjectileBase
 
     public override void CheckDead()
     {
+        base.CheckDead();
         if (_shrinking)
         {
             // 카메라 밖으로 나갔는지 체크는 유지
