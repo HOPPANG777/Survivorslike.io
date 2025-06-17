@@ -42,7 +42,7 @@ MonoBehaviour:
     _criticalDamage: 0
     _criticalChance: 0
     _attackSpeedMultiplier: 1
-    _projectileCountBonus: 3
+    _projectileCountBonus: 2
     _rangeBonus: 1
     _attackCooldown: 2
     _knockbackForce: 1
@@ -64,7 +64,7 @@ MonoBehaviour:
     _criticalDamage: 0
     _criticalChance: 0
     _attackSpeedMultiplier: 1
-    _projectileCountBonus: 5
+    _projectileCountBonus: 4
     _rangeBonus: 2
     _attackCooldown: 1
     _knockbackForce: 1
