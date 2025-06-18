@@ -44,7 +44,8 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
     private static readonly WeaponType[] _allWeapons =
     {
         WeaponType.WEAPON_AEGIS,
-        WeaponType.WEAPON_BOMB
+        WeaponType.WEAPON_BOMB,
+        WeaponType.WEAPON_ENERGYSHILD
     };
 
     private void Start()
