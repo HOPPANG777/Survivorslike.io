@@ -7,7 +7,7 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
     private Transform _center;
     private float _spawnTime;
     private float _lifeTime;
-    private bool _attacked;
+    private ParticleSystem _particle;
 
     public void Initialize(AttackStatsProvider stats, float lifeTime)
     {
@@ -15,7 +15,8 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
         _center = OwnerWeapon.transform.parent != null ? OwnerWeapon.transform.parent : OwnerWeapon.transform;
         _spawnTime = Time.time;
         _lifeTime = lifeTime;
-        _attacked = false;
+        _particle = GetComponent<ParticleSystem>();
+        UpdateParticleSize();
     }
 
     public override void SetStatus(WeaponBase ownerWeapon)
@@ -28,11 +29,7 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         Move();
-        if (!_attacked)
-        {
-            DoAttack();
-            _attacked = true;
-        }
+        DoAttack();
         CheckDead();
     }
 
@@ -45,11 +42,15 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
     private void DoAttack()
     {
         if (_stats == null) return;
+
         float range = _stats.GetAttackRange(OwnerWeapon);
         float knock = _stats.GetKnockbackForce(OwnerWeapon);
+        UpdateParticleSize();
+
         List<ICollidable> list = AllManager.instance.CollisionManager.GetAllCollidables();
         Vector3 myPos = _center != null ? _center.position : transform.position;
         float sqrRange = range * range;
+
         for (int i = 0; i < list.Count; i++)
         {
             if (list[i] is EnemyUnit enemy)
@@ -58,10 +59,18 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
                 if (delta.sqrMagnitude <= sqrRange)
                 {
                     enemy.Hitted(AttackPower);
-                    enemy.Push(delta.normalized * knock);
+                    enemy.transform.position += delta.normalized * knock;
                 }
             }
         }
+    }
+
+    private void UpdateParticleSize()
+    {
+        if (_particle == null || _stats == null) return;
+        float range = _stats.GetAttackRange(OwnerWeapon);
+        var shape = _particle.shape;
+        shape.radius = range;
     }
 
     public void Push(Vector3 direction)
