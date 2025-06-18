@@ -1,4 +1,3 @@
-// File: ItemBase.cs
 using Sirenix.OdinInspector;
 using UnityEngine;
 
