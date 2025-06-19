@@ -15,7 +15,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     public ProjectileBaseSO ProjectileBaseData { get { return _projectileBaseData; } set { _projectileBaseData = value; } }
 
     [TabGroup("Projectile")] [Tooltip("투사체 속성 (ScriptableObject에서 할당된 값)")][OdinSerialize] protected ProjectileAttribute _projectileAttributes;
-    public ProjectileAttribute Attributes { get { return _projectileAttributes; }set { _projectileAttributes = value; }}
+    public ProjectileAttribute Attributes { get { return _projectileAttributes; } set { _projectileAttributes = value; }}
 
     [TabGroup("Collision")] [Tooltip("충돌 반지름")][SerializeField] private float _collisionRadius;
     public float CollisionRadius{ get { return _collisionRadius; }}

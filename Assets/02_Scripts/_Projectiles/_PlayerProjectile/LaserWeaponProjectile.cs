@@ -56,11 +56,6 @@ public class LaserWeaponProjectile : ProjectileBase
         _direction = direction.normalized;
         _camera = Camera.main;
         _stats = stats != null ? stats : OwnerWeapon.GetComponentInParent<AttackStatsProvider>();
-
-        if (_stats != null)
-        {
-            Attributes.ProjectileSpeed = _stats.GetAttackSpeed(OwnerWeapon);
-        }
     }
 
     public override void SetStatus(WeaponBase ownerWeapon)
@@ -85,7 +80,7 @@ public class LaserWeaponProjectile : ProjectileBase
             }
         }
 
-        this.transform.position += _direction * Attributes.ProjectileSpeed * Time.deltaTime;
+        this.transform.position += _direction * _stats.GetAttackSpeed(OwnerWeapon) * Time.deltaTime;
 
         Vector3 viewPos = _camera.WorldToViewportPoint(transform.position);
 
