@@ -36,10 +36,11 @@ public class LaserWeaponProjectile : ProjectileBase
         _trail.endColor = Color.white;
 
         _trail.minVertexDistance = 0.1f;
-        _trail.widthCurve = new AnimationCurve(
+        _trail.widthCurve = new AnimationCurve
+            (
             new Keyframe(0f, 0.2f),
             new Keyframe(0.5f, 0f)
-        );
+            );
 
         _trail.colorGradient = new Gradient
         {
