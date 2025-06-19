@@ -5,6 +5,7 @@ public class LaserWeaponProjectile : ProjectileBase
     private Vector3 _direction;
     private Camera _camera;
     private TrailRenderer _trail;
+    private AttackStatsProvider _stats;
 
     private void Awake()
     {
@@ -50,10 +51,16 @@ public class LaserWeaponProjectile : ProjectileBase
         };
     }
 
-    public void Initialize(Vector3 direction)
+    public void Initialize(Vector3 direction, AttackStatsProvider stats)
     {
         _direction = direction.normalized;
         _camera = Camera.main;
+        _stats = stats != null ? stats : OwnerWeapon.GetComponentInParent<AttackStatsProvider>();
+
+        if (_stats != null)
+        {
+            Attributes.ProjectileSpeed = _stats.GetAttackSpeed(OwnerWeapon);
+        }
     }
 
     public override void SetStatus(WeaponBase ownerWeapon)
