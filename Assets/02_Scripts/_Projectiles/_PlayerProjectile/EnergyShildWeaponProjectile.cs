@@ -59,7 +59,7 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
                 if (delta.sqrMagnitude <= sqrRange)
                 {
                     enemy.Hitted(AttackPower);
-                    enemy.transform.position += delta.normalized * knock;
+                    enemy.transform.position += delta.normalized * knock * Time.deltaTime;
                 }
             }
         }

@@ -22,19 +22,8 @@ MonoBehaviour:
     _attackSpeedMultiplier: 1
     _projectileCountBonus: 1
     _rangeBonus: 1
-    _attackCooldown: 0.1
-    _knockbackForce: 0.1
-    _weaponDisableCount: 0
-    _weaponDisableTime: 1
-  - _flatDamage: 15
-    _damageMultiplier: 0
-    _criticalDamage: 0
-    _criticalChance: 0
-    _attackSpeedMultiplier: 1
-    _projectileCountBonus: 1
-    _rangeBonus: 1.5
-    _attackCooldown: 0.1
-    _knockbackForce: 0.2
+    _attackCooldown: 1
+    _knockbackForce: 2
     _weaponDisableCount: 0
     _weaponDisableTime: 1
   - _flatDamage: 15
@@ -44,8 +33,19 @@ MonoBehaviour:
     _attackSpeedMultiplier: 1
     _projectileCountBonus: 1
     _rangeBonus: 2
-    _attackCooldown: 0.1
-    _knockbackForce: 0.2
+    _attackCooldown: 1
+    _knockbackForce: 3
+    _weaponDisableCount: 0
+    _weaponDisableTime: 1
+  - _flatDamage: 15
+    _damageMultiplier: 0
+    _criticalDamage: 0
+    _criticalChance: 0
+    _attackSpeedMultiplier: 1
+    _projectileCountBonus: 1
+    _rangeBonus: 2.5
+    _attackCooldown: 0
+    _knockbackForce: 3
     _weaponDisableCount: 0
     _weaponDisableTime: 1
   - _flatDamage: 25
@@ -54,9 +54,9 @@ MonoBehaviour:
     _criticalChance: 0
     _attackSpeedMultiplier: 1
     _projectileCountBonus: 1
-    _rangeBonus: 2.5
-    _attackCooldown: 0.1
-    _knockbackForce: 0.3
+    _rangeBonus: 4
+    _attackCooldown: 0
+    _knockbackForce: 0.5
     _weaponDisableCount: 0
     _weaponDisableTime: 1
   _maxLevel: 4
