@@ -69,8 +69,8 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
     {
         if (_particle == null || _stats == null) return;
         float range = _stats.GetAttackRange(OwnerWeapon);
-        var shape = _particle.shape;
-        shape.radius = range;
+        var main = _particle.main;
+        main.startSize = new ParticleSystem.MinMaxCurve(range);
     }
 
     public void Push(Vector3 direction)

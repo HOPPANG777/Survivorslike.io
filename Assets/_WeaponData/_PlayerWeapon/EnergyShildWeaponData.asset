@@ -21,44 +21,44 @@ MonoBehaviour:
     _criticalChance: 0
     _attackSpeedMultiplier: 1
     _projectileCountBonus: 1
-    _rangeBonus: 5
-    _attackCooldown: 5
-    _knockbackForce: 2
+    _rangeBonus: 1
+    _attackCooldown: 0.1
+    _knockbackForce: 0.1
     _weaponDisableCount: 0
-    _weaponDisableTime: 3
+    _weaponDisableTime: 1
   - _flatDamage: 15
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
     _attackSpeedMultiplier: 1
     _projectileCountBonus: 1
-    _rangeBonus: 7
-    _attackCooldown: 5
-    _knockbackForce: 3
+    _rangeBonus: 1.5
+    _attackCooldown: 0.1
+    _knockbackForce: 0.2
     _weaponDisableCount: 0
-    _weaponDisableTime: 3
+    _weaponDisableTime: 1
   - _flatDamage: 15
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
     _attackSpeedMultiplier: 1
     _projectileCountBonus: 1
-    _rangeBonus: 9
-    _attackCooldown: 5
-    _knockbackForce: 4
+    _rangeBonus: 2
+    _attackCooldown: 0.1
+    _knockbackForce: 0.2
     _weaponDisableCount: 0
-    _weaponDisableTime: 3
+    _weaponDisableTime: 1
   - _flatDamage: 25
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
     _attackSpeedMultiplier: 1
     _projectileCountBonus: 1
-    _rangeBonus: 10
-    _attackCooldown: 5
-    _knockbackForce: 5
+    _rangeBonus: 2.5
+    _attackCooldown: 0.1
+    _knockbackForce: 0.3
     _weaponDisableCount: 0
-    _weaponDisableTime: 5
+    _weaponDisableTime: 1
   _maxLevel: 4
   _teamType: 1
   _weaponDisableType: 2
