@@ -19,8 +19,8 @@ MonoBehaviour:
     _knockbackForce: 0
     _pierceCount: 0
     _explosionRadius: 0
-    _isHoming: 0
-    _homingStrength: 0
+    _isHoming: 1
+    _homingStrength: 3
   _weaponType: 4
   _projectileSprite: {fileID: 0}
   _projectileName: MissileWeaponProjectile
