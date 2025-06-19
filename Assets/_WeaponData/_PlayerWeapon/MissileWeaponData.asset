@@ -19,10 +19,10 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 3
+    _attackSpeedMultiplier: 5
     _projectileCountBonus: 1
     _rangeBonus: 5
-    _attackCooldown: 4
+    _attackCooldown: 7
     _knockbackForce: 1
     _weaponDisableCount: 1
     _weaponDisableTime: 7
@@ -30,10 +30,10 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 3
+    _attackSpeedMultiplier: 5
     _projectileCountBonus: 2
     _rangeBonus: 5
-    _attackCooldown: 4
+    _attackCooldown: 7
     _knockbackForce: 1
     _weaponDisableCount: 1
     _weaponDisableTime: 7
@@ -41,10 +41,10 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 3
+    _attackSpeedMultiplier: 5
     _projectileCountBonus: 3
     _rangeBonus: 5
-    _attackCooldown: 4
+    _attackCooldown: 7
     _knockbackForce: 1
     _weaponDisableCount: 1
     _weaponDisableTime: 7
@@ -52,10 +52,10 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 3
+    _attackSpeedMultiplier: 5
     _projectileCountBonus: 3
     _rangeBonus: 5
-    _attackCooldown: 4
+    _attackCooldown: 7
     _knockbackForce: 1
     _weaponDisableCount: 1
     _weaponDisableTime: 7
@@ -63,10 +63,10 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 4
+    _attackSpeedMultiplier: 7
     _projectileCountBonus: 4
     _rangeBonus: 5
-    _attackCooldown: 4
+    _attackCooldown: 7
     _knockbackForce: 1
     _weaponDisableCount: 1
     _weaponDisableTime: 7
