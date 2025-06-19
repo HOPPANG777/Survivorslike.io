@@ -190,14 +190,14 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
             case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
                 {
                     // 무기 관통이나 반사를 통해서 카운트가 감소되서 0이 되면 사라지는 무기
-                    if (_remainingLifeTime > 0) return;
+                    if (_remainingPierceCount > 0) return;
                     Dead();
                 }
                 break;
             case WeaponDisableType.WEAPONDISABLETYPE_TIME:
                 {
                     // 무기 사용시간이 지나면 사라지는 무기
-                    if (_remainingPierceCount > 0) return;
+                    if (_remainingLifeTime > 0) return;
                     Dead();
                 }
                 break;
