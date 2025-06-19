@@ -112,11 +112,11 @@ public class AegisWeaponProjectile : ProjectileBase
                 StartShrink();
                 break;
             case WeaponDisableType.WEAPONDISABLETYPE_COUNT:
-                if (RemainingLifeTime > 0) return;
+                if (RemainingPierceCount > 0) return;
                 StartShrink();
                 break;
             case WeaponDisableType.WEAPONDISABLETYPE_TIME:
-                if (RemainingPierceCount > 0) return;
+                if (RemainingLifeTime > 0) return;
                 StartShrink();
                 break;
         }
