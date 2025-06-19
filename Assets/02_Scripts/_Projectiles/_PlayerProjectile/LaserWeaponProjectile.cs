@@ -7,6 +7,11 @@ public class LaserWeaponProjectile : ProjectileBase
     private TrailRenderer _trail;
     private AttackStatsProvider _stats;
 
+    // Count how many times this projectile has bounced off walls
+    private int _wallHitCount;
+    // Maximum number of wall collisions allowed before deactivation
+    private int _maxWallHitCount;
+
     private void Awake()
     {
         _trail = gameObject.AddComponent<TrailRenderer>();
@@ -63,6 +68,12 @@ public class LaserWeaponProjectile : ProjectileBase
         base.SetStatus(ownerWeapon);
         DisableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
 
+        // Initialize wall hit counters based on projectile attributes
+        _wallHitCount = 0;
+        _maxWallHitCount = Attributes.PierceCount;
+        // Prevent enemy collisions from disabling this projectile
+        RemainingPierceCount = int.MaxValue;
+
         if (_trail != null)
         {
             _trail.Clear();
@@ -115,6 +126,7 @@ public class LaserWeaponProjectile : ProjectileBase
         if (bounced)
         {
             transform.position = _camera.ViewportToWorldPoint(viewPos);
+            _wallHitCount++;
         }
     }
 
@@ -122,7 +134,7 @@ public class LaserWeaponProjectile : ProjectileBase
     {
         UpdateCameraBound();
 
-        if (RemainingLifeTime <= 0f || RemainingPierceCount <= 0)
+        if (RemainingLifeTime <= 0f || _wallHitCount >= _maxWallHitCount)
         {
             Dead();
         }

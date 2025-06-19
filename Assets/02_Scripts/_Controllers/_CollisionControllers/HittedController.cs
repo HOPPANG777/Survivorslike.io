@@ -5,15 +5,19 @@ public class HittedController : ICollision
 {
     public void OnCollision(ICollidable self, ICollidable other)
     {
-        // self°¡ ¸Â´Â ÂÊÀÌ°í, other°¡ ¶§¸®´Â ÂÊÀÌ¸é
+        // selfê°€ ë§ëŠ” ìª½ì´ê³ , otherê°€ ë•Œë¦¬ëŠ” ìª½ì´ë©´
         if (self is IHitted target && other is IAttacker attacker)
         {
-            if (target.TeamType == attacker.TeamType) return; // °°Àº ÆÀÀÌ¸é Ãæµ¹ ¹«½Ã
+            if (target.TeamType == attacker.TeamType) return; // ê°™ì€ íŒ€ì´ë©´ ì¶©ëŒ ë¬´ì‹œ
 
             target.Hitted(attacker.AttackPower);
 
-            // 2) ¶§¸° ÂÊÀÌ ProjectileBaseÀÌ¸é Ä«¿îÆ® °¨¼Ò ÈÄ 0 ÀÌÇÏÀÏ ¶§ Dead()
-            if (attacker is ProjectileBase proj)
+            // 2) Projectile ì²˜ë¦¬: LaserWeaponProjectileì€ ì ê³¼ ì¶©ëŒí•´ë„ ì¹´ìš´íŠ¸ë¥¼ ê°ì†Œì‹œí‚¤ì§€ ì•ŠëŠ”ë‹¤
+            if (attacker is LaserWeaponProjectile laserProj)
+            {
+                laserProj.CheckDead();
+            }
+            else if (attacker is ProjectileBase proj)
             {
                 switch (proj.DisableType)
                 {
