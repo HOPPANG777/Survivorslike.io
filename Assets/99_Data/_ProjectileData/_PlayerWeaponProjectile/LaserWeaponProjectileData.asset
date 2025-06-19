@@ -22,7 +22,7 @@ MonoBehaviour:
     _isHoming: 0
     _homingStrength: 0
   _weaponType: 11
-  _projectileSprite: {fileID: 0}
+  _projectileSprite: {fileID: 21300000, guid: 1a401676ea067b648a7a15c29923af51, type: 3}
   _projectileName: LaserWeaponProjectile
   _teamType: 1
   _soundName: LaserWeaponProjectileSFX

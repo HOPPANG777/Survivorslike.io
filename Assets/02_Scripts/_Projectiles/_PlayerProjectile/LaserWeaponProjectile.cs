@@ -4,6 +4,51 @@ public class LaserWeaponProjectile : ProjectileBase
 {
     private Vector3 _direction;
     private Camera _camera;
+    private TrailRenderer _trail;
+
+    private void Awake()
+    {
+        _trail = gameObject.AddComponent<TrailRenderer>();
+        ConfigureTrailRenderer();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+    }
+
+    private void ConfigureTrailRenderer()
+    {
+        if (_trail == null) return;
+
+        _trail.time = 1.0f;
+        _trail.startWidth = 0.05f;
+        _trail.endWidth = 0.01f;
+
+        _trail.material = new Material(Shader.Find("Sprites/Default"));
+        _trail.startColor = Color.white;
+        _trail.endColor = Color.white;
+
+        _trail.minVertexDistance = 0.1f;
+        _trail.widthCurve = new AnimationCurve(
+            new Keyframe(0f, 0.2f),
+            new Keyframe(0.5f, 0f)
+        );
+
+        _trail.colorGradient = new Gradient
+        {
+            colorKeys = new[]
+            {
+                new GradientColorKey(Color.white, 0f),
+                new GradientColorKey(Color.white, 0.5f)
+            },
+            alphaKeys = new[]
+            {
+                new GradientAlphaKey(1f, 0f),
+                new GradientAlphaKey(0f, 1f)
+            }
+        };
+    }
 
     public void Initialize(Vector3 direction)
     {
@@ -15,6 +60,11 @@ public class LaserWeaponProjectile : ProjectileBase
     {
         base.SetStatus(ownerWeapon);
         DisableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
+
+        if (_trail != null)
+        {
+            _trail.Clear();
+        }
     }
 
     protected override void Move()
@@ -28,7 +78,7 @@ public class LaserWeaponProjectile : ProjectileBase
             }
         }
 
-        transform.position += _direction * Attributes.ProjectileSpeed * Time.deltaTime;
+        this.transform.position += _direction * Attributes.ProjectileSpeed * Time.deltaTime;
 
         Vector3 viewPos = _camera.WorldToViewportPoint(transform.position);
 
