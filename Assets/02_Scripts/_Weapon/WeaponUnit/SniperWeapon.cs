@@ -94,7 +94,7 @@ public class SniperWeapon : WeaponBase
         if (_projectileData == null || _stats == null)
             return;
 
-        int count = Mathf.Max(1, _stats.GetProjectileCount(this));
+        int count = _stats.GetProjectileCount(this);
 
         // 발사 방향 계산 (없으면 자신의 우측 방향)
         Vector3 dir = transform.right;

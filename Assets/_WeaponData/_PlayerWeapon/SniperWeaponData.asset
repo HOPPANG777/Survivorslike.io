@@ -19,7 +19,7 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 1
+    _attackSpeedMultiplier: 20
     _projectileCountBonus: 1
     _rangeBonus: 1
     _attackCooldown: 10
@@ -30,7 +30,7 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 1
+    _attackSpeedMultiplier: 20
     _projectileCountBonus: 1
     _rangeBonus: 1
     _attackCooldown: 15
@@ -41,7 +41,7 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 1
+    _attackSpeedMultiplier: 20
     _projectileCountBonus: 1
     _rangeBonus: 1
     _attackCooldown: 15
@@ -52,7 +52,7 @@ MonoBehaviour:
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 1
+    _attackSpeedMultiplier: 20
     _projectileCountBonus: 1
     _rangeBonus: 1
     _attackCooldown: 15

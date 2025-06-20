@@ -73,7 +73,7 @@ public class LaserWeapon : WeaponBase
             return;
         }
 
-        int count = Mathf.Max(1, _stats.GetProjectileCount(this));
+        int count = _stats.GetProjectileCount(this);
         for (int i = 0; i < count; i++)
         {
             var proj = ProjectileFactory.instance.Create(
