@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class AegisWeaponProjectile : ProjectileBase
 {
-    // 눈에 띄는 생성/소멸 이펙트를 위해 기존보다 빠르고 크게 스케일을 변화시킨다.
+    // 생성/소멸 시 사용되는 스케일 애니메이션 지속 시간
     private const float ScaleDuration = 0.1f;
+    // 최대 스케일 값
     private const float TargetScale = 1.2f;
 
+    // 스탯 계산을 위한 프로바이더
     private AttackStatsProvider _stats;
+    // 원형 이동의 중심 위치
     private Transform _center;
+    // 스케일 애니메이션 진행 시간
     private float _scaleTimer;
+    // 축소 상태 여부
     private bool _shrinking;
+    // 생성 시점
     private float _spawnTime;
+    // 생존 시간
     private float _lifeTime;
+    // 축소 시작 시점
     private float _shrinkStartTime;
 
     public int Index { get; private set; }
 
     public int MaxCount { get; private set; }
 
+    // 투사체 초기 설정
     public void Initialize(int index, int maxCount, float spawnTime, float lifeTime)
     {
         Index = index;
@@ -34,6 +43,7 @@ public class AegisWeaponProjectile : ProjectileBase
         _shrinkStartTime = 0f;
     }
 
+    // 매 프레임 위치 이동 및 크기 갱신
     protected override void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
@@ -42,6 +52,7 @@ public class AegisWeaponProjectile : ProjectileBase
         UpdateScale();
     }
 
+    // 기본 상태 설정
     public override void SetStatus(WeaponBase ownerWeapon)
     {
         base.SetStatus(ownerWeapon);
@@ -49,6 +60,7 @@ public class AegisWeaponProjectile : ProjectileBase
         DisableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
     }
 
+    // 원을 그리며 회전하는 움직임 구현
     protected override void Move()
     {
         base.Move();
@@ -60,6 +72,7 @@ public class AegisWeaponProjectile : ProjectileBase
         transform.position = _center.position + offset;
     }
 
+    // 스케일 애니메이션 처리
     private void UpdateScale()
     {
         if (_shrinking)
@@ -81,6 +94,7 @@ public class AegisWeaponProjectile : ProjectileBase
         }
     }
 
+    // 축소 애니메이션 시작
     public void StartShrink()
     {
         if (_shrinking) return;
@@ -98,6 +112,7 @@ public class AegisWeaponProjectile : ProjectileBase
         base.SoundStop();
     }
 
+    // 사망 조건 확인
     public override void CheckDead()
     {
         UpdateCameraBound();
@@ -124,6 +139,7 @@ public class AegisWeaponProjectile : ProjectileBase
         }
     }
 
+    // 즉시 제거 처리
     public override void Dead()
     {
         base.Dead();

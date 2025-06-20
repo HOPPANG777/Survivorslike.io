@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class LaserWeapon : WeaponBase
 {
+    // 레이저 투사체 데이터
     [SerializeField]
     private ProjectileBaseSO _projectileData;
 
+    // 스탯 계산용 프로바이더
     private AttackStatsProvider _stats;
+    // 공격 쿨타임 타이머
     private float _cooldownTimer;
 
+    // 무기 사용을 위한 기본 설정
     public override void SetStatus()
     {
         base.SetStatus();
@@ -28,6 +32,7 @@ public class LaserWeapon : WeaponBase
         _cooldownTimer = 0f;
     }
 
+    // 매 프레임 호출되어 레이저 발사를 관리한다
     public override void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME)
@@ -53,11 +58,13 @@ public class LaserWeapon : WeaponBase
         }
         else
         {
+            // 첫 발사는 즉시 수행
             Shoot();
             _cooldownTimer += Time.deltaTime;
         }
     }
 
+    // 레이저 투사체를 발사한다
     public override void Shoot()
     {
         base.Shoot();
@@ -77,6 +84,7 @@ public class LaserWeapon : WeaponBase
 
             if (proj != null)
             {
+                // 무작위 방향으로 레이저 발사
                 Vector3 dir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
                 proj.Initialize(dir, _stats);
             }

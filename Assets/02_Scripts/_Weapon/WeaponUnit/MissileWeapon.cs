@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class MissileWeapon : WeaponBase
 {
-    // 투사체 데이터
+    // 미사일 투사체 데이터
     [SerializeField]
     private ProjectileBaseSO _projectileData;
 
-    // 스탯 계산용 프로바이더
+    // 공격력, 속도 등을 계산하기 위한 스탯 프로바이더
     private AttackStatsProvider _stats;
-    // 쿨다운 측정용 타이머
+    // 발사 간격을 조절하기 위한 쿨다운 타이머
     private float _cooldownTimer;
 
-    // 초기 설정
     public override void SetStatus()
     {
         base.SetStatus();
@@ -29,7 +28,7 @@ public class MissileWeapon : WeaponBase
         _cooldownTimer = 0f;
     }
 
-    // 매 프레임 호출
+    // 매 프레임 호출되어 미사일 발사 타이밍을 제어한다
     public override void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME)
@@ -59,7 +58,7 @@ public class MissileWeapon : WeaponBase
         }
     }
 
-    // 투사체 발사
+    // 미사일 투사체를 실제로 생성하여 발사한다
     public override void Shoot()
     {
         base.Shoot();
