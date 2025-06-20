@@ -80,10 +80,8 @@ public class LaserWeaponProjectile : ProjectileBase
         base.SetStatus(ownerWeapon);
         DisableType = WeaponDisableType.WEAPONDISABLETYPE_NONE;
 
-        // Initialize wall hit counters based on projectile attributes
         _wallHitCount = 0;
         _maxWallHitCount = Attributes.PierceCount;
-        // Prevent enemy collisions from disabling this projectile
         RemainingPierceCount = int.MaxValue;
 
         if (_trail != null)
