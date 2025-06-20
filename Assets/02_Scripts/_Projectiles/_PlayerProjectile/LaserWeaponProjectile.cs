@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// 벽에 부딪혀 튕기는 레이저 투사체
+
 public class LaserWeaponProjectile : ProjectileBase
 {
     private Vector3 _direction;

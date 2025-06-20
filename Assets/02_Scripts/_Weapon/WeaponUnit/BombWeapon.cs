@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// 곡선을 따라 투척되는 폭탄 무기
+
 public class BombWeapon : WeaponBase
 {
     [SerializeField] private ProjectileBaseSO _projectileData;
