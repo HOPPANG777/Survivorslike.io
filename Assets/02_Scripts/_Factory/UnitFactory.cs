@@ -13,7 +13,6 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
     private bool _initialized;
 
     private readonly List<UnitBase> _activeUnits = new List<UnitBase>();
-    // Map each spawned unit to its health bar so we can properly release it
     private readonly Dictionary<UnitBase, UnitHealthBarController> _unitBars = new Dictionary<UnitBase, UnitHealthBarController>();
 
     private void Start()

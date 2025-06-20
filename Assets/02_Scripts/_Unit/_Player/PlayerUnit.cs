@@ -90,5 +90,6 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
     {
         base.Dead();
         AllManager.instance.UIManager.GameOverPage();
+        UnitFactory.instance.Release(this.gameObject.GetComponent<PlayerUnit>());
     }
 }
