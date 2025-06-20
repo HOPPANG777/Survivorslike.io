@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 적을 추적하는 미사일 투사체
+
 public class MissileWeaponProjectile : ProjectileBase
 {
     // 현재 방향

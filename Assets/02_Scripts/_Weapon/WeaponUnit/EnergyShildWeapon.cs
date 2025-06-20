@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// 플레이어를 감싸는 에너지 실드 무기
+
 public class EnergyShildWeapon : WeaponBase
 {
     [SerializeField] private ProjectileBaseSO _projectileData;
