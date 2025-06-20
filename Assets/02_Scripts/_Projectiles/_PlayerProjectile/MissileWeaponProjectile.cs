@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class MissileWeaponProjectile : ProjectileBase
 {
-    // 현재 방향
+    // 현재 이동 방향
     private Vector3 _direction;
     // 스탯 프로바이더
     private AttackStatsProvider _stats;
     // 추적 대상
     private EnemyUnit _target;
 
-    // 초기 각도 설정
+    // 초기 방향과 스탯을 설정
     public void Initialize(Vector3 direction, AttackStatsProvider stats)
     {
         _direction = direction.normalized;
@@ -20,16 +20,19 @@ public class MissileWeaponProjectile : ProjectileBase
         _target = null;
     }
 
+    // 기본 상태 설정
     public override void SetStatus(WeaponBase ownerWeapon)
     {
         base.SetStatus(ownerWeapon);
     }
 
+    // 매 프레임 갱신
     protected override void Update()
     {
         base.Update();
     }
 
+    // 타겟을 추적하며 이동
     protected override void Move()
     {
         if (_stats == null)
@@ -61,6 +64,7 @@ public class MissileWeaponProjectile : ProjectileBase
         transform.position += _direction * _stats.GetAttackSpeed(OwnerWeapon) * Time.deltaTime;
     }
 
+    // 주어진 범위 내에서 가장 가까운 적을 찾음
     private EnemyUnit FindTarget(float range)
     {
         List<ICollidable> list = AllManager.instance.CollisionManager.GetAllCollidables();
