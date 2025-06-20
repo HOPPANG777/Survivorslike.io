@@ -28,9 +28,9 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
     private static readonly WeaponType[] _allWeapons =
     {
         //WeaponType.WEAPON_SNIPER,
-        //WeaponType.WEAPON_PISTOL,
+        WeaponType.WEAPON_PISTOL,
         //WeaponType.WEAPON_GATLING,
-        WeaponType.WEAPON_MISSILE,
+        //WeaponType.WEAPON_MISSILE,
         //WeaponType.WEAPON_AEGIS,
         //WeaponType.WEAPON_BOMB,
         //WeaponType.WEAPON_FLAME,

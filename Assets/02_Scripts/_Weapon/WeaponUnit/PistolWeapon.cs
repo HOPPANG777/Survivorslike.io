@@ -29,17 +29,14 @@ public class PistolWeapon : WeaponBase
     {
         base.SetStatus();
 
-        if (_stats == null)
-            _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+        if (_stats == null) _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
 
         _stats.SetTargetWeapon(this);
 
-        if (_projectileData == null)
-            _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
 
         // 부모 객체에서 방향 컨트롤러를 찾아둔다
-        if (_directionCtrl == null && transform.parent != null)
-            _directionCtrl = transform.parent.GetComponent<PlayerMouseDirectionController>();
+        if (_directionCtrl == null && transform.parent != null) _directionCtrl = transform.parent.GetComponent<PlayerMouseDirectionController>();
 
         _cooldownTimer = 0f;
     }
@@ -54,8 +51,7 @@ public class PistolWeapon : WeaponBase
 
         base.Update();
 
-        if (_stats != null)
-            _stats.SetTargetWeapon(this);
+        if (_stats != null) _stats.SetTargetWeapon(this);
 
         if (_cooldownTimer > 0f)
         {
@@ -87,16 +83,11 @@ public class PistolWeapon : WeaponBase
 
         // 현재 바라보는 방향을 구한다. 컨트롤러가 없으면 자신의 Right 방향 사용
         Vector3 dir = transform.right;
-        if (_directionCtrl != null)
-            dir = _directionCtrl.RotationDirection;
+        if (_directionCtrl != null) dir = _directionCtrl.RotationDirection;
 
         for (int i = 0; i < count; i++)
         {
-            var proj = ProjectileFactory.instance.Create(
-                _projectileData,
-                transform.position,
-                Quaternion.identity,
-                this) as PistolWeaponProjectile;
+            var proj = ProjectileFactory.instance.Create( _projectileData, transform.position, Quaternion.identity, this) as PistolWeaponProjectile;
 
             if (proj != null)
             {
