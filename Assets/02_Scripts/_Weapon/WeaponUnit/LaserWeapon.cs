@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// 벽에 반사되는 레이저 무기
+
 public class LaserWeapon : WeaponBase
 {
     [SerializeField]

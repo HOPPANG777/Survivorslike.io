@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// 에이직 무기의 방패 투사체
+
 public class AegisWeaponProjectile : ProjectileBase
 {
     // 눈에 띄는 생성/소멸 이펙트를 위해 기존보다 빠르고 크게 스케일을 변화시킨다.

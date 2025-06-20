@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 플레이어를 둘러싸는 에너지 실드 투사체
+
 public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
 {
     private AttackStatsProvider _stats;

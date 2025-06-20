@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// 포물선을 그리며 떨어지는 폭탄 투사체
+
 public class BombWeaponProjectile : ProjectileBase
 {
     [SerializeField] private float _rotationSpeed = 360f;

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// 적을 추적하는 미사일 무기
+
 public class MissileWeapon : WeaponBase
 {
     // 투사체 데이터
