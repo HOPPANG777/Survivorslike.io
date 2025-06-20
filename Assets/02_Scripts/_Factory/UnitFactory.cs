@@ -14,7 +14,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
 
     private readonly List<UnitBase> _activeUnits = new List<UnitBase>();
     // Map each spawned unit to its health bar so we can properly release it
-    private readonly Dictionary<UnitBase, EnemyHealthBar> _unitBars = new Dictionary<UnitBase, EnemyHealthBar>();
+    private readonly Dictionary<UnitBase, UnitHealthBarController> _unitBars = new Dictionary<UnitBase, UnitHealthBarController>();
 
     private void Start()
     {
@@ -53,18 +53,19 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
         unit.SetStatus();
   
         _activeUnits.Add(unit);
-        if (data is EnemyUnitSO)
+        if (data is UnitBaseSO)
         {
             var parent = UIPoolManager.instance != null ? UIPoolManager.instance.CanvasRoot : null;
-            var uiGo = _uiFactory.Create(UIType.UI_ENEMY_HEALTHBAR, parent);
+            var uiGo = _uiFactory.Create(UIType.UI_UNIT_HEALTHBAR, parent);
             if (uiGo != null)
             {
-                var bar = uiGo.GetComponent<EnemyHealthBar>();
+                var bar = uiGo.GetComponent<UnitHealthBarController>();
                 var pos = unit as IPositionProvider;
                 var attr = unit as IUnitAttribute<UnitAttribute>;
                 if (bar != null && pos != null && attr != null)
                 {
-                    bar.Bind(pos, attr);
+                    if (unit is PlayerUnit) bar.Bind(pos, attr, new Color(0, 255, 0, 200));
+                    else bar.Bind(pos, attr, new Color(255, 0, 0, 200));
                     _unitBars[unit] = bar;
                 }
             }

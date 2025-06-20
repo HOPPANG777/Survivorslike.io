@@ -10,5 +10,5 @@ public interface IUIFactory
 public enum UIType
 {
     UI_NONE = 0,
-    UI_ENEMY_HEALTHBAR,
+    UI_UNIT_HEALTHBAR,
 }

@@ -42,11 +42,6 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
     private Vector3 _dashTarget;
     private float _dashTimer;
 
-    private void Start()
-    {
-        if (CheckEnemyDash() == false) return;
-    }
-
     private void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
@@ -83,6 +78,7 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
 
     public void Dash()
     {
+        if (CheckEnemyDash() == false) return;
         if (CheckEnemyDirection() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 

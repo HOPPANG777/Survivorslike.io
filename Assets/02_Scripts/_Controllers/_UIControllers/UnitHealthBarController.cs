@@ -1,28 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealthBar : MonoBehaviour
+public class UnitHealthBarController : MonoBehaviour
 {
     [SerializeField] private Image _fillImage;
     [SerializeField] private Vector3 _offset;
-    // Camera used to convert world position to screen position.
-    // Defaults to Camera.main if not explicitly set.
     [SerializeField] private Camera _uiCamera;
 
     private IPositionProvider _positionProvider;
     private IUnitAttribute<UnitAttribute> _attributeProvider;
 
-    public void Bind(IPositionProvider positionProvider, IUnitAttribute<UnitAttribute> attributeProvider)
+    public void Bind(IPositionProvider positionProvider, IUnitAttribute<UnitAttribute> attributeProvider, Color healthBarColor)
     {
         _positionProvider = positionProvider;
         _attributeProvider = attributeProvider;
-        //_uiCamera = AllManager.instance.GamemodeManager.CameraController.MainCamera;
+        _fillImage.color = healthBarColor;
     }
 
     private void Awake()
     {
-        // Fallback to Camera.main if no camera was assigned (e.g. when the
-        // object is edited in Prefab Mode and cannot reference scene objects).
         if (_uiCamera == null)
         {
             _uiCamera = Camera.main;

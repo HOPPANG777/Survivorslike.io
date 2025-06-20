@@ -10,7 +10,7 @@ public class WeaponSelectionUIController : SerializedMonoBehaviour
     [TabGroup("Weapon Choice UI")][SerializeField] private TextMeshProUGUI _label;  // 무기 이름 표시용
     [TabGroup("Weapon Choice UI")][SerializeField] private TextMeshProUGUI _statLabel; // 스탯 차이 표시용 (deprecated)
     [TabGroup("Weapon Choice UI")][SerializeField] private Transform _statListParent; // 아이콘+수치 표시 부모
-    [TabGroup("Weapon Choice UI")][SerializeField] private WeaponStatItemUI _statItemPrefab; // 아이콘+수치 프리팹
+    [TabGroup("Weapon Choice UI")][SerializeField] private WeaponStatItemUIController _statItemPrefab; // 아이콘+수치 프리팹
     [TabGroup("Type, Name")][SerializeField] private Dictionary<string, Sprite> _statIcons; // 스탯 라벨별 아이콘
 
     private System.Action _onClick;
