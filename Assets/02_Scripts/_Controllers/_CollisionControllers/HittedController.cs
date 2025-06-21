@@ -9,6 +9,7 @@ public class HittedController : ICollision
         if (self is IHitted target && other is IAttacker attacker)
         {
             if (target.TeamType == attacker.TeamType) return; // 같은 팀이면 충돌 무시
+            if (target.IsInvincible) return; // 무적 중이면 피격 처리하지 않음
 
             // 피격 방향 계산 후 이펙트 실행
             Vector3 dir = self.Position - other.Position;
