@@ -12,7 +12,7 @@ using System.Collections.Generic;
 public class RedDiamondProjectile : ProjectileBase
 {
     // 스폰 후 공격까지 대기할 시간
-    [SerializeField] private float _spawnDelay = 1f;
+    [SerializeField] private float _spawnDelay = 3f;
     // 범위를 표현할 스프라이트 렌더러
     [SerializeField] private SpriteRenderer _rangeRenderer;
     // 투사체 자체 스프라이트 렌더러
@@ -30,7 +30,23 @@ public class RedDiamondProjectile : ProjectileBase
     {
         base.SetStatus();
 
-        if (_projectileRenderer == null) _projectileRenderer = GetComponent<SpriteRenderer>();
+        if (_projectileRenderer == null)
+            _projectileRenderer = GetComponent<SpriteRenderer>();
+
+        if (_rangeRenderer == null)
+        {
+            // 프리팹에서 할당되지 않았다면 자식에서 찾아준다
+            var renderers = GetComponentsInChildren<SpriteRenderer>(true);
+            for (int i = 0; i < renderers.Length; ++i)
+            {
+                var r = renderers[i];
+                if (r != _projectileRenderer)
+                {
+                    _rangeRenderer = r;
+                    break;
+                }
+            }
+        }
 
         if (_rangeRenderer != null)
         {
@@ -38,11 +54,16 @@ public class RedDiamondProjectile : ProjectileBase
             _rangeRenderer.gameObject.SetActive(false);
         }
 
-        _projectileRenderer.transform.localScale = Vector3.zero;
+        if (_projectileRenderer.drawMode != SpriteDrawMode.Sliced)
+        {
+            _projectileRenderer.drawMode = SpriteDrawMode.Sliced;
+        }
+
+        _projectileRenderer.size = Vector2.zero;
         _timer = 0f;
         _expanding = false;
         // 속성의 폭발 반경을 기준으로 최종 스케일 계산
-        _targetScale = Attributes.ExplosionRadius * 2f;
+        _targetScale = Attributes.ExplosionRadius;
     }
 
     // 매 프레임 상태 갱신
@@ -71,12 +92,12 @@ public class RedDiamondProjectile : ProjectileBase
         else
         {
             // 투사체 스프라이트 확대
-            Vector3 scale = _projectileRenderer.transform.localScale;
-            float newScale = Mathf.MoveTowards(scale.x, _targetScale, Time.deltaTime * _targetScale);
-            scale = Vector3.one * newScale;
-            _projectileRenderer.transform.localScale = scale;
+            Vector2 size = _projectileRenderer.size;
+            float newSize = Mathf.MoveTowards(size.x, _targetScale, Time.deltaTime * _targetScale);
+            size = Vector2.one * newSize;
+            _projectileRenderer.size = size;
 
-            if (newScale >= _targetScale)
+            if (newSize >= _targetScale)
             {
                 // 최대 크기에 도달하면 공격 판정 후 소멸
                 DamagePlayerInRange();

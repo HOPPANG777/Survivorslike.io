@@ -90,8 +90,11 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
         float randomX = Random.Range(xMin, xMax);
         float randomY = Random.Range(yMin, yMax);
 
-        // 순간이동
-        enemy = new Vector3(randomX, randomY, enemy.z);
+        // 실제 적 위치 변경
+        if (_enemy != null)
+        {
+            _enemy.transform.position = new Vector3(randomX, randomY, enemy.z);
+        }
     }
 }
 

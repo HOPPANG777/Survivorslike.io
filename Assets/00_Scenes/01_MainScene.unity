@@ -15408,7 +15408,7 @@ MonoBehaviour:
   - EnemyData: {fileID: 11400000, guid: 4479e60b871fb7b498a469f923fa138c, type: 2}
     StartTime: 0
     EndTime: 300
-    Interval: 15
+    Interval: 5
     MaxCount: 50
     Timer: 0
     SpawnedCount: 0

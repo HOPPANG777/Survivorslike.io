@@ -18,7 +18,7 @@ MonoBehaviour:
     _lifetime: 5
     _knockbackForce: 2
     _pierceCount: 0
-    _explosionRadius: 3
+    _explosionRadius: 7
     _isHoming: 0
     _homingStrength: 0
   _weaponType: 0
