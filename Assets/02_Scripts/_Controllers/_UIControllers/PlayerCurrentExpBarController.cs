@@ -10,7 +10,7 @@ public class PlayerCurrentExpBarController : MonoBehaviour
     [TabGroup("Controller")][Tooltip("플레이어 경험치 바 점멸 스피드")][SerializeField] private float _speed;     // 1.0f 기준 
     [TabGroup("Controller")][Tooltip("플레이어 경험치 바 점멸 스피드")][SerializeField] private float _elapsed;   // 누적 시간
 
-    private Color _expBaseColor = new Color(0, 113, 246, 255);
+    private Color _expBaseColor = new Color(255, 255, 0, 255);
 
     public void UpdatePlayerCurrentExpBar(float fillAmount)
     {
@@ -31,11 +31,11 @@ public class PlayerCurrentExpBarController : MonoBehaviour
         _elapsed += Time.deltaTime * _speed;
 
         // 2) 0↔1 사이를 부드럽게 왕복하는 PingPong 함수
-        float blue = Mathf.PingPong(_elapsed, 1f);
+        float ping = Mathf.PingPong(_elapsed, 1f);
 
         // 3) 컬러에 적용
         var c = _playerCurrentExpBar.color;
-        c.b = blue;
+        c.r = ping;
         _playerCurrentExpBar.color = c;
     }
 }

@@ -38,8 +38,8 @@ public class AllManager : Singleton<AllManager>
     [TabGroup("Factory")][SerializeField] private ItemFactory _itemFactory;
     public ItemFactory ItemFactory { get { return _itemFactory; } }
 
-    [TabGroup("Manager")][SerializeField] private UIPoolManager _uiPoolManager;
-    public UIPoolManager UIPoolManager { get { return _uiPoolManager; } }
+    [TabGroup("Canvas")][SerializeField] private UIPoolCanvasController _uIPoolCanvasController;
+    public UIPoolCanvasController UIPoolCanvas { get { return _uIPoolCanvasController; } }
 
     private void Start()
     {
@@ -55,7 +55,7 @@ public class AllManager : Singleton<AllManager>
         if (ProjectileFactory == null) Debug.Log("ProjectileFactory가 없습니다.");
         if (ParticleFactory == null) Debug.Log("ParticleFactory가 없습니다.");
         if (ItemFactory == null) Debug.Log("ItemFactory가 없습니다.");
-        if (UIPoolManager == null) Debug.Log("UIPoolManager가 없습니다.");
+        if (UIPoolCanvas == null) Debug.Log("UIPoolCanvasController가 없습니다.");
 
         _uiController.Init();
         _collisionController.Init();

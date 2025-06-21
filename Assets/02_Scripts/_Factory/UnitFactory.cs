@@ -54,7 +54,7 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
         _activeUnits.Add(unit);
         if (data is UnitBaseSO)
         {
-            var parent = AllManager.instance.UIPoolManager != null ? AllManager.instance.UIPoolManager.CanvasRoot : null;
+            var parent = AllManager.instance.UIPoolCanvas != null ? AllManager.instance.UIPoolCanvas.CanvasRoot : null;
             var uiGo = _uiFactory.Create(UIType.UI_UNIT_HEALTHBAR, parent);
             if (uiGo != null)
             {
