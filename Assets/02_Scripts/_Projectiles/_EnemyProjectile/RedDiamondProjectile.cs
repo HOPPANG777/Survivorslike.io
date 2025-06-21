@@ -118,23 +118,14 @@ public class RedDiamondProjectile : ProjectileBase
 
         // 현재 게임모드에서 플레이어 객체를 가져옴
         GameObject playerObj = AllManager.instance.GamemodeManager.Player;
-        if (playerObj == null)
-        {
-            return;
-        }
+        if (playerObj == null) return;
 
         PlayerUnit player = playerObj.GetComponent<PlayerUnit>();
-        if (player == null)
-        {
-            return;
-        }
+        if (player == null) return;
 
+        // 범위 내에 있으면 데미지 부여
         Vector3 delta = player.transform.position - pos;
-        if (delta.sqrMagnitude <= sqrRange)
-        {
-            // 범위 내에 있으면 데미지 부여
-            player.Hitted(AttackPower);
-        }
+        if (delta.sqrMagnitude <= sqrRange) player.Hitted(AttackPower); 
     }
 }
 
