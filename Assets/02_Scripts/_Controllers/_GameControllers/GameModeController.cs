@@ -21,9 +21,6 @@ public class GameModeController : MonoBehaviour, IGameMode
     [TabGroup("Controller")][Tooltip("스폰 컨트롤러")][SerializeField] private RandomEnemySpawner _randomEnemySpawner;
     public RandomEnemySpawner RandomEnemySpawner { get { return _randomEnemySpawner; } }
 
-    [TabGroup("Controller")][Tooltip("컨테이너 스폰 컨트롤러")][SerializeField] private RandomContainerSpawner _randomContainerSpawner;
-    public RandomContainerSpawner RandomContainerSpawner { get { return _randomContainerSpawner; } }
-
     [TabGroup("Game")][Tooltip("타이머")][SerializeField] private float _gameTime;
     public float GameTime { get { return _gameTime; } }
 
@@ -99,10 +96,6 @@ public class GameModeController : MonoBehaviour, IGameMode
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
-        if (RandomContainerSpawner != null)
-        {
-            RandomContainerSpawner.Init();
-        }
 
         if (_playerInstance != null)
         {
@@ -160,10 +153,6 @@ public class GameModeController : MonoBehaviour, IGameMode
         _gameTime = 0;
         _killCount = 0;
         RandomEnemySpawner.Init();
-        if (RandomContainerSpawner != null)
-        {
-            RandomContainerSpawner.Init();
-        }
 
         if (_playerInstance != null)
         {
