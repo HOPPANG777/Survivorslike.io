@@ -11,4 +11,5 @@ public enum UIType
 {
     UI_NONE = 0,
     UI_UNIT_HEALTHBAR,
+    UI_DAMAGE_TEXT,
 }
