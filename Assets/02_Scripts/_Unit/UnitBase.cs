@@ -103,6 +103,8 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         // 무적 중이면 무시
         if (Time.time < _nextHittableTime) return;
 
+        if (damageValue == 0) return;
+
         // 피격 이펙트 실행
         var effect = this.GetComponent<UnitHitEffect>();
         if (effect != null)

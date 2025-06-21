@@ -7838,6 +7838,8 @@ MonoBehaviour:
   _entries:
   - Type: 1
     Prefab: {fileID: 582681880845817058, guid: 43c04eb6df9dda64e83db28a96b9fdd7, type: 3}
+  - Type: 2
+    Prefab: {fileID: 2338064776794260648, guid: a468b03ae5bb8244591522f0278f1a77, type: 3}
 --- !u!1 &900324526
 GameObject:
   m_ObjectHideFlags: 0
@@ -8765,6 +8767,8 @@ MonoBehaviour:
   - Prefab: {fileID: 758083600495834113, guid: 83b1ef53306fb8741a4133358ba87fc6, type: 3}
     InitialSize: 200
   - Prefab: {fileID: 582681880845817058, guid: 43c04eb6df9dda64e83db28a96b9fdd7, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 2338064776794260648, guid: a468b03ae5bb8244591522f0278f1a77, type: 3}
     InitialSize: 1000
   - Prefab: {fileID: 2095504720921607626, guid: d9b2f4e2c85fff14fb017fc554780e01, type: 3}
     InitialSize: 2000
