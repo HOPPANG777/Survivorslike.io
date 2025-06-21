@@ -10,6 +10,14 @@ public class HittedController : ICollision
         {
             if (target.TeamType == attacker.TeamType) return; // 같은 팀이면 충돌 무시
 
+            // 피격 방향 계산 후 이펙트 실행
+            Vector3 dir = self.Position - other.Position;
+            if (self is MonoBehaviour mono)
+            {
+                var effect = mono.GetComponent<UnitHitEffect>();
+                if (effect != null) effect.PlayEffect(mono.transform.position, dir);
+            }
+
             target.Hitted(attacker.AttackPower);
 
             // 2) Projectile 처리: LaserWeaponProjectile은 적과 충돌해도 카운트를 감소시키지 않는다
