@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6748b7773f1e6b64c8cb12d7950d7e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 0}
-  _teleportInterval: 0
-  _teleportMarginPercent: 0
+  _enemy: {fileID: 7183161032584120759}
+  _teleportInterval: 5
+  _teleportMarginPercent: 100
 --- !u!114 &-6438233833780516932
 MonoBehaviour:
   m_ObjectHideFlags: 0

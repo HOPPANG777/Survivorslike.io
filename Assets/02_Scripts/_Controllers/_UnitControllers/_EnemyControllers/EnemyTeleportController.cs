@@ -74,10 +74,6 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
 
     private void TeleportEnemy(Vector3 enemy)
     {
-        if (CheckEnemyMoveTarget() == false) return;
-        if (CheckTargetPosition() == false) return;
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-
         // 카메라 절반 높이 & 너비
         float height = 2f * _mainCamera.orthographicSize;
         float width = height * _mainCamera.aspect;
