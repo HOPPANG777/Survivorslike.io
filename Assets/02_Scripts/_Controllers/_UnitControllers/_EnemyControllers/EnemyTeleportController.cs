@@ -19,6 +19,12 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
     private Camera _mainCamera;
     private float _timer = 0f;
 
+    private void Start()
+    {
+        _mainCamera = Camera.main;
+    }
+
+
     private bool CheckEnemyMoveTarget()
     {
         if (_enemy == null)
@@ -45,11 +51,6 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
             Debug.LogError("IPositionProvider 컴포넌트를 찾을 수 없습니다!");
             return false;
         }
-    }
-
-    private void Awake()
-    {
-        _mainCamera = Camera.main;
     }
 
     private void Update()

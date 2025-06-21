@@ -18,7 +18,7 @@ MonoBehaviour:
     _lifetime: 5
     _knockbackForce: 2
     _pierceCount: 0
-    _explosionRadius: 0
+    _explosionRadius: 3
     _isHoming: 0
     _homingStrength: 0
   _weaponType: 0
@@ -28,4 +28,4 @@ MonoBehaviour:
   _soundName: RedDiamondProjectileSound
   _soundType: 2
   _soundClip: {fileID: 0}
-  _collisionRadius: 3
+  _collisionRadius: 1
