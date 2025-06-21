@@ -109,7 +109,7 @@ public class RedDiamondProjectile : ProjectileBase
         // 폭발 범위와 플레이어 사이의 거리를 비교
         float range = Attributes.ExplosionRadius;
         float sqrRange = range * range;
-        Vector3 pos = transform.position;
+        Vector3 pos = this.transform.position;
 
         // 현재 게임모드에서 플레이어 객체를 가져옴
         GameObject playerObj = AllManager.instance.GamemodeManager.Player;

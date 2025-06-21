@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: RedDiamondProjectileData
   m_EditorClassIdentifier: 
   _projectileAttribute:
-    _damage: 50
+    _damage: 100
     _projectileSpeed: 0
     _lifetime: 5
     _knockbackForce: 2
     _pierceCount: 0
-    _explosionRadius: 7
+    _explosionRadius: 15
     _isHoming: 0
     _homingStrength: 0
   _weaponType: 0
