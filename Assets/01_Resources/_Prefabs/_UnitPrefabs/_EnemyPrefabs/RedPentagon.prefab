@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 8127170772559242271}
   - component: {fileID: -3086376322689161780}
   - component: {fileID: 7762059921523044077}
+  - component: {fileID: -6665614443969439678}
   - component: {fileID: 2832254851441757282}
   - component: {fileID: 2702774503643604812}
-  - component: {fileID: -6665614443969439678}
-  - component: {fileID: -1473653696058622703}
   - component: {fileID: 2359621710639758966}
   m_Layer: 0
   m_Name: RedPentagon
@@ -34,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.390625, y: 0.390625, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,7 +86,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -230,6 +229,20 @@ MonoBehaviour:
   _invincibleDuration: 0.5
   _enemyAttribute:
     _enemyPushStrength: 0
+--- !u!114 &-6665614443969439678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791335069791730190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2167c64a5c40f542beb3f1cd29feef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
+  _expData: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}
 --- !u!114 &2832254851441757282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,34 +279,6 @@ MonoBehaviour:
   _soundType: 0
   _soundClip: {fileID: 0}
   _soundSource: {fileID: 0}
---- !u!114 &-6665614443969439678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5791335069791730190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2167c64a5c40f542beb3f1cd29feef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemy: {fileID: 0}
-  _expData: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}
---- !u!114 &-1473653696058622703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5791335069791730190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2167c64a5c40f542beb3f1cd29feef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemy: {fileID: 0}
-  _expData: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}
 --- !u!114 &2359621710639758966
 MonoBehaviour:
   m_ObjectHideFlags: 0

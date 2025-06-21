@@ -19,11 +19,6 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
     private Camera _mainCamera;
     private float _timer = 0f;
 
-    private void Start()
-    {
-        if (CheckEnemyMoveTarget() == false) return;
-    }
-
     private bool CheckEnemyMoveTarget()
     {
         if (_enemy == null)
@@ -76,6 +71,7 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
 
     private void TeleportEnemy(Vector3 enemy)
     {
+        if (CheckEnemyMoveTarget() == false) return;
         if (CheckTargetPosition() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
