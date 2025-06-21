@@ -226,7 +226,9 @@ MonoBehaviour:
   _invincibleDuration: 0.5
   _maxHitCount: 3
   _currentHitCount: 0
-  _dropItems: []
+  _dropItems:
+  - {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}
+  - {fileID: 11400000, guid: d0d10f87d67909d4ab4c2d07b4aaa038, type: 2}
 --- !u!114 &-5484783594241566593
 MonoBehaviour:
   m_ObjectHideFlags: 0
