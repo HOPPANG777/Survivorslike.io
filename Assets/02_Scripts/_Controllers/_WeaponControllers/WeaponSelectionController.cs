@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
 {
     [TabGroup("UI")]
@@ -23,6 +24,9 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
 
     // 이번 레벨업에 뽑힌 3개의 후보
     private WeaponType[] _currentChoices = new WeaponType[0];
+
+    // 레벨업 시 체력 회복에 사용될 비율
+    private const float _levelUpHealRate = 0.3f;
 
     // 고정된 12개 무기 타입 목록
     private static readonly WeaponType[] _allWeapons =
@@ -86,20 +90,27 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         // 2) 셔플 & 앞 3개 추출
         ShuffleUtils.Shuffle(candidates);
         int take = candidates.Count < 3 ? candidates.Count : 3;
-        _currentChoices = new WeaponType[take];
-        for (int i = 0; i < take; i++) _currentChoices[i] = candidates[i];
+        _currentChoices = new WeaponType[_choiceButtons.Count];
+        for (int i = 0; i < take; i++)
+        {
+            _currentChoices[i] = candidates[i];
+        }
+        for (int i = take; i < _choiceButtons.Count; i++)
+        {
+            _currentChoices[i] = WeaponType.WEAPON_NONE;
+        }
 
         // 3) 버튼 라벨·아이콘 세팅
         for (int i = 0; i < _choiceButtons.Count; i++)
         {
-            if (i < take)
+            var type = _currentChoices[i];
+            _choiceButtons[i].gameObject.SetActive(true);
+
+            if (type != WeaponType.WEAPON_NONE)
             {
-                _choiceButtons[i].gameObject.SetActive(true);
-                var type = _currentChoices[i];
                 var data = _weaponFactory.GetWeaponData(type);
                 var name = data != null ? data.WeaponName : type.ToString();
 
-                // 현재 레벨과 다음 레벨 스탯 비교 문자열 생성
                 List<WeaponStatDiff> diffStats = null;
                 if (data != null)
                 {
@@ -115,7 +126,7 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
             }
             else
             {
-                _choiceButtons[i].gameObject.SetActive(false);
+                _choiceButtons[i].SetData(type, $"HP +{_levelUpHealRate * 100f:0}%", null);
             }
         }
 
@@ -129,11 +140,26 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
 
         WeaponType chosen = _currentChoices[index];
 
-        // 1) 무기 생성 & 장착
-        if (_playerHolderObj != null) _playerHolder.AddWeapon(chosen);
+        if (chosen == WeaponType.WEAPON_NONE)
+        {
+            var attrProvider = AllManager.instance.GamemodeManager.Player.GetComponent<IUnitAttribute<UnitAttribute>>();
+            if (attrProvider != null)
+            {
+                var attr = attrProvider.Attributes;
+                attr.UnitCurrentHealth += attr.UnitMaxHealth * _levelUpHealRate;
+                if (attr.UnitCurrentHealth > attr.UnitMaxHealth)
+                {
+                    attr.UnitCurrentHealth = attr.UnitMaxHealth;
+                }
+                attrProvider.Attributes = attr;
+                AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(attr.UnitCurrentHealth / attr.UnitMaxHealth);
+            }
+        }
+        else
+        {
+            if (_playerHolderObj != null) _playerHolder.AddWeapon(chosen);
+        }
 
-        // 2) 패널 숨김
-        //_itemPanel.SetActive(false);
         AllManager.instance.UIManager.OnWeaponChosen();
     }
 
