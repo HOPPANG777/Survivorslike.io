@@ -86,19 +86,19 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable, ISetSt
         if (CheckPlayerDirection() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-            // 쿨타임 감소
-            if (_dashTimer > 0f) _dashTimer -= Time.deltaTime;
+        // 쿨타임 감소
+        if (_dashTimer > 0f) _dashTimer -= Time.deltaTime;
 
-            // 대쉬 중이면 대쉬 지속, 아니면 일반 이동 + 대쉬 시도
-            if (_isDashing)
-            {
-                ContinueDash();
-            }
-            else
-            {
-                TryStartDash();
-            }
+        // 대쉬 중이면 대쉬 지속, 아니면 일반 이동 + 대쉬 시도
+        if (_isDashing)
+        {
+            ContinueDash();
         }
+        else
+        {
+            TryStartDash();
+        }
+    }
 
         public void TryStartDash()
         {
