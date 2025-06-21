@@ -264,9 +264,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 5605012745649470038}
-  _dashDistance: 200
-  _dashSpeed: 2000
-  _dashCooldown: 200
+  _dashDistance: 400
+  _dashSpeed: 4000
+  _dashCooldown: 100
   _soundName: PlayerDash
   _soundType: 2
   _soundClip: {fileID: 0}

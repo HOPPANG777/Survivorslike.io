@@ -80,7 +80,6 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
     {
         if (CheckEnemyDash() == false) return;
         if (CheckEnemyDirection() == false) return;
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         // 쿨타임 감소
         if (_dashTimer > 0f) _dashTimer -= Time.deltaTime;
@@ -100,7 +99,6 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
     {
         // 쿨타임 / 모드 확인
         if (_dashTimer > 0f) return;
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         //SoundPlay();
 
@@ -114,8 +112,6 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
 
     public void ContinueDash()
     {
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-
         // 한 프레임 이동량
         Vector3 moveStep = _dashDir * DashSpeed * Time.deltaTime;
         Vector3 toTarget = _dashTarget - transform.position;
@@ -132,6 +128,7 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
             this.transform.position += moveStep;
         }
     }
+
     public void SoundPlay()
     {
         _soundSource.Play();

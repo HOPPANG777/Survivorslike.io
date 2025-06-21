@@ -272,9 +272,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 5791335069791730190}
-  _dashDistance: 0
-  _dashSpeed: 0
-  _dashCooldown: 0
+  _dashDistance: 400
+  _dashSpeed: 4000
+  _dashCooldown: 300
   _soundName: 
   _soundType: 0
   _soundClip: {fileID: 0}
