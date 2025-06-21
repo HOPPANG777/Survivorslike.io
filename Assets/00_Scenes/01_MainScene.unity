@@ -15378,37 +15378,37 @@ MonoBehaviour:
     SerializationNodes: []
   _spawnEntries:
   - EnemyData: {fileID: 11400000, guid: fe925474c60dd4e47a1353742e4d4e7d, type: 2}
-    StartTime: 300
+    StartTime: 0
     EndTime: 300
     Interval: 3
     MaxCount: 50
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 30395190b4497354c86810e587f23314, type: 2}
-    StartTime: 300
+    StartTime: 30
     EndTime: 300
     Interval: 2
     MaxCount: 50
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 141d348b8d494774387090185bd1e19c, type: 2}
-    StartTime: 600
+    StartTime: 60
     EndTime: 300
     Interval: 5
     MaxCount: 50
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 620ed35295d62e74fbea396b5b2d5702, type: 2}
-    StartTime: 1100
+    StartTime: 110
     EndTime: 300
     Interval: 10
     MaxCount: 50
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 4479e60b871fb7b498a469f923fa138c, type: 2}
-    StartTime: 0
+    StartTime: 170
     EndTime: 300
-    Interval: 5
+    Interval: 15
     MaxCount: 5
     Timer: 0
     SpawnedCount: 0

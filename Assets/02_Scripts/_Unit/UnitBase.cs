@@ -57,14 +57,16 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     [Header("IAttacker")]
     public virtual float AttackPower { get { return Attributes.UnitDamage; } }
 
-    [TabGroup("Unit Dead")][Tooltip("죽었는지 확인")][SerializeField]  private bool isDead = false;
+    [TabGroup("Unit Dead")][Tooltip("죽었는지 확인")][SerializeField] private bool isDead = false;
     public bool IsDead { get { return isDead; } }
 
     [TabGroup("Unit Base")][Tooltip("피격 후 무적 지속 시간 (초)")][SerializeField] protected float _invincibleDuration = 0.5f;
+
     // 다음에 맞을 수 있는 시점 (Time.time 기준)
     private float _nextHittableTime = 0f;
+
     // 현재 무적 상태인지 여부
-    public bool IsInvincible { get { return Time.time < _nextHittableTime; } }
+    //public bool IsInvincible { get { return Time.time < _nextHittableTime; } }
 
     protected virtual void Start()
     {
@@ -106,11 +108,8 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
 
     public virtual void Hitted(float damageValue)
     {
-      // 무적 중이면 무시
-        if (Time.time < _nextHittableTime)
-        {
-            return;
-        }
+        // 무적 중이면 무시
+        if (Time.time < _nextHittableTime) return;
 
         // 피격 이펙트 실행
         var effect = this.GetComponent<UnitHitEffect>();

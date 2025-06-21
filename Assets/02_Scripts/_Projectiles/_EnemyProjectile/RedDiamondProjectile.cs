@@ -58,7 +58,7 @@ public class RedDiamondProjectile : ProjectileBase
         _timer = 0f;
         _expanding = false;
         // 속성의 폭발 반경을 기준으로 최종 스케일 계산
-        _targetScale = Attributes.ExplosionRadius;
+        _targetScale = Attributes.ExplosionRadius * 2.7f;
     }
 
     // 매 프레임 상태 갱신
@@ -120,7 +120,11 @@ public class RedDiamondProjectile : ProjectileBase
 
         // 범위 내에 있으면 데미지 부여
         Vector3 delta = player.transform.position - pos;
-        if (delta.sqrMagnitude <= sqrRange) player.Hitted(AttackPower); 
+        if (delta.sqrMagnitude <= sqrRange)
+        {
+            player.SetInvincible(0f);     // 무적 시간 초기화
+            player.Hitted(AttackPower);
+        }
     }
 }
 
