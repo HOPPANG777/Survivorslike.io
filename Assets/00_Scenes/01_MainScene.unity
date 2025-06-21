@@ -15409,7 +15409,7 @@ MonoBehaviour:
     StartTime: 0
     EndTime: 300
     Interval: 5
-    MaxCount: 50
+    MaxCount: 5
     Timer: 0
     SpawnedCount: 0
   _bossSpawnTime: 301
