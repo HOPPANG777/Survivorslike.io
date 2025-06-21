@@ -1,7 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditorInternal.VersionControl.ListControl;
 
 public class UISliderController : MonoBehaviour, IUISlider, IMoveable, ISelectedIndex
 {

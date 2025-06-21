@@ -17,4 +17,7 @@ MonoBehaviour:
   _collisionRadius: 1
   _attractRange: 0.5
   _attractSpeed: 0
+  _soundName: GetExpSound
+  _soundType: 2
+  _soundClip: {fileID: 0}
   _expAmount: 2
