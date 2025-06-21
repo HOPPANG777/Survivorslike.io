@@ -338,7 +338,7 @@ MonoBehaviour:
   - {fileID: 230656338}
   - {fileID: 609678599}
   _barRect: {fileID: 68180929}
-  _moveDuration: 0.5
+  _moveDuration: 0.3
   _delayBetween: 0.1
   _ease:
     serializedVersion: 2

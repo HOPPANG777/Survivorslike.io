@@ -33,12 +33,6 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     [TabGroup("Unit Sound")][Tooltip("사운드 타입")][SerializeField] protected SoundType _soundType;
     public SoundType SoundType { get { return _soundType; } }
 
-    // Sets the unit to be invincible for the given duration
-    public void SetInvincible(float duration)
-    {
-        _nextHittableTime = Time.time + duration;
-    }
-
     // 사용할 오디오 클립
     [TabGroup("Unit Sound")][Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
@@ -65,8 +59,6 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     // 다음에 맞을 수 있는 시점 (Time.time 기준)
     private float _nextHittableTime = 0f;
 
-    // 현재 무적 상태인지 여부
-    //public bool IsInvincible { get { return Time.time < _nextHittableTime; } }
 
     protected virtual void Start()
     {

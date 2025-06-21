@@ -103,11 +103,6 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable, ISetSt
         public void TryStartDash()
         {
             var unit = _player.GetComponent<UnitBase>();
-            if (unit != null)
-            {
-                float invDuration = DashSpeed != 0f ? DashDistance / DashSpeed : 0f;
-                unit.SetInvincible(invDuration);
-            }
             // 쿨타임 / 모드 확인
             if (_dashTimer > 0f) return;
             if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;

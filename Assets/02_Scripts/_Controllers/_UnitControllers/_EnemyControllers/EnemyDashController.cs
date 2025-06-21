@@ -85,12 +85,6 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
         // 쿨타임 감소
         if (_dashTimer > 0f) _dashTimer -= Time.deltaTime;
 
-        var unit = GetComponent<UnitBase>();
-        if (unit != null)
-        {
-            float invDuration = DashSpeed != 0f ? DashDistance / DashSpeed : 0f;
-            unit.SetInvincible(invDuration);
-        }
         // 대쉬 중이면 대쉬 지속, 아니면 일반 이동 + 대쉬 시도
         if (_isDashing)
         {

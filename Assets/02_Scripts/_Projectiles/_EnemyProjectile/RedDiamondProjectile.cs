@@ -120,11 +120,7 @@ public class RedDiamondProjectile : ProjectileBase
 
         // 범위 내에 있으면 데미지 부여
         Vector3 delta = player.transform.position - pos;
-        if (delta.sqrMagnitude <= sqrRange)
-        {
-            player.SetInvincible(0f);     // 무적 시간 초기화
-            player.Hitted(AttackPower);
-        }
+        if (delta.sqrMagnitude <= sqrRange) player.Hitted(AttackPower);
     }
 }
 
