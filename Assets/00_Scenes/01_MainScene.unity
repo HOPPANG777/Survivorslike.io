@@ -8030,6 +8030,8 @@ MonoBehaviour:
   _entries:
   - Data: {fileID: 11400000, guid: 35a76948f1ce155469a8cc4cd054c855, type: 2}
     Prefab: {fileID: 177575347635178658, guid: 05f5a69eb139d194c87ff142654c3dd5, type: 3}
+  - Data: {fileID: 11400000, guid: 85f3d6fad3df2bf4aa8bdaca2dbad67b, type: 2}
+    Prefab: {fileID: 8002070925203235009, guid: afd18eb4b5783d24dba0b30a1c477078, type: 3}
   - Data: {fileID: 11400000, guid: e4dc348ef0a55734ba46091d21062d14, type: 2}
     Prefab: {fileID: 9132914363161966335, guid: 4586b6ccede34014190a41558491d466, type: 3}
   - Data: {fileID: 11400000, guid: 0133b1863708cd048a61e76916809bb6, type: 2}
@@ -8733,6 +8735,8 @@ MonoBehaviour:
   - Prefab: {fileID: 9132914363161966335, guid: 9c0ab5444f8e4114d99f8777e63763d9, type: 3}
     InitialSize: 5
   - Prefab: {fileID: 177575347635178658, guid: 05f5a69eb139d194c87ff142654c3dd5, type: 3}
+    InitialSize: 1000
+  - Prefab: {fileID: 8002070925203235009, guid: afd18eb4b5783d24dba0b30a1c477078, type: 3}
     InitialSize: 1000
   - Prefab: {fileID: 9132914363161966335, guid: 4586b6ccede34014190a41558491d466, type: 3}
     InitialSize: 1000

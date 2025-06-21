@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5049582249991779616}
   - component: {fileID: -6192800292198891731}
   - component: {fileID: -7827385674853624532}
+  - component: {fileID: -6438233833780516932}
   - component: {fileID: -6120187012717513210}
   m_Layer: 0
   m_Name: RedDiamond
@@ -257,6 +258,22 @@ MonoBehaviour:
   _enemy: {fileID: 0}
   _teleportInterval: 0
   _teleportMarginPercent: 0
+--- !u!114 &-6438233833780516932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183161032584120759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803a392fefc7811478277c81b92f68a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shootInterval: 0
+  _bulletSpawnPoint: {fileID: 7183161032584120759}
+  _bulletData: {fileID: 11400000, guid: 85f3d6fad3df2bf4aa8bdaca2dbad67b, type: 2}
+  _shootTimer: 0
 --- !u!114 &-6120187012717513210
 MonoBehaviour:
   m_ObjectHideFlags: 0
