@@ -112,6 +112,13 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
             return;
         }
 
+        // 피격 이펙트 실행
+        var effect = GetComponent<UnitHitEffect>();
+        if (effect != null)
+        {
+            effect.PlayEffect(transform.position, Vector3.zero);
+        }
+
         // 실제 데미지 계산
         float damageReduction = damageValue * (100f / (100f + this.Attributes.UnitDefense));
         this._unitAttribute.UnitCurrentHealth -= damageReduction;
