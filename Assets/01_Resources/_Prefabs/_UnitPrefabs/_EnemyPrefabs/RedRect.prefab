@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1939052725359910934}
   - component: {fileID: -6523763708947494958}
   - component: {fileID: -6491244107926235677}
+  - component: {fileID: -1160885911311875851}
   m_Layer: 0
   m_Name: RedRect
   m_TagString: Untagged
@@ -355,3 +356,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-1160885911311875851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423636656322011951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfe3a29a8aa4e0aa38b930069152e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _duration: 0.1
+  _renderer: {fileID: 0}

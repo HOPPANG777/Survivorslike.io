@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 //==============================================================================
@@ -7,12 +8,9 @@ using UnityEngine;
 //==============================================================================
 public class UnitHitEffect : MonoBehaviour
 {
-    [Tooltip("피격 시 어두워질 색상")]
-    [SerializeField] private Color _hitColor = Color.gray;
-    [Tooltip("원래 색상으로 돌아갈 시간")]
-    [SerializeField] private float _duration = 0.1f;
-    [Tooltip("스프라이트 렌더러")]
-    [SerializeField] private SpriteRenderer _renderer;
+    [TabGroup("HitEffect")][Tooltip("피격 시 어두워질 색상")][SerializeField] private Color _hitColor = Color.gray;
+    [TabGroup("HitEffect")][Tooltip("원래 색상으로 돌아갈 시간")][SerializeField] private float _duration = 0.1f;
+    [TabGroup("HitEffect")][Tooltip("스프라이트 렌더러")][SerializeField] private SpriteRenderer _renderer;
 
     private Color _originColor;
     private float _recoverTime;
@@ -20,7 +18,7 @@ public class UnitHitEffect : MonoBehaviour
 
     private void Awake()
     {
-        if (_renderer == null) _renderer = GetComponent<SpriteRenderer>();
+        if (_renderer == null) _renderer = this.GetComponent<SpriteRenderer>();
         if (_renderer != null) _originColor = _renderer.color;
         _factory = ParticleFactory.instance;
     }

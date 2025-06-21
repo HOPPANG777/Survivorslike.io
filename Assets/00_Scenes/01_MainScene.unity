@@ -8747,6 +8747,8 @@ MonoBehaviour:
     InitialSize: 1000
   - Prefab: {fileID: 5605012745649470038, guid: f33211d48e555454db77b2414be82432, type: 3}
     InitialSize: 5
+  - Prefab: {fileID: 2095504720921607626, guid: d9b2f4e2c85fff14fb017fc554780e01, type: 3}
+    InitialSize: 2000
 --- !u!4 &1131158582
 Transform:
   m_ObjectHideFlags: 0
@@ -8762,6 +8764,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1141567743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1141567744}
+  - component: {fileID: 1141567745}
+  m_Layer: 0
+  m_Name: ParticleFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1141567744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141567743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1141567745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141567743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d7708e243f4c13af24f43023b232f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _entries:
+  - Type: 1
+    Prefab: {fileID: 2095504720921607626, guid: d9b2f4e2c85fff14fb017fc554780e01, type: 3}
 --- !u!1 &1189087049
 GameObject:
   m_ObjectHideFlags: 0
@@ -33012,6 +33070,7 @@ SceneRoots:
   - {fileID: 1019233235}
   - {fileID: 1131158582}
   - {fileID: 933357580}
+  - {fileID: 1141567744}
   - {fileID: 2047221278}
   - {fileID: 888269819}
   - {fileID: 2140000001}

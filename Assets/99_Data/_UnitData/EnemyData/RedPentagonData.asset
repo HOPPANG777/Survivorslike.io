@@ -29,7 +29,7 @@ MonoBehaviour:
     _knockbackForce: 1
   _unitSprite: {fileID: 0}
   _unitName: 
-  _teamType: 0
+  _teamType: 2
   _soundName: RedPentagonDie
   _soundType: 2
   _soundClip: {fileID: 0}

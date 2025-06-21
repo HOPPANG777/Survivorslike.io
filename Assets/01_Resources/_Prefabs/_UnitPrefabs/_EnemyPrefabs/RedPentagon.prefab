@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2702774503643604812}
   - component: {fileID: -6665614443969439678}
   - component: {fileID: -1473653696058622703}
+  - component: {fileID: 2359621710639758966}
   m_Layer: 0
   m_Name: RedPentagon
   m_TagString: Untagged
@@ -293,3 +294,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 0}
   _expData: {fileID: 11400000, guid: e2495e84a1881aa4d84045d1985232b8, type: 2}
+--- !u!114 &2359621710639758966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791335069791730190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfe3a29a8aa4e0aa38b930069152e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _duration: 0.1
+  _renderer: {fileID: 0}
