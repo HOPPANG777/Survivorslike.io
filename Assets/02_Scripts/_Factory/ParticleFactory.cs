@@ -48,6 +48,8 @@ public class ParticleFactory : SerializedMonoBehaviour, IParticleFactory
         if (parent != null) go.transform.SetParent(parent, false);
         go.transform.position = position;
         go.transform.rotation = rotation;
+        var ps = go.GetComponent<ParticleSystem>();
+        if (ps != null) ps.Play();
         _activeParticles.Add(go);
         return go;
     }
