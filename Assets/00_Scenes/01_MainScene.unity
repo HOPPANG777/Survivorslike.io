@@ -8436,68 +8436,6 @@ MonoBehaviour:
   _particleFactory: {fileID: 1141567745}
   _itemFactory: {fileID: 1755279254}
   _uIPoolCanvasController: {fileID: 2140000005}
---- !u!1 &1020758782
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1020758783}
-  - component: {fileID: 1020758784}
-  m_Layer: 0
-  m_Name: RandomContainerSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1020758783
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020758782}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2107988353}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1020758784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020758782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7163cd5899b72428f68ea9d6913511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  _spawnEntries:
-  - EnemyData: {fileID: 11400000, guid: fc5a262c66bb1044f89648035a4ab75b, type: 2}
-    StartTime: 0
-    EndTime: 300
-    Interval: 10
-    MaxCount: 5
-    Timer: 0
-    SpawnedCount: 0
-  _offCameraMargin: 1
 --- !u!1 &1071158030
 GameObject:
   m_ObjectHideFlags: 0
@@ -27522,6 +27460,13 @@ MonoBehaviour:
     StartTime: 170
     EndTime: 300
     Interval: 15
+    MaxCount: 5
+    Timer: 0
+    SpawnedCount: 0
+  - EnemyData: {fileID: 11400000, guid: fc5a262c66bb1044f89648035a4ab75b, type: 2}
+    StartTime: 0
+    EndTime: 300
+    Interval: 10
     MaxCount: 5
     Timer: 0
     SpawnedCount: 0
@@ -80920,7 +80865,6 @@ Transform:
   - {fileID: 1838589377}
   - {fileID: 1398061043}
   - {fileID: 1523479655}
-  - {fileID: 1020758783}
   m_Father: {fileID: 1019233235}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2107988354
