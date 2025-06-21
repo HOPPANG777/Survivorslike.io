@@ -14,13 +14,11 @@ public class UnitHitEffect : MonoBehaviour
 
     private Color _originColor;
     private float _recoverTime;
-    private IParticleFactory _factory;
 
     private void Awake()
     {
         if (_renderer == null) _renderer = this.GetComponent<SpriteRenderer>();
         if (_renderer != null) _originColor = _renderer.color;
-        _factory = AllManager.instance.ParticleFactory;
     }
 
     // 피격 이펙트 재생
@@ -32,10 +30,10 @@ public class UnitHitEffect : MonoBehaviour
             _recoverTime = Time.time + _duration;
         }
 
-        if (_factory != null)
+        if (AllManager.instance.ParticleFactory != null)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            _factory.Create(ParticleType.PARTICLE_HIT, position, Quaternion.Euler(0f, 0f, angle));
+            AllManager.instance.ParticleFactory.Create(ParticleType.PARTICLE_HIT, position, Quaternion.Euler(0f, 0f, angle));
         }
     }
 
