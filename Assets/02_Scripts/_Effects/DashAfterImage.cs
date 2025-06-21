@@ -1,0 +1,33 @@
+using UnityEngine;
+
+public class DashAfterImage : MonoBehaviour
+{
+    private SpriteRenderer _renderer;
+    private float _duration;
+    private float _timer;
+
+    public void Initialize(Sprite sprite, Color color, int sortingOrder, float duration)
+    {
+        _renderer = gameObject.AddComponent<SpriteRenderer>();
+        _renderer.sprite = sprite;
+        _renderer.sortingOrder = sortingOrder;
+        _renderer.color = color;
+        _duration = duration;
+        _timer = 0f;
+    }
+
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+        if (_renderer != null)
+        {
+            Color c = _renderer.color;
+            c.a = Mathf.Lerp(1f, 0f, _timer / _duration);
+            _renderer.color = c;
+        }
+        if (_timer >= _duration)
+        {
+            Destroy(gameObject);
+        }
+    }
+}
