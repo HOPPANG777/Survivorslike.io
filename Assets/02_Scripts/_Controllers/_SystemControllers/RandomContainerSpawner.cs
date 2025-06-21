@@ -1,60 +1,85 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 //==============================================================================
 // RandomContainerSpawner
 //==============================================================================
 // 컨테이너 유닛을 일정 시간마다 랜덤 위치에 스폰하는 컨트롤러
-// - ISpawnPositionProvider를 통해 위치 의존성을 제거
+// - RandomEnemySpawner 로직을 활용하여 구현 단순화
 // - IUnitFactory를 사용하여 실제 유닛 생성
 //==============================================================================
 [DisallowMultipleComponent]
-public class RandomContainerSpawner : SerializedMonoBehaviour, IContainerSpawner
+public class RandomContainerSpawner : SerializedMonoBehaviour
 {
-    [TabGroup("Spawn Settings")]
-    [Tooltip("스폰할 컨테이너 데이터")]
-    [SerializeField] private UnitBaseSO _containerData;
+    [TabGroup("Spawn Settings")][Tooltip("스폰 설정 목록")]
+    [SerializeField] private List<SpawnEntry> _spawnEntries = new List<SpawnEntry>();
 
-    [TabGroup("Spawn Settings")]
-    [Tooltip("스폰 간격(초)")]
-    [SerializeField] private float _spawnInterval = 10f;
+    private float _elapsedTime;
+    private IUnitFactory _factory;
 
-    [TabGroup("Spawn Settings")]
-    [Tooltip("최대 스폰 수")]
-    [SerializeField] private int _maxSpawnCount = 3;
-
-    private float _timer;                   // 스폰 타이머
-    private int _spawnedCount;              // 현재까지 스폰된 개수
-    private IUnitFactory _unitFactory;      // 유닛 생성용 팩토리
-    private ISpawnPositionProvider _provider; // 위치 제공자
-
-    /// <summary>
-    /// 스폰 시스템 초기화
-    /// </summary>
-    /// <param name="provider">스폰 위치 제공자</param>
-    public void Init(ISpawnPositionProvider provider)
+    public void Init()
     {
-        _unitFactory = AllManager.instance.UnitFactory;
-        _provider = provider;
-        _timer = 0f;
-        _spawnedCount = 0;
+        _factory = AllManager.instance.UnitFactory;
+        _elapsedTime = 0f;
+
+        // 스폰 관련 값 초기화
+        for (int i = 0; i < _spawnEntries.Count; i++)
+        {
+            SpawnEntry entry = _spawnEntries[i];
+            entry.Timer = 0f;
+            entry.SpawnedCount = 0;
+            _spawnEntries[i] = entry;
+        }
     }
 
     private void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-        if (_unitFactory == null || _provider == null || _containerData == null) return;
 
-        _timer += Time.deltaTime;
-        if (_timer < _spawnInterval) return;
-        if (_spawnedCount >= _maxSpawnCount) return;
+        _elapsedTime += Time.deltaTime;
 
-        _timer -= _spawnInterval;
-        Vector3 pos = _provider.GetPosition();
-        UnitBase unit = _unitFactory.Create(_containerData, pos);
-        if (unit != null)
+        for (int i = 0; i < _spawnEntries.Count; i++)
         {
-            _spawnedCount += 1;
+            var entry = _spawnEntries[i];
+            if (_elapsedTime < entry.StartTime || _elapsedTime > entry.EndTime) continue;
+            if (entry.SpawnedCount >= entry.MaxCount) continue;
+
+            entry.Timer += Time.deltaTime;
+            if (entry.Timer < entry.Interval)
+            {
+                _spawnEntries[i] = entry;
+                continue;
+            }
+
+            entry.Timer -= entry.Interval;
+            _spawnEntries[i] = entry;
+
+            Vector3 pos = GetRandomOffCameraPosition();
+            var container = _factory.Create(entry.EnemyData, pos);
+            if (container != null)
+            {
+                entry.SpawnedCount++;
+                _spawnEntries[i] = entry;
+            }
         }
     }
+
+    private Vector3 GetRandomOffCameraPosition()
+    {
+        Camera cam = Camera.main;
+        float halfH = cam.orthographicSize;
+        float halfW = halfH * cam.aspect;
+        Vector3 center = cam.transform.position;
+        float m = _offCameraMargin;
+        switch (Random.Range(0, 4))
+        {
+            case 0: return new Vector3(center.x - halfW - m, Random.Range(center.y - halfH, center.y + halfH), 0f);
+            case 1: return new Vector3(center.x + halfW + m, Random.Range(center.y - halfH, center.y + halfH), 0f);
+            case 2: return new Vector3(Random.Range(center.x - halfW, center.x + halfW), center.y + halfH + m, 0f);
+            default: return new Vector3(Random.Range(center.x - halfW, center.x + halfW), center.y - halfH - m, 0f);
+        }
+    }
+
+    [TabGroup("Spawn Settings")][SerializeField] private float _offCameraMargin = 1f;
 }
