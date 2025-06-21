@@ -33,31 +33,26 @@ public class RedDiamondProjectile : ProjectileBase
         if (_projectileRenderer == null)
             _projectileRenderer = GetComponent<SpriteRenderer>();
 
-        if (_rangeRenderer == null)
+        if (_rangeRenderer != null) return;
+
+        // 프리팹에서 할당되지 않았다면 자식에서 찾아준다
+        var renderers = GetComponentsInChildren<SpriteRenderer>(true);
+        for (int i = 0; i < renderers.Length; ++i)
         {
-            // 프리팹에서 할당되지 않았다면 자식에서 찾아준다
-            var renderers = GetComponentsInChildren<SpriteRenderer>(true);
-            for (int i = 0; i < renderers.Length; ++i)
+            var r = renderers[i];
+            if (r != _projectileRenderer)
             {
-                var r = renderers[i];
-                if (r != _projectileRenderer)
-                {
-                    _rangeRenderer = r;
-                    break;
-                }
+                _rangeRenderer = r;
+                break;
             }
         }
 
+        // 범위 스프라이트는 초기에는 꺼두었다가 딜레이 중 표시
         if (_rangeRenderer != null)
-        {
-            // 범위 스프라이트는 초기에는 꺼두었다가 딜레이 중 표시
             _rangeRenderer.gameObject.SetActive(false);
-        }
 
         if (_projectileRenderer.drawMode != SpriteDrawMode.Sliced)
-        {
             _projectileRenderer.drawMode = SpriteDrawMode.Sliced;
-        }
 
         _projectileRenderer.size = Vector2.zero;
         _timer = 0f;
