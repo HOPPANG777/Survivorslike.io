@@ -10,6 +10,12 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
     // Prefab -> 인스턴스 큐
     private Dictionary<GameObject, Queue<GameObject>> _pools;
 
+    // Prefab -> 생성된 인스턴스의 부모 트랜스폼
+    private Dictionary<GameObject, Transform> _poolParents;
+
+    // Prefab -> 현재까지 생성된 인스턴스 수
+    private Dictionary<GameObject, int> _poolInstanceCount;
+
     // 인스턴스 -> Prefab 매핑
     private Dictionary<GameObject, GameObject> _instanceToPrefab;
 
@@ -25,6 +31,8 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
         if (_initialized) return;
 
         _pools = new Dictionary<GameObject, Queue<GameObject>>(_configs.Count);
+        _poolParents = new Dictionary<GameObject, Transform>(_configs.Count);
+        _poolInstanceCount = new Dictionary<GameObject, int>(_configs.Count);
         _instanceToPrefab = new Dictionary<GameObject, GameObject>(_configs.Count * 2);
 
         // 각 프리팹별 큐 초기화
@@ -32,14 +40,24 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
         {
             var prefab = _configs[i].Prefab;
             var queue = new Queue<GameObject>(_configs[i].InitialSize);
+
+            // 프리팹 이름 + "Pool" 오브젝트 생성
+            var parent = new GameObject(prefab.name + "Pool").transform;
+            parent.SetParent(transform);
+            _poolParents[prefab] = parent;
+
+            int count = 0;
             for (int j = 0; j < _configs[i].InitialSize; j++)
             {
-                var go = Instantiate(prefab, transform);
+                count++;
+                var go = Instantiate(prefab, parent);
+                go.name = $"{prefab.name}_{count:00}";
                 go.SetActive(false);
                 queue.Enqueue(go);
                 _instanceToPrefab[go] = prefab;
             }
             _pools[prefab] = queue;
+            _poolInstanceCount[prefab] = count;
         }
 
         _initialized = true;
@@ -54,7 +72,26 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
             go.SetActive(true);
             return go;
         }
-        var inst = Instantiate(prefab, transform);
+
+        // 필요한 데이터가 없으면 초기화
+        if (!_pools.ContainsKey(prefab))
+        {
+            _pools[prefab] = new Queue<GameObject>();
+        }
+
+        if (!_poolParents.TryGetValue(prefab, out var parent))
+        {
+            parent = new GameObject(prefab.name + "Pool").transform;
+            parent.SetParent(transform);
+            _poolParents[prefab] = parent;
+            _poolInstanceCount[prefab] = 0;
+        }
+
+        int count = _poolInstanceCount[prefab] + 1;
+        _poolInstanceCount[prefab] = count;
+
+        var inst = Instantiate(prefab, parent);
+        inst.name = $"{prefab.name}_{count:00}";
         _instanceToPrefab[inst] = prefab;
         return inst;
     }
@@ -75,6 +112,11 @@ public class PoolManager : SerializedSingleton<PoolManager>, IPoolManager
         {
             queue = new Queue<GameObject>();
             _pools[prefab] = queue;
+        }
+
+        if (_poolParents.TryGetValue(prefab, out var parent))
+        {
+            instance.transform.SetParent(parent);
         }
         instance.SetActive(false);
         queue.Enqueue(instance);
