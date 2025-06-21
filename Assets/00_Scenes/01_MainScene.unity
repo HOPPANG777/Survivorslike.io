@@ -8489,9 +8489,15 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _containerData: {fileID: 11400000, guid: fc5a262c66bb1044f89648035a4ab75b, type: 2}
-  _spawnInterval: 10
-  _maxSpawnCount: 5
+  _spawnEntries:
+  - EnemyData: {fileID: 11400000, guid: fc5a262c66bb1044f89648035a4ab75b, type: 2}
+    StartTime: 0
+    EndTime: 300
+    Interval: 10
+    MaxCount: 5
+    Timer: 0
+    SpawnedCount: 0
+  _offCameraMargin: 1
 --- !u!1 &1071158030
 GameObject:
   m_ObjectHideFlags: 0
