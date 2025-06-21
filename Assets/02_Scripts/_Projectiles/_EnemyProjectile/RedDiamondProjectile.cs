@@ -111,23 +111,29 @@ public class RedDiamondProjectile : ProjectileBase
     // 범위 안에 플레이어가 존재하면 데미지를 가함
     private void DamagePlayerInRange()
     {
+        // 폭발 범위와 플레이어 사이의 거리를 비교
         float range = Attributes.ExplosionRadius;
         float sqrRange = range * range;
         Vector3 pos = transform.position;
-        List<ICollidable> list = AllManager.instance.CollisionManager.GetAllCollidables();
-        int count = list.Count;
-        for (int i = 0; i < count; i++)
+
+        // 현재 게임모드에서 플레이어 객체를 가져옴
+        GameObject playerObj = AllManager.instance.GamemodeManager.Player;
+        if (playerObj == null)
         {
-            if (list[i] is PlayerUnit player)
-            {
-                Vector3 delta = player.transform.position - pos;
-                if (delta.sqrMagnitude <= sqrRange)
-                {
-                    player.Hitted(AttackPower);
-                }
-                // 플레이어는 하나뿐이므로 검사 후 바로 종료
-                break;
-            }
+            return;
+        }
+
+        PlayerUnit player = playerObj.GetComponent<PlayerUnit>();
+        if (player == null)
+        {
+            return;
+        }
+
+        Vector3 delta = player.transform.position - pos;
+        if (delta.sqrMagnitude <= sqrRange)
+        {
+            // 범위 내에 있으면 데미지 부여
+            player.Hitted(AttackPower);
         }
     }
 }
