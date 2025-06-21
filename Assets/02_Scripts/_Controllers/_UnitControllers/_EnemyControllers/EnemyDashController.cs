@@ -43,7 +43,7 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable, ISetSta
     private float _dashTimer;
 
     [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageInterval = 0.05f;
-    [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageDuration = 0.2f;
+    [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageDuration = 1.0f;
     private float _afterImageTimer;
     private SpriteRenderer _enemyRenderer;
 

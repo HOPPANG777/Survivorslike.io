@@ -79,7 +79,7 @@ public class UIController : MonoBehaviour
         if (player.Attributes.PlayerLevel <= 0)
         {
             var attr = player.Attributes;
-            attr.PlayerLevel = 1;
+            attr.PlayerLevel = 0;
             player.Attributes = attr;
             AllManager.instance.UIManager.PlayerCurrentLevelCountController.UpdateLevelCounter(1);
         }
