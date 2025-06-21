@@ -29547,8 +29547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac03ffd99a20dec45b991b737aa9f2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tileMapSize: 4000
-  _tilemapOverlapOffset: 10
+  _tileMapSize: 6000
+  _tilemapOverlapOffset: 20
   _tileMapList:
   - {fileID: 2079285849}
   - {fileID: 2070322232}
