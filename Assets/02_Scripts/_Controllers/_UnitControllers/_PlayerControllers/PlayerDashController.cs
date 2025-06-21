@@ -166,13 +166,12 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable, ISetSt
     {
         if (_playerRenderer == null) return;
         _afterImageTimer -= Time.deltaTime;
+
         if (_afterImageTimer > 0f) return;
         _afterImageTimer = _afterImageInterval;
 
-        var obj = new GameObject("DashAfterImage");
-        obj.transform.position = this.transform.position;
-        obj.transform.rotation = this.transform.rotation;
-        var after = obj.AddComponent<DashAfterImage>();
-        after.Initialize(_playerRenderer.sprite, _playerRenderer.color, _playerRenderer.sortingOrder - 1, _afterImageDuration);
+        var dashEffect = AllManager.instance.ParticleFactory.Create(ParticleType.PARTICLE_DASH, this.transform.position, Quaternion.identity);
+        var after = dashEffect.GetComponent<DashAfterImage>();
+        after.Initialize(_playerRenderer.sprite, _playerRenderer.color, _playerRenderer.sortingOrder - 1, _afterImageDuration, this.gameObject.GetComponent<SpriteRenderer>().size);
     }
 }

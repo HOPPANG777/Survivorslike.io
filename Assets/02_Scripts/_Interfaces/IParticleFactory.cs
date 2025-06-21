@@ -10,5 +10,6 @@ public interface IParticleFactory
 public enum ParticleType
 {
     PARTICLE_NONE = 0,
-    PARTICLE_HIT
+    PARTICLE_HIT,
+    PARTICLE_DASH
 }

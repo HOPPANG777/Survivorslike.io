@@ -6,10 +6,12 @@ public class DashAfterImage : MonoBehaviour
     private float _duration;
     private float _timer;
 
-    public void Initialize(Sprite sprite, Color color, int sortingOrder, float duration)
+    public void Initialize(Sprite sprite, Color color, int sortingOrder, float duration, Vector2 size)
     {
         _renderer = gameObject.AddComponent<SpriteRenderer>();
         _renderer.sprite = sprite;
+        _renderer.drawMode = SpriteDrawMode.Sliced;
+        _renderer.size = size; // Adjust size as needed
         _renderer.sortingOrder = sortingOrder;
         _renderer.color = color;
         _duration = duration;
@@ -27,7 +29,7 @@ public class DashAfterImage : MonoBehaviour
         }
         if (_timer >= _duration)
         {
-            Destroy(gameObject);
+            AllManager.instance.ParticleFactory.Release(this.gameObject);
         }
     }
 }
