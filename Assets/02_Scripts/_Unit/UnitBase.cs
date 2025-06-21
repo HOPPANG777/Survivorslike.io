@@ -114,6 +114,18 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         float damageReduction = damageValue * (100f / (100f + this.Attributes.UnitDefense));
         this._unitAttribute.UnitCurrentHealth -= damageReduction;
 
+        var parent = AllManager.instance.UIPoolCanvas != null ? AllManager.instance.UIPoolCanvas.CanvasRoot : null;
+        var go = AllManager.instance.UIFactory.Create(UIType.UI_DAMAGE_TEXT, parent);
+        if (go != null)
+        {
+            var dmg = go.GetComponent<DamageTextController>();
+            if (dmg != null)
+            {
+                Color color = this is PlayerUnit ? Color.green : Color.red;
+                dmg.Play(damageReduction, this.transform.position, color);
+            }
+        }
+
         // 즉시 사망 체크
         CheckDead();
 
