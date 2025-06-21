@@ -52,7 +52,7 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
         unit.SetStatus();
   
         _activeUnits.Add(unit);
-        if (data is UnitBaseSO)
+        if (data is UnitBaseSO && !(unit is ContainerUnit))
         {
             var parent = AllManager.instance.UIPoolCanvas != null ? AllManager.instance.UIPoolCanvas.CanvasRoot : null;
             var uiGo = _uiFactory.Create(UIType.UI_UNIT_HEALTHBAR, parent);
