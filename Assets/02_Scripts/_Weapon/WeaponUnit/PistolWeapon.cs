@@ -33,7 +33,7 @@ public class PistolWeapon : WeaponBase
 
         _stats.SetTargetWeapon(this);
 
-        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        if (_projectileData == null) _projectileData = AllManager.instance.ProjectileFactory.GetProjectileData(WeaponType);
 
         // 부모 객체에서 방향 컨트롤러를 찾아둔다
         if (_directionCtrl == null && transform.parent != null) _directionCtrl = transform.parent.GetComponent<PlayerMouseDirectionController>();
@@ -79,7 +79,7 @@ public class PistolWeapon : WeaponBase
         if (_projectileData == null || _stats == null)
             return;
 
-        int count = Mathf.Max(1, _stats.GetProjectileCount(this));
+        int count = _stats.GetProjectileCount(this);
 
         // 현재 바라보는 방향을 구한다. 컨트롤러가 없으면 자신의 Right 방향 사용
         Vector3 dir = transform.right;
@@ -94,7 +94,7 @@ public class PistolWeapon : WeaponBase
 
         for (int i = 0; i < count; i++)
         {
-            var proj = ProjectileFactory.instance.Create( _projectileData, transform.position, Quaternion.identity, this) as PistolWeaponProjectile;
+            var proj = AllManager.instance.ProjectileFactory.Create( _projectileData, transform.position, Quaternion.identity, this) as PistolWeaponProjectile;
 
             if (proj != null)
             {

@@ -47,7 +47,7 @@ public class EnemyExpDropController : MonoBehaviour
         }
 
         // ÆÑÅä¸®¿¡¼­ ²¨³» ¾²±â
-        var go = ItemFactory.instance.Create(_expData, _enemyPosition.Position);
+        var go = AllManager.instance.ItemFactory.Create(_expData, _enemyPosition.Position);
 
         if (go == null)
         {

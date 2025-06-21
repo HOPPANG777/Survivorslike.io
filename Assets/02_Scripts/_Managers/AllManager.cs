@@ -20,6 +20,27 @@ public class AllManager : Singleton<AllManager>
     [TabGroup("Controller")][SerializeField] private UIController _uiController;
     public UIController UIManager { get { return _uiController; } }
 
+    [TabGroup("Factory")][SerializeField] private UIFactory _uiFactory;
+    public UIFactory UIFactory { get { return _uiFactory; } }
+
+    [TabGroup("Factory")][SerializeField] private UnitFactory _unitFactory;
+    public UnitFactory UnitFactory { get { return _unitFactory; } }
+
+    [TabGroup("Factory")][SerializeField] private WeaponFactory _weaponFactory;
+    public WeaponFactory WeaponFactory { get { return _weaponFactory; } }
+
+    [TabGroup("Factory")][SerializeField] private ProjectileFactory _projectileFactory;
+    public ProjectileFactory ProjectileFactory { get { return _projectileFactory; } }
+
+    [TabGroup("Factory")][SerializeField] private ParticleFactory _particleFactory;
+    public ParticleFactory ParticleFactory { get { return _particleFactory; } }
+
+    [TabGroup("Factory")][SerializeField] private ItemFactory _itemFactory;
+    public ItemFactory ItemFactory { get { return _itemFactory; } }
+
+    [TabGroup("Manager")][SerializeField] private UIPoolManager _uiPoolManager;
+    public UIPoolManager UIPoolManager { get { return _uiPoolManager; } }
+
     private void Start()
     {
         Screen.SetResolution(1920, 1080, true);
@@ -28,16 +49,23 @@ public class AllManager : Singleton<AllManager>
         if (GamemodeManager == null) Debug.Log("GameModeContoller가 없습니다.");
         if (CollisionManager == null) Debug.Log("CollisionController가 없습니다.");
         if (UIManager == null) Debug.Log("UIController가 없습니다.");
+        if (UIFactory == null) Debug.Log("UIFactory가 없습니다.");
+        if (UnitFactory == null) Debug.Log("UnitFactory가 없습니다.");
+        if (WeaponFactory == null) Debug.Log("WeaponFactory가 없습니다.");
+        if (ProjectileFactory == null) Debug.Log("ProjectileFactory가 없습니다.");
+        if (ParticleFactory == null) Debug.Log("ParticleFactory가 없습니다.");
+        if (ItemFactory == null) Debug.Log("ItemFactory가 없습니다.");
+        if (UIPoolManager == null) Debug.Log("UIPoolManager가 없습니다.");
 
         _uiController.Init();
         _collisionController.Init();
-
         PoolManager.instance.Init();
-        UIFactory.instance.Init();
-        UnitFactory.instance.Init();
-        WeaponFactory.instance.Init();
-        ProjectileFactory.instance.Init();
-        ItemFactory.instance.Init();
+        UIFactory.Init();
+        UnitFactory.Init();
+        WeaponFactory.Init();
+        ProjectileFactory.Init();
+        ParticleFactory.Init();
+        ItemFactory.Init();
 
         GamemodeManager.GameStart();
     }

@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class UIFactory : SerializedSingleton<UIFactory>, IUIFactory
+public class UIFactory : SerializedMonoBehaviour, IUIFactory
 {
     [TabGroup("UI Factory")]
     [SerializeField]

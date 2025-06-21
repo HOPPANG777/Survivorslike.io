@@ -216,7 +216,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
 
         // 풀로 반환
-        ProjectileFactory.instance.Release(this);
+        AllManager.instance.ProjectileFactory.Release(this);
 
         isDead = true;
     }

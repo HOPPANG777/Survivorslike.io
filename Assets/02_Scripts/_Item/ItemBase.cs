@@ -95,7 +95,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
     {
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
         this.gameObject.SetActive(false);
-        ItemFactory.instance.Release(this);
+        AllManager.instance.ItemFactory.Release(this);
     }
 
     virtual protected void PlayerGetItem()

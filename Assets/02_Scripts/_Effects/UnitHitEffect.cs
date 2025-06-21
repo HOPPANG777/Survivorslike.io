@@ -20,7 +20,7 @@ public class UnitHitEffect : MonoBehaviour
     {
         if (_renderer == null) _renderer = this.GetComponent<SpriteRenderer>();
         if (_renderer != null) _originColor = _renderer.color;
-        _factory = ParticleFactory.instance;
+        _factory = AllManager.instance.ParticleFactory;
     }
 
     // 피격 이펙트 재생

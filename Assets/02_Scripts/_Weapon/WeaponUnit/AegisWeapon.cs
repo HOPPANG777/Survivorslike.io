@@ -66,7 +66,7 @@ public class AegisWeapon : WeaponBase
         transform.localScale = Vector3.one;
 
         // 투사체 데이터가 비어 있다면 팩토리에서 가져온다
-        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        if (_projectileData == null) _projectileData = AllManager.instance.ProjectileFactory.GetProjectileData(WeaponType);
 
         _lastProjectileCount = Mathf.Max(1, _stats.GetProjectileCount(this));
     }
@@ -93,7 +93,7 @@ public class AegisWeapon : WeaponBase
         _stats.SetTargetWeapon(this);
 
         // 현재 설정된 투사체 개수를 확인하여 변경 시 재생성한다
-        int currentCount = Mathf.Max(1, _stats.GetProjectileCount(this));
+        int currentCount = _stats.GetProjectileCount(this);
         if (currentCount != _lastProjectileCount)
         {
             ReleaseProjectile();
@@ -140,7 +140,7 @@ public class AegisWeapon : WeaponBase
         // 요구 개수만큼 투사체를 생성해 원형 배치한다
         for (int i = 0; i < count; i++)
         {
-            var proj = ProjectileFactory.instance.Create( _projectileData, transform.position, Quaternion.identity, this.gameObject.GetComponent<WeaponBase>()) as AegisWeaponProjectile;
+            var proj = AllManager.instance.ProjectileFactory.Create( _projectileData, transform.position, Quaternion.identity, this.gameObject.GetComponent<WeaponBase>()) as AegisWeaponProjectile;
             if (proj != null)
             {
                 proj.Initialize(i, count, spawnTime, lifeTime);

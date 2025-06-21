@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class WeaponFactory : SerializedSingleton<WeaponFactory>, IWeaponFactory
+public class WeaponFactory : SerializedMonoBehaviour, IWeaponFactory
 {
     [TabGroup("Unit Factory")][Tooltip("UnitData SO ↔ Prefab 매핑")][SerializeField] private List<WeaponPrefabEntry> _entries = new List<WeaponPrefabEntry>();
 

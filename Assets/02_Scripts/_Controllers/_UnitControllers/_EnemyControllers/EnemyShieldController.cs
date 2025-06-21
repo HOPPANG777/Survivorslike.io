@@ -79,7 +79,7 @@ public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision
             if (proj != null)
             {
                 // 무효화: 풀로 반환
-                ProjectileFactory.instance.Release(proj);
+                AllManager.instance.ProjectileFactory.Release(proj);
                 // (선택) 이펙트나 사운드 재생
             }
         }

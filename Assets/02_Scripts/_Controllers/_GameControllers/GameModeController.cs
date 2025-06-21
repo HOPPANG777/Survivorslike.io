@@ -103,14 +103,14 @@ public class GameModeController : MonoBehaviour, IGameMode
             unitPrev.EquippedWeapons.Clear();
         }
 
-        UnitFactory.instance.ReleaseAll();
-        ProjectileFactory.instance.ReleaseAll();
-        WeaponFactory.instance.ReleaseAll();
-        ItemFactory.instance.ReleaseAll();
-        UIFactory.instance.ReleaseAll();
+        AllManager.instance.UnitFactory.ReleaseAll();
+        AllManager.instance.ProjectileFactory.ReleaseAll();
+        AllManager.instance.WeaponFactory.ReleaseAll();
+        AllManager.instance.ItemFactory.ReleaseAll();
+        AllManager.instance.UIFactory.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
 
-        var playerUnit = UnitFactory.instance.Create(_playerData, Vector3.zero) as PlayerUnit;
+        var playerUnit = AllManager.instance.UnitFactory.Create(_playerData, Vector3.zero) as PlayerUnit;
         _playerInstance = playerUnit != null ? playerUnit.gameObject : null;
 
         _tileMapController.Init();
@@ -160,11 +160,11 @@ public class GameModeController : MonoBehaviour, IGameMode
             unit.EquippedWeapons.Clear();
         }
 
-        UnitFactory.instance.ReleaseAll();
-        ProjectileFactory.instance.ReleaseAll();
-        WeaponFactory.instance.ReleaseAll();
-        ItemFactory.instance.ReleaseAll();
-        UIFactory.instance.ReleaseAll();
+        AllManager.instance.UnitFactory.ReleaseAll();
+        AllManager.instance.ProjectileFactory.ReleaseAll();
+        AllManager.instance.WeaponFactory.ReleaseAll();
+        AllManager.instance.ItemFactory.ReleaseAll();
+        AllManager.instance.UIFactory.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
 
         _playerInstance = null;
@@ -182,7 +182,7 @@ public class GameModeController : MonoBehaviour, IGameMode
         if (_playerInstance != null)
         {
             var unit = _playerInstance.GetComponent<PlayerUnit>();
-            UnitFactory.instance.Release(unit);
+            AllManager.instance.UnitFactory.Release(unit);
             _playerInstance = null;
         }
         GameMode = GameModeType.GAMEMODE_NONE;

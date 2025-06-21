@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ItemFactory : SerializedSingleton<ItemFactory>, IItemFactory
+public class ItemFactory : SerializedMonoBehaviour, IItemFactory
 {
     [TabGroup("Item Factory")]
     [Tooltip("Item SO ¡ê Prefab ¸ÅÇÎ")]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
+public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
 {
     [TabGroup("Unit Factory")][Tooltip("UnitData SO  Prefab ")][SerializeField] private List<UnitPrefabEntry> _entries = new List<UnitPrefabEntry>();
 
@@ -24,7 +24,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
     {
         if (_initialized) return;
 
-        _uiFactory = UIFactory.instance;
+        _uiFactory = AllManager.instance.UIFactory;
         _pool = PoolManager.instance;
         _map = new Dictionary<UnitBaseSO, GameObject>(_entries.Count);
 
@@ -54,7 +54,7 @@ public class UnitFactory : SerializedSingleton<UnitFactory>, IUnitFactory
         _activeUnits.Add(unit);
         if (data is UnitBaseSO)
         {
-            var parent = UIPoolManager.instance != null ? UIPoolManager.instance.CanvasRoot : null;
+            var parent = AllManager.instance.UIPoolManager != null ? AllManager.instance.UIPoolManager.CanvasRoot : null;
             var uiGo = _uiFactory.Create(UIType.UI_UNIT_HEALTHBAR, parent);
             if (uiGo != null)
             {

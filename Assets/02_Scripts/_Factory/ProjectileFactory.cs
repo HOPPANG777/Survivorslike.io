@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ProjectileFactory : SerializedSingleton<ProjectileFactory>, IProjectileFactory
+public class ProjectileFactory : SerializedMonoBehaviour, IProjectileFactory
 {
     [TabGroup("Projectile Factory")][Tooltip("ProjectileSO  Prefab  Ʈ")][SerializeField] private List<ProjectilePrefabEntry> _entries;
 

@@ -25,7 +25,7 @@ public class EnergyShildWeapon : WeaponBase
 
         _stats.SetTargetWeapon(this);
 
-        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        if (_projectileData == null) _projectileData = AllManager.instance.ProjectileFactory.GetProjectileData(WeaponType);
 
         _cooldownTimer = 0f;
 
@@ -78,7 +78,7 @@ public class EnergyShildWeapon : WeaponBase
         if (_projectileData == null || _stats == null) return;
 
         ReleaseProjectile();
-        var proj = ProjectileFactory.instance.Create(_projectileData, transform.position, Quaternion.identity, this) as EnergyShildWeaponProjectile;
+        var proj = AllManager.instance.ProjectileFactory.Create(_projectileData, transform.position, Quaternion.identity, this) as EnergyShildWeaponProjectile;
         if (proj != null)
         {
             float lifeTime = _stats.GetAttackDuration(this);

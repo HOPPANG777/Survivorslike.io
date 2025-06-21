@@ -51,7 +51,7 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
         }
 
         // 2. 없다면 → 팩토리로 생성, 플레이어 자식으로 붙이고 리스트에 추가
-        var weapon = WeaponFactory.instance.Create(type, this.transform);
+        var weapon = AllManager.instance.WeaponFactory.Create(type, this.transform);
         if (weapon == null)
         {
             Debug.LogWarning($"WeaponFactory에서 {type} 무기 생성 실패");
@@ -90,6 +90,6 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
     {
         base.Dead();
         AllManager.instance.UIManager.GameOverPage();
-        UnitFactory.instance.Release(this.gameObject.GetComponent<PlayerUnit>());
+        AllManager.instance.UnitFactory.Release(this.gameObject.GetComponent<PlayerUnit>());
     }
 }

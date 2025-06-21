@@ -16,7 +16,7 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
 
     public void Init()
     {
-        _factory = UnitFactory.instance;
+        _factory = AllManager.instance.UnitFactory;
         _elapsedTime = 0f;
         _bossSpawned = false;
 
@@ -97,7 +97,7 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
 
     private void ClearAllEnemies()
     {
-        UnitFactory.instance.ReleaseAll();
+        AllManager.instance.UnitFactory.ReleaseAll();
     }
 
     // _offCameraMargin 필드도 유지

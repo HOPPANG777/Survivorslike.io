@@ -37,7 +37,7 @@ public class SniperWeapon : WeaponBase
 
         _stats.SetTargetWeapon(this);
 
-        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        if (_projectileData == null) _projectileData = AllManager.instance.ProjectileFactory.GetProjectileData(WeaponType);
 
         if (_directionCtrl == null && transform.parent != null) _directionCtrl = transform.parent.GetComponent<PlayerMouseDirectionController>();
 
@@ -96,7 +96,7 @@ public class SniperWeapon : WeaponBase
 
         for (int i = 0; i < count; i++)
         {
-            var proj = ProjectileFactory.instance.Create(_projectileData, transform.position, Quaternion.identity, this) as SniperWeaponProjectile;
+            var proj = AllManager.instance.ProjectileFactory.Create(_projectileData, transform.position, Quaternion.identity, this) as SniperWeaponProjectile;
             if (proj != null)
             {
                 proj.Initialize(dir, _stats);

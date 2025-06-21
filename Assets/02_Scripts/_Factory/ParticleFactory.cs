@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ParticleFactory : SerializedSingleton<ParticleFactory>, IParticleFactory
+public class ParticleFactory : SerializedMonoBehaviour, IParticleFactory
 {
     [TabGroup("Particle Factory")]
     [SerializeField]

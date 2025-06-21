@@ -68,6 +68,6 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
         var enemyExpController = this.GetComponent<EnemyExpDropController>();
         if (enemyExpController == null) return;
         enemyExpController.EnemyDropExp();
-        UnitFactory.instance.Release(this.gameObject.GetComponent<EnemyUnit>());
+        AllManager.instance.UnitFactory.Release(this.gameObject.GetComponent<EnemyUnit>());
     }
 }
