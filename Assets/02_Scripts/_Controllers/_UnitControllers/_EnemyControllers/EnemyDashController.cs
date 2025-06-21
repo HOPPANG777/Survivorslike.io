@@ -42,6 +42,20 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
     private Vector3 _dashTarget;
     private float _dashTimer;
 
+    [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageInterval = 0.05f;
+    [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageDuration = 0.2f;
+    private float _afterImageTimer;
+    private SpriteRenderer _enemyRenderer;
+
+    private void Start()
+    {
+        if (_enemy == null)
+        {
+            _enemy = this.gameObject;
+        }
+        _enemyRenderer = _enemy.GetComponent<SpriteRenderer>();
+    }
+
     private void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
@@ -120,6 +134,8 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
         Vector3 moveStep = _dashDir * DashSpeed * Time.deltaTime;
         Vector3 toTarget = _dashTarget - transform.position;
 
+        CreateAfterImage();
+
         // 목표 넘어서면 종료
         if (Vector3.Dot(toTarget, _dashDir) <= 0f || moveStep.sqrMagnitude >= toTarget.sqrMagnitude)
         {
@@ -131,6 +147,20 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
         {
             this.transform.position += moveStep;
         }
+    }
+    
+    private void CreateAfterImage()
+    {
+        if (_enemyRenderer == null) return;
+        _afterImageTimer -= Time.deltaTime;
+        if (_afterImageTimer > 0f) return;
+        _afterImageTimer = _afterImageInterval;
+
+        var obj = new GameObject("DashAfterImage");
+        obj.transform.position = this.transform.position;
+        obj.transform.rotation = this.transform.rotation;
+        var after = obj.AddComponent<DashAfterImage>();
+        after.Initialize(_enemyRenderer.sprite, _enemyRenderer.color, _enemyRenderer.sortingOrder - 1, _afterImageDuration);
     }
     public void SoundPlay()
     {
