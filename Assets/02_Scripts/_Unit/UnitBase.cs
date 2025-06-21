@@ -5,7 +5,7 @@ using UnityEngine;
 //==============================================================================
 // UnitBase
 //==============================================================================
-// UnitBase ½ºÅ©¸³Æ®
+// UnitBase ìŠ¤í¬ë¦½íŠ¸
 //	
 //==============================================================================
 
@@ -15,48 +15,54 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     [TabGroup("Unit Base")][Tooltip("Unit Data")][SerializeField] protected UnitBaseSO _unitBaseData;
     public UnitBaseSO UnitBaseData { get { return _unitBaseData; } set { _unitBaseData = value; } }
 
-    [TabGroup("Unit Base")][Tooltip("À¯´Ö ÀÌ¸§")][SerializeField] protected string _unitName;
+    [TabGroup("Unit Base")][Tooltip("ìœ ë‹› ì´ë¦„")][SerializeField] protected string _unitName;
     public string UnitName { get { return _unitName; } set { _unitName = value; } }
 
-    [TabGroup("Unit Base")][Tooltip("ÆÀ Å¸ÀÔ")][SerializeField] protected TeamType _teamType;
+    [TabGroup("Unit Base")][Tooltip("íŒ€ íƒ€ì…")][SerializeField] protected TeamType _teamType;
     public TeamType TeamType { get { return _teamType; } set { _teamType = value; } }
 
-    [TabGroup("Unit Base")][Tooltip("À¯´Ö ´É·ÂÄ¡")][SerializeField] protected UnitAttribute _unitAttribute;
+    [TabGroup("Unit Base")][Tooltip("ìœ ë‹› ëŠ¥ë ¥ì¹˜")][SerializeField] protected UnitAttribute _unitAttribute;
     public UnitAttribute Attributes { get { return _unitAttribute; } set { _unitAttribute = value; } }
 
     [Header("Unit Sound")]
-    // »ç¿ëÇÒ »ç¿îµå ÀÌ¸§
-    [TabGroup("Unit Sound")][Tooltip("»ç¿îµå ÀÌ¸§")][SerializeField] protected string _soundName;
+    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ ì´ë¦„
+    [TabGroup("Unit Sound")][Tooltip("ì‚¬ìš´ë“œ ì´ë¦„")][SerializeField] protected string _soundName;
     public string SoundName { get { return _soundName; } }
 
-    // »ç¿ëÇÒ »ç¿îµå Å¸ÀÔ
-    [TabGroup("Unit Sound")][Tooltip("»ç¿îµå Å¸ÀÔ")][SerializeField] protected SoundType _soundType;
+    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ íƒ€ì…
+    [TabGroup("Unit Sound")][Tooltip("ì‚¬ìš´ë“œ íƒ€ì…")][SerializeField] protected SoundType _soundType;
     public SoundType SoundType { get { return _soundType; } }
 
-    // »ç¿ëÇÒ ¿Àµğ¿À Å¬¸³
-    [TabGroup("Unit Sound")][Tooltip("¿Àµğ¿À Å¬¸³")][SerializeField] protected AudioClip _soundClip;
+    // Sets the unit to be invincible for the given duration
+    public void SetInvincible(float duration)
+    {
+        _nextHittableTime = Time.time + duration;
+    }
+
+    // ì‚¬ìš©í•  ì˜¤ë””ì˜¤ í´ë¦½
+    [TabGroup("Unit Sound")][Tooltip("ì˜¤ë””ì˜¤ í´ë¦½")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
-    // ¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼
-    [TabGroup("Unit Sound")][Tooltip("¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼")][SerializeField] protected AudioSource _soundSource;
+    // ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´
+    [TabGroup("Unit Sound")][Tooltip("ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´")][SerializeField] protected AudioSource _soundSource;
     public AudioSource SoundSource { get { return _soundSource; } }
 
     [Header("ICollidable")]
-    [TabGroup("ICollidable")][Tooltip("°´Ã¼ÀÇ Æ÷Áö¼ÇÀ» ¹Ş´Â")][SerializeField] protected Vector3 _position => this.transform.position;
+    [TabGroup("ICollidable")][Tooltip("ê°ì²´ì˜ í¬ì§€ì…˜ì„ ë°›ëŠ”")][SerializeField] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
 
-    [TabGroup("ICollidable")][Tooltip("°´Ã¼ÀÇ Æ÷Áö¼ÇÀ» ¹Ş´Â(±×¸®°í 100 ºĞÀ²·Î º¸½Ê½Ã¿À µû¶ó¼­ 50ÀÏˆÛ 0.5f°¡ µË´Ï´Ù.)")][SerializeField] protected float _collisionRadius;
+    [TabGroup("ICollidable")][Tooltip("ê°ì²´ì˜ í¬ì§€ì…˜ì„ ë°›ëŠ”(ê·¸ë¦¬ê³  100 ë¶„ìœ¨ë¡œ ë³´ì‹­ì‹œì˜¤ ë”°ë¼ì„œ 50ì¼Âˆ 0.5fê°€ ë©ë‹ˆë‹¤.)")][SerializeField] protected float _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius; } }
 
     [Header("IAttacker")]
     public virtual float AttackPower { get { return Attributes.UnitDamage; } }
 
-    [TabGroup("Unit Dead")][Tooltip("Á×¾ú´ÂÁö È®ÀÎ")][SerializeField]  private bool isDead = false;
+    [TabGroup("Unit Dead")][Tooltip("ì£½ì—ˆëŠ”ì§€ í™•ì¸")][SerializeField]  private bool isDead = false;
     public bool IsDead { get { return isDead; } }
 
-    [Header("Invincibility")][Tooltip("ÇÇ°İ ÈÄ ¹«Àû Áö¼Ó ½Ã°£ (ÃÊ)")][SerializeField] protected float _invincibleDuration = 0.5f;
+    [Header("Invincibility")][Tooltip("í”¼ê²© í›„ ë¬´ì  ì§€ì† ì‹œê°„ (ì´ˆ)")][SerializeField] protected float _invincibleDuration = 0.5f;
 
-    // ´ÙÀ½¿¡ ¸ÂÀ» ¼ö ÀÖ´Â ½ÃÁ¡ (Time.time ±âÁØ)
+    // ë‹¤ìŒì— ë§ì„ ìˆ˜ ìˆëŠ” ì‹œì  (Time.time ê¸°ì¤€)
     private float _nextHittableTime = 0f;
 
     protected virtual void Start()
@@ -93,26 +99,26 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         _soundSource = this.gameObject.GetComponent<AudioSource>();
         AllManager.instance.CollisionManager.RegisterCollidable(this);
         isDead = false;
-        // ¹«Àû Å¸ÀÌ¸Ó ÃÊ±âÈ­: ½ºÆù Á÷ÈÄ Áï½Ã ÇÇ°İ °¡´É
+        // ë¬´ì  íƒ€ì´ë¨¸ ì´ˆê¸°í™”: ìŠ¤í° ì§í›„ ì¦‰ì‹œ í”¼ê²© ê°€ëŠ¥
         _nextHittableTime = Time.time;
     }
 
     public virtual void Hitted(float damageValue)
     {
-      // ¹«Àû ÁßÀÌ¸é ¹«½Ã
+      // ë¬´ì  ì¤‘ì´ë©´ ë¬´ì‹œ
         if (Time.time < _nextHittableTime)
         {
             return;
         }
 
-        // ½ÇÁ¦ µ¥¹ÌÁö °è»ê
+        // ì‹¤ì œ ë°ë¯¸ì§€ ê³„ì‚°
         float damageReduction = damageValue * (100f / (100f + this.Attributes.UnitDefense));
         this._unitAttribute.UnitCurrentHealth -= damageReduction;
 
-        // Áï½Ã »ç¸Á Ã¼Å©
+        // ì¦‰ì‹œ ì‚¬ë§ ì²´í¬
         CheckDead();
 
-        // ¹«Àû ½Ã°£ ¼³Á¤
+        // ë¬´ì  ì‹œê°„ ì„¤ì •
         _nextHittableTime = Time.time + _invincibleDuration;
     }
 
