@@ -8,35 +8,35 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
     [TabGroup("Target")][SerializeField] private GameObject _enemy;
     public GameObject Enemy { get { return _enemy; } }
 
-    [TabGroup("Target")][Tooltip("Å¸°Ù Æ÷Áö¼Ç")][SerializeField] private IMoveable _enemyDirection;
+    [TabGroup("Target")][Tooltip("íƒ€ê²Ÿ í¬ì§€ì…˜")][SerializeField] private IMoveable _enemyDirection;
     public IMoveable EnemyDirection { get { return _enemyDirection; } }
 
-    [TabGroup("Dash")][Tooltip("´ë½¬ ÀÌµ¿ °Å¸®(±×¸®°í 100 ºĞÀ²·Î º¸½Ê½Ã¿À µû¶ó¼­ 50ÀÏˆÛ 0.5f°¡ µË´Ï´Ù.)")][SerializeField] private int _dashDistance; // 5f;
+    [TabGroup("Dash")][Tooltip("ëŒ€ì‰¬ ì´ë™ ê±°ë¦¬(ê·¸ë¦¬ê³  100 ë¶„ìœ¨ë¡œ ë³´ì‹­ì‹œì˜¤ ë”°ë¼ì„œ 50ì¼Âˆ 0.5fê°€ ë©ë‹ˆë‹¤.)")][SerializeField] private int _dashDistance; // 5f;
     public float DashDistance { get { return _dashDistance / 100f; } set { _dashDistance = (int)value; } }
 
-    [TabGroup("Dash")][Tooltip("´ë½¬ ¼Óµµ(±×¸®°í 100 ºĞÀ²·Î º¸½Ê½Ã¿À µû¶ó¼­ 50ÀÏˆÛ 0.5f°¡ µË´Ï´Ù.)")][SerializeField] private int _dashSpeed; // 20f;
+    [TabGroup("Dash")][Tooltip("ëŒ€ì‰¬ ì†ë„(ê·¸ë¦¬ê³  100 ë¶„ìœ¨ë¡œ ë³´ì‹­ì‹œì˜¤ ë”°ë¼ì„œ 50ì¼Âˆ 0.5fê°€ ë©ë‹ˆë‹¤.)")][SerializeField] private int _dashSpeed; // 20f;
     public float DashSpeed { get { return _dashSpeed / 100f; } set { _dashSpeed = (int)value; } }
 
-    [TabGroup("Dash")][Tooltip("´ë½¬ ÄğÅ¸ÀÓ(s)(±×¸®°í 100 ºĞÀ²·Î º¸½Ê½Ã¿À µû¶ó¼­ 50ÀÏˆÛ 0.5f°¡ µË´Ï´Ù.)")][SerializeField] private int _dashCooldown; // 2f;
+    [TabGroup("Dash")][Tooltip("ëŒ€ì‰¬ ì¿¨íƒ€ì„(s)(ê·¸ë¦¬ê³  100 ë¶„ìœ¨ë¡œ ë³´ì‹­ì‹œì˜¤ ë”°ë¼ì„œ 50ì¼Âˆ 0.5fê°€ ë©ë‹ˆë‹¤.)")][SerializeField] private int _dashCooldown; // 2f;
     public float DashCooldown { get { return _dashCooldown / 100f; } set { _dashCooldown = (int)value; } }
 
-    // »ç¿ëÇÒ »ç¿îµå ÀÌ¸§
-    [TabGroup("Dash Sound")][Tooltip("»ç¿îµå ÀÌ¸§")][SerializeField] protected string _soundName;
+    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ ì´ë¦„
+    [TabGroup("Dash Sound")][Tooltip("ì‚¬ìš´ë“œ ì´ë¦„")][SerializeField] protected string _soundName;
     public string SoundName { get { return _soundName; } }
 
-    // »ç¿ëÇÒ »ç¿îµå Å¸ÀÔ
-    [TabGroup("Dash Sound")][Tooltip("»ç¿îµå Å¸ÀÔ")][SerializeField] protected SoundType _soundType;
+    // ì‚¬ìš©í•  ì‚¬ìš´ë“œ íƒ€ì…
+    [TabGroup("Dash Sound")][Tooltip("ì‚¬ìš´ë“œ íƒ€ì…")][SerializeField] protected SoundType _soundType;
     public SoundType SoundType { get { return _soundType; } }
 
-    // »ç¿ëÇÒ ¿Àµğ¿À Å¬¸³
-    [TabGroup("Dash Sound")][Tooltip("¿Àµğ¿À Å¬¸³")][SerializeField] protected AudioClip _soundClip;
+    // ì‚¬ìš©í•  ì˜¤ë””ì˜¤ í´ë¦½
+    [TabGroup("Dash Sound")][Tooltip("ì˜¤ë””ì˜¤ í´ë¦½")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
-    // ¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼
-    [TabGroup("Dash Sound")][Tooltip("¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼")][SerializeField] protected AudioSource _soundSource;
+    // ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´
+    [TabGroup("Dash Sound")][Tooltip("ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´")][SerializeField] protected AudioSource _soundSource;
     public AudioSource SoundSource { get { return _soundSource; } }
 
-    // ³»ºÎ »óÅÂ
+    // ë‚´ë¶€ ìƒíƒœ
     private bool _isDashing;
     private Vector3 _dashDir;
     private Vector3 _dashTarget;
@@ -53,7 +53,7 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
         if (_enemy == null)
         {
             _enemy = this.gameObject;
-            //Debug.LogError("Enemy°¡ ÇÒ´çµÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            //Debug.LogError("Enemyê°€ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
             return false;
         }
         else
@@ -71,7 +71,7 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
         }
         else
         {
-            Debug.LogError("IPositionProvider ÄÄÆ÷³ÍÆ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            Debug.LogError("IPositionProvider ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
             return false;
         }
     }
@@ -82,10 +82,16 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
         if (CheckEnemyDirection() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-        // ÄğÅ¸ÀÓ °¨¼Ò
+        // ì¿¨íƒ€ì„ ê°ì†Œ
         if (_dashTimer > 0f) _dashTimer -= Time.deltaTime;
 
-        // ´ë½¬ ÁßÀÌ¸é ´ë½¬ Áö¼Ó, ¾Æ´Ï¸é ÀÏ¹İ ÀÌµ¿ + ´ë½¬ ½Ãµµ
+        var unit = GetComponent<UnitBase>();
+        if (unit != null)
+        {
+            float invDuration = DashSpeed != 0f ? DashDistance / DashSpeed : 0f;
+            unit.SetInvincible(invDuration);
+        }
+        // ëŒ€ì‰¬ ì¤‘ì´ë©´ ëŒ€ì‰¬ ì§€ì†, ì•„ë‹ˆë©´ ì¼ë°˜ ì´ë™ + ëŒ€ì‰¬ ì‹œë„
         if (_isDashing)
         {
             ContinueDash();
@@ -98,13 +104,13 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
 
     public void TryStartDash()
     {
-        // ÄğÅ¸ÀÓ / ¸ğµå È®ÀÎ
+        // ì¿¨íƒ€ì„ / ëª¨ë“œ í™•ì¸
         if (_dashTimer > 0f) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         //SoundPlay();
 
-        // ´ë½¬ ¹æÇâ & ¸ñÇ¥ ¼³Á¤
+        // ëŒ€ì‰¬ ë°©í–¥ & ëª©í‘œ ì„¤ì •
         _dashDir = _enemyDirection.MoveDirection.normalized; // (_moveDirection - transform.position).normalized;
         _dashTarget = this.transform.position + _dashDir * DashDistance;
 
@@ -116,11 +122,11 @@ public class EnemyDashController : MonoBehaviour, IDashable, ISpeakable
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-        // ÇÑ ÇÁ·¹ÀÓ ÀÌµ¿·®
+        // í•œ í”„ë ˆì„ ì´ë™ëŸ‰
         Vector3 moveStep = _dashDir * DashSpeed * Time.deltaTime;
         Vector3 toTarget = _dashTarget - transform.position;
 
-        // ¸ñÇ¥ ³Ñ¾î¼­¸é Á¾·á
+        // ëª©í‘œ ë„˜ì–´ì„œë©´ ì¢…ë£Œ
         if (Vector3.Dot(toTarget, _dashDir) <= 0f || moveStep.sqrMagnitude >= toTarget.sqrMagnitude)
         {
             // SoundStop();
