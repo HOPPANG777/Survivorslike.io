@@ -20,13 +20,17 @@ public class EnergyShildWeapon : WeaponBase
     public override void SetStatus()
     {
         base.SetStatus();
-        if (_stats == null)
-            _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+
+        if (_stats == null) _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+
         _stats.SetTargetWeapon(this);
-        if (_projectileData == null)
-            _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+
+        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+
         _cooldownTimer = 0f;
+
         _durationTimer = 0f;
+
         _activeProjectile = null;
     }
 
@@ -34,9 +38,13 @@ public class EnergyShildWeapon : WeaponBase
     public override void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
         base.Update();
+
         if (_projectileData == null || _stats == null) return;
-        if (_stats != null) _stats.SetTargetWeapon(this);
+
+        if (_stats == null) return;
+        _stats.SetTargetWeapon(this);
 
         if (_durationTimer > 0f)
         {

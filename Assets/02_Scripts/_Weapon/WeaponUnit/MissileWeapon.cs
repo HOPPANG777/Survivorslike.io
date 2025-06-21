@@ -16,31 +16,23 @@ public class MissileWeapon : WeaponBase
     public override void SetStatus()
     {
         base.SetStatus();
-        if (_stats == null)
-        {
-            _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
-        }
+
+        if (_stats == null) _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+
         _stats.SetTargetWeapon(this);
-        if (_projectileData == null)
-        {
-            _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
-        }
+
+        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+
         _cooldownTimer = 0f;
     }
 
     // 매 프레임 호출되어 미사일 발사 타이밍을 제어한다
     public override void Update()
     {
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME)
-        {
-            return;
-        }
         base.Update();
 
-        if (_stats != null)
-        {
-            _stats.SetTargetWeapon(this);
-        }
+        if (_stats == null) return;
+        _stats.SetTargetWeapon(this);
 
         if (_cooldownTimer > 0f)
         {
@@ -62,10 +54,7 @@ public class MissileWeapon : WeaponBase
     public override void Shoot()
     {
         base.Shoot();
-        if (_projectileData == null || _stats == null)
-        {
-            return;
-        }
+        if (_projectileData == null || _stats == null) return;
 
         int count = _stats.GetProjectileCount(this);
         for (int i = 0; i < count; i++)

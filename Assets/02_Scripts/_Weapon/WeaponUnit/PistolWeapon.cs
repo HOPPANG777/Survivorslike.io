@@ -46,12 +46,12 @@ public class PistolWeapon : WeaponBase
     //---------------------------------------------------------------------------
     public override void Update()
     {
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME)
-            return;
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         base.Update();
 
-        if (_stats != null) _stats.SetTargetWeapon(this);
+        if (_stats == null) return; 
+        _stats.SetTargetWeapon(this);
 
         if (_cooldownTimer > 0f)
         {

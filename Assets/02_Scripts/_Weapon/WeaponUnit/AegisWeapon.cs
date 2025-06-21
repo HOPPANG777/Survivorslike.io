@@ -49,20 +49,24 @@ public class AegisWeapon : WeaponBase
     public override void SetStatus()
     {
         base.SetStatus();
-        if (_stats == null)
-            _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+
+        if (_stats == null) _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+
         _stats.SetTargetWeapon(this);
 
         // 각종 타이머 초기화
         _cooldownTimer = 0f;
+
         _durationTimer = 0f;
+
         _isShrinking = false;
+
         _shrinkTimer = 0f;
+
         transform.localScale = Vector3.one;
 
         // 투사체 데이터가 비어 있다면 팩토리에서 가져온다
-        if (_projectileData == null)
-            _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
 
         _lastProjectileCount = Mathf.Max(1, _stats.GetProjectileCount(this));
     }
@@ -71,7 +75,6 @@ public class AegisWeapon : WeaponBase
     public override void Update()
     {
         // 인게임 상태가 아니면 동작하지 않는다
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         base.Update();
 
         // 축소 중이면 축소 애니메이션을 진행한다
@@ -80,10 +83,7 @@ public class AegisWeapon : WeaponBase
             _shrinkTimer += Time.deltaTime;
             float t = 1f - Mathf.Clamp01(_shrinkTimer / ShrinkDuration);
             transform.localScale = Vector3.one * t;
-            if (_shrinkTimer >= ShrinkDuration)
-            {
-                base.Dead();
-            }
+            if (_shrinkTimer >= ShrinkDuration) base.Dead();
             return;
         }
 
@@ -140,12 +140,7 @@ public class AegisWeapon : WeaponBase
         // 요구 개수만큼 투사체를 생성해 원형 배치한다
         for (int i = 0; i < count; i++)
         {
-            var proj = ProjectileFactory.instance.Create(
-                _projectileData,
-                transform.position,
-                Quaternion.identity,
-                this.gameObject.GetComponent<WeaponBase>()) as AegisWeaponProjectile;
-
+            var proj = ProjectileFactory.instance.Create( _projectileData, transform.position, Quaternion.identity, this.gameObject.GetComponent<WeaponBase>()) as AegisWeaponProjectile;
             if (proj != null)
             {
                 proj.Initialize(i, count, spawnTime, lifeTime);
@@ -167,8 +162,7 @@ public class AegisWeapon : WeaponBase
     {
         for (int i = 0; i < _activeProjectiles.Count; i++)
         {
-            if (_activeProjectiles[i] != null)
-                _activeProjectiles[i].StartShrink();
+            if (_activeProjectiles[i] != null) _activeProjectiles[i].StartShrink();
         }
         _activeProjectiles.Clear();
     }

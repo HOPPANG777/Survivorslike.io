@@ -33,22 +33,13 @@ public class SniperWeapon : WeaponBase
     {
         base.SetStatus();
 
-        if (_stats == null)
-        {
-            _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
-        }
+        if (_stats == null) _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
 
         _stats.SetTargetWeapon(this);
 
-        if (_projectileData == null)
-        {
-            _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
-        }
+        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
 
-        if (_directionCtrl == null && transform.parent != null)
-        {
-            _directionCtrl = transform.parent.GetComponent<PlayerMouseDirectionController>();
-        }
+        if (_directionCtrl == null && transform.parent != null) _directionCtrl = transform.parent.GetComponent<PlayerMouseDirectionController>();
 
         _cooldownTimer = 0f;
     }
@@ -58,15 +49,12 @@ public class SniperWeapon : WeaponBase
     //--------------------------------------------------------------------------
     public override void Update()
     {
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME)
-            return;
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
         base.Update();
 
-        if (_stats != null)
-        {
-            _stats.SetTargetWeapon(this);
-        }
+        if (_stats == null) return;
+        _stats.SetTargetWeapon(this);
 
         if (_cooldownTimer > 0f)
         {
@@ -91,8 +79,7 @@ public class SniperWeapon : WeaponBase
     public override void Shoot()
     {
         base.Shoot();
-        if (_projectileData == null || _stats == null)
-            return;
+        if (_projectileData == null || _stats == null) return;
 
         int count = _stats.GetProjectileCount(this);
 
@@ -105,12 +92,7 @@ public class SniperWeapon : WeaponBase
 
         for (int i = 0; i < count; i++)
         {
-            var proj = ProjectileFactory.instance.Create(
-                _projectileData,
-                transform.position,
-                Quaternion.identity,
-                this) as SniperWeaponProjectile;
-
+            var proj = ProjectileFactory.instance.Create(_projectileData, transform.position, Quaternion.identity, this) as SniperWeaponProjectile;
             if (proj != null)
             {
                 proj.Initialize(dir, _stats);

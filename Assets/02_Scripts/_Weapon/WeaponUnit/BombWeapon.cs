@@ -17,14 +17,15 @@ public class BombWeapon : WeaponBase
     public override void SetStatus()
     {
         base.SetStatus();
-        if (_stats == null)
-            _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+
+        if (_stats == null) _stats = AllManager.instance.GamemodeManager.Player.GetComponent<AttackStatsProvider>();
+
         _stats.SetTargetWeapon(this);
 
-        if (_projectileData == null)
-            _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
+        if (_projectileData == null) _projectileData = ProjectileFactory.instance.GetProjectileData(WeaponType);
 
         _cooldownTimer = 0f;
+
         _leftRightToggle = false;
     }
 
@@ -34,7 +35,8 @@ public class BombWeapon : WeaponBase
         base.Update();
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-        if (_stats != null) _stats.SetTargetWeapon(this);
+        if (_stats == null) return;
+        _stats.SetTargetWeapon(this);
 
         if (_cooldownTimer > 0f)
         {
@@ -63,11 +65,7 @@ public class BombWeapon : WeaponBase
         int count = _stats.GetProjectileCount(this);
         for (int i = 0; i < count; i++)
         {
-            var proj = ProjectileFactory.instance.Create(
-                _projectileData,
-                transform.position,
-                Quaternion.identity,
-                this) as BombWeaponProjectile;
+            var proj = ProjectileFactory.instance.Create( _projectileData, transform.position, Quaternion.identity, this) as BombWeaponProjectile;
             if (proj != null)
             {
                 // 베지어 곡선의 네 지점을 계산하여 초기화
