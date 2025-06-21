@@ -27,8 +27,8 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
     // 고정된 12개 무기 타입 목록
     private static readonly WeaponType[] _allWeapons =
     {
-        WeaponType.WEAPON_SNIPER,
-        //WeaponType.WEAPON_PISTOL,
+        //WeaponType.WEAPON_SNIPER,
+        WeaponType.WEAPON_PISTOL,
         //WeaponType.WEAPON_GATLING,
         //WeaponType.WEAPON_MISSILE,
         //WeaponType.WEAPON_AEGIS,

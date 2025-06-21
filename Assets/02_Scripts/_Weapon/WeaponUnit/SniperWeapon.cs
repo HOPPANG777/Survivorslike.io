@@ -87,7 +87,11 @@ public class SniperWeapon : WeaponBase
         Vector3 dir = transform.right;
         if (_directionCtrl != null)
         {
-            dir = _directionCtrl.RotationDirection;
+            _directionCtrl.Rotate();  // 방향 갱신
+            if (_directionCtrl.RotationDirection.sqrMagnitude > 0f)
+            {
+                dir = _directionCtrl.RotationDirection;
+            }
         }
 
         for (int i = 0; i < count; i++)

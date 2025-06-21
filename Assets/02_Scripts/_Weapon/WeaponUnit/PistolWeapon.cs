@@ -83,7 +83,14 @@ public class PistolWeapon : WeaponBase
 
         // 현재 바라보는 방향을 구한다. 컨트롤러가 없으면 자신의 Right 방향 사용
         Vector3 dir = transform.right;
-        if (_directionCtrl != null) dir = _directionCtrl.RotationDirection;
+        if (_directionCtrl != null)
+        {
+            _directionCtrl.Rotate();  // 방향 갱신
+            if (_directionCtrl.RotationDirection.sqrMagnitude > 0f)
+            {
+                dir = _directionCtrl.RotationDirection;
+            }
+        }
 
         for (int i = 0; i < count; i++)
         {
