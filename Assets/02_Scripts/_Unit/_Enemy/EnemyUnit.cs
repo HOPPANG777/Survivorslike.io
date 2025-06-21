@@ -33,6 +33,14 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
         base.SetStatus();
         _enemyData = _unitBaseData as EnemyUnitSO;
         _enemyAttribute = _enemyData.EnemyAttribute;
+        if (this.GetComponent<EnemyDashController>() != null)
+        {
+            this.GetComponent<EnemyDashController>().SetStatus();
+        }
+        if (this.GetComponent<EnemyShieldController>() != null)
+        {
+            this.GetComponent<EnemyShieldController>().SetStatus();
+        }
     }
 
     public override void Hitted(float damageValue)
@@ -59,7 +67,12 @@ public class EnemyUnit : UnitBase, IEnemyAttribute, IPushable
     public override void CheckDead()
     {
         base.CheckDead();
+        if (this.GetComponent<EnemyShieldController>() != null)
+        {
+            this.GetComponent<EnemyShieldController>().CheckDead();
+        }
     }
+    
     public override void Dead()
     {
         base.Dead();

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision
+public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision, ISetStatus, IDead
 {
     [Tooltip("회전시킬 방패 Transform (자기 자신일 수도 있고, 자식일 수도 있습니다)")]
     [SerializeField] private GameObject _shield;
@@ -19,6 +19,21 @@ public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision
 
 
     private GameObject _player;
+
+    public void SetStatus()
+    {
+        AllManager.instance.CollisionManager.RegisterCollidable(this);
+    }
+
+    public void CheckDead()
+    {
+        Dead();
+    }
+
+    public void Dead()
+    {
+        AllManager.instance.CollisionManager.UnregisterCollidable(this);
+    }
 
     private void Update()
     {
@@ -56,15 +71,6 @@ public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision
         {
             return true;
         }
-    }
-    private void OnEnable()
-    {
-        AllManager.instance.CollisionManager.RegisterCollidable(this);
-    }
-
-    private void OnDisable()
-    {
-        AllManager.instance.CollisionManager.UnregisterCollidable(this);
     }
 
     // ICollision: 충돌 페어(a=this shield, b=other) 호출
