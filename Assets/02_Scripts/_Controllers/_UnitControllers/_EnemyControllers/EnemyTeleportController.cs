@@ -7,13 +7,13 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
     [TabGroup("Target")][SerializeField] private GameObject _enemy;
     public GameObject Enemy { get { return _enemy; } }
 
-    [TabGroup("Target")][Tooltip("Å¸°Ù Æ÷Áö¼Ç")][SerializeField] private IPositionProvider _enemyPosition;
+    [TabGroup("Target")][Tooltip("íƒ€ê²Ÿ í¬ì§€ì…˜")][SerializeField] private IPositionProvider _enemyPosition;
     public IPositionProvider EnemyPosition { get { return _enemyPosition; } }
 
-    [TabGroup("Teleport")][Tooltip("ÀûÀ» ÅÚ·¹Æ÷Æ®ÇÒ °£°İ (ÃÊ)")][SerializeField] private float _teleportInterval;
+    [TabGroup("Teleport")][Tooltip("ì ì„ í…”ë ˆí¬íŠ¸í•  ê°„ê²© (ì´ˆ)")][SerializeField] private float _teleportInterval;
     public float TeleportInterval { get { return _teleportInterval; } set { _teleportInterval = value; } }
 
-    [TabGroup("Teleport")][Tooltip("Ä«¸Ş¶ó ºä ³»¿¡¼­ ÅÚ·¹Æ÷Æ® ½ÃÅ³ À§Ä¡ÀÇ ¸¶Áø(%)")][SerializeField][Range(0, 100)] private int _teleportMarginPercent;
+    [TabGroup("Teleport")][Tooltip("ì¹´ë©”ë¼ ë·° ë‚´ì—ì„œ í…”ë ˆí¬íŠ¸ ì‹œí‚¬ ìœ„ì¹˜ì˜ ë§ˆì§„(%)")][SerializeField][Range(0, 100)] private int _teleportMarginPercent;
     public int TeleportMarginPercent { get { return _teleportMarginPercent; } set { _teleportMarginPercent = value; } }
 
     private Camera _mainCamera;
@@ -24,7 +24,7 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
         if (_enemy == null)
         {
             _enemy = this.gameObject;
-            //Debug.LogError("Enemy ÇÒ´çµÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            //Debug.LogError("Enemy í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤!");
             return false;
         }
         else
@@ -42,7 +42,7 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
         }
         else
         {
-            Debug.LogError("IPositionProvider ÄÄÆ÷³ÍÆ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            Debug.LogError("IPositionProvider ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
             return false;
         }
     }
@@ -60,10 +60,13 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
 
     public void Teleport()
     {
+        if (CheckEnemyMoveTarget() == false) return;
+        if (CheckTargetPosition() == false) return;
+
         _timer += Time.deltaTime;
         if (_timer >= TeleportInterval)
         {
-            // ÀÎÅÍ¹ú¸¸Å­ »©°í Teleport È£Ãâ
+            // ì¸í„°ë²Œë§Œí¼ ë¹¼ê³  Teleport í˜¸ì¶œ
             _timer -= TeleportInterval;
             TeleportEnemy(_enemyPosition.Position);
         }
@@ -75,22 +78,22 @@ public class EnemyTeleportController : MonoBehaviour, ITeleport
         if (CheckTargetPosition() == false) return;
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
 
-        // Ä«¸Ş¶ó Àı¹İ ³ôÀÌ & ³Êºñ
+        // ì¹´ë©”ë¼ ì ˆë°˜ ë†’ì´ & ë„ˆë¹„
         float height = 2f * _mainCamera.orthographicSize;
         float width = height * _mainCamera.aspect;
         Vector3 center = _mainCamera.transform.position;
 
-        // ¸¶Áø¸¸Å­ ¿µ¿ª Ãà¼Ò
+        // ë§ˆì§„ë§Œí¼ ì˜ì—­ ì¶•ì†Œ
         float xMin = center.x - width / 2f + width * TeleportMarginPercent;
         float xMax = center.x + width / 2f - width * TeleportMarginPercent;
         float yMin = center.y - height / 2f + height * TeleportMarginPercent;
         float yMax = center.y + height / 2f - height * TeleportMarginPercent;
 
-        // ·£´ı ÁÂÇ¥
+        // ëœë¤ ì¢Œí‘œ
         float randomX = Random.Range(xMin, xMax);
         float randomY = Random.Range(yMin, yMax);
 
-        // ¼ø°£ÀÌµ¿
+        // ìˆœê°„ì´ë™
         enemy = new Vector3(randomX, randomY, enemy.z);
     }
 }
