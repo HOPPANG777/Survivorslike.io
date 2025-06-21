@@ -123,7 +123,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
             var dmg = go.GetComponent<DamageTextController>();
             if (dmg != null)
             {
-                Color color = this is PlayerUnit ? Color.green : Color.red;
+                Color color = this is PlayerUnit ? Color.white : Color.red;
                 dmg.Play(damageReduction, this.transform.position, color);
             }
         }
