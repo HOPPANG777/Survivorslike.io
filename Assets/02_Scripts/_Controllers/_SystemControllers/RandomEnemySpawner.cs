@@ -97,7 +97,7 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
 
     private void ClearAllEnemies()
     {
-        AllManager.instance.UnitFactory.ReleaseAll();
+        AllManager.instance.UnitFactory.ReleaseAllEnemies();
     }
 
     // _offCameraMargin 필드도 유지

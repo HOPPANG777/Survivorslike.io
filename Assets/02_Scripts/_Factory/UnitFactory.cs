@@ -110,4 +110,20 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
         _activeUnits.Clear();
         _unitBars.Clear();
     }
+
+    public void ReleaseAllEnemies()
+    {
+        for (int i = _activeUnits.Count - 1; i >= 0; i--)
+        {
+            var unit = _activeUnits[i];
+            if (unit == null) continue;
+
+            if (unit is PlayerUnit || unit is ContainerUnit)
+            {
+                continue;
+            }
+
+            Release(unit);
+        }
+    }
 }
