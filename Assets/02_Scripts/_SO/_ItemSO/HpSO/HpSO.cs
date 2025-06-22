@@ -15,13 +15,26 @@ public class HpSO : ItemBaseSO
         if (attrProvider != null)
         {
             var attr = attrProvider.Attributes;
-            attr.UnitCurrentHealth += attr.UnitMaxHealth * _healRate;
-            if (attr.UnitCurrentHealth > attr.UnitMaxHealth)
-            {
-                attr.UnitCurrentHealth = attr.UnitMaxHealth;
-            }
+            float healAmount = attr.UnitMaxHealth * _healRate;
+            float prevHealth = attr.UnitCurrentHealth;
+
+            attr.UnitCurrentHealth = Mathf.Min(attr.UnitCurrentHealth + healAmount, attr.UnitMaxHealth);
+            healAmount = attr.UnitCurrentHealth - prevHealth;
+
             attrProvider.Attributes = attr;
             AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(attr.UnitCurrentHealth / attr.UnitMaxHealth);
+
+            var parent = AllManager.instance.UIPoolCanvas != null ? AllManager.instance.UIPoolCanvas.CanvasRoot : null;
+            var go = AllManager.instance.UIFactory.Create(UIType.UI_DAMAGE_TEXT, parent);
+
+            if (go != null)
+            {
+                var dmg = go.GetComponent<DamageTextController>();
+                if (dmg != null && healAmount > 0f)
+                {
+                    dmg.Play(healAmount, user.transform.position, Color.green);
+                }
+            }
         }
     }
 }

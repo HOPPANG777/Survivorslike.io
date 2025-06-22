@@ -146,10 +146,22 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
             if (attrProvider != null)
             {
                 var attr = attrProvider.Attributes;
-                attr.UnitCurrentHealth += attr.UnitMaxHealth * _levelUpHealRate;
-                if (attr.UnitCurrentHealth > attr.UnitMaxHealth)
+                float healAmount = attr.UnitMaxHealth * _levelUpHealRate;
+                float prevHealth = attr.UnitCurrentHealth;
+                attr.UnitCurrentHealth = Mathf.Min(attr.UnitCurrentHealth + healAmount, attr.UnitMaxHealth);
+                healAmount = attr.UnitCurrentHealth - prevHealth;
+                attrProvider.Attributes = attr;
+                AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(attr.UnitCurrentHealth / attr.UnitMaxHealth);
+
+                var parent = AllManager.instance.UIPoolCanvas != null ? AllManager.instance.UIPoolCanvas.CanvasRoot : null;
+                var go = AllManager.instance.UIFactory.Create(UIType.UI_DAMAGE_TEXT, parent);
+                if (go != null)
                 {
-                    attr.UnitCurrentHealth = attr.UnitMaxHealth;
+                    var dmg = go.GetComponent<DamageTextController>();
+                    if (dmg != null && healAmount > 0f)
+                    {
+                        dmg.Play(healAmount, AllManager.instance.GamemodeManager.Player.transform.position, Color.green);
+                    }
                 }
                 attrProvider.Attributes = attr;
                 AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(attr.UnitCurrentHealth / attr.UnitMaxHealth);
