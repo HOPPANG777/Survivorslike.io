@@ -12,15 +12,9 @@ using UnityEngine;
 //==============================================================================
 public class ContainerUnit : UnitBase
 {
-    [Header("Container Unit")]
-    [TabGroup("Container Unit")][Tooltip("맞으면 감소하는 최대 내구도 값")]
-    [SerializeField] private int _maxHitCount = 3;
-
-    [TabGroup("Container Unit")][Tooltip("현재 남아있는 내구도")]
-    [SerializeField] private int _currentHitCount;
-
-    [TabGroup("Container Unit")][Tooltip("파괴 시 생성될 아이템 목록")]
-    [SerializeField] private List<ItemBaseSO> _dropItems = new List<ItemBaseSO>();
+    [Header("Container Unit")][TabGroup("Container Unit")][Tooltip("맞으면 감소하는 최대 내구도 값")][SerializeField] private int _maxHitCount = 3;
+    [TabGroup("Container Unit")][Tooltip("현재 충돌한 횟수")][SerializeField] private int _currentHitCount;
+    [TabGroup("Container Unit")][Tooltip("파괴 시 생성될 아이템 목록")][SerializeField] private List<ItemBaseSO> _dropItems = new List<ItemBaseSO>();
 
     // 공격하지 않는 유닛이므로 공격력은 0으로 고정
     public override float AttackPower { get { return 0f; } }
@@ -39,8 +33,8 @@ public class ContainerUnit : UnitBase
     {
         base.SetStatus();
 
-        // 기본 체력을 내구도 값으로 초기화
-        _currentHitCount = _maxHitCount;
+        // 내구도는 충돌 횟수로 누적 관리하므로 0부터 시작
+        _currentHitCount = 0;
         _unitAttribute.UnitHealth = _maxHitCount;
         _unitAttribute.UnitMaxHealth = _maxHitCount;
         _unitAttribute.UnitCurrentHealth = _maxHitCount;
@@ -77,12 +71,12 @@ public class ContainerUnit : UnitBase
             }
         }
 
-        // 내구도 감소
-        _currentHitCount -= 1;
-        _unitAttribute.UnitCurrentHealth = _currentHitCount;
+        // 충돌 횟수 누적
+        _currentHitCount += 1;
+        _unitAttribute.UnitCurrentHealth = _maxHitCount - _currentHitCount;
 
-        // 내구도가 모두 소진되면 파괴 처리
-        if (_currentHitCount <= 0)
+        // 누적된 충돌 횟수가 최대에 도달하면 파괴 처리
+        if (_currentHitCount >= _maxHitCount)
         {
             Dead();
         }
