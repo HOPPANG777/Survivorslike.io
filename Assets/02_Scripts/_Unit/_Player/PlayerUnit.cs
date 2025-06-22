@@ -50,7 +50,7 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
             }
         }
 
-        this.gameObject.GetComponent<ExpMagnetController>().SetStatus();
+        this.gameObject.GetComponent<PlayerExpMagnetController>().SetStatus();
         // 2. 없다면 → 팩토리로 생성, 플레이어 자식으로 붙이고 리스트에 추가
         var weapon = AllManager.instance.WeaponFactory.Create(type, this.transform);
         if (weapon == null)

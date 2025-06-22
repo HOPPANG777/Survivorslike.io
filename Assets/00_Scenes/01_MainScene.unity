@@ -27434,42 +27434,42 @@ MonoBehaviour:
     StartTime: 0
     EndTime: 300
     Interval: 3
-    MaxCount: 50
+    MaxCount: 200
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 30395190b4497354c86810e587f23314, type: 2}
     StartTime: 30
     EndTime: 300
     Interval: 2
-    MaxCount: 50
+    MaxCount: 200
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 141d348b8d494774387090185bd1e19c, type: 2}
     StartTime: 60
     EndTime: 300
     Interval: 5
-    MaxCount: 50
+    MaxCount: 200
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 620ed35295d62e74fbea396b5b2d5702, type: 2}
     StartTime: 110
     EndTime: 300
     Interval: 10
-    MaxCount: 50
+    MaxCount: 200
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 4479e60b871fb7b498a469f923fa138c, type: 2}
     StartTime: 170
     EndTime: 300
     Interval: 15
-    MaxCount: 5
+    MaxCount: 200
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: fc5a262c66bb1044f89648035a4ab75b, type: 2}
     StartTime: 0
     EndTime: 300
     Interval: 10
-    MaxCount: 5
+    MaxCount: 200
     Timer: 0
     SpawnedCount: 0
   _bossSpawnTime: 301

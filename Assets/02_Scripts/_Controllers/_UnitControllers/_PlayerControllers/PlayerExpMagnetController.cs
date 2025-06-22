@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ExpMagnetController : MonoBehaviour, IExpMagnet, ISetStatus
+public class PlayerExpMagnetController : MonoBehaviour, IExpMagnet, ISetStatus
 {
     [SerializeField] private GameObject _player;
     private float _timer;
