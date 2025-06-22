@@ -77,11 +77,11 @@ public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision, ISe
     public void OnCollision(ICollidable a, ICollidable b)
     {
         // shield vs projectile ¸¸ Ã³¸®
-        if (a == this && b is ProjectileBase proj)
+        if ((object)a == this && b is ProjectileBase proj)
         {
             AllManager.instance.ProjectileFactory.Release(proj);
         }
-        else if (b == this && a is ProjectileBase proj2)
+        else if ((object)b == this && a is ProjectileBase proj2)
         {
             AllManager.instance.ProjectileFactory.Release(proj2);
         }

@@ -33,7 +33,7 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
     {
         WeaponType.WEAPON_SNIPER,
         WeaponType.WEAPON_PISTOL,
-        //WeaponType.WEAPON_GATLING,
+        WeaponType.WEAPON_GATLING,
         WeaponType.WEAPON_MISSILE,
         WeaponType.WEAPON_AEGIS,
         WeaponType.WEAPON_BOMB,
