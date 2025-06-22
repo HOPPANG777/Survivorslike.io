@@ -115,6 +115,7 @@ public class GameModeController : MonoBehaviour, IGameMode
 
         _tileMapController.Init();
         _cameraController.Init();
+        _cameraController.SetOrthographicSize(10f);
         _weaponSelectionController.Init();
 
         if (playerUnit != null)

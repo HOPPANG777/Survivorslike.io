@@ -27,6 +27,15 @@ public class CameraController : MonoBehaviour, IMoveable
     [TabGroup("Direction")][SerializeField] private Vector3 _moveDirection;
     public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
+    // 카메라 사이즈 변경
+    public void SetOrthographicSize(float size)
+    {
+        if (MainCamera != null)
+        {
+            MainCamera.orthographicSize = size;
+        }
+    }
+
     public void Init()
     {
         _cameraTarget = AllManager.instance.GamemodeManager.Player;
