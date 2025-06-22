@@ -77,17 +77,13 @@ public class EnemyShieldController : MonoBehaviour, ICollidable, ICollision, ISe
     public void OnCollision(ICollidable a, ICollidable b)
     {
         // shield vs projectile 만 처리
-        if (a == this.gameObject.GetComponent<ICollidable>() && b is IProjectileAttribute<ProjectileAttribute>)
+        if (a == this && b is ProjectileBase proj)
         {
-            // 프로젝타일 컴포넌트 획득
-            var projGO = (b as Component).gameObject;
-            var proj = projGO.GetComponent<ProjectileBase>();
-            if (proj != null)
-            {
-                // 무효화: 풀로 반환
-                AllManager.instance.ProjectileFactory.Release(proj);
-                // (선택) 이펙트나 사운드 재생
-            }
+            AllManager.instance.ProjectileFactory.Release(proj);
+        }
+        else if (b == this && a is ProjectileBase proj2)
+        {
+            AllManager.instance.ProjectileFactory.Release(proj2);
         }
     }
     private void EnemyShieldMove()
