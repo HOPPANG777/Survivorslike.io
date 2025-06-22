@@ -5,22 +5,32 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class RandomEnemySpawner : SerializedMonoBehaviour
 {
-    [TabGroup("Spawn Settings")][Tooltip("´Ù¾çÇÑ ¸ó½ºÅÍ ½ºÆù ¼³Á¤ ¸®½ºÆ®")] [SerializeField] private List<SpawnEntry> _spawnEntries = new List<SpawnEntry>();
-    [TabGroup("Spawn Settings")][Tooltip("º¸½º ½ºÆù ½Ã°£(ÃÊ)")] [SerializeField] private float _bossSpawnTime = 60f;
-    [TabGroup("Spawn Settings")][Tooltip("º¸½º µ¥ÀÌÅÍ SO")][SerializeField]private UnitBaseSO _bossData;
-    [TabGroup("Spawn Settings")][Tooltip("º¸½º ½ºÆù À§Ä¡")][SerializeField]private Transform _bossSpawnPoint;
+    [TabGroup("Spawn Settings")][Tooltip("ë‹¤ì–‘í•œ ëª¬ìŠ¤í„° ìŠ¤í° ì„¤ì • ë¦¬ìŠ¤íŠ¸")][SerializeField]
+    private List<SpawnEntry> _spawnEntries = new List<SpawnEntry>();
+    [TabGroup("Spawn Settings")][Tooltip("ë³´ìŠ¤ ìŠ¤í° ì‹œê°„(ì´ˆ)")][SerializeField]
+    private float _bossSpawnTime = 60f;
+    [TabGroup("Spawn Settings")][Tooltip("ë³´ìŠ¤ ë°ì´í„° SO")][SerializeField]
+    private UnitBaseSO _bossData;
+    [TabGroup("Spawn Settings")][Tooltip("ë³´ìŠ¤ ìŠ¤í° ìœ„ì¹˜")][SerializeField]
+    private Transform _bossSpawnPoint;
 
     private float _elapsedTime;
     private bool _bossSpawned;
     private IUnitFactory _factory;
+    private IPositionProvider _playerPosition;
 
     public void Init()
     {
         _factory = AllManager.instance.UnitFactory;
+        var player = AllManager.instance.GamemodeManager.Player;
+        if (player != null && player.TryGetComponent<IPositionProvider>(out var provider))
+        {
+            _playerPosition = provider;
+        }
+
         _elapsedTime = 0f;
         _bossSpawned = false;
 
-        // ±¸Á¶Ã¼ ¸®½ºÆ® ÃÊ±âÈ­: º¹»ç ÈÄ ÇÊµå ¼³Á¤, ´Ù½Ã ´ëÀÔ
         for (int i = 0; i < _spawnEntries.Count; i++)
         {
             SpawnEntry entry = _spawnEntries[i];
@@ -36,7 +46,6 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
 
         _elapsedTime += Time.deltaTime;
 
-        // º¸½º ½ºÆù Á¶°Ç
         if (!_bossSpawned && _elapsedTime >= _bossSpawnTime)
         {
             ClearAllEnemies();
@@ -45,14 +54,12 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
             return;
         }
 
-        // º¸½º ÀÌÀü¿¡ ÀÏ¹İ ¸ó½ºÅÍ ½ºÆù
         if (_bossSpawned) return;
 
         for (int i = 0; i < _spawnEntries.Count; i++)
         {
             var entry = _spawnEntries[i];
             if (_elapsedTime < entry.StartTime || _elapsedTime > entry.EndTime) continue;
-
             if (entry.SpawnedCount >= entry.MaxCount) continue;
 
             entry.Timer += Time.deltaTime;
@@ -65,14 +72,69 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
             entry.Timer -= entry.Interval;
             _spawnEntries[i] = entry;
 
-            // ½ºÆù ½ÇÇà
-            Vector3 pos = GetRandomOffCameraPosition();
-            var enemy = _factory.Create(entry.EnemyData, pos);
+            SpawnByPattern(entry);
             entry.SpawnedCount++;
             _spawnEntries[i] = entry;
         }
     }
 
+    // íŒ¨í„´ì— ë”°ë¼ ì  ìŠ¤í°
+    private void SpawnByPattern(SpawnEntry entry)
+    {
+        switch (entry.Pattern)
+        {
+            case SpawnPatternType.SPAWNPATTERN_DOT:
+                SpawnDot(entry);
+                break;
+            case SpawnPatternType.SPAWNPATTERN_SURROUND:
+                SpawnSurround(entry);
+                break;
+            case SpawnPatternType.SPAWNPATTERN_BOSS:
+                SpawnBossFromEntry(entry);
+                break;
+            default:
+                SpawnRandom(entry);
+                break;
+        }
+    }
+
+    // ë¬´ì‘ìœ„ ìœ„ì¹˜ì— ìŠ¤í°
+    private void SpawnRandom(SpawnEntry entry)
+    {
+        Vector3 pos = GetRandomOffCameraPosition();
+        _factory.Create(entry.EnemyData, pos);
+    }
+
+    // ì¼ì • ë°˜ê²½ ë‚´ ì„ì˜ì˜ ìœ„ì¹˜ì— ì  í˜•íƒœë¡œ ìŠ¤í°
+    private void SpawnDot(SpawnEntry entry)
+    {
+        Vector3 basePosition = GetRandomInsideCameraPosition();
+        Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0f);
+        Vector3 spawnPosition = basePosition + offset;
+        _factory.Create(entry.EnemyData, spawnPosition);
+    }
+
+    // í”Œë ˆì´ì–´ë¥¼ ë‘˜ëŸ¬ì‹¸ë„ë¡ ìŠ¤í°
+    private void SpawnSurround(SpawnEntry entry)
+    {
+        if (_playerPosition == null) return;
+        Vector3 playerPos = _playerPosition.Position;
+        float radius = 6.0f;
+        float angle = Random.Range(0f, 360f);
+        float enemyPosX = playerPos.x + Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
+        float enemyPosY = playerPos.y + Mathf.Cos(angle * Mathf.Deg2Rad) * radius;
+        Vector3 spawnPosition = new Vector3(enemyPosX, enemyPosY, playerPos.z);
+        _factory.Create(entry.EnemyData, spawnPosition);
+    }
+
+    // ë³´ìŠ¤ íŒ¨í„´ ìŠ¤í°
+    private void SpawnBossFromEntry(SpawnEntry entry)
+    {
+        Vector3 pos = GetCameraTopPosition();
+        _factory.Create(entry.EnemyData, pos);
+    }
+
+    // í™”ë©´ ë°– ë¬´ì‘ìœ„ ìœ„ì¹˜ ê³„ì‚°
     private Vector3 GetRandomOffCameraPosition()
     {
         Camera cam = Camera.main;
@@ -89,9 +151,32 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
         }
     }
 
+    // í™”ë©´ ë‚´ë¶€ ë¬´ì‘ìœ„ ìœ„ì¹˜ ê³„ì‚°
+    private Vector3 GetRandomInsideCameraPosition()
+    {
+        Camera cam = Camera.main;
+        float halfH = cam.orthographicSize;
+        float halfW = halfH * cam.aspect;
+        Vector3 center = cam.transform.position;
+        return new Vector3(Random.Range(center.x - halfW, center.x + halfW),
+                           Random.Range(center.y - halfH, center.y + halfH),
+                           0f);
+    }
+
+    // ì¹´ë©”ë¼ ìœ„ìª½ ìœ„ì¹˜ ê³„ì‚°
+    private Vector3 GetCameraTopPosition()
+    {
+        Camera cam = Camera.main;
+        float halfH = cam.orthographicSize;
+        Vector3 center = cam.transform.position;
+        float m = _offCameraMargin;
+        float x = _playerPosition != null ? _playerPosition.Position.x : center.x;
+        return new Vector3(x, center.y + halfH + m, 0f);
+    }
+
     private void SpawnBoss()
     {
-        Vector3 pos = _bossSpawnPoint != null ? _bossSpawnPoint.position : GetRandomOffCameraPosition();
+        Vector3 pos = _bossSpawnPoint != null ? _bossSpawnPoint.position : GetCameraTopPosition();
         _factory.Create(_bossData, pos);
     }
 
@@ -100,6 +185,5 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
         AllManager.instance.UnitFactory.ReleaseAllEnemies();
     }
 
-    // _offCameraMargin ÇÊµåµµ À¯Áö
     [TabGroup("Spawn Settings")][SerializeField] private float _offCameraMargin = 1f;
 }
