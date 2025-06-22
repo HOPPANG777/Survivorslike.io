@@ -80,5 +80,7 @@ public class PlayerLevelUpController : MonoBehaviour, ISetStatus
 
         _expBar.UpdatePlayerCurrentExpBar(fill);
         _levelCounter.UpdateLevelCounter(level);
+        var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
+        if (panel != null) panel.UpdatePanel();
     }
 }

@@ -21,6 +21,11 @@ public class UIController : MonoBehaviour
     [TabGroup("Controller")][Tooltip("플레이어 레벨 카운터 컨트롤러")][SerializeField] private PlayerCurrentLevelCountController _playerCurrentLevelCountController;
     public PlayerCurrentLevelCountController PlayerCurrentLevelCountController { get { return _playerCurrentLevelCountController; } }
 
+    [TabGroup("Controller")][Tooltip("플레이어 능력치 패널 컨트롤러")][SerializeField]
+    private PlayerCurrentAttributesPanelController _playerCurrentAttributesPanelController;
+    public PlayerCurrentAttributesPanelController PlayerCurrentAttributesPanelController
+    { get { return _playerCurrentAttributesPanelController; } }
+
     [TabGroup("Controller")][Tooltip("레벨업 아이템 이미지 슬라이드 컨트롤러")][SerializeField] private SlideInImagesController _slideInImagesController;
     public SlideInImagesController SlideInImagesController { get { return _slideInImagesController; } }
 

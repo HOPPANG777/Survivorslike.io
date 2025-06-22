@@ -46,6 +46,8 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
             if (weaponEquipped.WeaponType == type)
             {
                 weaponEquipped.LevelUp(); // 무기 레벨업
+                var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
+                if (panel != null) panel.UpdatePanel();
                 return;
             }
         }
@@ -60,6 +62,10 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
         }
 
         _equippedWeapons.Add(weapon);
+        {
+            var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
+            if (panel != null) panel.UpdatePanel();
+        }
     }
 
     public override void SetStatus()
@@ -80,6 +86,8 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
     {
         base.Hitted(damageValue);
         AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(base.Attributes.UnitCurrentHealth / base.Attributes.UnitMaxHealth);
+        var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
+        if (panel != null) panel.UpdatePanel();
     }
 
     public override void CheckDead()
