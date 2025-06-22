@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46b4d108e0e2f041ac4295059e81393, type: 3}
+  m_Name: MagnetItemData
+  m_EditorClassIdentifier: 
+  _itemName: Magnet
+  _icon: {fileID: 21300000, guid: 9c76ba38093c6384e8bbe8ce754cd04d, type: 3}
+  _collisionRadius: 1
+  _attractRange: 1
+  _attractSpeed: 1
+  _soundName: GetMagnetSound
+  _soundType: 2
+  _soundClip: {fileID: 0}
+  _duration: 3
+  _speed: 20
