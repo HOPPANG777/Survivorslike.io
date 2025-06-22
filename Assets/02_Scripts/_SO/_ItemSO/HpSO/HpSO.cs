@@ -35,6 +35,8 @@ public class HpSO : ItemBaseSO
                     dmg.Play(healAmount, user.transform.position, Color.green);
                 }
             }
+            var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
+            if (panel != null) panel.UpdatePanel();
         }
     }
 }

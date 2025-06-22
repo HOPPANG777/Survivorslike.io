@@ -178,6 +178,10 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         }
 
         AllManager.instance.UIManager.OnWeaponChosen();
+        {
+            var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
+            if (panel != null) panel.UpdatePanel();
+        }
     }
 
     private List<WeaponStatDiff> BuildDiffList(WeaponAttribute next, WeaponAttribute current)

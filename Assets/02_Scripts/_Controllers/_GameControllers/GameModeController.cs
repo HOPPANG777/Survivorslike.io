@@ -123,6 +123,8 @@ public class GameModeController : MonoBehaviour, IGameMode
             playerUnit.SetStatus();
             playerUnit.EquippedWeapons.Clear();
             _playerInstance.SetActive(false);
+            var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
+            if (panel != null) panel.SetStatus();
         }
 
         GameMode = GameModeType.GAMEMODE_GAMESTART;
