@@ -5,7 +5,7 @@ using UnityEngine;
 //==============================================================================
 // PlayerUnit
 //==============================================================================
-// PlayerUnit ½ºÅ©¸³Æ®
+// PlayerUnit ìŠ¤í¬ë¦½íŠ¸
 //	
 //==============================================================================
 
@@ -39,22 +39,23 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
 
     public void AddWeapon(WeaponType type)
     {
-        // 1. ÀÌ¹Ì ¼ÒÀ¯ÇÑ ¹«±â¶ó¸é ¡æ ·¹º§¸¸ ¿Ã¸®°í ³¡
+        // 1. ì´ë¯¸ ì†Œìœ í•œ ë¬´ê¸°ë¼ë©´ â†’ ë ˆë²¨ë§Œ ì˜¬ë¦¬ê³  ë
         for (int i = 0; i < _equippedWeapons.Count; i++)
         {
             WeaponBase weaponEquipped = _equippedWeapons[i];
             if (weaponEquipped.WeaponType == type)
             {
-                weaponEquipped.LevelUp(); // ¹«±â ·¹º§¾÷
+                weaponEquipped.LevelUp(); // ë¬´ê¸° ë ˆë²¨ì—…
                 return;
             }
         }
 
-        // 2. ¾ø´Ù¸é ¡æ ÆÑÅä¸®·Î »ı¼º, ÇÃ·¹ÀÌ¾î ÀÚ½ÄÀ¸·Î ºÙÀÌ°í ¸®½ºÆ®¿¡ Ãß°¡
+        this.gameObject.GetComponent<ExpMagnetController>().SetStatus();
+        // 2. ì—†ë‹¤ë©´ â†’ íŒ©í† ë¦¬ë¡œ ìƒì„±, í”Œë ˆì´ì–´ ìì‹ìœ¼ë¡œ ë¶™ì´ê³  ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
         var weapon = AllManager.instance.WeaponFactory.Create(type, this.transform);
         if (weapon == null)
         {
-            Debug.LogWarning($"WeaponFactory¿¡¼­ {type} ¹«±â »ı¼º ½ÇÆĞ");
+            Debug.LogWarning($"WeaponFactoryì—ì„œ {type} ë¬´ê¸° ìƒì„± ì‹¤íŒ¨");
             return;
         }
 
