@@ -1,15 +1,19 @@
 using UnityEngine;
 
+/// <summary>
+/// ì  ìŠ¤í° ì„¤ì • ì—”íŠ¸ë¦¬ êµ¬ì¡°ì²´
+/// </summary>
 [System.Serializable]
 public struct SpawnEntry
 {
-    [Tooltip("½ºÆùÇÒ Àû µ¥ÀÌÅÍ SO")] public UnitBaseSO EnemyData;
-    [Tooltip("½ºÆù °¡´É ½ÃÀÛ ½Ã°£(ÃÊ)")] public float StartTime;
-    [Tooltip("½ºÆù °¡´É Á¾·á ½Ã°£(ÃÊ)")] public float EndTime;
-    [Tooltip("ÀÌ ¿£Æ®¸® ³»¿¡¼­ÀÇ ½ºÆù °£°İ(ÃÊ)")] public float Interval;
-    [Tooltip("ÃÖ´ë ½ºÆù °³¼ö")] public int MaxCount;
+    [Tooltip("ìŠ¤í°í•  ì  ë°ì´í„° SO")] public UnitBaseSO EnemyData;
+    [Tooltip("ìŠ¤í° ê°€ëŠ¥ ì‹œì‘ ì‹œê°„(ì´ˆ)")] public float StartTime;
+    [Tooltip("ìŠ¤í° ê°€ëŠ¥ ì¢…ë£Œ ì‹œê°„(ì´ˆ)")] public float EndTime;
+    [Tooltip("ì´ ì—”íŠ¸ë¦¬ ë‚´ì—ì„œì˜ ìŠ¤í° ê°„ê²©(ì´ˆ)")] public float Interval;
+    [Tooltip("ìµœëŒ€ ìŠ¤í° ê°œìˆ˜")] public int MaxCount;
+    [Tooltip("ìŠ¤í° íŒ¨í„´")] public SpawnPatternType Pattern;
 
-    // ³»ºÎ »ç¿ë
+    // ë‚´ë¶€ ì‚¬ìš©
     [HideInInspector] public float Timer;
     [HideInInspector] public int SpawnedCount;
 }
