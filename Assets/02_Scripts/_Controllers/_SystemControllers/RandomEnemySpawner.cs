@@ -190,6 +190,8 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
     {
         Vector3 pos = _bossSpawnPoint != null ? _bossSpawnPoint.position : GetCameraTopPosition();
         _factory.Create(_bossData, pos);
+        // 보스가 등장하면 카메라 시야를 넓힌다
+        AllManager.instance.GamemodeManager.CameraController.SetOrthographicSize(15f);
     }
 
     private void ClearAllEnemies()
