@@ -72,28 +72,34 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
             entry.Timer -= entry.Interval;
             _spawnEntries[i] = entry;
 
-            SpawnByPattern(entry);
-            entry.SpawnedCount++;
+            int spawnAmount = Mathf.Max(1, entry.SpawnAmount);
+            spawnAmount = Mathf.Min(spawnAmount, entry.MaxCount - entry.SpawnedCount);
+
+            SpawnByPattern(entry, spawnAmount);
+            entry.SpawnedCount += spawnAmount;
             _spawnEntries[i] = entry;
         }
     }
 
     // 패턴에 따라 적 스폰
-    private void SpawnByPattern(SpawnEntry entry)
+    private void SpawnByPattern(SpawnEntry entry, int count)
     {
         switch (entry.Pattern)
         {
             case SpawnPatternType.SPAWNPATTERN_DOT:
-                SpawnDot(entry);
+                SpawnDot(entry, count);
                 break;
             case SpawnPatternType.SPAWNPATTERN_SURROUND:
-                SpawnSurround(entry);
+                SpawnSurround(entry, count);
                 break;
             case SpawnPatternType.SPAWNPATTERN_BOSS:
                 SpawnBossFromEntry(entry);
                 break;
             default:
-                SpawnRandom(entry);
+                for (int i = 0; i < count; i++)
+                {
+                    SpawnRandom(entry);
+                }
                 break;
         }
     }
@@ -106,25 +112,31 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
     }
 
     // 일정 반경 내 임의의 위치에 점 형태로 스폰
-    private void SpawnDot(SpawnEntry entry)
+    private void SpawnDot(SpawnEntry entry, int count)
     {
-        Vector3 basePosition = GetRandomInsideCameraPosition();
-        Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0f);
-        Vector3 spawnPosition = basePosition + offset;
-        _factory.Create(entry.EnemyData, spawnPosition);
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 basePosition = GetRandomInsideCameraPosition();
+            Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0f);
+            Vector3 spawnPosition = basePosition + offset;
+            _factory.Create(entry.EnemyData, spawnPosition);
+        }
     }
 
     // 플레이어를 둘러싸도록 스폰
-    private void SpawnSurround(SpawnEntry entry)
+    private void SpawnSurround(SpawnEntry entry, int count)
     {
         if (_playerPosition == null) return;
         Vector3 playerPos = _playerPosition.Position;
         float radius = 6.0f;
-        float angle = Random.Range(0f, 360f);
-        float enemyPosX = playerPos.x + Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
-        float enemyPosY = playerPos.y + Mathf.Cos(angle * Mathf.Deg2Rad) * radius;
-        Vector3 spawnPosition = new Vector3(enemyPosX, enemyPosY, playerPos.z);
-        _factory.Create(entry.EnemyData, spawnPosition);
+        for (int i = 0; i < count; i++)
+        {
+            float angle = (360f / count) * i;
+            float enemyPosX = playerPos.x + Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
+            float enemyPosY = playerPos.y + Mathf.Cos(angle * Mathf.Deg2Rad) * radius;
+            Vector3 spawnPosition = new Vector3(enemyPosX, enemyPosY, playerPos.z);
+            _factory.Create(entry.EnemyData, spawnPosition);
+        }
     }
 
     // 보스 패턴 스폰
