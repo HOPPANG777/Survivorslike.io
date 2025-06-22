@@ -27435,6 +27435,8 @@ MonoBehaviour:
     EndTime: 300
     Interval: 3
     MaxCount: 200
+    Pattern: 0
+    SpawnAmount: 1
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 30395190b4497354c86810e587f23314, type: 2}
@@ -27442,6 +27444,8 @@ MonoBehaviour:
     EndTime: 300
     Interval: 2
     MaxCount: 200
+    Pattern: 0
+    SpawnAmount: 1
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 141d348b8d494774387090185bd1e19c, type: 2}
@@ -27449,6 +27453,8 @@ MonoBehaviour:
     EndTime: 300
     Interval: 5
     MaxCount: 200
+    Pattern: 0
+    SpawnAmount: 1
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 620ed35295d62e74fbea396b5b2d5702, type: 2}
@@ -27456,6 +27462,8 @@ MonoBehaviour:
     EndTime: 300
     Interval: 10
     MaxCount: 200
+    Pattern: 0
+    SpawnAmount: 1
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 4479e60b871fb7b498a469f923fa138c, type: 2}
@@ -27463,6 +27471,8 @@ MonoBehaviour:
     EndTime: 300
     Interval: 15
     MaxCount: 200
+    Pattern: 0
+    SpawnAmount: 1
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: fc5a262c66bb1044f89648035a4ab75b, type: 2}
@@ -27470,6 +27480,26 @@ MonoBehaviour:
     EndTime: 300
     Interval: 10
     MaxCount: 200
+    Pattern: 0
+    SpawnAmount: 1
+    Timer: 0
+    SpawnedCount: 0
+  - EnemyData: {fileID: 11400000, guid: 30395190b4497354c86810e587f23314, type: 2}
+    StartTime: 0
+    EndTime: 300
+    Interval: 60
+    MaxCount: 200
+    Pattern: 2
+    SpawnAmount: 30
+    Timer: 0
+    SpawnedCount: 0
+  - EnemyData: {fileID: 11400000, guid: 141d348b8d494774387090185bd1e19c, type: 2}
+    StartTime: 0
+    EndTime: 300
+    Interval: 90
+    MaxCount: 200
+    Pattern: 1
+    SpawnAmount: 10
     Timer: 0
     SpawnedCount: 0
   _bossSpawnTime: 301
