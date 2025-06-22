@@ -33,6 +33,11 @@ public class BossDashController : MonoBehaviour, IDashable, ISetStatus
     private float _dashTimer;
     private int _remainDash;
 
+    [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageInterval = 0.05f;
+    [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageDuration = 1.0f;
+    private float _afterImageTimer;
+    private SpriteRenderer _enemyRenderer;
+
     public void SetStatus()
     {
         if (_boss == null)
@@ -101,6 +106,8 @@ public class BossDashController : MonoBehaviour, IDashable, ISetStatus
         Vector3 moveStep = _dashDir * DashSpeed * Time.deltaTime;
         Vector3 toTarget = _dashTarget - transform.position;
 
+        CreateAfterImage();
+
         if (Vector3.Dot(toTarget, _dashDir) <= 0f || moveStep.sqrMagnitude >= toTarget.sqrMagnitude)
         {
             transform.position = _dashTarget;
@@ -119,5 +126,18 @@ public class BossDashController : MonoBehaviour, IDashable, ISetStatus
         {
             transform.position += moveStep;
         }
+    }
+
+    private void CreateAfterImage()
+    {
+        if (_enemyRenderer == null) return;
+        _afterImageTimer -= Time.deltaTime;
+
+        if (_afterImageTimer > 0f) return;
+        _afterImageTimer = _afterImageInterval;
+
+        var dashEffect = AllManager.instance.ParticleFactory.Create(ParticleType.PARTICLE_DASH, this.transform.position, Quaternion.identity);
+        var after = dashEffect.GetComponent<DashAfterImage>();
+        after.Initialize(_enemyRenderer.sprite, _enemyRenderer.color, _enemyRenderer.sortingOrder - 1, _afterImageDuration, this.gameObject.GetComponent<SpriteRenderer>().size);
     }
 }

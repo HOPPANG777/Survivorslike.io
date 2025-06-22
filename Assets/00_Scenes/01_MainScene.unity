@@ -8751,6 +8751,8 @@ MonoBehaviour:
     InitialSize: 100
   - Prefab: {fileID: 7183161032584120759, guid: f03034e3a25011b4384c31432f3aabf7, type: 3}
     InitialSize: 100
+  - Prefab: {fileID: 4231145564527053269, guid: 696fe3f9b466c0a47b873b62ec5125ae, type: 3}
+    InitialSize: 5
   - Prefab: {fileID: 205627021574548224, guid: 221366fbf762ec04e9aa9eb016e2d663, type: 3}
     InitialSize: 100
   - Prefab: {fileID: 9132914363161966335, guid: 5678cf41311f6864cb0fd40fa7b962e5, type: 3}
@@ -75503,7 +75505,7 @@ MonoBehaviour:
     Timer: 0
     SpawnedCount: 0
   _bossSpawnTime: 301
-  _bossData: {fileID: 0}
+  _bossData: {fileID: 11400000, guid: 83630343ba4bc6f4fa2f1aa96ecda709, type: 2}
   _bossSpawnPoint: {fileID: 0}
   _offCameraMargin: 1
 --- !u!1 &1546737402
@@ -143838,6 +143840,8 @@ MonoBehaviour:
     Prefab: {fileID: 5730023950293293173, guid: bd535a5e61b5a244ca09bf6dbb299564, type: 3}
   - Data: {fileID: 11400000, guid: 4479e60b871fb7b498a469f923fa138c, type: 2}
     Prefab: {fileID: 7183161032584120759, guid: f03034e3a25011b4384c31432f3aabf7, type: 3}
+  - Data: {fileID: 11400000, guid: 83630343ba4bc6f4fa2f1aa96ecda709, type: 2}
+    Prefab: {fileID: 4231145564527053269, guid: 696fe3f9b466c0a47b873b62ec5125ae, type: 3}
   - Data: {fileID: 11400000, guid: fc5a262c66bb1044f89648035a4ab75b, type: 2}
     Prefab: {fileID: 205627021574548224, guid: 221366fbf762ec04e9aa9eb016e2d663, type: 3}
 --- !u!4 &2047221278
