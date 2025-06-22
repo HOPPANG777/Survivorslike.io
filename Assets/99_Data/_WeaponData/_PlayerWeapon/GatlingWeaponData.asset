@@ -15,62 +15,18 @@ MonoBehaviour:
   _weaponName: "\uAC8C\uD2C0\uB9C1\uAC74"
   _weaponSprite: {fileID: 21300000, guid: 49fccc9e8401b714ebcfa5c6fd548140, type: 3}
   _levelAttributes:
-  - _flatDamage: 1
+  - _flatDamage: 20
     _damageMultiplier: 0
     _criticalDamage: 0
     _criticalChance: 0
-    _attackSpeedMultiplier: 5
+    _attackSpeedMultiplier: 20
     _projectileCountBonus: 2
     _rangeBonus: 1
-    _attackCooldown: 0.5
+    _attackCooldown: 0.1
     _knockbackForce: 0.5
     _weaponDisableCount: 2
     _weaponDisableTime: 4
-  - _flatDamage: 3
-    _damageMultiplier: 0
-    _criticalDamage: 0
-    _criticalChance: 0
-    _attackSpeedMultiplier: 5
-    _projectileCountBonus: 2
-    _rangeBonus: 1
-    _attackCooldown: 0.5
-    _knockbackForce: 0.5
-    _weaponDisableCount: 2
-    _weaponDisableTime: 4
-  - _flatDamage: 3
-    _damageMultiplier: 0
-    _criticalDamage: 0
-    _criticalChance: 0
-    _attackSpeedMultiplier: 5
-    _projectileCountBonus: 2
-    _rangeBonus: 1
-    _attackCooldown: 0.5
-    _knockbackForce: 0.5
-    _weaponDisableCount: 2
-    _weaponDisableTime: 4
-  - _flatDamage: 3
-    _damageMultiplier: 0
-    _criticalDamage: 0
-    _criticalChance: 0
-    _attackSpeedMultiplier: 5
-    _projectileCountBonus: 2
-    _rangeBonus: 1
-    _attackCooldown: 0.5
-    _knockbackForce: 0.5
-    _weaponDisableCount: 2
-    _weaponDisableTime: 4
-  - _flatDamage: 5
-    _damageMultiplier: 0
-    _criticalDamage: 0
-    _criticalChance: 0
-    _attackSpeedMultiplier: 5
-    _projectileCountBonus: 3
-    _rangeBonus: 1
-    _attackCooldown: 0.5
-    _knockbackForce: 0.5
-    _weaponDisableCount: 2
-    _weaponDisableTime: 4
-  _maxLevel: 5
+  _maxLevel: 1
   _teamType: 1
   _weaponDisableType: 1
   _weaponType: 3

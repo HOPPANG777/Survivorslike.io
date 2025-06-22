@@ -77,11 +77,16 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
         for (int i = 0; i < ownedWeapons.Count; i++)
         {
             var weapon = ownedWeapons[i];
-            if (weapon.CurrentLevel >= weapon.MaxLevel)
+            if (weapon.CurrentLevel >= weapon.MaxLevel - 1)
             {
-                for (int j = candidates.Count - 1; j >= 0; j--)
+                for (int j = 0; j < candidates.Count; j++)
                 {
-                    if (candidates[j] == weapon.WeaponType) candidates.RemoveAt(j);
+                    if (candidates[j] == weapon.WeaponType)
+                    {
+                        // 최종 레벨 무기는 후보 목록에서 제거하고 체력 회복 아이템으로 대체
+                        candidates[j] = WeaponType.WEAPON_NONE;
+                        break;
+                    }
                 }
             }
         }
