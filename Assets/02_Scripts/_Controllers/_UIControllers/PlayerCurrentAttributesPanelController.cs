@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 /// <summary>
@@ -11,6 +12,9 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
 {
     [TabGroup("UI")][Tooltip("무기 아이콘을 표시할 이미지들 (최대 5개)")][SerializeField] private List<Image> _weaponImages = new List<Image>();
     [TabGroup("UI")][Tooltip("악세서리 아이콘을 표시할 이미지들 (최대 5개)")][SerializeField] private List<Image> _accImages = new List<Image>();
+
+    [TabGroup("UI")][Tooltip("무기 정보를 표시할 툴팁 컨트롤러")][SerializeField]
+    private WeaponTooltipController _weaponTooltipController;
 
     [TabGroup("UI")][Tooltip("플레이어 체력")][SerializeField]
     private TextMeshProUGUI _healthText;
@@ -55,6 +59,7 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
         _statsProvider = _player.GetComponent<AttackStatsProvider>();
         _unitAttributes = _player.GetComponent<IUnitAttribute<UnitAttribute>>();
         _playerAttributes = _player.GetComponent<IUnitAttribute<PlayerableAttribute>>();
+        _weaponTooltipController?.HideTooltip();
         UpdatePanel();
     }
 
@@ -80,12 +85,19 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
                     {
                         img.sprite = weapon.WeaponBaseData.WeaponSprite;
                         img.enabled = img.sprite != null;
+
+                        // 마우스 오버 시 정보를 보여주도록 핸들러 설정
+                        var hover = img.GetComponent<WeaponImageHoverHandler>();
+                        if (hover == null) hover = img.gameObject.AddComponent<WeaponImageHoverHandler>();
+                        hover.Init(weapon, _weaponTooltipController);
                     }
                 }
                 else if (_weaponImages[i] != null)
                 {
                     _weaponImages[i].sprite = null;
                     _weaponImages[i].enabled = false;
+                    var hover = _weaponImages[i].GetComponent<WeaponImageHoverHandler>();
+                    if (hover != null) Destroy(hover);
                 }
             }
         }
