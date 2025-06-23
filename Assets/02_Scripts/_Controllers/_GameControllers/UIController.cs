@@ -9,8 +9,8 @@ public class UIController : MonoBehaviour
     [TabGroup("Controller")][Tooltip("타이머 컨트롤러")][SerializeField] private IngameClockController _ingameClockController;
     public IngameClockController IngameClockController { get { return _ingameClockController; } }
 
-    [TabGroup("Controller")][Tooltip("플레이어 체력 바 컨트롤러")][SerializeField] private PlayerCurrentHealthBarController _playerCurrentHealthBarController;
-    public PlayerCurrentHealthBarController PlayerCurrentHealthBarController { get { return _playerCurrentHealthBarController; } }
+    [TabGroup("Controller")][Tooltip("보스 체력 바 컨트롤러")][SerializeField] private BossCurrentHealthBarController _playerCurrentHealthBarController;
+    public BossCurrentHealthBarController BossCurrentHealthBarController { get { return _playerCurrentHealthBarController; } }
 
     [TabGroup("Controller")][Tooltip("플레이어 경험치 바 컨트롤러")][SerializeField] private PlayerCurrentExpBarController _playerCurrentExpBarController;
     public PlayerCurrentExpBarController PlayerCurrentExpBarController { get { return _playerCurrentExpBarController; } }
@@ -121,7 +121,7 @@ public class UIController : MonoBehaviour
 
     public void ResetUI()
     {
-        PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(1);
+        BossCurrentHealthBarController.ResetBar();
         _playerCurrentExpBarController.RevertPlayerCurreontExpBar();
         EnemyKillCountController.UpdateKillCounter(0);
         _backManager.InitializeToTitle();

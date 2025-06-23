@@ -178,7 +178,6 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
                 attr.UnitCurrentHealth = Mathf.Min(attr.UnitCurrentHealth + healAmount, attr.UnitMaxHealth);
                 healAmount = attr.UnitCurrentHealth - prevHealth;
                 attrProvider.Attributes = attr;
-                AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(attr.UnitCurrentHealth / attr.UnitMaxHealth);
 
                 var parent = AllManager.instance.UIPoolCanvas != null ? AllManager.instance.UIPoolCanvas.CanvasRoot : null;
                 var go = AllManager.instance.UIFactory.Create(UIType.UI_DAMAGE_TEXT, parent);
@@ -191,7 +190,6 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
                     }
                 }
                 attrProvider.Attributes = attr;
-                AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(attr.UnitCurrentHealth / attr.UnitMaxHealth);
             }
         }
         else
