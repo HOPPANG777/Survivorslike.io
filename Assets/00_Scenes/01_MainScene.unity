@@ -3464,7 +3464,6 @@ GameObject:
   - component: {fileID: 230697191}
   - component: {fileID: 230697193}
   - component: {fileID: 230697192}
-  - component: {fileID: 230697194}
   m_Layer: 0
   m_Name: BossCurrentHealthBar
   m_TagString: Untagged
@@ -3529,19 +3528,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230697190}
   m_CullTransparentMesh: 1
---- !u!114 &230697194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 230697190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1623368f67b0d3849bf26fb02ae8b3cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bossCurrentHealthBar: {fileID: 230697192}
 --- !u!1 &232413418
 GameObject:
   m_ObjectHideFlags: 0
@@ -82351,7 +82337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ingameClockController: {fileID: 367560947}
-  _bossCurrentHealthBarController: {fileID: 230697194}
+  _bossCurrentHealthBarController: {fileID: 1969371838}
   _playerCurrentExpBarController: {fileID: 678210165}
   _enemyKillCountController: {fileID: 115841884}
   _playerCurrentLevelCountController: {fileID: 213815615}
@@ -149586,13 +149572,14 @@ GameObject:
   - component: {fileID: 1969371835}
   - component: {fileID: 1969371837}
   - component: {fileID: 1969371836}
+  - component: {fileID: 1969371838}
   m_Layer: 0
   m_Name: BossHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1969371835
 RectTransform:
   m_ObjectHideFlags: 0
@@ -149651,6 +149638,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969371834}
   m_CullTransparentMesh: 1
+--- !u!114 &1969371838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969371834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1623368f67b0d3849bf26fb02ae8b3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bossCurrentHealthBar: {fileID: 230697192}
 --- !u!1 &1971104203
 GameObject:
   m_ObjectHideFlags: 0
