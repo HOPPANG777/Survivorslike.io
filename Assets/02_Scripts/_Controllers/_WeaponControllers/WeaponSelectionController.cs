@@ -22,6 +22,8 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
     private IPlayerHolder _playerHolder;
     private IWeaponFactory _weaponFactory;
 
+    private const int MaxWeaponCount = 5;
+
     // 이번 레벨업에 뽑힌 3개의 후보
     private WeaponType[] _currentChoices = new WeaponType[0];
 
@@ -71,21 +73,41 @@ public class WeaponSelectionController : MonoBehaviour, ISelectedIndex
     /// <summary>레벨업 시 외부에서 호출</summary>
     public void OpenSelection()
     {
-        // 1) 후보 풀 작성 (보유 무기는 제외)
-        var candidates = new List<WeaponType>(_allWeapons);
+        // 1) 후보 풀 작성
+        //var candidates = new List<WeaponType>(_allWeapons);
         var ownedWeapons = _playerHolder.GetOwnedWeaponTypes();
-        for (int i = 0; i < ownedWeapons.Count; i++)
+        List<WeaponType> candidates;
+
+        if (ownedWeapons.Count >= MaxWeaponCount)
         {
-            var weapon = ownedWeapons[i];
-            if (weapon.CurrentLevel >= weapon.MaxLevel - 1)
+            // 모든 무기 슬롯을 사용 중이므로 이미 보유한 무기만 후보에 넣음
+            candidates = new List<WeaponType>();
+            for (int i = 0; i < ownedWeapons.Count; i++)
             {
-                for (int j = 0; j < candidates.Count; j++)
+                var weapon = ownedWeapons[i];
+                if (weapon.CurrentLevel >= weapon.MaxLevel - 1)
+                    candidates.Add(WeaponType.WEAPON_NONE);
+                else
+                    candidates.Add(weapon.WeaponType);
+            }
+        }
+        else
+        {
+            // 슬롯이 남아있으면 모든 무기 타입에서 고름
+            candidates = new List<WeaponType>(_allWeapons);
+            for (int i = 0; i < ownedWeapons.Count; i++)
+            {
+                var weapon = ownedWeapons[i];
+                if (weapon.CurrentLevel >= weapon.MaxLevel - 1)
                 {
-                    if (candidates[j] == weapon.WeaponType)
+                    for (int j = 0; j < candidates.Count; j++)
                     {
-                        // 최종 레벨 무기는 후보 목록에서 제거하고 체력 회복 아이템으로 대체
-                        candidates[j] = WeaponType.WEAPON_NONE;
-                        break;
+                        if (candidates[j] == weapon.WeaponType)
+                        {
+                            // 최종 레벨 무기는 후보 목록에서 제거하고 체력 회복 아이템으로 대체
+                            candidates[j] = WeaponType.WEAPON_NONE;
+                            break;
+                        }
                     }
                 }
             }

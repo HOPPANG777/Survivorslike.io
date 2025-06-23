@@ -22,6 +22,9 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
     public List<WeaponBase> EquippedWeapons { get { return _equippedWeapons; } }
 
     [TabGroup("Player Unit")][Tooltip("AttackStatsProvider")][SerializeField] private AttackStatsProvider _attackStatsProvider;
+
+    private const int MaxWeaponCount = 5;
+
     protected override void Start()
     {
         base.Start();
@@ -52,7 +55,15 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
             }
         }
 
+        // 새로운 무기 추가 전에 최대 보유 수 체크
+        if (_equippedWeapons.Count >= MaxWeaponCount)
+        {
+            Debug.Log("Maximum weapon count reached");
+            return;
+        }
+
         this.gameObject.GetComponent<PlayerExpMagnetController>().SetStatus();
+        
         // 2. 없다면 → 팩토리로 생성, 플레이어 자식으로 붙이고 리스트에 추가
         var weapon = AllManager.instance.WeaponFactory.Create(type, this.transform);
         if (weapon == null)
