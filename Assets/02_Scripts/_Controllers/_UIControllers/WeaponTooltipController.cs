@@ -12,6 +12,15 @@ public class WeaponTooltipController : MonoBehaviour
 
     private WeaponSelectionUIController _cardInstance;
 
+    private void EnsureCardSetup()
+    {
+        if (_cardInstance == null) return;
+        var cg = _cardInstance.GetComponent<CanvasGroup>();
+        if (cg == null) cg = _cardInstance.gameObject.AddComponent<CanvasGroup>();
+        cg.interactable = false;
+        cg.blocksRaycasts = false;
+    }
+
     /// <summary>
     /// 지정된 무기의 스탯을 카드에 표시하고 화면에 띄웁니다.
     /// </summary>
@@ -24,6 +33,11 @@ public class WeaponTooltipController : MonoBehaviour
         if (_cardInstance == null)
         {
             _cardInstance = Instantiate(_cardPrefab, transform);
+            EnsureCardSetup();
+        }
+        else
+        {
+            EnsureCardSetup();
         }
 
         _cardInstance.gameObject.SetActive(true);
@@ -31,7 +45,14 @@ public class WeaponTooltipController : MonoBehaviour
 
         Vector3 pos = screenPos;
         pos.y -= 20f; // 마우스 아래쪽에 배치
-        _cardInstance.GetComponent<RectTransform>().position = pos;
+
+        var rect = _cardInstance.GetComponent<RectTransform>();
+        float halfW = rect.rect.width * rect.lossyScale.x * 0.5f;
+        float halfH = rect.rect.height * rect.lossyScale.y * 0.5f;
+        pos.x = Mathf.Clamp(pos.x, halfW, Screen.width - halfW);
+        pos.y = Mathf.Clamp(pos.y, halfH, Screen.height - halfH);
+
+        rect.position = pos;
     }
 
     /// <summary>
