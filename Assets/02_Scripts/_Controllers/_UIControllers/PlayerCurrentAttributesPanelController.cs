@@ -9,8 +9,8 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
 {
-    [TabGroup("UI")][Tooltip("무기 아이콘을 표시할 이미지들 (최대 5개)")]
-    [SerializeField] private List<Image> _weaponImages = new List<Image>();
+    [TabGroup("UI")][Tooltip("무기 아이콘을 표시할 이미지들 (최대 5개)")][SerializeField] private List<Image> _weaponImages = new List<Image>();
+    [TabGroup("UI")][Tooltip("악세서리 아이콘을 표시할 이미지들 (최대 5개)")][SerializeField] private List<Image> _accImages = new List<Image>();
 
     [TabGroup("UI")][Tooltip("플레이어 체력")][SerializeField]
     private TextMeshProUGUI _healthText;
@@ -41,9 +41,10 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
     [TabGroup("UI")][Tooltip("치명타 확률")][SerializeField]
     private TextMeshProUGUI _criticalChanceText;
 
-    private PlayerUnit _player;                             // 플레이어 오브젝트
+    private UnitBase _player;                             // 플레이어 오브젝트 
     private AttackStatsProvider _statsProvider;             // 공격 스탯 계산기
-    private IUnitAttribute<PlayerableAttribute> _unitAttributes;  // 플레이어 스탯 접근용
+    private IUnitAttribute<UnitAttribute> _unitAttributes;  // 플레이어 스탯 접근용
+    private IUnitAttribute<PlayerableAttribute> _playerAttributes;  // 플레이어 스탯 접근용
 
     /// <summary>
     /// 패널에서 사용할 모든 참조를 초기화합니다.
@@ -52,7 +53,8 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
     {
         _player = AllManager.instance.GamemodeManager.Player.GetComponent<PlayerUnit>();
         _statsProvider = _player.GetComponent<AttackStatsProvider>();
-        _unitAttributes = _player.GetComponent<IUnitAttribute<PlayerableAttribute>>();
+        _unitAttributes = _player.GetComponent<IUnitAttribute<UnitAttribute>>();
+        _playerAttributes = _player.GetComponent<IUnitAttribute<PlayerableAttribute>>();
         UpdatePanel();
     }
 
@@ -63,7 +65,9 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
     {
         if (_player == null) return;
 
-        var weapons = _player.EquippedWeapons;
+        PlayerUnit playerUnit = _player as PlayerUnit;
+
+        var weapons = playerUnit.EquippedWeapons;
         if (_weaponImages != null)
         {
             for (int i = 0; i < _weaponImages.Count; i++)
@@ -89,12 +93,12 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
         if (_statsProvider != null && _unitAttributes != null)
         {
             var attr = _unitAttributes.Attributes;
-
-            _healthText?.SetText($"{attr.UnitCurrentHealth:0}/{attr.UnitMaxHealth:0}");
+            var playerAttr = playerUnit.Attributes;
+            _healthText?.SetText($"{attr.UnitHealth:0}/{attr.UnitMaxHealth:0}");
             _defenseText?.SetText($"{attr.UnitDefense:0.##}");
             _moveSpeedText?.SetText($"{attr.UnitMoveSpeed:0.##}");
-            _luckText?.SetText($"{attr.UnitLuck:0.##}");
-            _getExpRangeText?.SetText($"{attr.PlayerGetExpRange:0.##}");
+            _luckText?.SetText($"{playerAttr.UnitLuck:0.##}");
+            _getExpRangeText?.SetText($"{playerAttr.PlayerGetExpRange:0.##}");
             _baseDamageText?.SetText($"{_statsProvider.AttackPower:0.##}");
             _attackSpeedText?.SetText($"{_statsProvider.AttackSpeed:0.##}");
             _attackRangeText?.SetText($"{_statsProvider.AttackRange:0.##}");
