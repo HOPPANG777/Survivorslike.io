@@ -99,6 +99,7 @@ public class ProjectileFactory : SerializedMonoBehaviour, IProjectileFactory
             _activeProjectiles.Remove(projectile);
         }
 
+        AllManager.instance.CollisionManager.UnregisterCollidable(projectile);
         projectile.gameObject.SetActive(false);
         _pool.Return(projectile.gameObject);
     }
@@ -110,6 +111,7 @@ public class ProjectileFactory : SerializedMonoBehaviour, IProjectileFactory
             var unit = _activeProjectiles[i];
             if (unit != null)
             {
+                AllManager.instance.CollisionManager.UnregisterCollidable(unit);
                 unit.gameObject.SetActive(false);
                 _pool.Return(unit.gameObject);
             }

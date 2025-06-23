@@ -96,6 +96,7 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
             _uiFactory.Release(bar.gameObject);
             _unitBars.Remove(unit);
         }
+        AllManager.instance.CollisionManager.UnregisterCollidable(unit);
         unit.gameObject.SetActive(false);
         _pool.Return(unit.gameObject);
     }
@@ -112,6 +113,7 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
                     _uiFactory.Release(bar.gameObject);
                     _unitBars.Remove(unit);
                 }
+                AllManager.instance.CollisionManager.UnregisterCollidable(unit);
                 unit.gameObject.SetActive(false);
                 _pool.Return(unit.gameObject);
             }
