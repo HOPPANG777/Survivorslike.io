@@ -70,6 +70,15 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
             }
         }
 
+        if (unit is BossUnit && unit is IUnitAttribute<UnitAttribute> bossAttr)
+        {
+            var bossBar = AllManager.instance.UIManager.BossCurrentHealthBarController;
+            if (bossBar != null)
+            {
+                bossBar.Bind(bossAttr);
+            }
+        }
+
         return unit;
     }
 

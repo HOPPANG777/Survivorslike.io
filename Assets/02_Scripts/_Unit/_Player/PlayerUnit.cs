@@ -96,7 +96,6 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
     public override void Hitted(float damageValue)
     {
         base.Hitted(damageValue);
-        AllManager.instance.UIManager.PlayerCurrentHealthBarController.UpdatePlayerHealthBarImage(base.Attributes.UnitCurrentHealth / base.Attributes.UnitMaxHealth);
         var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
         if (panel != null) panel.UpdatePanel();
     }
