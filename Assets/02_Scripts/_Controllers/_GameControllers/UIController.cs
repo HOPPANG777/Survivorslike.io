@@ -9,8 +9,8 @@ public class UIController : MonoBehaviour
     [TabGroup("Controller")][Tooltip("타이머 컨트롤러")][SerializeField] private IngameClockController _ingameClockController;
     public IngameClockController IngameClockController { get { return _ingameClockController; } }
 
-    [TabGroup("Controller")][Tooltip("보스 체력 바 컨트롤러")][SerializeField] private BossCurrentHealthBarController _playerCurrentHealthBarController;
-    public BossCurrentHealthBarController BossCurrentHealthBarController { get { return _playerCurrentHealthBarController; } }
+    [TabGroup("Controller")][Tooltip("보스 체력 바 컨트롤러")][SerializeField] private BossCurrentHealthBarController _bossCurrentHealthBarController;
+    public BossCurrentHealthBarController BossCurrentHealthBarController { get { return _bossCurrentHealthBarController; } }
 
     [TabGroup("Controller")][Tooltip("플레이어 경험치 바 컨트롤러")][SerializeField] private PlayerCurrentExpBarController _playerCurrentExpBarController;
     public PlayerCurrentExpBarController PlayerCurrentExpBarController { get { return _playerCurrentExpBarController; } }
