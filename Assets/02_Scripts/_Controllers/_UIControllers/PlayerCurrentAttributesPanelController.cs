@@ -12,9 +12,8 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
 {
     [TabGroup("UI")][Tooltip("무기 아이콘을 표시할 이미지들 (최대 5개)")][SerializeField] private List<Image> _weaponImages = new List<Image>();
     [TabGroup("UI")][Tooltip("악세서리 아이콘을 표시할 이미지들 (최대 5개)")][SerializeField] private List<Image> _accImages = new List<Image>();
-
-    [TabGroup("UI")][Tooltip("무기 정보를 표시할 툴팁 컨트롤러")][SerializeField]
-    private WeaponTooltipController _weaponTooltipController;
+    [TabGroup("UI")][Tooltip("무기 레벨을 표시할 텍스트들 (최대 5개)")][SerializeField] private List<TextMeshProUGUI> _weaponLevelTexts = new List<TextMeshProUGUI>();
+    [TabGroup("UI")][Tooltip("무기 정보를 표시할 툴팁 컨트롤러")][SerializeField] private WeaponTooltipController _weaponTooltipController;
 
     [TabGroup("UI")][Tooltip("플레이어 체력")][SerializeField]
     private TextMeshProUGUI _healthText;
@@ -91,6 +90,14 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
                         if (hover == null) hover = img.gameObject.AddComponent<WeaponImageHoverHandler>();
                         hover.Init(weapon, _weaponTooltipController);
                     }
+                    if (_weaponLevelTexts != null && i < _weaponLevelTexts.Count)
+                    {
+                        var lvlTxt = _weaponLevelTexts[i];
+                        if (lvlTxt != null)
+                        {
+                            lvlTxt.text = $"Lv.{weapon.CurrentLevel + 1}";
+                        }
+                    }
                 }
                 else if (_weaponImages[i] != null)
                 {
@@ -98,6 +105,10 @@ public class PlayerCurrentAttributesPanelController : MonoBehaviour, ISetStatus
                     _weaponImages[i].enabled = false;
                     var hover = _weaponImages[i].GetComponent<WeaponImageHoverHandler>();
                     if (hover != null) Destroy(hover);
+                    if (_weaponLevelTexts != null && i < _weaponLevelTexts.Count && _weaponLevelTexts[i] != null)
+                    {
+                        _weaponLevelTexts[i].text = string.Empty;
+                    }
                 }
             }
         }
