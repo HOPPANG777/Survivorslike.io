@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, ISpeakable
 {
-    [TabGroup("Item Base")][Tooltip("Item SO µ¥ÀÌÅÍ")][SerializeField] private ItemBaseSO _itemData;
+    [TabGroup("Item Base")][Tooltip("Item SO ë°ì´í„°")][SerializeField] private ItemBaseSO _itemData;
     public ItemBaseSO ItemData { get { return _itemData; } set { _itemData = value; } }
 
     [TabGroup("Item Base")][Tooltip("SpriteRenderer")][SerializeField] private SpriteRenderer _renderer;
@@ -12,20 +12,21 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
     public float CollisionRadius { get { return _itemData.CollisionRadius; } set { /*noop*/ } }
 
     [Header("Sound")]
-    // »ç¿ëÇÒ »ç¿îµå ÀÌ¸§
-    [TabGroup("Sound")][Tooltip("»ç¿îµå ÀÌ¸§")][SerializeField] protected string _soundName;
-    public string SoundName { get { return _soundName; } }
-
-    // »ç¿ëÇÒ »ç¿îµå Å¸ÀÔ
-    [TabGroup("Sound")][Tooltip("»ç¿îµå Å¸ÀÔ")][SerializeField] protected SoundType _soundType;
+    private bool _isAttracting;
+        _isAttracting = false;
+        if (dist <= CurrentAttractRange) _isAttracting = true;
+        if (!_isAttracting) return;
+        this.transform.position += dir * _itemData.AttractSpeed * Time.deltaTime;
+        dist = Vector3.Distance(this.transform.position, _player.transform.position);
+    [TabGroup("Sound")][Tooltip("ì‚¬ìš´ë“œ íƒ€ì…")][SerializeField] protected SoundType _soundType;
     public SoundType SoundType { get { return _soundType; } }
 
-    // »ç¿ëÇÒ ¿Àµğ¿À Å¬¸³
-    [TabGroup("Sound")][Tooltip("¿Àµğ¿À Å¬¸³")][SerializeField] protected AudioClip _soundClip;
+    // ì‚¬ìš©í•  ì˜¤ë””ì˜¤ í´ë¦½
+    [TabGroup("Sound")][Tooltip("ì˜¤ë””ì˜¤ í´ë¦½")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
-    // ¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼
-    [TabGroup("Sound")][Tooltip("¿Àµğ¿À¸¦ Ãâ·ÂÇÒ ÁÖÃ¼")][SerializeField] protected AudioSource _soundSource;
+    // ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´
+    [TabGroup("Sound")][Tooltip("ì˜¤ë””ì˜¤ë¥¼ ì¶œë ¥í•  ì£¼ì²´")][SerializeField] protected AudioSource _soundSource;
     public AudioSource SoundSource { get { return _soundSource; } }
 
     [TabGroup("Item Base")][Tooltip("Player")][SerializeField] private GameObject _player;
@@ -56,7 +57,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
 
     public virtual void SetStatus()
     {
-        // SO·ÎºÎÅÍ ÇÊµå ÃÊ±âÈ­
+        // SOë¡œë¶€í„° í•„ë“œ ì´ˆê¸°í™”
         _itemData.SetData(_itemData);
         _renderer = GetComponent<SpriteRenderer>();
 
