@@ -44,7 +44,7 @@ public class WeaponTooltipController : MonoBehaviour
         _cardInstance.SetData(weapon.WeaponType, weapon.WeaponName, BuildStatList(weapon.Attributes));
 
         Vector3 pos = screenPos;
-        pos.y -= 20f; // 마우스 아래쪽에 배치
+        pos.y -= 30f; // 마우스 아래쪽에 배치
 
         var rect = _cardInstance.GetComponent<RectTransform>();
         float halfW = rect.rect.width * rect.lossyScale.x * 0.5f;
