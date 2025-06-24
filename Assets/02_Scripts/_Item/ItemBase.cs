@@ -33,6 +33,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
 
     private Vector3 _initialScale;
     //private float _pickupDistance = 0.1f;
+    private bool _isAttracting;
 
     [TabGroup("Item Base")][Tooltip("BaseAttractRange")][SerializeField] private float _baseAttractRange;
     protected virtual float CurrentAttractRange { get { return _baseAttractRange; } }    
@@ -61,6 +62,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
         _renderer = GetComponent<SpriteRenderer>();
 
         _initialScale = Vector3.one;
+        _isAttracting = false;
 
         var go = AllManager.instance.GamemodeManager.Player;
         if (go != null) _player = go.gameObject;
@@ -103,12 +105,16 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
         if (_player == null) return;
 
         float dist = Vector3.Distance(this.transform.position, _player.transform.position);
-        if (dist > CurrentAttractRange) return;
+        if (dist <= CurrentAttractRange) _isAttracting = true;
+        if (!_isAttracting) return;
 
         Vector3 dir = (_player.transform.position - this.transform.position).normalized;
-        this.transform.position += dir * 0.05f;
+        //this.transform.position += dir * 0.05f;
 
-        if (this.transform.localScale.x > 0.01f) this.transform.localScale -= Vector3.one * Time.deltaTime * 5.0f;
+        //if (this.transform.localScale.x > 0.01f) this.transform.localScale -= Vector3.one * Time.deltaTime * 5.0f;
+
+        this.transform.position += dir * _itemData.AttractSpeed * Time.deltaTime;
+        dist = Vector3.Distance(this.transform.position, _player.transform.position);
 
         if (dist < 0.1f) Collect();
     }
