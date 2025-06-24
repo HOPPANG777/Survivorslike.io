@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.5, y: 0.3}
+  m_SizeDelta: {x: 1.3, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1226321549558594101
 CanvasRenderer:
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 150
+  m_PixelsPerUnitMultiplier: 310
 --- !u!114 &5630646488376919189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,8 +90,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fillImage: {fileID: 3838299517705772442}
-  _offset: {x: 0, y: -1, z: 0}
+  _offset: {x: 0, y: -0.7, z: 0}
   _uiCamera: {fileID: 0}
+  _canvasGroup: {fileID: 0}
 --- !u!1 &2753174630612869724
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +128,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.43, y: 0.24}
+  m_SizeDelta: {x: 1.27, y: 0.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5489359239506270783
 CanvasRenderer:
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.80784315}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

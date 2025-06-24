@@ -286,8 +286,8 @@ MonoBehaviour:
   _soundType: 0
   _soundClip: {fileID: 0}
   _soundSource: {fileID: 0}
-  _afterImageInterval: 0.05
-  _afterImageDuration: 1
+  _afterImageInterval: 0.01
+  _afterImageDuration: 0.2
 --- !u!114 &697534953352500139
 MonoBehaviour:
   m_ObjectHideFlags: 0

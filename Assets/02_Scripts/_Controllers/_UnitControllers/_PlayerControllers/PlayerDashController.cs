@@ -42,7 +42,7 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable, ISetSt
     private float _dashTimer;
 
     [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageInterval = 0.05f;
-    [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageDuration = 1.0f;
+    [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageDuration = 10.0f;
     private float _afterImageTimer;
     private SpriteRenderer _playerRenderer;
 

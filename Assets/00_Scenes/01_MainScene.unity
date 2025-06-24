@@ -81897,16 +81897,16 @@ MonoBehaviour:
     Interval: 60
     MaxCount: 200
     Pattern: 2
-    SpawnAmount: 30
+    SpawnAmount: 50
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 141d348b8d494774387090185bd1e19c, type: 2}
     StartTime: 0
     EndTime: 300
-    Interval: 90
+    Interval: 120
     MaxCount: 200
     Pattern: 1
-    SpawnAmount: 10
+    SpawnAmount: 30
     Timer: 0
     SpawnedCount: 0
   _bossSpawnTime: 301

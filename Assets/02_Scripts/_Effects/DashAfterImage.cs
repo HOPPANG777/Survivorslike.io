@@ -14,6 +14,8 @@ public class DashAfterImage : MonoBehaviour
         _renderer.size = size; // Adjust size as needed
         _renderer.sortingOrder = sortingOrder;
         _renderer.color = color;
+        //var brightColor = new Color(Mathf.Min(color.r * 1.5f, 1f), Mathf.Min(color.g * 1.5f, 1f), Mathf.Min(color.b * 1.5f, 1f), 1f);
+        //_renderer.color = brightColor;
         _duration = duration;
         _timer = 0f;
     }

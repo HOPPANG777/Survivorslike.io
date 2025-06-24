@@ -272,7 +272,7 @@ MonoBehaviour:
   _soundType: 2
   _soundClip: {fileID: 0}
   _soundSource: {fileID: 0}
-  _afterImageInterval: 0.05
+  _afterImageInterval: 0.01
   _afterImageDuration: 0.2
 --- !u!114 &3829378165992001487
 MonoBehaviour:
