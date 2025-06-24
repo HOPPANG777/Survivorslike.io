@@ -62,6 +62,11 @@ public class GameModeController : MonoBehaviour, IGameMode
                     TileMapController.Move();
                     CameraController.Move();
                     AllManager.instance.UIManager.IngameClockController.UpdateTimer(_gameTime);
+
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        GamePause();
+                    }
                 }
                 break;
             case GameModeType.GAMEMODE_GAMEPAUSE:
