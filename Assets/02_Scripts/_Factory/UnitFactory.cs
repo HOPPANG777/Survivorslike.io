@@ -12,8 +12,10 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
     private IUIFactory _uiFactory;
     private bool _initialized;
 
+    // 현재 활성화된 유닛 리스트
     private readonly List<UnitBase> _activeUnits = new List<UnitBase>();
-    private readonly Dictionary<UnitBase, UnitHealthBarController> _unitBars = new Dictionary<UnitBase, UnitHealthBarController>();
+    // 생성된 체력 바 UI를 관리하기 위한 딕셔너리
+    private readonly Dictionary<UnitBase, IHealthBarUI> _unitBars = new Dictionary<UnitBase, IHealthBarUI>();
 
     private void Start()
     {
@@ -54,17 +56,19 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
         _activeUnits.Add(unit);
         if (data is UnitBaseSO && !(unit is ContainerUnit))
         {
+            // 플레이어 여부에 따라 다른 UI 타입을 사용한다
             var parent = AllManager.instance.UIPoolCanvas != null ? AllManager.instance.UIPoolCanvas.CanvasRoot : null;
-            var uiGo = _uiFactory.Create(UIType.UI_UNIT_HEALTHBAR, parent);
+            UIType barType = unit is PlayerUnit ? UIType.UI_PLAYER_HEALTHBAR : UIType.UI_UNIT_HEALTHBAR;
+            var uiGo = _uiFactory.Create(barType, parent);
             if (uiGo != null)
             {
-                var bar = uiGo.GetComponent<UnitHealthBarController>();
+                var bar = uiGo.GetComponent<IHealthBarUI>();
                 var pos = unit as IPositionProvider;
                 var attr = unit as IUnitAttribute<UnitAttribute>;
                 if (bar != null && pos != null && attr != null)
                 {
-                    if (unit is PlayerUnit) bar.Bind(pos, attr, new Color(0, 255, 0, 200));
-                    else bar.Bind(pos, attr, new Color(255, 0, 0, 200));
+                    Color color = unit is PlayerUnit ? new Color(0, 255, 0, 200) : new Color(255, 0, 0, 200);
+                    bar.Bind(pos, attr, color);
                     _unitBars[unit] = bar;
                 }
             }
@@ -93,7 +97,11 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
 
         if (_unitBars.TryGetValue(unit, out var bar))
         {
-            _uiFactory.Release(bar.gameObject);
+            // 인터페이스로 받은 객체가 MonoBehaviour라면 게임오브젝트 반환을 진행
+            if (bar is MonoBehaviour mb)
+            {
+                _uiFactory.Release(mb.gameObject);
+            }
             _unitBars.Remove(unit);
         }
         AllManager.instance.CollisionManager.UnregisterCollidable(unit);
@@ -110,7 +118,10 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
             {
                 if (_unitBars.TryGetValue(unit, out var bar))
                 {
-                    _uiFactory.Release(bar.gameObject);
+                    if (bar is MonoBehaviour mb)
+                    {
+                        _uiFactory.Release(mb.gameObject);
+                    }
                     _unitBars.Remove(unit);
                 }
                 AllManager.instance.CollisionManager.UnregisterCollidable(unit);
