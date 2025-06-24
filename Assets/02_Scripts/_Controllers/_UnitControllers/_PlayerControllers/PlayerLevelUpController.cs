@@ -14,6 +14,7 @@ public class PlayerLevelUpController : MonoBehaviour, ISetStatus
     private IUnitAttribute<PlayerableAttribute> _playerAttr;
     private PlayerCurrentExpBarController _expBar;
     private PlayerCurrentLevelCountController _levelCounter;
+    private int _pendingLevelUps;
 
     public void SetStatus()
     {
@@ -21,6 +22,7 @@ public class PlayerLevelUpController : MonoBehaviour, ISetStatus
         _playerAttr = GetComponent<IUnitAttribute<PlayerableAttribute>>();
         _expBar = AllManager.instance.UIManager.PlayerCurrentExpBarController;
         _levelCounter = AllManager.instance.UIManager.PlayerCurrentLevelCountController;
+        _pendingLevelUps = 0;
         UpdateUI();
     }
 
@@ -39,18 +41,19 @@ public class PlayerLevelUpController : MonoBehaviour, ISetStatus
         // ② 필요 EXP 계산
         int needed = GetExpForLevel(curLevel);
 
+        int gained = 0;
         // ③ 레벨업 가능할 때까지 반복
         while (curExp >= needed)
         {
             curExp -= needed;
             curLevel++;
-
-            // 레벨업 이펙트/UI
-            AllManager.instance.UIManager.LevelUpPage();
+            gained++;
 
             // 다음 레벨 필요 EXP 갱신
             needed = GetExpForLevel(curLevel);
         }
+
+        _pendingLevelUps += gained;
 
         // ⑤ struct 수정값 반영
         pAttr.PlayerLevel = curLevel;
@@ -61,6 +64,8 @@ public class PlayerLevelUpController : MonoBehaviour, ISetStatus
 
         // ⑥ UI 갱신
         UpdateUI();
+
+        TryOpenLevelUpPage();
     }
 
     /// <summary>레벨ℓ → ℓ+1에 필요한 EXP</summary>
@@ -82,5 +87,19 @@ public class PlayerLevelUpController : MonoBehaviour, ISetStatus
         _levelCounter.UpdateLevelCounter(level);
         var panel = AllManager.instance.UIManager.PlayerCurrentAttributesPanelController;
         if (panel != null) panel.UpdatePanel();
+    }
+
+    private void TryOpenLevelUpPage()
+    {
+        if (_pendingLevelUps > 0 && AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_LEVELUP)
+        {
+            _pendingLevelUps--;
+            AllManager.instance.UIManager.LevelUpPage();
+        }
+    }
+
+    public void OnLevelUpSelectionComplete()
+    {
+        TryOpenLevelUpPage();
     }
 }

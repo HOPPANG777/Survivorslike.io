@@ -105,6 +105,16 @@ public class UIController : MonoBehaviour
         _backManager.OverlayOut(_pageList[5], SlideDirection.SLIDE_LEFT);
         _playerCurrentExpBarController.RevertPlayerCurreontExpBar();
         AllManager.instance.GamemodeManager.GameIngame();  // 게임 모드 복원
+
+        var player = AllManager.instance.GamemodeManager.Player;
+        if (player != null)
+        {
+            var lvl = player.GetComponent<PlayerLevelUpController>();
+            if (lvl != null)
+            {
+                lvl.OnLevelUpSelectionComplete();
+            }
+        }
     }
 
     public void GameOverPage()
