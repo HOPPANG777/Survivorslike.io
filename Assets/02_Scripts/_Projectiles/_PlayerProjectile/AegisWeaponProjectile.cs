@@ -1,8 +1,12 @@
 using UnityEngine;
 
-// 에이직 무기의 방패 투사체
-
-public class AegisWeaponProjectile : ProjectileBase
+//------------------------------------------------------------------------------
+// AegisWeaponProjectile
+//------------------------------------------------------------------------------
+// 원형으로 회전하는 방패 투사체. 대쉬 잔상과 같은 효과를 추가한다.
+// 모든 변수와 함수에 한글 주석을 달아 이해를 돕는다.
+//------------------------------------------------------------------------------
+public class AegisWeaponProjectile : ProjectileBase, IAfterImageTarget
 {
     // 생성/소멸 시 사용되는 스케일 애니메이션 지속 시간
     private const float ScaleDuration = 0.1f;
@@ -24,9 +28,23 @@ public class AegisWeaponProjectile : ProjectileBase
     // 축소 시작 시점
     private float _shrinkStartTime;
 
+    // 잔상 생성 주기
+    [SerializeField] private float _afterImageInterval = 0.05f;
+    // 잔상 유지 시간
+    [SerializeField] private float _afterImageDuration = 0.2f;
+    // 잔상에 사용할 렌더러
+    [SerializeField] private SpriteRenderer _renderer;
+
     public int Index { get; private set; }
 
     public int MaxCount { get; private set; }
+
+    // 컴포넌트 초기화
+    private void Awake()
+    {
+        if (_renderer == null) _renderer = GetComponent<SpriteRenderer>();
+        gameObject.AddComponent<ProjectileAfterImageSpawner>();
+    }
 
     // 투사체 초기 설정
     public void Initialize(int index, int maxCount, float spawnTime, float lifeTime)
@@ -144,4 +162,12 @@ public class AegisWeaponProjectile : ProjectileBase
     {
         base.Dead();
     }
+
+    // IAfterImageTarget 구현 -----------------------------
+    /// <summary>잔상에 사용할 렌더러 반환</summary>
+    public SpriteRenderer Renderer => _renderer;
+    /// <summary>잔상 생성 주기 반환</summary>
+    public float AfterImageInterval => _afterImageInterval;
+    /// <summary>잔상 유지 시간 반환</summary>
+    public float AfterImageDuration => _afterImageDuration;
 }
