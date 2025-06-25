@@ -41,18 +41,19 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
     virtual protected void Update()
     {
         if (AllManager.instance.GamemodeManager.Player == null) return;
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return; 
 
         PlayerGetItem();
     }
 
     public virtual void SoundPlay()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public virtual void SoundStop()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public virtual void SetStatus()

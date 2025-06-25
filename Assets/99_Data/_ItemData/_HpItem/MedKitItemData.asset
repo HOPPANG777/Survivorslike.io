@@ -15,8 +15,8 @@ MonoBehaviour:
   _itemName: MedKit
   _icon: {fileID: 21300000, guid: 4159d1723ac3b324a8a400032be02c03, type: 3}
   _collisionRadius: 1
-  _attractRange: 1
-  _attractSpeed: 1
+  _attractRange: 0.5
+  _attractSpeed: 10
   _soundName: GetMedKitSound
   _soundType: 2
   _soundClip: {fileID: 0}

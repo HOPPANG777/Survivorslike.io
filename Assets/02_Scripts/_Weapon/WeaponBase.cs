@@ -62,12 +62,12 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public virtual void Shoot()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public virtual void Melee()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public virtual void ReleaseProjectile()
@@ -92,14 +92,14 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
 
     public virtual void SoundPlay()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
     
     //나선 계단 장수풍뎅이 폐허의 마을 무화과 타르트 장수풍뎅이 돌로로사의 길 장수풍뎅이 특이점 지오토 엔젤 자양화 장수풍뎅이 특이점 비밀의 황제
     
     public virtual void SoundStop()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public virtual void SetStatus()
@@ -128,7 +128,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
     }
 
     public virtual void Dead()
-    { 
+    {
         isDead = true;
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
         gameObject.SetActive(false);

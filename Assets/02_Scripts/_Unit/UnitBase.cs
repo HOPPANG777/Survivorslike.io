@@ -54,7 +54,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     [TabGroup("Unit Dead")][Tooltip("죽었는지 확인")][SerializeField] private bool isDead = false;
     public bool IsDead { get { return isDead; } }
 
-    [TabGroup("Unit Base")][Tooltip("피격 후 무적 지속 시간 (초)")][SerializeField] protected float _invincibleDuration = 0.1f;
+    [TabGroup("Unit Base")][Tooltip("피격 후 무적 지속 시간 (초)")][SerializeField] protected float _invincibleDuration = 0.01f;
 
     // 다음에 맞을 수 있는 시점 (Time.time 기준)
     private float _nextHittableTime = 0f;
@@ -73,12 +73,12 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
 
     public void SoundPlay()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public void SoundStop()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public virtual void SetStatus()
@@ -137,6 +137,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
 
     public virtual void CheckDead()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (this._unitAttribute.UnitCurrentHealth <= 0)
         {
             this._unitAttribute.UnitCurrentHealth = 0;

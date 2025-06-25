@@ -92,12 +92,12 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
 
     public virtual void SoundPlay()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     public virtual void SoundStop()
     {
-
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     /// <summary>
@@ -167,7 +167,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     /// </summary>
     protected virtual void Move()
     {
-        
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
     }
 
     /// <summary>

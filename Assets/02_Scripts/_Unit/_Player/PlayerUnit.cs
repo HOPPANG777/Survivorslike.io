@@ -86,6 +86,7 @@ public class PlayerUnit : UnitBase, IPlayerAttribute, IWeaponHolder, IPlayerHold
         _playerAttribute = _playerData.PlayerAttribute;
         _attackStatsProvider = this.gameObject.GetComponent<AttackStatsProvider>();
         _attackStatsProvider.SetStatus();
+        _invincibleDuration = 0.1f; // 플레이어는 무적 시간 0.1초로 설정
         this.gameObject.GetComponent<PlayerDashController>().SetStatus();
         this.gameObject.GetComponent<PlayerGetExpController>().SetStatus();
         this.gameObject.GetComponent<PlayerLevelUpController>().SetStatus();

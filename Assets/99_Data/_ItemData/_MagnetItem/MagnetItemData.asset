@@ -15,8 +15,8 @@ MonoBehaviour:
   _itemName: Magnet
   _icon: {fileID: 21300000, guid: 9c76ba38093c6384e8bbe8ce754cd04d, type: 3}
   _collisionRadius: 1
-  _attractRange: 1
-  _attractSpeed: 1
+  _attractRange: 0.5
+  _attractSpeed: 10
   _soundName: GetMagnetSound
   _soundType: 2
   _soundClip: {fileID: 0}
