@@ -94,20 +94,25 @@ public class SniperWeapon : WeaponBase
             _pathPreview.UpdatePath(previewDir, range);
         }
 
-        if (_cooldownTimer > 0f)
+        float cooldown = _stats.GetAttackCooldown(this);
+        if (_cooldownTimer == 0f && _pathPreview != null)
         {
-            _cooldownTimer += Time.deltaTime;
-            if (_stats != null && _cooldownTimer >= _stats.GetAttackCooldown(this))
-            {
-                _cooldownTimer = 0f;
-                Shoot();
-            }
+            _pathPreview.Show();
+            _pathPreview.SetChargeProgress(0f);
         }
-        else
+
+        _cooldownTimer += Time.deltaTime;
+        if (_pathPreview != null)
         {
-            // 첫 발사는 즉시 진행
+            float ratio = Mathf.Clamp01(_cooldownTimer / cooldown);
+            _pathPreview.SetChargeProgress(ratio);
+        }
+
+        if (_cooldownTimer >= cooldown)
+        {
+            _cooldownTimer = 0f;
+            if (_pathPreview != null) _pathPreview.Hide();
             Shoot();
-            _cooldownTimer += Time.deltaTime;
         }
     }
 
