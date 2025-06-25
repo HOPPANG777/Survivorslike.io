@@ -27,7 +27,6 @@ public class SniperWeapon : WeaponBase
     private float _recoilDistance = 0.5f;
 
     // 투사체 경로 미리보기 오브젝트
-    [SerializeField]
     private GameObject _pathPreviewObj;
     private IProjectilePathPreviewer _pathPreview;
 
@@ -49,6 +48,11 @@ public class SniperWeapon : WeaponBase
         _cooldownTimer = 0f;
 
         // 경로 미리보기 초기화 및 표시
+        if (_pathPreviewObj == null)
+        {
+            _pathPreviewObj = AllManager.instance.ParticleFactory.Create(ParticleType.PARTICLE_SNIPER_PATH,
+                transform.position, Quaternion.identity);
+        }
         if (_pathPreviewObj != null)
         {
             _pathPreview = _pathPreviewObj.GetComponent<SniperPathPreview>() as IProjectilePathPreviewer;
