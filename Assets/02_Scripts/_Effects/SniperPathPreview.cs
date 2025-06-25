@@ -1,23 +1,26 @@
 using UnityEngine;
 
 /// <summary>
-/// ½º³ªÀÌÆÛ Åõ»çÃ¼ÀÇ ¿¹»ó °æ·Î¸¦ ¼±À¸·Î º¸¿©ÁÖ´Â ÄÄÆ÷³ÍÆ®
+/// ìŠ¤ë‚˜ì´í¼ ë¬´ê¸° ë°œì‚¬ ì „ ê²½ë¡œë¥¼ í‘œì‹œí•˜ëŠ” í”„ë¦¬ë·° ì´í™íŠ¸
 /// </summary>
 public class SniperPathPreview : MonoBehaviour, IProjectilePathPreviewer
 {
-    [SerializeField, Tooltip("¼±ÀÇ µÎ²²")]
+    [SerializeField, Tooltip("ë¼ì¸ ë‘ê»˜")]
     private float _lineWidth = 0.05f;
+    [SerializeField, Tooltip("ì‹œì‘ ì§€ì  ì˜¤í”„ì…‹")]
+    private float _startOffset = 0.2f;
 
     private LineRenderer _line;
     private Transform _owner;
     private float _length;
     private Vector3 _direction = Vector3.right;
     private bool _visible;
+    private float _progress;
 
-    // ÄÄÆ÷³ÍÆ® ÃÊ±â ¼³Á¤
+    // ì´ˆê¸°í™” ì‹œ ë¼ì¸ë Œë”ëŸ¬ ì„¤ì •
     private void Awake()
     {
-        _line = this.gameObject.GetComponent<LineRenderer>();
+        _line = GetComponent<LineRenderer>();
         _line.positionCount = 2;
         _line.material = new Material(Shader.Find("Sprites/Default"));
         _line.startWidth = _lineWidth;
@@ -25,46 +28,47 @@ public class SniperPathPreview : MonoBehaviour, IProjectilePathPreviewer
         _line.enabled = false;
     }
 
-    // ¹Ì¸®º¸±â ´ë»ó°ú ÃÊ±â ±æÀÌ ¼³Á¤
+    // ë¯¸ë¦¬ë³´ê¸° ëŒ€ìƒ ì„¤ì •
     public void Initialize(Transform owner)
     {
         _owner = owner;
     }
 
-    // °æ·Î °»½Å
+    // ë°©í–¥ê³¼ ê¸¸ì´ ê°±ì‹ 
     public void UpdatePath(Vector3 direction, float length)
     {
         _direction = direction.normalized;
         _length = length;
-        if (!_visible || _owner == null) return;
-
-        Vector3 start = _owner.position;
-        Vector3 end = start + _direction * _length;
-        _line.SetPosition(0, start);
-        _line.SetPosition(1, end);
     }
 
-    // ¹Ì¸®º¸±â Ç¥½Ã
+    // í”„ë¦¬ë·° í‘œì‹œ
     public void Show()
     {
         _visible = true;
+        _progress = 0f;
         _line.enabled = true;
     }
 
-    // ¹Ì¸®º¸±â ¼û±è
+    // í”„ë¦¬ë·° ìˆ¨ê¹€
     public void Hide()
     {
         _visible = false;
         _line.enabled = false;
     }
 
-    // ¸Å ÇÁ·¹ÀÓ À§Ä¡¸¦ º¸Á¤ÇÏ¿© ¼±À» À¯ÁöÇÑ´Ù
+    // ë°œì‚¬ ì¤€ë¹„ ì§„í–‰ë„ ì„¤ì • (0~1)
+    public void SetChargeProgress(float ratio)
+    {
+        _progress = Mathf.Clamp01(ratio);
+    }
+
+    // ë§¤ í”„ë ˆì„ ë¼ì¸ ê°±ì‹ 
     private void LateUpdate()
     {
         if (!_visible || _owner == null) return;
 
-        Vector3 start = _owner.position;
-        Vector3 end = start + _direction * _length;
+        Vector3 start = _owner.position + _direction * _startOffset;
+        Vector3 end = start + _direction * _length * _progress;
         _line.SetPosition(0, start);
         _line.SetPosition(1, end);
     }
