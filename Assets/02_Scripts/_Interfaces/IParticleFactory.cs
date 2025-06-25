@@ -11,5 +11,6 @@ public enum ParticleType
 {
     PARTICLE_NONE = 0,
     PARTICLE_HIT,
-    PARTICLE_DASH
+    PARTICLE_DASH,
+    PARTICLE_SNIPER_PATH
 }

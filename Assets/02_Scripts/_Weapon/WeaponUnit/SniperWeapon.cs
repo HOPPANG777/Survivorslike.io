@@ -26,6 +26,11 @@ public class SniperWeapon : WeaponBase
     [SerializeField]
     private float _recoilDistance = 0.5f;
 
+    // 투사체 경로 미리보기 오브젝트
+    [SerializeField]
+    private GameObject _pathPreviewObj;
+    private IProjectilePathPreviewer _pathPreview;
+
     //--------------------------------------------------------------------------
     // 무기 초기 설정
     //--------------------------------------------------------------------------
@@ -42,6 +47,19 @@ public class SniperWeapon : WeaponBase
         if (_directionCtrl == null && transform.parent != null) _directionCtrl = transform.parent.GetComponent<PlayerMouseDirectionController>();
 
         _cooldownTimer = 0f;
+
+        // 경로 미리보기 초기화 및 표시
+        if (_pathPreviewObj != null)
+        {
+            _pathPreview = _pathPreviewObj.GetComponent<SniperPathPreview>() as IProjectilePathPreviewer;
+            if (_pathPreview != null)
+            {
+                _pathPreview.Initialize(transform);
+                float range = _stats != null ? _stats.GetAttackRange(this) : 0f;
+                _pathPreview.UpdatePath(transform.right, range);
+                _pathPreview.Show();
+            }
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -55,6 +73,22 @@ public class SniperWeapon : WeaponBase
 
         if (_stats == null) return;
         _stats.SetTargetWeapon(this);
+
+        // 현재 방향을 이용해 미리보기 갱신
+        Vector3 previewDir = transform.right;
+        if (_directionCtrl != null)
+        {
+            _directionCtrl.Rotate();
+            if (_directionCtrl.RotationDirection.sqrMagnitude > 0f)
+            {
+                previewDir = _directionCtrl.RotationDirection;
+            }
+        }
+        if (_pathPreview != null)
+        {
+            float range = _stats.GetAttackRange(this);
+            _pathPreview.UpdatePath(previewDir, range);
+        }
 
         if (_cooldownTimer > 0f)
         {

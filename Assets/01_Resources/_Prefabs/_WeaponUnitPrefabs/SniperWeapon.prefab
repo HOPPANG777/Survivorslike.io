@@ -165,3 +165,6 @@ MonoBehaviour:
   _soundSource: {fileID: 0}
   _collisionRadius: 0
   isDead: 0
+  _projectileData: {fileID: 0}
+  _recoilDistance: 0.5
+  _pathPreviewObj: {fileID: 4850887215352301296, guid: b2dc63ddee7909e4d9a991ca2b81a453, type: 3}
