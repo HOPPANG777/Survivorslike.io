@@ -13,7 +13,7 @@ public class ProjectileAfterImageSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _target = GetComponent<IAfterImageTarget>();
+        _target = this.GetComponent<IAfterImageTarget>();
     }
 
     private void Update()

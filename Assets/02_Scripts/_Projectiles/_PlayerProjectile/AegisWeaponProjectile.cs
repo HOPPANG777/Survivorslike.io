@@ -43,7 +43,7 @@ public class AegisWeaponProjectile : ProjectileBase, IAfterImageTarget
     private void Awake()
     {
         if (_renderer == null) _renderer = GetComponent<SpriteRenderer>();
-        gameObject.AddComponent<ProjectileAfterImageSpawner>();
+        if (this.gameObject.GetComponent<ProjectileAfterImageSpawner>() == null) this.gameObject.AddComponent<ProjectileAfterImageSpawner>();
     }
 
     // 투사체 초기 설정
