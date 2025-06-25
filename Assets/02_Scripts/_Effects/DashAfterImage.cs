@@ -6,7 +6,7 @@ public class DashAfterImage : MonoBehaviour
     private float _duration;
     private float _timer;
 
-    public void Initialize(Sprite sprite, Color color, int sortingOrder, float duration, Vector2 size)
+    public void Initialize(Sprite sprite, Color color, int sortingOrder, float duration, Vector2 size, Quaternion rotation)
     {
         _renderer = gameObject.AddComponent<SpriteRenderer>();
         _renderer.sprite = sprite;
@@ -14,6 +14,7 @@ public class DashAfterImage : MonoBehaviour
         _renderer.size = size; // Adjust size as needed
         _renderer.sortingOrder = sortingOrder;
         _renderer.color = color;
+        _renderer.transform.rotation = rotation; // Set rotation if needed
         //var brightColor = new Color(Mathf.Min(color.r * 1.5f, 1f), Mathf.Min(color.g * 1.5f, 1f), Mathf.Min(color.b * 1.5f, 1f), 1f);
         //_renderer.color = brightColor;
         _duration = duration;

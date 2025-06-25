@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 //==============================================================================
 // 보스 전용 대쉬 컨트롤러. 연속 대쉬를 지원한다.
 //==============================================================================
-public class BossDashController : MonoBehaviour, IDashable, ISetStatus
+public class BossDashController : MonoBehaviour, IDashable, ISetStatus, ISpeakable
 {
     [TabGroup("Target")][SerializeField] private GameObject _boss;
     public GameObject Boss { get { return _boss; } }
@@ -14,18 +14,34 @@ public class BossDashController : MonoBehaviour, IDashable, ISetStatus
     [TabGroup("Target")][SerializeField] private IMoveable _bossDirection;
     public IMoveable BossDirection { get { return _bossDirection; } }
 
-    [TabGroup("Dash")][SerializeField] private int _dashDistance;
-    public float DashDistance { get { return _dashDistance / 100f; } set { _dashDistance = (int)value; } }
+    [TabGroup("Dash")][SerializeField] private float _dashDistance;
+    public float DashDistance { get { return _dashDistance; } set { _dashDistance = value; } }
 
-    [TabGroup("Dash")][SerializeField] private int _dashSpeed;
-    public float DashSpeed { get { return _dashSpeed / 100f; } set { _dashSpeed = (int)value; } }
+    [TabGroup("Dash")][SerializeField] private float _dashSpeed;
+    public float DashSpeed { get { return _dashSpeed; } set { _dashSpeed = value; } }
 
-    [TabGroup("Dash")][SerializeField] private int _dashCooldown;
-    public float DashCooldown { get { return _dashCooldown / 100f; } set { _dashCooldown = (int)value; } }
+    [TabGroup("Dash")][SerializeField] private float _dashCooldown;
+    public float DashCooldown { get { return _dashCooldown; } set { _dashCooldown = value; } }
 
     // 연속 대쉬 횟수
     [TabGroup("Dash")][SerializeField] private int _consecutiveDash = 3;
     public int ConsecutiveDash { get { return _consecutiveDash; } set { _consecutiveDash = value; } }
+
+    // 사용할 사운드 이름
+    [TabGroup("Dash Sound")][Tooltip("사운드 이름")][SerializeField] protected string _soundName;
+    public string SoundName { get { return _soundName; } }
+
+    // 사용할 사운드 타입
+    [TabGroup("Dash Sound")][Tooltip("사운드 타입")][SerializeField] protected SoundType _soundType;
+    public SoundType SoundType { get { return _soundType; } }
+
+    // 사용할 오디오 클립
+    [TabGroup("Dash Sound")][Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
+    public AudioClip SoundClip { get { return _soundClip; } }
+
+    // 오디오를 출력할 주체
+    [TabGroup("Dash Sound")][Tooltip("오디오를 출력할 주체")][SerializeField] protected AudioSource _soundSource;
+    public AudioSource SoundSource { get { return _soundSource; } }
 
     private bool _isDashing;
     private Vector3 _dashDir;
@@ -37,6 +53,11 @@ public class BossDashController : MonoBehaviour, IDashable, ISetStatus
     [TabGroup("Dash AfterImage")][SerializeField] private float _afterImageDuration = 1.0f;
     private float _afterImageTimer;
     private SpriteRenderer _enemyRenderer;
+    private void Update()
+    {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        Dash();
+    }
 
     public void SetStatus()
     {
@@ -46,12 +67,17 @@ public class BossDashController : MonoBehaviour, IDashable, ISetStatus
         }
     }
 
-    private void Update()
+    public void SoundPlay()
     {
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-        Dash();
+
     }
 
+    public void SoundStop()
+    {
+
+    }
+
+    
     private bool CheckBossDash()
     {
         if (_boss == null)
@@ -138,6 +164,6 @@ public class BossDashController : MonoBehaviour, IDashable, ISetStatus
 
         var dashEffect = AllManager.instance.ParticleFactory.Create(ParticleType.PARTICLE_DASH, this.transform.position, Quaternion.identity);
         var after = dashEffect.GetComponent<DashAfterImage>();
-        after.Initialize(_enemyRenderer.sprite, _enemyRenderer.color, _enemyRenderer.sortingOrder - 1, _afterImageDuration, this.gameObject.GetComponent<SpriteRenderer>().size);
+        after.Initialize(_enemyRenderer.sprite, _enemyRenderer.color, _enemyRenderer.sortingOrder - 1, _afterImageDuration, this.gameObject.GetComponent<SpriteRenderer>().size, this.transform.rotation);
     }
 }

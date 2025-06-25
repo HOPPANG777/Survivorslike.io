@@ -34,6 +34,6 @@ public class ProjectileAfterImageSpawner : MonoBehaviour
         if (renderer == null) return;
         var effect = AllManager.instance.ParticleFactory.Create(ParticleType.PARTICLE_DASH, transform.position, Quaternion.identity);
         var after = effect.GetComponent<DashAfterImage>();
-        after.Initialize(renderer.sprite, Color.white, renderer.sortingOrder - 1, _target.AfterImageDuration, renderer.size);
+        after.Initialize(renderer.sprite, Color.white, renderer.sortingOrder - 1, _target.AfterImageDuration, renderer.size, this.transform.rotation);
     }
 }

@@ -260,12 +260,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boss: {fileID: 4231145564527053269}
-  _dashDistance: 400
-  _dashSpeed: 4000
-  _dashCooldown: 800
+  _dashDistance: 4
+  _dashSpeed: 40
+  _dashCooldown: 6
   _consecutiveDash: 3
-  _afterImageInterval: 0.05
-  _afterImageDuration: 1
+  _soundName: 
+  _soundType: 0
+  _soundClip: {fileID: 0}
+  _soundSource: {fileID: 0}
+  _afterImageInterval: 0.01
+  _afterImageDuration: 0.2
 --- !u!114 &1697903680757829080
 MonoBehaviour:
   m_ObjectHideFlags: 0

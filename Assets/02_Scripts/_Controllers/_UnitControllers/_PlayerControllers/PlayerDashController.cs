@@ -171,6 +171,6 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable, ISetSt
 
         var dashEffect = AllManager.instance.ParticleFactory.Create(ParticleType.PARTICLE_DASH, this.transform.position, Quaternion.identity);
         var after = dashEffect.GetComponent<DashAfterImage>();
-        after.Initialize(_playerRenderer.sprite, _playerRenderer.color, _playerRenderer.sortingOrder - 1, _afterImageDuration, this.gameObject.GetComponent<SpriteRenderer>().size);
+        after.Initialize(_playerRenderer.sprite, _playerRenderer.color, _playerRenderer.sortingOrder - 1, _afterImageDuration, this.gameObject.GetComponent<SpriteRenderer>().size, this.transform.rotation);
     }
 }
