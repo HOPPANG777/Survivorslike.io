@@ -11387,10 +11387,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _entries:
+  - Type: 3
+    Prefab: {fileID: 2338064776794260648, guid: a468b03ae5bb8244591522f0278f1a77, type: 3}
   - Type: 1
     Prefab: {fileID: 582681880845817058, guid: 43c04eb6df9dda64e83db28a96b9fdd7, type: 3}
-  - Type: 2
-    Prefab: {fileID: 2338064776794260648, guid: a468b03ae5bb8244591522f0278f1a77, type: 3}
   - Type: 2
     Prefab: {fileID: 582681880845817058, guid: 9478520237f1ca84582b6d3c0215139d, type: 3}
 --- !u!1 &893268404
