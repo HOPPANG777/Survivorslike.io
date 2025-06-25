@@ -11,7 +11,7 @@ public class BossShooterController : MonoBehaviour, IShoot
     [TabGroup("Timer")][SerializeField] private float _shootInterval;
     [TabGroup("Shooting")][SerializeField] private GameObject _bulletSpawnPoint;
     [TabGroup("Projectile")][SerializeField] private ProjectileBaseSO _bulletData;
-    [TabGroup("Pattern")][SerializeField] private int _bulletCount = 8;
+    [TabGroup("Pattern")][SerializeField] private int _bulletCount = 16;
     [TabGroup("Pattern")][SerializeField] private float _fanAngle = 60f;
 
     private float _shootTimer;
