@@ -113,11 +113,28 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
     {
         Vector3 basePosition = GetRandomOutsideCameraPosition();
 
+        // 플레이어 방향 계산
+        Vector3 dir = Vector3.down;
+        if (_playerPosition != null)
+        {
+            dir = (_playerPosition.Position - basePosition).normalized;
+        }
+
         for (int i = 0; i < count; i++)
         {
             Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0f);
             Vector3 spawnPosition = basePosition + offset;
-            _factory.Create(entry.EnemyData, spawnPosition);
+            var unit = _factory.Create(entry.EnemyData, spawnPosition);
+            if (unit == null) continue;
+
+            if (!unit.TryGetComponent<IDotMove>(out var mover))
+            {
+                var comp = unit.gameObject.AddComponent<DotEnemyMoveController>();
+                if (comp is ISetStatus setter) setter.SetStatus();
+                mover = comp;
+            }
+
+            mover.SetDirection(dir);
         }
     }
 
