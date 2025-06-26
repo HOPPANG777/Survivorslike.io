@@ -100,7 +100,6 @@ public class GameModeController : MonoBehaviour, IGameMode
     {
         _gameTime = 0;
         _killCount = 0;
-        RandomEnemySpawner.Init();
 
         if (_playerInstance != null)
         {
@@ -118,6 +117,7 @@ public class GameModeController : MonoBehaviour, IGameMode
         var playerUnit = AllManager.instance.UnitFactory.Create(_playerData, Vector3.zero) as PlayerUnit;
         _playerInstance = playerUnit != null ? playerUnit.gameObject : null;
 
+        _randomEnemySpawner.Init();
         _tileMapController.Init();
         _cameraController.Init();
         _cameraController.SetOrthographicSize(10f);
@@ -160,8 +160,7 @@ public class GameModeController : MonoBehaviour, IGameMode
     {
         _gameTime = 0;
         _killCount = 0;
-        RandomEnemySpawner.Init();
-
+      
         if (_playerInstance != null)
         {
             var unit = _playerInstance.GetComponent<PlayerUnit>();
@@ -174,6 +173,8 @@ public class GameModeController : MonoBehaviour, IGameMode
         AllManager.instance.ItemFactory.ReleaseAll();
         AllManager.instance.UIFactory.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
+
+        _randomEnemySpawner.Init();
 
         _playerInstance = null;
 

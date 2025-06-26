@@ -128,7 +128,7 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
         Vector3 playerPos = _playerPosition.Position;
         float radiusStep = 360.0f / count;
         float angle = 0.0f;
-        float radius = 6.0f;
+        float radius = 18.0f;
         
         for (int i = 0; i < count; i++)
         {

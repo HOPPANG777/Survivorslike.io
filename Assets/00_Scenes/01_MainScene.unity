@@ -81902,10 +81902,10 @@ MonoBehaviour:
   - EnemyData: {fileID: 11400000, guid: 30395190b4497354c86810e587f23314, type: 2}
     StartTime: 0
     EndTime: 300
-    Interval: 60
+    Interval: 10
     MaxCount: 200
     Pattern: 2
-    SpawnAmount: 50
+    SpawnAmount: 30
     Timer: 0
     SpawnedCount: 0
   - EnemyData: {fileID: 11400000, guid: 141d348b8d494774387090185bd1e19c, type: 2}
