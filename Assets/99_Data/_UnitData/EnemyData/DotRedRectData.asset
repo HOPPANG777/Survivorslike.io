@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da697510401f0364eb96fe177f6a005f, type: 3}
+  m_Name: DotRedRectData
+  m_EditorClassIdentifier: 
+  _unitAttribute:
+    _health: 60
+    _currentHealth: 60
+    _maxHealth: 60
+    _moveSpeed: 10
+    _damage: 5
+    _defense: 1
+    _criticalDamage: 0
+    _criticalChance: 0
+    _projectileNumber: 0
+    _attackSpeed: 2
+    _attackRange: 1
+    _attackDuration: 1
+    _attackCoolDown: 2
+    _knockbackForce: 1
+  _unitSprite: {fileID: 21300000, guid: 587b10e6573116c4dbeb556ed712cfe0, type: 3}
+  _unitName: DotRedRect
+  _teamType: 2
+  _soundName: RedRectDie
+  _soundType: 2
+  _soundClip: {fileID: 0}
+  _collisionRadius: 0.5
+  _enemyAttribute:
+    _enemyPushStrength: 1

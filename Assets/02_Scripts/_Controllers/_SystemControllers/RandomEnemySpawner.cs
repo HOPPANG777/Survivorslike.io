@@ -127,9 +127,9 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
             var unit = _factory.Create(entry.EnemyData, spawnPosition);
             if (unit == null) continue;
 
-            if (!unit.TryGetComponent<IDotMove>(out var mover))
+            if (unit.TryGetComponent<IDotMove>(out var mover))
             {
-                var comp = unit.gameObject.AddComponent<DotEnemyMoveController>();
+                var comp = unit.gameObject.GetComponent<DotEnemyMoveController>();
                 if (comp is ISetStatus setter) setter.SetStatus();
                 mover = comp;
             }

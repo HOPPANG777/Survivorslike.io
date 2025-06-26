@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 /// <summary>
@@ -6,11 +7,8 @@ using UnityEngine;
 /// </summary>
 public class DotEnemyMoveController : MonoBehaviour, IMoveable, ICameraBoundDetectable, IOutOfCameraKillable, ISetStatus, IDotMove
 {
-    [Tooltip("이동 속도")]
-    [SerializeField] private float _speed = 10f;
-
-    [Tooltip("카메라 밖에서 제거되기까지 시간")]
-    [SerializeField] private float _killDelay = 4f;
+    [TabGroup("DotEnemyMove")][Tooltip("이동 속도")][SerializeField] private float _speed;
+    [TabGroup("DotEnemyMove")][Tooltip("카메라 밖에서 제거되기까지 시간")][SerializeField] private float _killDelay;
 
     // 이동 방향
     private Vector3 _moveDirection;

@@ -13218,6 +13218,8 @@ MonoBehaviour:
     InitialSize: 1000
   - Prefab: {fileID: 7183161032584120759, guid: f03034e3a25011b4384c31432f3aabf7, type: 3}
     InitialSize: 1000
+  - Prefab: {fileID: 2423636656322011951, guid: 91b7f9b430688874a800972687b9bd6a, type: 3}
+    InitialSize: 1000
   - Prefab: {fileID: 4231145564527053269, guid: 696fe3f9b466c0a47b873b62ec5125ae, type: 3}
     InitialSize: 1000
   - Prefab: {fileID: 205627021574548224, guid: 221366fbf762ec04e9aa9eb016e2d663, type: 3}
@@ -81899,12 +81901,12 @@ MonoBehaviour:
     SpawnAmount: 1
     Timer: 0
     SpawnedCount: 0
-  - EnemyData: {fileID: 11400000, guid: 30395190b4497354c86810e587f23314, type: 2}
+  - EnemyData: {fileID: 11400000, guid: d4523e6cc0a173d46839db846bc1f8af, type: 2}
     StartTime: 0
     EndTime: 300
-    Interval: 10
+    Interval: 60
     MaxCount: 200
-    Pattern: 2
+    Pattern: 1
     SpawnAmount: 30
     Timer: 0
     SpawnedCount: 0
@@ -81913,7 +81915,7 @@ MonoBehaviour:
     EndTime: 300
     Interval: 120
     MaxCount: 200
-    Pattern: 1
+    Pattern: 2
     SpawnAmount: 30
     Timer: 0
     SpawnedCount: 0
@@ -152626,6 +152628,8 @@ MonoBehaviour:
     Prefab: {fileID: 4231145564527053269, guid: 696fe3f9b466c0a47b873b62ec5125ae, type: 3}
   - Data: {fileID: 11400000, guid: fc5a262c66bb1044f89648035a4ab75b, type: 2}
     Prefab: {fileID: 205627021574548224, guid: 221366fbf762ec04e9aa9eb016e2d663, type: 3}
+  - Data: {fileID: 11400000, guid: d4523e6cc0a173d46839db846bc1f8af, type: 2}
+    Prefab: {fileID: 2423636656322011951, guid: 91b7f9b430688874a800972687b9bd6a, type: 3}
 --- !u!4 &2047221278
 Transform:
   m_ObjectHideFlags: 0

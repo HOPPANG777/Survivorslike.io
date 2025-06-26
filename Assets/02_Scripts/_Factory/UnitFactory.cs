@@ -105,6 +105,12 @@ public class UnitFactory : SerializedMonoBehaviour, IUnitFactory
             _unitBars.Remove(unit);
         }
         AllManager.instance.CollisionManager.UnregisterCollidable(unit);
+        // DotEnemyMoveController는 런타임에 추가되므로 회수 시 제거한다
+        //var dotMove = unit.GetComponent<DotEnemyMoveController>();
+        //if (dotMove != null)
+        //{
+        //    Object.Destroy(dotMove);
+        //}
         unit.gameObject.SetActive(false);
         _pool.Return(unit.gameObject);
     }
