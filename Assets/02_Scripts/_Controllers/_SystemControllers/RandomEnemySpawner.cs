@@ -5,14 +5,11 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class RandomEnemySpawner : SerializedMonoBehaviour
 {
-    [TabGroup("Spawn Settings")][Tooltip("다양한 몬스터 스폰 설정 리스트")][SerializeField]
-    private List<SpawnEntry> _spawnEntries = new List<SpawnEntry>();
-    [TabGroup("Spawn Settings")][Tooltip("보스 스폰 시간(초)")][SerializeField]
-    private float _bossSpawnTime = 60f;
-    [TabGroup("Spawn Settings")][Tooltip("보스 데이터 SO")][SerializeField]
-    private UnitBaseSO _bossData;
-    [TabGroup("Spawn Settings")][Tooltip("보스 스폰 위치")][SerializeField]
-    private Transform _bossSpawnPoint;
+    [TabGroup("Spawn Settings")][Tooltip("다양한 몬스터 스폰 설정 리스트")][SerializeField]private List<SpawnEntry> _spawnEntries = new List<SpawnEntry>();
+    [TabGroup("Spawn Settings")][Tooltip("보스 스폰 시간(초)")][SerializeField]private float _bossSpawnTime = 60f;
+    [TabGroup("Spawn Settings")][Tooltip("보스 데이터 SO")][SerializeField]private UnitBaseSO _bossData;
+    [TabGroup("Spawn Settings")][Tooltip("보스 스폰 위치")][SerializeField]private Transform _bossSpawnPoint;
+    [TabGroup("Spawn Settings")][SerializeField] private float _offCameraMargin = 1f;
 
     private float _elapsedTime;
     private bool _bossSpawned;
@@ -114,9 +111,10 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
     // 일정 반경 내 임의의 위치에 점 형태로 스폰
     private void SpawnDot(SpawnEntry entry, int count)
     {
+        Vector3 basePosition = GetRandomOutsideCameraPosition();
+
         for (int i = 0; i < count; i++)
         {
-            Vector3 basePosition = GetRandomInsideCameraPosition();
             Vector3 offset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0f);
             Vector3 spawnPosition = basePosition + offset;
             _factory.Create(entry.EnemyData, spawnPosition);
@@ -128,14 +126,17 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
     {
         if (_playerPosition == null) return;
         Vector3 playerPos = _playerPosition.Position;
+        float radiusStep = 360.0f / count;
+        float angle = 0.0f;
         float radius = 6.0f;
+        
         for (int i = 0; i < count; i++)
         {
-            float angle = (360f / count) * i;
             float enemyPosX = playerPos.x + Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
             float enemyPosY = playerPos.y + Mathf.Cos(angle * Mathf.Deg2Rad) * radius;
             Vector3 spawnPosition = new Vector3(enemyPosX, enemyPosY, playerPos.z);
             _factory.Create(entry.EnemyData, spawnPosition);
+            angle += radiusStep;
         }
     }
 
@@ -146,14 +147,20 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
         _factory.Create(entry.EnemyData, pos);
     }
 
-    // 화면 밖 무작위 위치 계산
+    // 무작위 위치 계산
     private Vector3 GetRandomOffCameraPosition()
+    {
+        return GetRandomOutsideCameraPosition();
+    }
+
+    // 화면 밖 무작위 위치 계산
+    private Vector3 GetRandomOutsideCameraPosition(float additionalMargin = 0f)
     {
         Camera cam = Camera.main;
         float halfH = cam.orthographicSize;
         float halfW = halfH * cam.aspect;
         Vector3 center = cam.transform.position;
-        float m = _offCameraMargin;
+        float m = _offCameraMargin + additionalMargin;
         switch (Random.Range(0, 4))
         {
             case 0: return new Vector3(center.x - halfW - m, Random.Range(center.y - halfH, center.y + halfH), 0f);
@@ -170,9 +177,20 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
         float halfH = cam.orthographicSize;
         float halfW = halfH * cam.aspect;
         Vector3 center = cam.transform.position;
-        return new Vector3(Random.Range(center.x - halfW, center.x + halfW),
-                           Random.Range(center.y - halfH, center.y + halfH),
-                           0f);
+        return new Vector3
+            (
+                Random.Range
+                (
+                    center.x - halfW, 
+                    center.x + halfW
+                ),
+                Random.Range
+                (
+                    center.y - halfH, 
+                    center.y + halfH
+                ),
+                0f
+            );
     }
 
     // 카메라 위쪽 위치 계산
@@ -199,5 +217,4 @@ public class RandomEnemySpawner : SerializedMonoBehaviour
         AllManager.instance.UnitFactory.ReleaseAllEnemies();
     }
 
-    [TabGroup("Spawn Settings")][SerializeField] private float _offCameraMargin = 1f;
 }
