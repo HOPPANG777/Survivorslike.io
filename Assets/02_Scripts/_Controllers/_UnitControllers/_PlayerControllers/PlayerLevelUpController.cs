@@ -16,6 +16,11 @@ public class PlayerLevelUpController : MonoBehaviour, ISetStatus
     private PlayerCurrentLevelCountController _levelCounter;
     private int _pendingLevelUps;
 
+    private void Update()
+    {
+        TryOpenLevelUpPage();
+    }
+
     public void SetStatus()
     {
         _unitAttr = GetComponent<IUnitAttribute<UnitAttribute>>();
@@ -64,8 +69,6 @@ public class PlayerLevelUpController : MonoBehaviour, ISetStatus
 
         // ⑥ UI 갱신
         UpdateUI();
-
-        TryOpenLevelUpPage();
     }
 
     /// <summary>레벨ℓ → ℓ+1에 필요한 EXP</summary>

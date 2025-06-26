@@ -226,7 +226,7 @@ MonoBehaviour:
   _soundSource: {fileID: 0}
   _collisionRadius: 0
   isDead: 0
-  _invincibleDuration: 0.5
+  _invincibleDuration: 0.1
   _enemyAttribute:
     _enemyPushStrength: 0
 --- !u!114 &3710331478056748986

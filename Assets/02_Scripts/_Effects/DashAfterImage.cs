@@ -8,7 +8,7 @@ public class DashAfterImage : MonoBehaviour
 
     public void Initialize(Sprite sprite, Color color, int sortingOrder, float duration, Vector2 size, Quaternion rotation)
     {
-        _renderer = gameObject.AddComponent<SpriteRenderer>();
+        _renderer = this.gameObject.GetComponent<SpriteRenderer>();
         _renderer.sprite = sprite;
         _renderer.drawMode = SpriteDrawMode.Sliced;
         _renderer.size = size; // Adjust size as needed
