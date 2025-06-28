@@ -91,6 +91,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
 
     virtual public void CheckDead()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         Dead();
     }
 
