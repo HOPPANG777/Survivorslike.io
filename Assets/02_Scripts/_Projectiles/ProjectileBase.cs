@@ -175,6 +175,8 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     /// </summary>
     public virtual void CheckDead()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
         UpdateCameraBound();
 
         switch (_disableType)

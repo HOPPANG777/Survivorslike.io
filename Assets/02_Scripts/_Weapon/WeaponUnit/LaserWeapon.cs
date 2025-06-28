@@ -30,6 +30,8 @@ public class LaserWeapon : WeaponBase
     // 매 프레임 호출되어 레이저 발사를 관리한다
     public override void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
         base.Update();
 
         if (_stats == null) return;

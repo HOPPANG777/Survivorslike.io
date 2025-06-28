@@ -29,6 +29,7 @@ public class LaserWeaponProjectile : ProjectileBase
     protected override void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
         base.Update();
     }
 
@@ -145,6 +146,7 @@ public class LaserWeaponProjectile : ProjectileBase
     // 수명이나 벽 충돌 횟수 초과 시 사망 처리
     public override void CheckDead()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         UpdateCameraBound();
 
         if (RemainingLifeTime <= 0f || _wallHitCount >= _maxWallHitCount)

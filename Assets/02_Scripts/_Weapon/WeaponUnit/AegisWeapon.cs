@@ -74,6 +74,8 @@ public class AegisWeapon : WeaponBase
     // 매 프레임 호출되는 업데이트 로직
     public override void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
         // 인게임 상태가 아니면 동작하지 않는다
         base.Update();
 

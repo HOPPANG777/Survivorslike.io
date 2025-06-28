@@ -23,6 +23,7 @@ public class BombWeaponProjectile : ProjectileBase
     protected override void Update()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+     
         base.Update();
     }
 
@@ -71,6 +72,7 @@ public class BombWeaponProjectile : ProjectileBase
     // 생존 시간 초과 시 사망 처리
     public override void CheckDead()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         base.CheckDead();
         if (_timer >= _lifeTime)
         {

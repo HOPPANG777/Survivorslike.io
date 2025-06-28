@@ -43,6 +43,7 @@ public class PistolWeaponProjectile : ProjectileBase
     {
 
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
         base.Update();
     }
 

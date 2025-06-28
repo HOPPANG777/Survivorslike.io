@@ -65,13 +65,17 @@ public class GameModeController : MonoBehaviour, IGameMode
 
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
-                        GamePause();
+                        AllManager.instance.UIManager.PausePage();
                     }
                 }
                 break;
             case GameModeType.GAMEMODE_GAMEPAUSE:
                 {
-
+                    if (Input.GetKeyDown(KeyCode.Escape))
+                    {
+                        AllManager.instance.UIManager.BackManager.GoBack();
+                        GameIngame();
+                    }
                 }
                 break;
             case GameModeType.GAMEMODE_LEVELUP:

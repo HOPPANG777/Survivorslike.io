@@ -95,6 +95,7 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
     // 유지 시간이 끝나면 소멸
     public override void CheckDead()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (Time.time >= _spawnTime + _lifeTime)
         {
             Dead();

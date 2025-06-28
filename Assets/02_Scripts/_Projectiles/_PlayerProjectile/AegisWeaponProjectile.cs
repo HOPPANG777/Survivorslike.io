@@ -133,6 +133,8 @@ public class AegisWeaponProjectile : ProjectileBase, IAfterImageTarget
     // 사망 조건 확인
     public override void CheckDead()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+
         UpdateCameraBound();
 
         if (_shrinking)

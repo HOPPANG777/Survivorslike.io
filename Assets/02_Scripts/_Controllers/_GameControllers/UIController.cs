@@ -34,6 +34,8 @@ public class UIController : MonoBehaviour
 
 
     [TabGroup("UIPage")][Tooltip("Back Manager")][SerializeField] private UIBackController _backManager;
+    public UIBackController BackManager { get { return _backManager; } }
+    
     [TabGroup("UIPage")][Tooltip("Page List")][SerializeField] private List<GameObject> _pageList;
 
     public void Init()
