@@ -127,7 +127,7 @@ public class SniperWeapon : WeaponBase
         int count = _stats.GetProjectileCount(this);
 
         // 발사 방향 계산 (없으면 자신의 우측 방향)
-        Vector3 dir = transform.right;
+        Vector3 dir = this.transform.right;
         if (_directionCtrl != null)
         {
             _directionCtrl.Rotate();  // 방향 갱신
@@ -139,7 +139,7 @@ public class SniperWeapon : WeaponBase
 
         for (int i = 0; i < count; i++)
         {
-            var proj = AllManager.instance.ProjectileFactory.Create(_projectileData, transform.position, Quaternion.identity, this) as SniperWeaponProjectile;
+            var proj = AllManager.instance.ProjectileFactory.Create(_projectileData, this.transform.position, Quaternion.identity, this) as SniperWeaponProjectile;
             if (proj != null)
             {
                 proj.Initialize(dir, _stats);
@@ -151,9 +151,9 @@ public class SniperWeapon : WeaponBase
         }
 
         // 발사 후 반동으로 플레이어를 뒤로 이동시킴
-        if (transform.parent != null)
+        if (this.transform.parent != null)
         {
-            transform.parent.position -= dir.normalized * _recoilDistance;
+            this.transform.parent.position -= dir.normalized * _recoilDistance;
         }
     }
 }

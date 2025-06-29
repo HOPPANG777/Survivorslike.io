@@ -52,8 +52,8 @@ public class BombWeaponProjectile : ProjectileBase
         _timer += Time.deltaTime * _dropSpeedMultiplier;
         float t = _lifeTime > 0f ? Mathf.Clamp01(_timer / _lifeTime) : 1f;
         Vector3 pos = CalculateBezier(_p1, _p2, _p3, _p4, t);
-        transform.position = pos;
-        transform.Rotate(Vector3.forward, _rotationSpeed * Time.deltaTime);
+        this.transform.position = pos;
+        this.transform.Rotate(Vector3.forward, _rotationSpeed * Time.deltaTime);
     }
 
     // 베지어 곡선 계산 함수

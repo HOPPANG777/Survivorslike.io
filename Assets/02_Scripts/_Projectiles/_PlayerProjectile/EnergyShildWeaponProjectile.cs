@@ -81,7 +81,7 @@ public class EnergyShildWeaponProjectile : ProjectileBase, IPushable
     private void UpdateParticleSize()
     {
         if (_particle == null || _stats == null) return;
-        float range = _stats.GetAttackRange(OwnerWeapon);
+        float range = _stats.GetAttackRange(OwnerWeapon) * 1.5f;
         var main = _particle.main;
         main.startSize = new ParticleSystem.MinMaxCurve(range);
     }

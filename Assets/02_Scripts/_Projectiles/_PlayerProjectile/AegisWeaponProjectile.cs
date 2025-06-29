@@ -87,7 +87,7 @@ public class AegisWeaponProjectile : ProjectileBase, IAfterImageTarget
         float rad = Mathf.Deg2Rad * (angle + Index * (360f / MaxCount));
         float range = _stats.GetAttackRange(OwnerWeapon);
         Vector3 offset = new Vector3(Mathf.Sin(rad) * range, Mathf.Cos(rad) * range, 0f);
-        transform.position = _center.position + offset;
+        this.transform.position = _center.position + offset;
     }
 
     // 스케일 애니메이션 처리

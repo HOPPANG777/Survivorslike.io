@@ -70,7 +70,7 @@ public class MissileWeaponProjectile : ProjectileBase
     private EnemyUnit FindTarget(float range)
     {
         List<ICollidable> list = AllManager.instance.CollisionManager.GetAllCollidables();
-        Vector3 pos = transform.position;
+        Vector3 pos = this.transform.position;
         float minSqr = float.MaxValue;
         EnemyUnit closest = null;
         float sqrRange = range * range;

@@ -134,7 +134,7 @@ public class PlayerDashController : MonoBehaviour, IDashable, ISpeakable, ISetSt
 
             // 한 프레임 이동량
             Vector3 moveStep = _dashDir * DashSpeed * Time.deltaTime;
-            Vector3 toTarget = _dashTarget - transform.position;
+            Vector3 toTarget = _dashTarget - this.transform.position;
 
             CreateAfterImage();
 
