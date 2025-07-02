@@ -19,5 +19,5 @@ MonoBehaviour:
   _attractSpeed: 10
   _soundName: GetMedKitSound
   _soundType: 2
-  _soundClip: {fileID: 8300000, guid: 0604516dcd72bbf4e9e3b9660b218a3b, type: 3}
+  _soundClip: {fileID: 8300000, guid: e3cc041958bacc5439d4961d172bd152, type: 3}
   _healRate: 0.3

@@ -118,6 +118,28 @@ public class SoundManager : SerializedSingleton<SoundManager>
         }
     }
 
+    // 특정 Speaker의 사운드를 재생한다
+    public void PlaySound(string soundName, ISpeakable speaker)
+    {
+        if (_soundDictionary.ContainsKey(soundName) && _soundDictionary[soundName].Contains(speaker))
+        {
+            if (!speaker.SoundSource.isPlaying)
+            {
+                speaker.SoundPlay();
+            }
+            else
+            {
+                // 다른 소스가 재생 중일 경우 기본 로직을 사용해 남는 소스를 찾는다
+                PlaySound(soundName);
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Speaker for sound '{soundName}' not registered. Using default PlaySound.");
+            PlaySound(soundName);
+        }
+    }
+
     // 볼륨 조절 메서드
     public void SetBGMVolume(float volume)
     {

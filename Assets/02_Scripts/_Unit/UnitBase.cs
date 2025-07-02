@@ -165,6 +165,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     public virtual void Dead()
     {
         if (isDead == true) return;
+        SoundManager.instance.PlaySound(this.SoundName, this);
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
         isDead = true;
     }

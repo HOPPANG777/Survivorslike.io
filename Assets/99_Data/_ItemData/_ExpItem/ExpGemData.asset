@@ -19,5 +19,5 @@ MonoBehaviour:
   _attractSpeed: 10
   _soundName: GetExpSound
   _soundType: 2
-  _soundClip: {fileID: 8300000, guid: 0bfbb36cc22f5d84288ae517129f8043, type: 3}
+  _soundClip: {fileID: 8300000, guid: af01d842a546cc9479b9afd66586250d, type: 3}
   _expAmount: 2

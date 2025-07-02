@@ -96,7 +96,8 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
     virtual protected void Collect()
     {
         if (_player == null) return;
-        SoundManager.instance.PlaySound(this.SoundName);
+        // SoundManager를 통해 이 아이템의 사운드를 재생한다
+        SoundManager.instance.PlaySound(this.SoundName, this);
         _itemData.Apply(_player.gameObject);
         CheckDead();
     }
