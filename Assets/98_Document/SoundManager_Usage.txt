@@ -1,0 +1,9 @@
+사운드 매니저 사용법
+====================
+
+1. 사운드를 재생하고 싶은 오브젝트에 `ISpeakable` 인터페이스를 구현합니다.
+2. 오디오 소스와 클립, 사운드 이름, 타입을 설정합니다.
+3. 게임 시작 시 `SoundManager.instance.RegisterSound("사운드이름", 대상, 사운드타입);`을 호출합니다.
+4. 사운드 재생은 `SoundManager.instance.PlaySound("사운드이름");` 또는
+   `SoundManager.instance.PlaySound("사운드이름", 대상);` 으로 호출합니다.
+5. 사운드가 끝나면 자동으로 반환되므로 별도의 관리가 필요 없습니다.
