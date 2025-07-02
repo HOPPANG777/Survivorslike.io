@@ -90,7 +90,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
 
         gameObject.SetActive(true);
         AllManager.instance.CollisionManager.RegisterCollidable(this);
-        SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
+        SoundManager.instance.RegisterSound(this.SoundName, this.SoundClip, this.SoundType);
     }
 
     virtual protected void Collect()

@@ -6,47 +6,43 @@ using Sirenix.OdinInspector;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public struct SoundData
+{
+    public AudioClip Clip;
+    public SoundType Type;
+
+    public SoundData(AudioClip clip, SoundType type)
+    {
+        Clip = clip;
+        Type = type;
+    }
+}
+
 public class SoundManager : SerializedSingleton<SoundManager>
 {
     [TabGroup("Audio Mixer")][SerializeField] AudioMixer _audioMixer;
+    
     [TabGroup("Mixer Groups")][SerializeField] AudioMixerGroup _masterMixerGroup;
     [TabGroup("Mixer Groups")][SerializeField] AudioMixerGroup _bgmMixerGroup;
     [TabGroup("Mixer Groups")][SerializeField] AudioMixerGroup _sfxMixerGroup;
+    
     [TabGroup("Volum Sliders")][SerializeField] Slider _masterVolumeSlider;
     [TabGroup("Volum Sliders")][SerializeField] Slider _bgmVolumeSlider;
     [TabGroup("Volum Sliders")][SerializeField] Slider _sfxVolumeSlider;
-    [System.Serializable]
-    public struct SoundData
-    {
-        public AudioClip Clip;
-        public SoundType Type;
-
-        public SoundData(AudioClip clip, SoundType type)
-        {
-            Clip = clip;
-            Type = type;
-        }
-    }
-
+    
     [TabGroup("Sound Dictionary")][SerializeField] Dictionary<string, SoundData> _soundDictionary = new Dictionary<string, SoundData>();
 
     [TabGroup("Sound Player")][SerializeField] SoundPlayer _playerPrefab; // 사운드 플레이어 프리팹
     [TabGroup("Sound Player")][SerializeField] int _initialPlayerCount = 6; // 초기 생성할 플레이어 수
+    public int InitialPlayerCount { get { return _initialPlayerCount; } }
 
     readonly List<SoundPlayer> _activePlayers = new List<SoundPlayer>(); // 사용 중인 플레이어 목록
     readonly Queue<SoundPlayer> _inactivePlayers = new Queue<SoundPlayer>(); // 대기 중인 플레이어 목록
 
     const int MAX_SIMULTANEOUS_SOUNDS = 6; // 최대 동시에 재생 가능한 사운드 수
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-        CreatePlayers(_initialPlayerCount); // 초기 사운드 플레이어 생성
-        InitVolumSliders();
-    }
-
-    void InitVolumSliders()
+    public void InitVolumSliders()
     {
         if (_masterVolumeSlider == null) return;
         _masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
@@ -141,7 +137,7 @@ public class SoundManager : SerializedSingleton<SoundManager>
     }
 
     // 사운드 플레이어 초기화
-    void CreatePlayers(int count)
+    public void CreatePlayers(int count)
     {
         if (_playerPrefab == null) return;
         for (int i = 0; i < count; i++)

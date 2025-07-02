@@ -66,6 +66,8 @@ public class AllManager : Singleton<AllManager>
         ProjectileFactory.Init();
         ParticleFactory.Init();
         ItemFactory.Init();
+        SoundManager.instance.CreatePlayers(SoundManager.instance.InitialPlayerCount); // 초기 사운드 플레이어 생성
+        SoundManager.instance.InitVolumSliders();
 
         GamemodeManager.GameStart();
     }
