@@ -19,7 +19,7 @@ public class HittedController : ICollision
             if (attacker is LaserWeaponProjectile laserProj)
             {
                 laserProj.CheckDead();
-                SoundManager.instance.PlaySound(laserProj.SoundName, laserProj);
+                //SoundManager.instance.PlaySound(laserProj.SoundName, laserProj);
             }
             else if (attacker is ProjectileBase proj)
             {
@@ -40,7 +40,7 @@ public class HittedController : ICollision
                     default:
                         break;
                 }
-                SoundManager.instance.PlaySound(proj.SoundName, proj);
+                //SoundManager.instance.PlaySound(proj.SoundName, proj);
             }
         }
     }

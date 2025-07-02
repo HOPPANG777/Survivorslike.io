@@ -20,6 +20,9 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
     [TabGroup("UIPages")][Tooltip("현재 페이지")][SerializeField] private GameObject _currentPage;
     [TabGroup("UIPages")][Tooltip("현재 슬라이더")][SerializeField] private UISliderController _currentSlider;
     [TabGroup("UIPages")][Tooltip("생성시 포지션 리스트")][SerializeField] private List<Vector2> _initialPositions;
+    
+    // OverlayOut에서 페이지 비활성화 대기 코루틴을 추적하기 위한 딕셔너리
+    private readonly Dictionary<GameObject, Coroutine> _disableCoroutines = new Dictionary<GameObject, Coroutine>();
 
     public void Init()
     {
@@ -75,6 +78,11 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
         var idx = _pages.IndexOf(page);
         var rect = page.GetComponent<RectTransform>();
         rect.anchoredPosition = _initialPositions[idx];
+        if (_disableCoroutines.TryGetValue(page, out var co))
+        {
+            StopCoroutine(co);
+            _disableCoroutines.Remove(page);
+        }
 
         // 2) 그냥 켜기 + 슬라이드
         page.SetActive(true);
@@ -91,12 +99,19 @@ public class UIBackController : MonoBehaviour, IUIBack, IUIOverlay
         slider.Slide(outDirection);
         // 슬라이드가 끝나는 시점을 알 수 있다면 콜백을 걸어서 비활성화하거나,
         // MoveDuration 후에 비활성화해 주세요:
-        StartCoroutine(DisableAfter(page, slider.MoveDuration));
+        if (_disableCoroutines.TryGetValue(page, out var prev))
+        {
+            StopCoroutine(prev);
+            _disableCoroutines.Remove(page);
+        }
+        var co = StartCoroutine(DisableAfter(page, slider.MoveDuration));
+        _disableCoroutines[page] = co;
     }
 
     public IEnumerator DisableAfter(GameObject page, float delay)
     {
         yield return new WaitForSeconds(delay);
+        _disableCoroutines.Remove(page);
         page.SetActive(false);
     }
 
