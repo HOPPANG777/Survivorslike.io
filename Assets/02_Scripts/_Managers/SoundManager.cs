@@ -17,6 +17,8 @@ public class SoundManager : SerializedSingleton<SoundManager>
     [TabGroup("Volum Sliders")][SerializeField] Slider _sfxVolumeSlider;
     [TabGroup("Sound Dictionary")][SerializeField] Dictionary<string, List<ISpeakable>> _soundDictionary = new Dictionary<string, List<ISpeakable>>();
 
+    const int MAX_SIMULTANEOUS_SOUNDS = 6; // 최대 동시에 재생 가능한 사운드 수
+
     protected override void Awake()
     {
         base.Awake();
@@ -68,13 +70,9 @@ public class SoundManager : SerializedSingleton<SoundManager>
             speaker.SoundSource.outputAudioMixerGroup = _sfxMixerGroup;
         }
 
-        if (_soundDictionary[soundName].Count < 6)
+        if (!_soundDictionary[soundName].Contains(speaker))
         {
             _soundDictionary[soundName].Add(speaker);
-        }
-        else
-        {
-            Debug.LogWarning($"Sound '{soundName}' has reached the maximum number of simultaneous instances (6).");
         }
     }
 
@@ -100,6 +98,14 @@ public class SoundManager : SerializedSingleton<SoundManager>
         if (_soundDictionary.ContainsKey(soundName))
         {
             List<ISpeakable> speakers = _soundDictionary[soundName];
+
+            int playingCount = speakers.Count(s => s.SoundSource.isPlaying);
+            if (playingCount >= MAX_SIMULTANEOUS_SOUNDS)
+            {
+                Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
+                return;
+            }
+
             for (int i = 0; i < speakers.Count; ++i)
             {
                 ISpeakable speaker = speakers[i];
@@ -109,8 +115,11 @@ public class SoundManager : SerializedSingleton<SoundManager>
                     return;
                 }
             }
-            // 모든 Speaker가 재생 중이라면 재생을 제한 (최대 6번)
-            Debug.LogWarning($"Sound '{soundName}' is already playing 6 instances.");
+
+            if (speakers.Count > 0)
+            {
+                speakers[0].SoundPlay();
+            }
         }
         else
         {
@@ -121,21 +130,30 @@ public class SoundManager : SerializedSingleton<SoundManager>
     // 특정 Speaker의 사운드를 재생한다
     public void PlaySound(string soundName, ISpeakable speaker)
     {
-        if (_soundDictionary.ContainsKey(soundName) && _soundDictionary[soundName].Contains(speaker))
+        if (!_soundDictionary.ContainsKey(soundName))
         {
-            if (!speaker.SoundSource.isPlaying)
-            {
-                speaker.SoundPlay();
-            }
-            else
-            {
-                // 다른 소스가 재생 중일 경우 기본 로직을 사용해 남는 소스를 찾는다
-                PlaySound(soundName);
-            }
+            _soundDictionary[soundName] = new List<ISpeakable>();
+        }
+
+        if (!_soundDictionary[soundName].Contains(speaker))
+        {
+            _soundDictionary[soundName].Add(speaker);
+        }
+
+        int playingCount = _soundDictionary[soundName].Count(s => s.SoundSource.isPlaying);
+        if (playingCount >= MAX_SIMULTANEOUS_SOUNDS)
+        {
+            Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
+            return;
+        }
+
+        if (!speaker.SoundSource.isPlaying)
+        {
+            speaker.SoundPlay();
         }
         else
         {
-            Debug.LogWarning($"Speaker for sound '{soundName}' not registered. Using default PlaySound.");
+            // 다른 소스가 재생 중일 경우 기본 로직을 사용해 남는 소스를 찾는다    
             PlaySound(soundName);
         }
     }

@@ -59,7 +59,6 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     // 다음에 맞을 수 있는 시점 (Time.time 기준)
     private float _nextHittableTime = 0f;
 
-
     protected virtual void Start()
     {
         SetStatus();
