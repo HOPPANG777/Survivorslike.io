@@ -32,7 +32,7 @@ MonoBehaviour:
   _teamType: 2
   _soundName: ContanierUnitDie
   _soundType: 2
-  _soundClip: {fileID: 8300000, guid: 5c2e1d81b69e9e042ab4146cfcfbd6fc, type: 3}
+  _soundClip: {fileID: 8300000, guid: 05f39d7463ad4434aa65eaf4065813c1, type: 3}
   _collisionRadius: 0.5
   _enemyAttribute:
     _enemyPushStrength: 0

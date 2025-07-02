@@ -27,5 +27,5 @@ MonoBehaviour:
   _teamType: 1
   _soundName: WipeWeaponProjectileSFX
   _soundType: 2
-  _soundClip: {fileID: 0}
+  _soundClip: {fileID: 8300000, guid: 025bd5748c73d474db500cb16c7af003, type: 3}
   _collisionRadius: 1

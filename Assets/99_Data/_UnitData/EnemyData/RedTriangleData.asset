@@ -32,7 +32,7 @@ MonoBehaviour:
   _teamType: 2
   _soundName: RedTriangleDieSound
   _soundType: 2
-  _soundClip: {fileID: 8300000, guid: 5c2e1d81b69e9e042ab4146cfcfbd6fc, type: 3}
+  _soundClip: {fileID: 8300000, guid: 767fe2b2aa58d174ca26c962e888febc, type: 3}
   _collisionRadius: 0.5
   _enemyAttribute:
     _enemyPushStrength: 1

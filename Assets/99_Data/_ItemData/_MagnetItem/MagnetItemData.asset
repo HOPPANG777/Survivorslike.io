@@ -19,6 +19,6 @@ MonoBehaviour:
   _attractSpeed: 10
   _soundName: GetMagnetSound
   _soundType: 2
-  _soundClip: {fileID: 8300000, guid: 6b6909efc427ff04f9e420925bbc493d, type: 3}
+  _soundClip: {fileID: 8300000, guid: 763a4f9d3bcbcea499fda2cf8d0d234a, type: 3}
   _duration: 3
   _speed: 50

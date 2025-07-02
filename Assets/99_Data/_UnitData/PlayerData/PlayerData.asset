@@ -32,7 +32,7 @@ MonoBehaviour:
   _teamType: 1
   _soundName: PlayerDie
   _soundType: 2
-  _soundClip: {fileID: 8300000, guid: bd37136d728461c4aadb65e87de07f1c, type: 3}
+  _soundClip: {fileID: 8300000, guid: 7f86512583f5d514e894a1d926f533e2, type: 3}
   _collisionRadius: 0.5
   _playerAttribute:
     _playerGetExpRange: 1

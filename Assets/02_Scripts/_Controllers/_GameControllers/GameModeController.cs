@@ -116,6 +116,7 @@ public class GameModeController : MonoBehaviour, IGameMode
         AllManager.instance.WeaponFactory.ReleaseAll();
         AllManager.instance.ItemFactory.ReleaseAll();
         AllManager.instance.UIFactory.ReleaseAll();
+        AllManager.instance.ParticleFactory.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
 
         var playerUnit = AllManager.instance.UnitFactory.Create(_playerData, Vector3.zero) as PlayerUnit;
@@ -176,6 +177,7 @@ public class GameModeController : MonoBehaviour, IGameMode
         AllManager.instance.WeaponFactory.ReleaseAll();
         AllManager.instance.ItemFactory.ReleaseAll();
         AllManager.instance.UIFactory.ReleaseAll();
+        AllManager.instance.ParticleFactory.ReleaseAll();
         AllManager.instance.UIManager.ResetUI();
 
         _randomEnemySpawner.Init();
