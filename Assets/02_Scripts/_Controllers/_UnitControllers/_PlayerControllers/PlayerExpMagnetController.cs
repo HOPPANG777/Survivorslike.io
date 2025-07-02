@@ -23,6 +23,7 @@ public class PlayerExpMagnetController : MonoBehaviour, IExpMagnet, ISetStatus
 
     private void Update()
     {
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (_timer <= 0f) return;
         _timer -= Time.deltaTime;
         Attract();
