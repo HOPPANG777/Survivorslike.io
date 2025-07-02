@@ -137,7 +137,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
         _collisionRadius = _projectileBaseData.CollisionRadius;
         
         AllManager.instance.CollisionManager.RegisterCollidable(this);
-        SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
+        SoundManager.instance.RegisterSound(this.SoundName, this.SoundClip, this.SoundType);
         _age = 0f;
         isDead = false;
     }

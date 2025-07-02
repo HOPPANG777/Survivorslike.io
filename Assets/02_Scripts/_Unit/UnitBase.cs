@@ -122,8 +122,8 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         _soundSource.clip = _soundClip;
 
         AllManager.instance.CollisionManager.RegisterCollidable(this);
-        SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
-        SoundManager.instance.RegisterSound(this.HitSoundName, this, this.HitSoundType);
+        SoundManager.instance.RegisterSound(this.SoundName, this.SoundClip, this.SoundType);
+        SoundManager.instance.RegisterSound(this.HitSoundName, this.HitSoundClip, this.HitSoundType);
         isDead = false;
         // 무적 타이머 초기화: 스폰 직후 즉시 피격 가능
         _nextHittableTime = Time.time;
