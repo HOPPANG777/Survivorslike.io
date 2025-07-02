@@ -147,9 +147,10 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
             effect.PlayEffect(this.transform.position, Vector3.zero);
         }
 
-        if (!string.IsNullOrEmpty(_hitSoundName))
+        if (!string.IsNullOrEmpty(_hitSoundName) && _hitSoundClip != null)
         {
-            SoundManager.instance.RegisterSound(this.HitSoundName, this, this.HitSoundType);
+            // 기본 사운드 소스는 죽음 사운드 재생에 사용되므로 직접 재생한다
+            AudioSource.PlayClipAtPoint(_hitSoundClip, Position);
         }
 
         // 실제 데미지 계산

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: RedCircleBossData
   m_EditorClassIdentifier: 
   _unitAttribute:
-    _health: 1000
-    _currentHealth: 1000
-    _maxHealth: 1000
+    _health: 10000
+    _currentHealth: 10000
+    _maxHealth: 10000
     _moveSpeed: 5
     _damage: 1
     _defense: 10
