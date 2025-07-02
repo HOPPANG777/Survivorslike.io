@@ -86,19 +86,19 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     public void SoundPlay()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-        if (_soundSource != null && _soundClip != null)
+        if (this._soundSource != null && this._soundClip != null)
         {
-            _soundSource.clip = _soundClip;
-            AudioSource.PlayClipAtPoint(SoundClip, Position);
+            this._soundSource.clip = this._soundClip;
+            this._soundSource.Play();
         }
     }
 
     public void SoundStop()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
-        if (_soundSource != null && _soundSource.isPlaying)
+        if (this._soundSource != null && this._soundSource.isPlaying)
         {
-            _soundSource.Stop();
+            this._soundSource.Stop();
         }
     }
 
@@ -144,10 +144,10 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
             effect.PlayEffect(this.transform.position, Vector3.zero);
         }
 
-        if (!string.IsNullOrEmpty(_hitSoundName) && _hitSoundClip != null)
+        if (!string.IsNullOrEmpty(this._hitSoundName) && this._hitSoundClip != null)
         {
             // 기본 사운드 소스는 죽음 사운드 재생에 사용되므로 직접 재생한다
-            AudioSource.PlayClipAtPoint(_hitSoundClip, Position);
+            this._soundSource.Play();
         }
 
         // 실제 데미지 계산

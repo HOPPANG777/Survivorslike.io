@@ -96,7 +96,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
         if (_soundSource != null && _soundClip != null)
         {
             _soundSource.clip = _soundClip;
-            AudioSource.PlayClipAtPoint(SoundClip, Position);
+            _soundSource.Play();
         }
     }
 

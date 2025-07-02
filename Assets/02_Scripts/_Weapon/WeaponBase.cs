@@ -96,7 +96,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
         if (_soundSource != null && _soundClip != null)
         {
             _soundSource.clip = _soundClip;
-            AudioSource.PlayClipAtPoint(SoundClip, Position);
+            _soundSource.Play();
         }
     }
 
