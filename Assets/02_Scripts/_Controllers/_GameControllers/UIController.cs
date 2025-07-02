@@ -94,6 +94,16 @@ public class UIController : MonoBehaviour
         // Ingame 패널은 그대로, 레벨업 페이지만 overlay
         _backManager.OverlayIn(_pageList[5], SlideDirection.SLIDE_RIGHT);
 
+        // Ensure the level up page appears in front of the current camera
+        var cam = AllManager.instance.GamemodeManager.CameraController.MainCamera;
+        if (cam != null)
+        {
+            Vector3 pos = cam.transform.position;
+            pos.z = 0f;
+            _pageList[5].transform.position = pos;
+            _pageList[5].transform.localScale = Vector3.one;
+        }
+
         _weaponSelectionController.OpenSelection();
 
         // 이미지 슬라이드도 리셋→재생
