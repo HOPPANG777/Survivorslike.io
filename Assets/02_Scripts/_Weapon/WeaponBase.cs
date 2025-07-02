@@ -95,8 +95,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (_soundSource != null && _soundClip != null)
         {
-            _soundSource.clip = _soundClip;
-            _soundSource.Play();
+            SoundManager.instance.PlaySound(SoundName);
         }
     }
 

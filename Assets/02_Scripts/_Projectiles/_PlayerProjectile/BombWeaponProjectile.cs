@@ -88,18 +88,12 @@ public class BombWeaponProjectile : ProjectileBase
     // 사운드 재생
     public override void SoundPlay()
     {
-        if (!string.IsNullOrEmpty(SoundName))
-        {
-            SoundManager.instance.PlaySound(SoundName);
-        }
+        base.SoundPlay();
     }
 
     // 사운드 중지
     public override void SoundStop()
     {
-        if (SoundSource != null)
-        {
-            SoundSource.Stop();
-        }
+        base.SoundStop();
     }
 }
