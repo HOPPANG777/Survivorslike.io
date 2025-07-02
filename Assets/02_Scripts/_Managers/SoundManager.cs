@@ -106,7 +106,7 @@ public class SoundManager : SerializedSingleton<SoundManager>
         {
             if (_activePlayers.Count >= MAX_SIMULTANEOUS_SOUNDS)
             {
-                Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
+                //Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
                 return;
             }
 
@@ -147,7 +147,7 @@ public class SoundManager : SerializedSingleton<SoundManager>
 
         if (_activePlayers.Count >= MAX_SIMULTANEOUS_SOUNDS)
         {
-            Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
+            //Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
             return;
         }
 
