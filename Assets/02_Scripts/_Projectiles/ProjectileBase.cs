@@ -95,7 +95,8 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (_soundSource != null && _soundClip != null)
         {
-            SoundManager.instance.PlaySound(SoundName);
+            _soundSource.clip = _soundClip;
+            AudioSource.PlayClipAtPoint(SoundClip, Position);
         }
     }
 

@@ -8,7 +8,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
 
     [TabGroup("Item Base")][Tooltip("SpriteRenderer")][SerializeField] private SpriteRenderer _renderer;
 
-    public Vector3 Position { get { return transform.position; } }
+    public Vector3 Position { get { return this.transform.position; } }
     public float CollisionRadius { get { return _itemData.CollisionRadius; } set { /*noop*/ } }
 
     [Header("Sound")]
@@ -51,7 +51,8 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (_soundSource != null && _soundClip != null)
         {
-            SoundManager.instance.PlaySound(SoundName);
+            _soundSource.clip = _soundClip;
+            AudioSource.PlayClipAtPoint(SoundClip, Position);
         }
     }
 
@@ -95,7 +96,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
     virtual protected void Collect()
     {
         if (_player == null) return;
-        SoundPlay();
+        SoundManager.instance.PlaySound(this.SoundName);
         _itemData.Apply(_player.gameObject);
         CheckDead();
     }
@@ -108,7 +109,6 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
 
     virtual public void Dead()
     {
-        SoundStop();
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
         //SoundManager.instance.UnregisterSound(this.SoundName, this);
         this.gameObject.SetActive(false);

@@ -95,13 +95,14 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
         if (_soundSource != null && _soundClip != null)
         {
-            SoundManager.instance.PlaySound(SoundName);
+            _soundSource.clip = _soundClip;
+            AudioSource.PlayClipAtPoint(SoundClip, Position);
         }
     }
 
     public virtual void SoundStop()
     {
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;   
         if (_soundSource != null && _soundSource.isPlaying)
         {
             _soundSource.Stop();

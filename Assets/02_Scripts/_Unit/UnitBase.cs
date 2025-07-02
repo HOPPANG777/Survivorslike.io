@@ -78,7 +78,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         if (_soundSource != null && _soundClip != null)
         {
             _soundSource.clip = _soundClip;
-            _soundSource.Play();
+            AudioSource.PlayClipAtPoint(SoundClip, Position);
         }
     }
 
