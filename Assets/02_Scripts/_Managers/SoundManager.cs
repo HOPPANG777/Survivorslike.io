@@ -78,6 +78,21 @@ public class SoundManager : SerializedSingleton<SoundManager>
         }
     }
 
+    public void UnregisterSound(string soundName, ISpeakable speaker)
+    {
+        if (_soundDictionary.ContainsKey(soundName))
+        {
+            _soundDictionary[soundName].Remove(speaker);
+            if (_soundDictionary[soundName].Count == 0)
+            {
+                _soundDictionary.Remove(soundName);
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Sound '{soundName}' not found in SoundManager.");
+        }
+    }
 
     // 사운드 재생 메서드
     public void PlaySound(string soundName)

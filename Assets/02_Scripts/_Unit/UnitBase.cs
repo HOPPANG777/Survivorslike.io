@@ -75,11 +75,20 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     public void SoundPlay()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (_soundSource != null && _soundClip != null)
+        {
+            _soundSource.clip = _soundClip;
+            _soundSource.Play();
+        }
     }
 
     public void SoundStop()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (_soundSource != null && _soundSource.isPlaying)
+        {
+            _soundSource.Stop();
+        }
     }
 
     public virtual void SetStatus()
@@ -87,16 +96,23 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         _unitBaseData.SetData(UnitBaseData);
         _unitAttribute = _unitBaseData.UnitAttribute;
         _unitName = _unitBaseData.UnitName;
+        
         _collisionRadius = _unitBaseData.CollisionRadius;
+        
         _teamType = _unitBaseData.TeamType;
+        
         _soundName = _unitBaseData.SoundName;
         _soundType = _unitBaseData.SoundType;
         _soundClip = _unitBaseData.SoundClip;
         _soundSource = this.gameObject.GetComponent<AudioSource>();
+        _soundSource.clip = _soundClip;
+
         AllManager.instance.CollisionManager.RegisterCollidable(this);
+        SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
         isDead = false;
         // 무적 타이머 초기화: 스폰 직후 즉시 피격 가능
         _nextHittableTime = Time.time;
+
     }
 
     public virtual void Hitted(float damageValue)

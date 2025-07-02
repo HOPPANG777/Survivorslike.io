@@ -49,11 +49,20 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
     public virtual void SoundPlay()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (_soundSource != null && _soundClip != null)
+        {
+            _soundSource.clip = _soundClip;
+            _soundSource.Play();
+        }
     }
 
     public virtual void SoundStop()
     {
-        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;   
+        if (_soundSource != null && _soundSource.isPlaying)
+        {
+            _soundSource.Stop();
+        }
     }
 
     public virtual void SetStatus()
@@ -77,14 +86,17 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
         _soundType = _itemData.SoundType;
         _soundClip = _itemData.SoundClip;
         _soundSource = this.gameObject.GetComponent<AudioSource>();
+        _soundSource.clip = _soundClip;
 
         gameObject.SetActive(true);
         AllManager.instance.CollisionManager.RegisterCollidable(this);
+        SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
     }
 
     virtual protected void Collect()
     {
         if (_player == null) return;
+        SoundPlay();
         _itemData.Apply(_player.gameObject);
         CheckDead();
     }
@@ -97,7 +109,9 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
 
     virtual public void Dead()
     {
+        SoundStop();
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
+        //SoundManager.instance.UnregisterSound(this.SoundName, this);
         this.gameObject.SetActive(false);
         AllManager.instance.ItemFactory.Release(this);
     }

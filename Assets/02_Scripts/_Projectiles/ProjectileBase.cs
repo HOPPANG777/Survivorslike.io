@@ -93,11 +93,20 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     public virtual void SoundPlay()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (_soundSource != null && _soundClip != null)
+        {
+            _soundSource.clip = _soundClip;
+            _soundSource.Play();
+        }
     }
 
     public virtual void SoundStop()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (_soundSource != null && _soundSource.isPlaying)
+        {
+            _soundSource.Stop();
+        }
     }
 
     /// <summary>
@@ -111,16 +120,24 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
         _projectileBaseData.SetData(ProjectileBaseData);
         _projectileAttributes = _projectileBaseData.ProjectileAttribute;
         _projectileName = _projectileBaseData.ProjectileName;
+        
         _remainingLifeTime = _projectileAttributes.LifeTime;
         _remainingPierceCount = _projectileAttributes.PierceCount;
+        
         AttackPower = _projectileAttributes.ProjectileDamage;
+        
         _teamType = _projectileBaseData.TeamType;
+        
         _soundName = _projectileBaseData.SoundName;
         _soundType = _projectileBaseData.SoundType;
         _soundClip = _projectileBaseData.SoundClip;
         _soundSource = this.gameObject.GetComponent<AudioSource>();
+        _soundSource.clip = _soundClip;
+
         _collisionRadius = _projectileBaseData.CollisionRadius;
+        
         AllManager.instance.CollisionManager.RegisterCollidable(this);
+        SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
         _age = 0f;
         isDead = false;
     }

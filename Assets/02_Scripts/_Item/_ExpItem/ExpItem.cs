@@ -47,4 +47,14 @@ public class ExpItem : ItemBase
         base.PlayerGetItem();
     }
 
+    public override void SoundPlay()
+    {
+        base.SoundPlay();
+    }
+
+    public override void SoundStop()
+    {
+        base.SoundStop();
+    }
+
 }

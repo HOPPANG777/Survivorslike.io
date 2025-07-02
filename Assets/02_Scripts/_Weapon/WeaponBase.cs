@@ -93,13 +93,20 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
     public virtual void SoundPlay()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (_soundSource != null && _soundClip != null)
+        {
+            _soundSource.clip = _soundClip;
+            _soundSource.Play();
+        }
     }
-    
-    //나선 계단 장수풍뎅이 폐허의 마을 무화과 타르트 장수풍뎅이 돌로로사의 길 장수풍뎅이 특이점 지오토 엔젤 자양화 장수풍뎅이 특이점 비밀의 황제
-    
+
     public virtual void SoundStop()
     {
         if (AllManager.instance.GamemodeManager.GameMode != GameModeType.GAMEMODE_INGAME) return;
+        if (_soundSource != null && _soundSource.isPlaying)
+        {
+            _soundSource.Stop();
+        }
     }
 
     public virtual void SetStatus()
@@ -107,15 +114,21 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
         _weaponBaseData.SetData(WeaponBaseData);
         _weaponAttribute = _weaponBaseData.LevelAttributes[Mathf.Clamp(CurrentLevel, 0, _weaponBaseData.LevelAttributes.Count - 1)];
         _weaponName = _weaponBaseData.WeaponName;
+        
         _collisionRadius = _weaponBaseData.CollisionRadius;
+        
         _teamType = _weaponBaseData.TeamType;
         _weaponType = _weaponBaseData.WeaponType;
         _weaponDisableType = _weaponBaseData.WeaponDisableType;
+        
         _soundName = _weaponBaseData.SoundName;
         _soundType = _weaponBaseData.SoundType;
         _soundClip = _weaponBaseData.SoundClip;
         _soundSource = this.gameObject.GetComponent<AudioSource>();
+        _soundSource.clip = _soundClip;
+
         AllManager.instance.CollisionManager.RegisterCollidable(this);
+        SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
         isDead = false;
     }
 
