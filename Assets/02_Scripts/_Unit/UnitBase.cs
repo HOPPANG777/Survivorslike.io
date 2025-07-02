@@ -147,7 +147,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         if (!string.IsNullOrEmpty(this._hitSoundName) && this._hitSoundClip != null)
         {
             // 기본 사운드 소스는 죽음 사운드 재생에 사용되므로 직접 재생한다
-            this._soundSource.Play();
+            SoundManager.instance.PlaySound(HitSoundName, this);
         }
 
         // 실제 데미지 계산
@@ -186,7 +186,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     public virtual void Dead()
     {
         if (isDead == true) return;
-        SoundManager.instance.PlaySound(this.SoundName, this);
+        SoundManager.instance.PlaySound(SoundName, this);
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
         isDead = true;
     }

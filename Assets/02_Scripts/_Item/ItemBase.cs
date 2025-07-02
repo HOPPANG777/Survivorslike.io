@@ -96,8 +96,7 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
     virtual protected void Collect()
     {
         if (_player == null) return;
-        // SoundManager를 통해 이 아이템의 사운드를 재생한다
-        SoundManager.instance.PlaySound(this.SoundName, this);
+        SoundManager.instance.PlaySound(SoundName, this);
         _itemData.Apply(_player.gameObject);
         CheckDead();
     }
@@ -111,7 +110,6 @@ public abstract class ItemBase : MonoBehaviour, ICollidable, ISetStatus, IDead, 
     virtual public void Dead()
     {
         AllManager.instance.CollisionManager.UnregisterCollidable(this);
-        //SoundManager.instance.UnregisterSound(this.SoundName, this);
         this.gameObject.SetActive(false);
         AllManager.instance.ItemFactory.Release(this);
     }

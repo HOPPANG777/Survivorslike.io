@@ -4818,6 +4818,8 @@ MonoBehaviour:
   _masterVolumeSlider: {fileID: 2107016726}
   _bgmVolumeSlider: {fileID: 1985712226}
   _sfxVolumeSlider: {fileID: 1758966040}
+  _playerPrefab: {fileID: 2261530523526075027, guid: 2080b1bc654da334d877b7b0f0f938dc, type: 3}
+  _initialPlayerCount: 6
 --- !u!1 &313016694
 GameObject:
   m_ObjectHideFlags: 0
