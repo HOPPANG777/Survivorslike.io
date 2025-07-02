@@ -33,6 +33,9 @@ MonoBehaviour:
   _soundName: RedHexagonDie
   _soundType: 2
   _soundClip: {fileID: 8300000, guid: 05f39d7463ad4434aa65eaf4065813c1, type: 3}
+  _hitSoundName: RedHexagonHit
+  _hitSoundType: 2
+  _hitSoundClip: {fileID: 8300000, guid: 025bd5748c73d474db500cb16c7af003, type: 3}
   _collisionRadius: 0.5
   _enemyAttribute:
     _enemyPushStrength: 1

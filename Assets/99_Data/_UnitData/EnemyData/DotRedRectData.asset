@@ -33,6 +33,9 @@ MonoBehaviour:
   _soundName: RedRectDie
   _soundType: 2
   _soundClip: {fileID: 8300000, guid: 767fe2b2aa58d174ca26c962e888febc, type: 3}
+  _hitSoundName: RedRectHit
+  _hitSoundType: 2
+  _hitSoundClip: {fileID: 8300000, guid: 025bd5748c73d474db500cb16c7af003, type: 3}
   _collisionRadius: 0.5
   _enemyAttribute:
     _enemyPushStrength: 1

@@ -41,6 +41,18 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     [TabGroup("Unit Sound")][Tooltip("오디오를 출력할 주체")][SerializeField] protected AudioSource _soundSource;
     public AudioSource SoundSource { get { return _soundSource; } }
 
+    // 피격 시 재생될 사운드 이름
+    [TabGroup("Unit Sound")][Tooltip("피격 사운드 이름")][SerializeField] protected string _hitSoundName;
+    public string HitSoundName { get { return _hitSoundName; } }
+
+    // 피격 시 사용할 사운드 타입
+    [TabGroup("Unit Sound")][Tooltip("피격 사운드 타입")][SerializeField] protected SoundType _hitSoundType;
+    public SoundType HitSoundType { get { return _hitSoundType; } }
+
+    // 피격 시 사용할 오디오 클립
+    [TabGroup("Unit Sound")][Tooltip("피격 오디오 클립")][SerializeField] protected AudioClip _hitSoundClip;
+    public AudioClip HitSoundClip { get { return _hitSoundClip; } }
+
     [Header("ICollidable")]
     [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][SerializeField] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
@@ -103,11 +115,18 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         _soundName = _unitBaseData.SoundName;
         _soundType = _unitBaseData.SoundType;
         _soundClip = _unitBaseData.SoundClip;
+        _hitSoundName = _unitBaseData.HitSoundName;
+        _hitSoundType = _unitBaseData.HitSoundType;
+        _hitSoundClip = _unitBaseData.HitSoundClip;
         _soundSource = this.gameObject.GetComponent<AudioSource>();
         _soundSource.clip = _soundClip;
 
         AllManager.instance.CollisionManager.RegisterCollidable(this);
         SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
+        if (!string.IsNullOrEmpty(_hitSoundName))
+        {
+            SoundManager.instance.RegisterSound(this.HitSoundName, this, this.HitSoundType);
+        }
         isDead = false;
         // 무적 타이머 초기화: 스폰 직후 즉시 피격 가능
         _nextHittableTime = Time.time;
@@ -126,6 +145,11 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
         if (effect != null)
         {
             effect.PlayEffect(this.transform.position, Vector3.zero);
+        }
+
+        if (!string.IsNullOrEmpty(_hitSoundName))
+        {
+            SoundManager.instance.RegisterSound(this.HitSoundName, this, this.HitSoundType);
         }
 
         // 실제 데미지 계산

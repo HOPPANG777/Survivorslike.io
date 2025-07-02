@@ -39,6 +39,18 @@ public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
     [TabGroup("Sound")][Tooltip("오디오 클립")][SerializeField] protected AudioClip _soundClip;
     public AudioClip SoundClip { get { return _soundClip; } }
 
+    // 피격 시 재생될 사운드 이름
+    [TabGroup("Sound")][Tooltip("피격 사운드 이름")][SerializeField] protected string _hitSoundName;
+    public string HitSoundName { get { return _hitSoundName; } }
+
+    // 피격 시 사운드 타입
+    [TabGroup("Sound")][Tooltip("피격 사운드 타입")][SerializeField] protected SoundType _hitSoundType;
+    public SoundType HitSoundType { get { return _hitSoundType; } }
+
+    // 피격 시 오디오 클립
+    [TabGroup("Sound")][Tooltip("피격 오디오 클립")][SerializeField] protected AudioClip _hitSoundClip;
+    public AudioClip HitSoundClip { get { return _hitSoundClip; } }
+
     [TabGroup("Collision")][Tooltip("충돌 반경")][SerializeField] protected float _collisionRadius;
     public float CollisionRadius { get { return _collisionRadius; } }
 
@@ -57,6 +69,12 @@ public class UnitBaseSO : ScriptableObject, ISetSOData<UnitBaseSO>
         this._soundType = unitData._soundType;
 
         this._soundClip = unitData._soundClip;
+
+        this._hitSoundName = unitData._hitSoundName;
+
+        this._hitSoundType = unitData._hitSoundType;
+
+        this._hitSoundClip = unitData._hitSoundClip;
 
         this._collisionRadius = unitData._collisionRadius;
     }
