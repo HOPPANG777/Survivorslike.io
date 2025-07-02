@@ -128,7 +128,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
         _soundSource.clip = _soundClip;
 
         AllManager.instance.CollisionManager.RegisterCollidable(this);
-        SoundManager.instance.RegisterSound(this.SoundName, this, this.SoundType);
+        SoundManager.instance.RegisterSound(this.SoundName, this.SoundClip, this.SoundType);
         isDead = false;
     }
 

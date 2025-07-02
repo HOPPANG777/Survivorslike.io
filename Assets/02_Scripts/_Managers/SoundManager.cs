@@ -15,7 +15,20 @@ public class SoundManager : SerializedSingleton<SoundManager>
     [TabGroup("Volum Sliders")][SerializeField] Slider _masterVolumeSlider;
     [TabGroup("Volum Sliders")][SerializeField] Slider _bgmVolumeSlider;
     [TabGroup("Volum Sliders")][SerializeField] Slider _sfxVolumeSlider;
-    [TabGroup("Sound Dictionary")][SerializeField] Dictionary<string, List<ISpeakable>> _soundDictionary = new Dictionary<string, List<ISpeakable>>();
+    [System.Serializable]
+    public struct SoundData
+    {
+        public AudioClip Clip;
+        public SoundType Type;
+
+        public SoundData(AudioClip clip, SoundType type)
+        {
+            Clip = clip;
+            Type = type;
+        }
+    }
+
+    [TabGroup("Sound Dictionary")][SerializeField] Dictionary<string, SoundData> _soundDictionary = new Dictionary<string, SoundData>();
 
     [TabGroup("Sound Player")][SerializeField] SoundPlayer _playerPrefab; // 사운드 플레이어 프리팹
     [TabGroup("Sound Player")][SerializeField] int _initialPlayerCount = 6; // 초기 생성할 플레이어 수
@@ -59,39 +72,18 @@ public class SoundManager : SerializedSingleton<SoundManager>
     }
 
     // 사운드 등록 메서드드
-    public void RegisterSound(string soundName, ISpeakable speaker, SoundType soundType)
+    public void RegisterSound(string soundName, AudioClip clip, SoundType soundType)
     {
-        if (soundType == SoundType.NONE) return;
+        if (soundType == SoundType.NONE || clip == null) return;
 
-        if (!_soundDictionary.ContainsKey(soundName))
-        {
-            _soundDictionary[soundName] = new List<ISpeakable>();
-        }
-            
-        if (soundType == SoundType.BGM)
-        {
-            speaker.SoundSource.outputAudioMixerGroup = _bgmMixerGroup;
-        }
-        else if (soundType == SoundType.SFX)
-        {
-            speaker.SoundSource.outputAudioMixerGroup = _sfxMixerGroup;
-        }
-
-        if (!_soundDictionary[soundName].Contains(speaker))
-        {
-            _soundDictionary[soundName].Add(speaker);
-        }
+        _soundDictionary[soundName] = new SoundData(clip, soundType);
     }
 
-    public void UnregisterSound(string soundName, ISpeakable speaker)
+    public void UnregisterSound(string soundName)
     {
         if (_soundDictionary.ContainsKey(soundName))
         {
-            _soundDictionary[soundName].Remove(speaker);
-            if (_soundDictionary[soundName].Count == 0)
-            {
-                _soundDictionary.Remove(soundName);
-            }
+            _soundDictionary.Remove(soundName);
         }
         else
         {
@@ -102,29 +94,16 @@ public class SoundManager : SerializedSingleton<SoundManager>
     // 사운드 재생 메서드
     public void PlaySound(string soundName)
     {
-        if (_soundDictionary.ContainsKey(soundName))
+        if (_soundDictionary.TryGetValue(soundName, out var data))
         {
             if (_activePlayers.Count >= MAX_SIMULTANEOUS_SOUNDS)
             {
-                //Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
                 return;
             }
 
-            List<ISpeakable> speakers = _soundDictionary[soundName];
-            ISpeakable speaker = null;
-            for (int i = 0; i < speakers.Count; i++)
-            {
-                if (speakers[i] != null)
-                {
-                    speaker = speakers[i];
-                    break;
-                }
-            }
-            if (speaker == null) return;
-
             var player = GetPlayer();
-            var group = speaker.SoundType == SoundType.BGM ? _bgmMixerGroup : _sfxMixerGroup;
-            player.Play(speaker.SoundClip, group);
+            var group = data.Type == SoundType.BGM ? _bgmMixerGroup : _sfxMixerGroup;
+            player.Play(data.Clip, group);
         }
         else
         {
@@ -135,25 +114,7 @@ public class SoundManager : SerializedSingleton<SoundManager>
     // 특정 Speaker의 사운드를 재생한다
     public void PlaySound(string soundName, ISpeakable speaker)
     {
-        if (!_soundDictionary.ContainsKey(soundName))
-        {
-            _soundDictionary[soundName] = new List<ISpeakable>();
-        }
-
-        if (!_soundDictionary[soundName].Contains(speaker))
-        {
-            _soundDictionary[soundName].Add(speaker);
-        }
-
-        if (_activePlayers.Count >= MAX_SIMULTANEOUS_SOUNDS)
-        {
-            //Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
-            return;
-        }
-
-        var player = GetPlayer();
-        var group = speaker.SoundType == SoundType.BGM ? _bgmMixerGroup : _sfxMixerGroup;
-        player.Play(speaker.SoundClip, group);
+        PlaySound(soundName);
     }
 
     // 볼륨 조절 메서드
