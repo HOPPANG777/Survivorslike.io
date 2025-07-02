@@ -17,12 +17,19 @@ public class SoundManager : SerializedSingleton<SoundManager>
     [TabGroup("Volum Sliders")][SerializeField] Slider _sfxVolumeSlider;
     [TabGroup("Sound Dictionary")][SerializeField] Dictionary<string, List<ISpeakable>> _soundDictionary = new Dictionary<string, List<ISpeakable>>();
 
+    [TabGroup("Sound Player")][SerializeField] SoundPlayer _playerPrefab; // 사운드 플레이어 프리팹
+    [TabGroup("Sound Player")][SerializeField] int _initialPlayerCount = 6; // 초기 생성할 플레이어 수
+
+    readonly List<SoundPlayer> _activePlayers = new List<SoundPlayer>(); // 사용 중인 플레이어 목록
+    readonly Queue<SoundPlayer> _inactivePlayers = new Queue<SoundPlayer>(); // 대기 중인 플레이어 목록
+
     const int MAX_SIMULTANEOUS_SOUNDS = 6; // 최대 동시에 재생 가능한 사운드 수
 
     protected override void Awake()
     {
         base.Awake();
 
+        CreatePlayers(_initialPlayerCount); // 초기 사운드 플레이어 생성
         InitVolumSliders();
     }
 
@@ -97,29 +104,27 @@ public class SoundManager : SerializedSingleton<SoundManager>
     {
         if (_soundDictionary.ContainsKey(soundName))
         {
-            List<ISpeakable> speakers = _soundDictionary[soundName];
-
-            int playingCount = speakers.Count(s => s.SoundSource.isPlaying);
-            if (playingCount >= MAX_SIMULTANEOUS_SOUNDS)
+            if (_activePlayers.Count >= MAX_SIMULTANEOUS_SOUNDS)
             {
                 Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
                 return;
             }
 
-            for (int i = 0; i < speakers.Count; ++i)
+            List<ISpeakable> speakers = _soundDictionary[soundName];
+            ISpeakable speaker = null;
+            for (int i = 0; i < speakers.Count; i++)
             {
-                ISpeakable speaker = speakers[i];
-                if (!speaker.SoundSource.isPlaying)
+                if (speakers[i] != null)
                 {
-                    speaker.SoundPlay();
-                    return;
+                    speaker = speakers[i];
+                    break;
                 }
             }
+            if (speaker == null) return;
 
-            if (speakers.Count > 0)
-            {
-                speakers[0].SoundPlay();
-            }
+            var player = GetPlayer();
+            var group = speaker.SoundType == SoundType.BGM ? _bgmMixerGroup : _sfxMixerGroup;
+            player.Play(speaker.SoundClip, group);
         }
         else
         {
@@ -140,22 +145,15 @@ public class SoundManager : SerializedSingleton<SoundManager>
             _soundDictionary[soundName].Add(speaker);
         }
 
-        int playingCount = _soundDictionary[soundName].Count(s => s.SoundSource.isPlaying);
-        if (playingCount >= MAX_SIMULTANEOUS_SOUNDS)
+        if (_activePlayers.Count >= MAX_SIMULTANEOUS_SOUNDS)
         {
             Debug.LogWarning($"Sound '{soundName}' is already playing {MAX_SIMULTANEOUS_SOUNDS} instances.");
             return;
         }
 
-        if (!speaker.SoundSource.isPlaying)
-        {
-            speaker.SoundPlay();
-        }
-        else
-        {
-            // 다른 소스가 재생 중일 경우 기본 로직을 사용해 남는 소스를 찾는다    
-            PlaySound(soundName);
-        }
+        var player = GetPlayer();
+        var group = speaker.SoundType == SoundType.BGM ? _bgmMixerGroup : _sfxMixerGroup;
+        player.Play(speaker.SoundClip, group);
     }
 
     // 볼륨 조절 메서드
@@ -179,5 +177,58 @@ public class SoundManager : SerializedSingleton<SoundManager>
         float dB = volume <= 0f ? -80f : Mathf.Log10(volume) * 20;
         _audioMixer.SetFloat("MasterVolume", dB);
         PlayerPrefs.SetFloat("Master", volume);
+    }
+
+    // 사운드 플레이어 초기화
+    void CreatePlayers(int count)
+    {
+        if (_playerPrefab == null) return;
+        for (int i = 0; i < count; i++)
+        {
+            var obj = Instantiate(_playerPrefab, transform);
+            obj.gameObject.SetActive(false);
+            _inactivePlayers.Enqueue(obj);
+        }
+    }
+
+    // 사용 가능한 플레이어 가져오기
+    SoundPlayer GetPlayer()
+    {
+        if (_inactivePlayers.Count > 0)
+        {
+            var p = _inactivePlayers.Dequeue();
+            _activePlayers.Add(p);
+            p.gameObject.SetActive(true);
+            return p;
+        }
+
+        var newPlayer = Instantiate(_playerPrefab, transform);
+        _activePlayers.Add(newPlayer);
+        return newPlayer;
+    }
+
+    // 플레이어 반환
+    void ReleasePlayer(SoundPlayer player)
+    {
+        if (player == null) return;
+        if (_activePlayers.Contains(player))
+        {
+            _activePlayers.Remove(player);
+        }
+        player.gameObject.SetActive(false);
+        _inactivePlayers.Enqueue(player);
+    }
+
+    // 매 프레임 재생 상태 확인
+    void Update()
+    {
+        for (int i = _activePlayers.Count - 1; i >= 0; i--)
+        {
+            var p = _activePlayers[i];
+            if (!p.IsPlaying)
+            {
+                ReleasePlayer(p);
+            }
+        }
     }
 }
