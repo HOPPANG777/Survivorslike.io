@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //------------------------------------------------------------------------------
@@ -56,7 +57,7 @@ public abstract class ProjectileBase : MonoBehaviour , IProjectileAttribute<Proj
     public AudioSource SoundSource { get { return _soundSource; } }
 
     [Header("ICollidable")]
-    [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][SerializeField] protected Vector3 _position => this.transform.position;
+    [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][Serialize] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
 
     [Header("IAttacker")]

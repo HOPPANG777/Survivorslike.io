@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, ICollidable, IDead, IWeaponAttribute<WeaponAttribute>, IWeaponDisableMember, IWeaponLevel, IWeaponAttackFunction, IWeaponMember
@@ -41,7 +42,7 @@ public class WeaponBase : MonoBehaviour, ITeamMember, ISpeakable, ISetStatus, IC
     public AudioSource SoundSource { get { return _soundSource; } }
 
     [Header("ICollidable")]
-    [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][SerializeField] protected Vector3 _position => this.transform.position;
+    [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][Serialize] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
 
     [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는(그리고 100 분율로 보십시오 따라서 50일 0.5f가 됩니다.)")][SerializeField] protected float _collisionRadius;

@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //==============================================================================
@@ -54,7 +56,7 @@ public abstract class UnitBase : MonoBehaviour, ITeamMember, ISpeakable, ISetSta
     public AudioClip HitSoundClip { get { return _hitSoundClip; } }
 
     [Header("ICollidable")]
-    [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][SerializeField] protected Vector3 _position => this.transform.position;
+    [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는")][Serialize] protected Vector3 _position => this.transform.position;
     public Vector3 Position { get { return _position; } }
 
     [TabGroup("ICollidable")][Tooltip("객체의 포지션을 받는(그리고 100 분율로 보십시오 따라서 50일 0.5f가 됩니다.)")][SerializeField] protected float _collisionRadius;
